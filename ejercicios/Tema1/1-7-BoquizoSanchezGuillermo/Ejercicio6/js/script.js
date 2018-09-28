@@ -71,7 +71,7 @@ Autor: Guillermo Boquizo Sánchez
       if (calculatedLetter != letterOfDNI) {
         alert("La letra o el número proporcionados no son correctos");
       } else {
-        alert(
+        console.log(
           "El número de DNI y su letra son correctos, tu DNI es " +
             numberOfDNI +
             " y la letra es " +
