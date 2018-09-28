@@ -10,9 +10,9 @@ Autor: Guillermo Boquizo Sánchez
 */
 
 {
-  let strings = [];
-  let booleans = [];
-  let numbers = [];
+  let strings = [],
+    booleans = [],
+    numbers = [];
 
   let valueSort = function() {
     var valores = [true, 5, false, "hola", "adiós", 2];
@@ -40,7 +40,11 @@ Autor: Guillermo Boquizo Sánchez
         "La cadena " + strings[0] + " es mayor que la cadena " + strings[1]
       );
     } else {
-      console.log("La cadena " + strings[0] +" es del mismo tamaño que la cadena " + strings[1]
+      console.log(
+        "La cadena " +
+          strings[0] +
+          " es del mismo tamaño que la cadena " +
+          strings[1]
       );
     }
   };
@@ -48,19 +52,43 @@ Autor: Guillermo Boquizo Sánchez
   let useBooleans = function() {
     let valueFalse = booleans[0] && booleans[1];
     let valueTrue = booleans[0] || booleans[1];
-    console.log("Usando operadores booleanos " + "(" + booleans[0] + "," + booleans[1] + ")");
+    console.log(
+      "Usando operadores booleanos " +
+        "(" +
+        booleans[0] +
+        "," +
+        booleans[1] +
+        ")"
+    );
     console.log("El resultado para && es " + valueFalse);
     console.log("Usando el || obtenemos " + valueTrue);
-  }
+  };
 
   let mathematicalOperations = function() {
-    console.log("Operaciones matemáticas " + "(" + numbers[0] + "," + numbers[1] + ")");
-    console.log("El resultado de la suma de los dos valores es: " + (numbers[0] + numbers[1]));
-    console.log("El resultado de la resta de los dos valores es: " + (numbers[0] - numbers[1]));
-    console.log("El resultado de la multiplicación de los dos valores es: " + (numbers[0] * numbers[1]));
-    console.log("El resultado de la división de los dos valores es: " + (numbers[0] / numbers[1]));
-    console.log("El resultado del módulo de los dos valores es: " + (numbers[0] % numbers[1]));
-}
+    console.log(
+      "Operaciones matemáticas " + "(" + numbers[0] + "," + numbers[1] + ")"
+    );
+    console.log(
+      "El resultado de la suma de los dos valores es: " +
+        (numbers[0] + numbers[1])
+    );
+    console.log(
+      "El resultado de la resta de los dos valores es: " +
+        (numbers[0] - numbers[1])
+    );
+    console.log(
+      "El resultado de la multiplicación de los dos valores es: " +
+        numbers[0] * numbers[1]
+    );
+    console.log(
+      "El resultado de la división de los dos valores es: " +
+        numbers[0] / numbers[1]
+    );
+    console.log(
+      "El resultado del módulo de los dos valores es: " +
+        (numbers[0] % numbers[1])
+    );
+  };
 
   valueSort();
   checkStrings();
