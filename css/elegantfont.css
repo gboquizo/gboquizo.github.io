@@ -14,7 +14,6 @@
 [data-icon]:before {
     font-family: ElegantIcons;
     content: attr(data-icon);
-    speak: none;
     font-weight: bold;
     font-variant: normal;
     text-transform: none;
@@ -393,7 +392,6 @@ you can use the generic selector below, but it's slower:
 .icon_globe_alt,
 .icon_clipboard {
     font-family: ElegantIcons;
-    speak: none;
     font-style: normal;
     font-weight: bold;
     font-variant: normal;
