@@ -205,10 +205,6 @@ body {
     width: 100%;
   }
 
-  .contenedor-proyectos>.responsive-img {
-    margin: 1rem;
-  }
-
   .contenedor>p {
     overflow-x: hidden;
     text-align: left;
@@ -217,25 +213,11 @@ body {
     width: 80%;
   }
 
-  .contenedor>.lista li {
-    list-style-image: url(../images/html5-ico.png);
-  }
-
   .responsive-img {
     margin-top: 2rem;
     margin-bottom: 2rem;
     max-width: 100%;
     height: auto;
-  }
-
-  .responsive-img>img,
-  .responsive a {
-    border-radius: 20%;
-    max-width: 100%;
-    height: auto;
-    box-shadow: 3px 3px 3px 3px rgba(236, 241, 241, 0.19),
-      inset 3px 3px 3px 3px rgba(0, 0, 0, 0.75);
-    filter: drop-shadow(3px 3px 3px black);
   }
 
   footer {
@@ -394,12 +376,7 @@ body {
     width: 100%;
   }
 
-  .contenedor-proyectos>.responsive-img {
-    margin: 1rem;
-  }
-
-  .contenedor>p,
-  .responsive-img {
+  .contenedor>p {
     margin-top: 2rem;
     margin-bottom: 2rem;
     max-width: 100%;
@@ -579,34 +556,7 @@ body {
     min-height: 100px;
   }
 
-  .contenedor-proyectos>.responsive-img {
-    margin: 0.5rem;
-  }
-
   .contenedor>p,
-  .contenedor>.lista {
-    overflow-x: hidden;
-    text-align: justify;
-    width: 70%;
-  }
-
-  .contenedor>.lista .html5 {
-    list-style-image: url(../images/html5-ico.png);
-  }
-
-  .responsive-img {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    max-width: 100%;
-    height: auto;
-  }
-
-  .responsive-img>img {
-    border-radius: 10%;
-    max-width: 100%;
-    height: auto;
-    filter: drop-shadow(16px 16px 10px black);
-  }
 
   footer {
     display: flex;
@@ -728,95 +678,6 @@ footer p {
   font-family: "Merienda", cursive;
 }
 
-#arribainicio {
-  display: none;
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  z-index: 99;
-  border: none;
-  outline: none;
-  background-color: #00000080;
-  color: white;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-#arribainicio:hover {
-  background-color: white;
-  color: #000000;
-}
-
-.button {
-  border-top: 1px solid #edf6fc;
-  background: #0e8fe6;
-  background: -webkit-gradient(linear,
-    left top,
-    left bottom,
-    from(#a8b9c4),
-    to(#0e8fe6));
-  background: -webkit-linear-gradient(top, #a8b9c4, #0e8fe6);
-  background: -moz-linear-gradient(top, #a8b9c4, #0e8fe6);
-  background: -ms-linear-gradient(top, #a8b9c4, #0e8fe6);
-  background: -o-linear-gradient(top, #a8b9c4, #0e8fe6);
-  padding: 9px 18px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  -webkit-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
-  -moz-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
-  box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
-  text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0;
-  color: white;
-  font-size: 10px;
-  font-family: Georgia, Serif;
-  text-decoration: none;
-  vertical-align: middle;
-  margin-bottom: 1rem;
-}
-
-.button:hover {
-  border-top-color: #c0d3e0;
-  background: #0e8fe6;
-  color: #ccc;
-  animation-name: animacionInfo;
-  animation-duration: 2s;
-  animation-timing-function: linear;
-  animation-delay: 2s;
-  animation-iteration-count: 1;
-  animation-direction: normal;
-  box-shadow: 3px 4px 10px rgba(0, 148, 255, 1);
-  cursor: pointer;
-  transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -o-transform: scale(1.1);
-  transition: 1s ease-out;
-  -webkit-transition: 1s ease-out;
-  -moz-transition: 1s ease-out;
-  -o-transition: 1s ease-out;
-}
-
-.button:active {
-  border-top-color: #2d91d4;
-  background: #2d91d4;
-}
-
-.responsive-img>img:hover {
-  border-top-color: #c0d3e0;
-  background: #0e8fe6;
-  color: #ccc;
-  animation-name: volteo;
-  animation-duration: 2s;
-  animation-timing-function: ease-in-out;
-  animation-delay: 0.5s;
-  animation-iteration-count: 2;
-  animation-direction: reverse;
-  box-shadow: 3px 4px 10px rgba(0, 148, 255, 1);
-  cursor: pointer;
-}
-
 .violet {
   background-color: rgb(140, 97, 212);
 }
@@ -847,4 +708,16 @@ footer p {
 
 .blue {
   background-color: rgb(68, 163, 207);
+}
+
+.dark-blue {
+  background-color: rgb(87, 121, 231);
+}
+
+.aquamarine {
+  background-color: rgb(21, 226, 158);
+}
+
+.fucsia {
+  background-color: rgb(248, 7, 208);
 }
