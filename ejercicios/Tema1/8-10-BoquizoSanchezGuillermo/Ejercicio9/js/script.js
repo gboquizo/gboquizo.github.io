@@ -6,33 +6,30 @@ Autor: Guillermo Boquizo Sánchez
 */
 {
     let testByID;
-    
-    function init() {
-        let info = function (string) {
 
-            testByID = document.getElementById("testByID");
-            
-            let sizeString = string.length;
-            let upperCase = "";
-            let lowerCase = "";
+    function init(string) {
+        testByID = document.getElementById("testByID");
+        
+        let sizeString = string.length;
+        let upperCase = "";
+        let lowerCase = "";
 
-            for(var i = 0; i < string.length; i++) {
-                if(string[i] === string[i].toUpperCase()) {
-                    upperCase += string[i];
-                } else if (string[i] === string[i].toLowerCase()) {
-                    lowerCase += string[i];
-                }
-            }
-            if (sizeString === upperCase.length) {
-                testByID.textContent = "La cadena \"" + string +"\" está compuesta sólo por mayúsculas";
-            } else if (sizeString === lowerCase.length) {
-                testByID.textContent = "La cadena \"" + string +"\" está compuesta sólo por minúsculas";
-            } else {
-                testByID.textContent = "La cadena \"" + string +"\" está compuesta por mayúsculas y minúsculas";
+        for(let i = 0; i < string.length; i++) {
+            if(string[i] === string[i].toUpperCase()) {
+                upperCase += string[i];
+            } else if (string[i] === string[i].toLowerCase()) {
+                lowerCase += string[i];
             }
         }
 
-        info("Probando");
+        if (sizeString === upperCase.length) {
+            testByID.textContent = "La cadena \"" + string +"\" está compuesta sólo por mayúsculas";
+        } else if (sizeString === lowerCase.length) {
+            testByID.textContent = "La cadena \"" + string +"\" está compuesta sólo por minúsculas";
+        } else {
+            testByID.textContent = "La cadena \"" + string +"\" está compuesta por mayúsculas y minúsculas";
+        }
     }
-    window.onload = init;
+
+    window.onload = init("Probando");
 }

@@ -7,15 +7,13 @@ Autor: Guillermo Boquizo Sánchez
 {
 	let testById = document.getElementById("testByID");
 
-	function init() {
-		let isPairImpair = function(number) {
-			if (number % 2 !== 0) {
-				testById.textContent = "Es un número impar";
-			} else {
-				testestById.textContent = "Es un número par";
-			}
+	function isPairImpair(number) {
+    	if (number % 2 !== 0) {
+        	testById.textContent = "Es un número impar";
+    	} else {
+        	testById.textContent = "Es un número par";
 		}
-		isPairImpair(21);
-    }
-    window.onload = init;
+	}
+	
+	window.onload = isPairImpair(21);
 }

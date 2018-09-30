@@ -6,24 +6,26 @@ Autor: Guillermo Boquizo Sánchez
 */
 {
     let testByID;
-    function init() { 
-        let isPalindromo = function (string) {
-            testByID = document.getElementById("testByID");
-            testByID = document.getElementById("testByID");
-            let stringWithoutSpaces = string.replace(/ /g, "")
-            let reverseStringWithoutSpaces = "";
-            for (let i = stringWithoutSpaces.length - 1; i >= 0; i--) {
-                reverseStringWithoutSpaces += stringWithoutSpaces[i];
-            }
-            stringWithoutSpaces = stringWithoutSpaces.toLowerCase();
-            reverseStringWithoutSpaces = reverseStringWithoutSpaces.toLowerCase();
-            if (stringWithoutSpaces === reverseStringWithoutSpaces) {
-                testByID.textContent =  "La cadena \"" + string + "\" es un palindromo";
-            } else {
-                testByID.textContent = "La cadena \"" + string + "\" no es un palindromo";
-            }
+
+    function isPalindromo(string) { 
+
+        testByID = document.getElementById("testByID");
+
+        let stringWithoutSpaces = string.replace(/ /g, "")
+        let reverseStringWithoutSpaces = "";
+
+        for (let i = stringWithoutSpaces.length - 1; i >= 0; i--) {
+            reverseStringWithoutSpaces += stringWithoutSpaces[i];
         }
-        isPalindromo("La turba brutal");
+
+        stringWithoutSpaces = stringWithoutSpaces.toLowerCase();
+        reverseStringWithoutSpaces = reverseStringWithoutSpaces.toLowerCase();
+        
+        if (stringWithoutSpaces === reverseStringWithoutSpaces) {
+            testByID.textContent =  "La cadena \"" + string + "\" es un palindromo";
+        } else {
+            testByID.textContent = "La cadena \"" + string + "\" no es un palindromo";
+        }
     }
-    window.onload = init;
+    window.onload = isPalindromo("La turba brutal");
 }
