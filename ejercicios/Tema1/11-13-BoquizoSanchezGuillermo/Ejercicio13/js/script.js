@@ -3,24 +3,23 @@ Conmpletar el código JavaScript proporcionado para que se añadan nuevos elemen
 Autor: Guillermo Boquizo Sánchez
 */
 {
-    let list;
-    let btnAdd;
-    document.addEventListener('DOMContentLoaded', init);
+	let list;
+	let btnAdd;
+	document.addEventListener('DOMContentLoaded', init);
 
-    function addElement() {
-        let element = document.createElement('li');
+	function addElement() {
+		let element = document.createElement('li');
 
-        element.textContent = "Nuevo elemento cargado por JS";
+		element.textContent = 'Nuevo elemento cargado por JS';
 
-        list.appendChild(element);
-    }
+		list.appendChild(element);
+	}
 
-    function init() {
+	function init() {
+		list = document.getElementById('list');
 
-        list = document.getElementById("list");
+		btnAdd = document.getElementById('add');
 
-        btnAdd = document.getElementById("add");
-
-        btnAdd.addEventListener("click", addElement);
-    }
+		btnAdd.addEventListener('click', addElement);
+	}
 }
