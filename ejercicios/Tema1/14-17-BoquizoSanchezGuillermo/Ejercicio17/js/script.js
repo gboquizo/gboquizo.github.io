@@ -6,7 +6,7 @@
 * @Author: Guillermo Boquizo Sánchez
 */
 {
-    const CHARACTERS_LIMIT = 10;
+    const CHARACTERS_LIMIT = 100;
 
     let text;
     let infoMsg;
