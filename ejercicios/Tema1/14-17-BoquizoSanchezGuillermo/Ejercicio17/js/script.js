@@ -14,25 +14,6 @@
 
 	document.addEventListener('DOMContentLoaded', init);
 
-	let controlCharacter = function(ev) {
-		characterCode = ev.key;
-
-		console.log(characterCode);
-
-		if (
-			characterCode === 'ArrowLeft' ||
-			characterCode === 'ArrowRight' ||
-			characterCode === 'Delete' ||
-			characterCode === 'Backspace'
-		) {
-			return true;
-		} else if (text.value.length >= CHARACTERS_LIMIT) {
-			return false;
-		} else {
-			return true;
-		}
-	};
-
 	function init() {
 		text = document.getElementById('text');
 
@@ -40,11 +21,22 @@
 
 		text.addEventListener('keypress', controlCharacter);
 		text.addEventListener('keyup', updateInfo);
-
-		//text.onkeypress = controlCharacter;
-
-		//text.onkeyup = updateInfo;
 	}
+
+	let controlCharacter = function(ev) {
+		characterCode = ev.key;
+
+		console.log(characterCode);
+
+		if (characterCode === 'ArrowLeft' || characterCode === 'ArrowRight' || characterCode === 'Delete' || characterCode === 'Backspace') {
+			return true;
+		} else if (text.value.length >= CHARACTERS_LIMIT) {
+			    ev.preventDefault();
+			return false;
+		} else {
+			return true;
+		}
+	};
 
 	let updateInfo = function() {
 		if (text.value.length >= CHARACTERS_LIMIT) {
