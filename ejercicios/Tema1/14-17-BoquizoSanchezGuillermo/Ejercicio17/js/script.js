@@ -6,49 +6,52 @@
 * @Author: Guillermo Boquizo Sánchez
 */
 {
-    const CHARACTERS_LIMIT = 100;
+	const CHARACTERS_LIMIT = 100;
 
-    let text;
-    let infoMsg;
-    let characterCode;
+	let text;
+	let infoMsg;
+	let characterCode;
 
-    document.addEventListener('DOMContentLoaded', init);
+	document.addEventListener('DOMContentLoaded', init);
 
-    let controlCharacter = function (ev) {
+	let controlCharacter = function(ev) {
+		characterCode = ev.key;
 
-        characterCode = ev.key;
+		console.log(characterCode);
 
-        console.log(characterCode);
+		if (
+			characterCode === 'ArrowLeft' ||
+			characterCode === 'ArrowRight' ||
+			characterCode === 'Delete' ||
+			characterCode === 'Backspace'
+		) {
+			return true;
+		} else if (text.value.length >= CHARACTERS_LIMIT) {
+			return false;
+		} else {
+			return true;
+		}
+	};
 
-        if (characterCode === 'ArrowLeft' || characterCode === 'ArrowRight' || characterCode === 'Delete' || characterCode === 'Backspace') {
-            return true;
-        } else if (text.value.length >= CHARACTERS_LIMIT) {
-            return false;
-        } else {
-            return true;
-        }
-    };
+	function init() {
+		text = document.getElementById('text');
 
-    function init() {
+		infoMsg = document.getElementById('infoMsg');
 
-        text = document.getElementById('text');
+		text.addEventListener('keypress', controlCharacter);
+		text.addEventListener('keyup', updateInfo);
 
-        infoMsg = document.getElementById('infoMsg');
+		//text.onkeypress = controlCharacter;
 
-        //text.addEventListener("keypress", controlCharacter);
-        text.addEventListener("keyup", updateInfo);
+		//text.onkeyup = updateInfo;
+	}
 
-        text.onkeypress = controlCharacter;
-
-        //text.onkeyup = updateInfo;
-    }
-
-    let updateInfo = function () {
-        if (text.value.length >= CHARACTERS_LIMIT) {
-            infoMsg.innerHTML = '<p> El máximo de caracteres posibles es ' + CHARACTERS_LIMIT + '</p>';
-            infoMsg.style.color = 'darkred';
-        } else {
-            infoMsg.innerHTML = 'Te faltan ' + (CHARACTERS_LIMIT - text.value.length) + ' para llegar al tope';
-        }
-    };
+	let updateInfo = function() {
+		if (text.value.length >= CHARACTERS_LIMIT) {
+			infoMsg.innerHTML = '<p> El máximo de caracteres posibles es ' + CHARACTERS_LIMIT + '</p>';
+			infoMsg.style.color = 'darkred';
+		} else {
+			infoMsg.innerHTML = 'Te faltan ' + (CHARACTERS_LIMIT - text.value.length) + ' para llegar al tope';
+		}
+	};
 }
