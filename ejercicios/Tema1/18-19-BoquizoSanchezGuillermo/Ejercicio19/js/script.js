@@ -23,22 +23,22 @@
 		text.addEventListener('keyup', updateInfo);
 	}
 
-	let controlCharacter = function (ev) {
+	let controlCharacter = function(ev) {
 		characterCode = ev.key;
 
 		console.log(characterCode);
 
-		if (characterCode === 'ArrowUp' || characterCode === 'ArrowDown' | characterCode === 'ArrowLeft' || characterCode === 'ArrowRight' || characterCode === 'Delete' || characterCode === 'Backspace') {
+		if (characterCode === 'ArrowLeft' || characterCode === 'ArrowRight' || characterCode === 'Delete' || characterCode === 'Backspace') {
 			return true;
 		} else if (text.value.length >= CHARACTERS_LIMIT) {
-			ev.preventDefault();
+			    ev.preventDefault();
 			return false;
 		} else {
 			return true;
 		}
 	};
 
-	let updateInfo = function () {
+	let updateInfo = function() {
 		if (text.value.length >= CHARACTERS_LIMIT) {
 			infoMsg.innerHTML = '<p> El máximo de caracteres posibles es ' + CHARACTERS_LIMIT + '</p>';
 			infoMsg.style.color = 'darkred';
