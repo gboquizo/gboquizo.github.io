@@ -30,13 +30,17 @@
     };
 
     function init() {
+
         text = document.getElementById('text');
 
         infoMsg = document.getElementById('infoMsg');
 
+        //text.addEventListener("keypress", controlCharacter);
+        text.addEventListener("keyup", updateInfo);
+
         text.onkeypress = controlCharacter;
 
-        text.onkeyup = updateInfo;
+        //text.onkeyup = updateInfo;
     }
 
     let updateInfo = function () {

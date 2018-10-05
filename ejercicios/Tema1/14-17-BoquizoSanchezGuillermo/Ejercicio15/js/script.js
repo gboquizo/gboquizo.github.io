@@ -21,6 +21,7 @@
     }
 
     generateMessages = function (ev) {
+
         let xRelative, yRelative, xAbsolut, yAbsolut;
         xAbsolut = ev.pageX;
         yAbsolut = ev.pageY;
@@ -46,6 +47,7 @@
     }
 
     let showInformation = function (info) {
+
         message.innerHTML = '<h2>' + info[0] + '</h2>';
         for (let i = 1; i < info.length; i++) {
             message.innerHTML += '<p>' + info[i] + '</p>';
