@@ -1,13 +1,13 @@
 /**
-Definir una función que determine si la cadena de texto que se le pasa como parámetro es un palíndromo,
-es decir, si se lee de la misma forma desde la izquierda y desde la derecha,
-Ejemplo de palíndromo complejo:"La ruta nos aporto otro paso natural"
-Autor: Guillermo Boquizo Sánchez
-*/
+ * Definir una función que determine si la cadena de texto que se le pasa como parámetro es un palíndromo,
+ * es decir, si se lee de la misma forma desde la izquierda y desde la derecha,
+ * Ejemplo de palíndromo complejo:"La ruta nos aporto otro paso natural"
+ * @author Guillermo Boquizo Sánchez
+ */
 {
     let testByID;
 
-    function isPalindromo(string) { 
+    function isPalindromo(string) {
 
         testByID = document.getElementById("testByID");
 
@@ -20,9 +20,9 @@ Autor: Guillermo Boquizo Sánchez
 
         stringWithoutSpaces = stringWithoutSpaces.toLowerCase();
         reverseStringWithoutSpaces = reverseStringWithoutSpaces.toLowerCase();
-        
+
         if (stringWithoutSpaces === reverseStringWithoutSpaces) {
-            testByID.textContent =  "La cadena \"" + string + "\" es un palindromo";
+            testByID.textContent = "La cadena \"" + string + "\" es un palindromo";
         } else {
             testByID.textContent = "La cadena \"" + string + "\" no es un palindromo";
         }

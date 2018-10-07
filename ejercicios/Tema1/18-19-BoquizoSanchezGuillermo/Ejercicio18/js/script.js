@@ -1,55 +1,29 @@
-/**
- * Crear un script que informe al usuario en que zona de la pantalla ha pulsado el ratón. 
- * Las zonas definidas son las siguientes: izquierda arriba, izquierda abajo, derecha arriba y derecha abajo. 
- * Para determinar el tamaño de la ventana del navegador, utilizar la función tamanoVentanaNavegador() proporcionada.
- * 
+/**Ejercicio 18 Mejorar el calendario creado añadiendo las opciones necesarias para que
+ * muestre el siguiente aspecto:
+ * Que no se muestre el número de la semana en el calendario (pista: weekNumbers)
+ * Modificar el formato en el que se muestra la fecha seleccionada. El formato original es
+ * 21 / 08 / 2007 (indicado como %d / %m / %Y). El formato deseado es
+ * Martes, 21 de Agosto de 2007 (pistas: %A, %B)
+ * El nuevo formato de fecha es mucho más agradable para los usuarios, pero más incómodo para
+ * los scripts que tienen que manejarlo. Afortunadamente, el calendario dispone de la
+ * posibilidad de guardar dos valores: un valor para mostrar a los usuarios y otro valor para
+ * que lo procesen los scripts. Cuando el usuario seleccione una fecha, la fecha con el
+ * formato original se debe almacenar en un campo oculto de formulario y el otro formato más
+ * largo debe mostrar al usuario en un elemento de tipo <span> (pistas: displayArea, daFormat)
+ *
  * @author Guillermo Boquizo Sánchez
  */
 
 {
-	let width;
-	let heigth;
-	let generateMessages;
-	let upperLeft;
-	let upperRight;
-	let lowerLeft;
-	let lowerRight;
-	document.addEventListener('DOMContentLoaded', init);
-
-	function init() {
-		width = window.innerWidth;
-		heigth = window.innerHeight;
-		upperLeft = document.getElementById('upperLeft');
-		upperRight = document.getElementById('upperRight');
-		lowerLeft = document.getElementById('lowerLeft');
-		lowerRight = document.getElementById('lowerRight');
-		document.addEventListener('click', generateMessages);
+	function calendarInit() {
+		Calendar.setup({
+			inputField: "fecha",
+			ifFormat: "%d/ %m/ %Y",
+			daFormat: "%A , %d de %B de %Y",
+			displayArea: "fecha",
+			button: "selector",
+			weekNumbers: false
+		});
 	}
-
-	generateMessages = function(ev) {
-		let xPosition = ev.clientX;
-		let yPosition = ev.clientY;
-
-		if (xPosition < width / 2 && yPosition <= heigth / 2) {
-			upperRight.className = '';
-			lowerLeft.className = '';
-			lowerRight.className = '';
-			upperLeft.className = 'mouseClick';
-		} else if (xPosition > width / 2 && yPosition <= heigth / 2) {
-			upperLeft.className = '';
-			lowerLeft.className = '';
-			lowerRight.className = '';
-			upperRight.className = 'mouseClick';
-		} else if (xPosition < width / 2 && yPosition > heigth / 2) {
-			upperLeft.className = '';
-			upperRight.className = '';
-			lowerRight.className = '';
-			lowerLeft.className = 'mouseClick';
-		} else if (xPosition > width / 2 && yPosition > heigth / 2) {
-			upperLeft.className = '';
-			upperRight.className = '';
-			lowerLeft.className = '';
-			lowerRight.className = 'mouseClick';
-		}
-	};
+	window.addEventListener("load", calendarInit);
 }

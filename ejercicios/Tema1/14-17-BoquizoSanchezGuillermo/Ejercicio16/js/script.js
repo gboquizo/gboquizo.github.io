@@ -14,7 +14,6 @@
 	let upperRight;
 	let lowerLeft;
 	let lowerRight;
-	document.addEventListener('DOMContentLoaded', init);
 
 	function init() {
 		width = window.innerWidth;
@@ -26,7 +25,7 @@
 		document.addEventListener('click', generateMessages);
 	}
 
-	generateMessages = function(ev) {
+	generateMessages = function (ev) {
 		let xPosition = ev.clientX;
 		let yPosition = ev.clientY;
 
@@ -52,4 +51,5 @@
 			lowerRight.className = 'mouseClick';
 		}
 	};
+	document.addEventListener('DOMContentLoaded', init);
 }

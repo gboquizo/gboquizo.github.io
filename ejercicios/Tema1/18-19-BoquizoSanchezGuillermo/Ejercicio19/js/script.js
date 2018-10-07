@@ -1,49 +1,26 @@
-/**
-* Mejorar el ejemplo anterior indicando en todo momento al usuario el número de caracteres que aún puede escribir.
-* Además, se debe permitir pulsar las teclas Backspace, Supr.y las flechas
-* horizontales cuando se haya llegado al máximo número de caracteres.
-
-* @Author: Guillermo Boquizo Sánchez
-*/
+/**Ejercicio 19 Mejorar el tooltip propuesto añadiendo las siguientes características:
+ * Que el tooltip no se muestre instantáneamente, sino que transcurra un cuarto de segundo
+ * hasta que se muestre (pista: DELAY)
+ * Que exista una separación horizontal de 15 píxel entre el puntero del ratón y el tooltip
+ * (pista: OFFSETX)
+ *  Que el tooltip se muestre en la parte superior del puntero del ratón y no en la parte
+ * inferior (pista: ABOVE)
+ * El nuevo aspecto del tooltip se muestra en la siguiente imagen:
+ * @author Guillermo Boquizo Sánchez
+ */
 {
-	const CHARACTERS_LIMIT = 100;
-
-	let text;
-	let infoMsg;
-	let characterCode;
-
-	document.addEventListener('DOMContentLoaded', init);
-
 	function init() {
-		text = document.getElementById('text');
-
-		infoMsg = document.getElementById('infoMsg');
-
-		text.addEventListener('keypress', controlCharacter);
-		text.addEventListener('keyup', updateInfo);
+		document.getElementById("tooltip").addEventListener("mouseover", showToolTip);
+		document.getElementById("tooltip").addEventListener("mouseout", hideToolTip);
 	}
 
-	let controlCharacter = function(ev) {
-		characterCode = ev.key;
+	function showToolTip() {
+		overlib('Prueba de un tooltip básico y muy sencillo.', WIDTH, 150, FGCOLOR, '#ffffcc',DELAY, 250, OFFSETX, 15, ABOVE);
+	}
 
-		console.log(characterCode);
+	function hideToolTip() {
+		nd();
+	}
 
-		if (characterCode === 'ArrowLeft' || characterCode === 'ArrowRight' || characterCode === 'Delete' || characterCode === 'Backspace') {
-			return true;
-		} else if (text.value.length >= CHARACTERS_LIMIT) {
-			    ev.preventDefault();
-			return false;
-		} else {
-			return true;
-		}
-	};
-
-	let updateInfo = function() {
-		if (text.value.length >= CHARACTERS_LIMIT) {
-			infoMsg.innerHTML = '<p> El máximo de caracteres posibles es ' + CHARACTERS_LIMIT + '</p>';
-			infoMsg.style.color = 'darkred';
-		} else {
-			infoMsg.innerHTML = 'Te faltan ' + (CHARACTERS_LIMIT - text.value.length) + ' para llegar al tope';
-		}
-	};
+	document.addEventListener('DOMContentLoaded', init);
 }

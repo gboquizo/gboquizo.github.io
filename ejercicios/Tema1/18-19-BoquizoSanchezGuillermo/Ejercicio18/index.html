@@ -8,14 +8,20 @@
     <meta name="author" content="Guillermo Boquizo Sánchez">
     <meta name="description" content="Decimoctavo ejercicio de js para clase">
     <meta name="keywords" content="HTML,CSS,JavaScript">
-    <link rel="stylesheet" href="css/estilos.css">
-    <title>Ejercicio 18 Otras utilidades</title>
+    <title>Ejercicio 18 Calendario</title>
+    <link rel="stylesheet" type="text/css" href="js/calendar/calendar-blue.css">
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/calendar/calendar.js"></script>
+    <script type="text/javascript" src="js/calendar/calendar-es.js"></script>
+    <script type="text/javascript" src="js/calendar/calendar-setup.js"></script>
+
 </head>
 
 <body>
     <noscript>
-        <p>Por favor, compruebe que su navegador sea compatible con javascript, o bien compruebe si lo tiene activado.</p>
+        <p>Por favor, compruebe que su navegador sea compatible con javascript,
+            o bien compruebe si lo tiene activado.</p>
     </noscript>
     <div class="web">
         <div class="header">
@@ -26,19 +32,31 @@
         </div>
         <main class="contenido">
             <section class='principal'>
-                <h2>Decimosexto script</h2>
-                <div id="container">
-                    <div id="upperLeft">
-                        <h2>Arriba izquierda</h2>
+                <h2>Decimoctavo script</h2>
+                <p>Ejercicio 18: Mejorar el calendario creado añadiendo las opciones necesarias para que muestre el
+                    siguiente aspecto:</p>
+                <ol>
+                    <li>Que no se muestre el número de la semana en el calendario (pista: weekNumbers)</li>
+                    <li>Modificar el formato en el que se muestra la fecha seleccionada. El formato original es 21 /
+                        08/ 2007 (indicado como %d / %m / %Y). El formato deseado es Martes, 21 de Agosto de 2007
+                        (pistas: %A,%B)</li>
+                    <li>El nuevo formato de fecha es mucho más agradable para los usuarios, pero más incómodo para los
+                        scripts que
+                        tienen que manejarlo. Afortunadamente, el calendario dispone de la posibilidad de guardar dos
+                        valores: un valor
+                        para mostrar a los usuarios y otro valor para que lo procesen los scripts. Cuando el usuario
+                        seleccione una
+                        fecha, la fecha con el formato original se debe almacenar en un campo oculto de formulario y el
+                        otro formato
+                        más largo debe mostrar al usuario en un elemento de tipo <span> (pistas: displayArea, daFormat)</li>
+                </ol>
+                <div id=calendario>
+                    <div>
+                        <input type="text" name="date" id="fecha" readonly="readonly" />
                     </div>
-                    <div id="upperRight">
-                        <h2>Arriba derecha</h2>
-                    </div>
-                    <div id="lowerLeft">
-                        <h2>Abajo izquierda</h2>
-                    </div>
-                    <div id="lowerRight">
-                        <h2>Abajo derecha</h2>
+                    <div>
+                        <img src="js/images/calendario.jpg" class="img" id="selector" title="Selecciona una fecha" alt="Selecciona una fecha">
+                        <span id="fecha"></span>
                     </div>
                 </div>
             </section>

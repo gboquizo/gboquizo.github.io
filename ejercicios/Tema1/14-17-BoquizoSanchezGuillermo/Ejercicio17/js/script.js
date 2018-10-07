@@ -1,18 +1,17 @@
 /**
-* Mejorar el ejemplo anterior indicando en todo momento al usuario el número de caracteres que aún puede escribir.
-* Además, se debe permitir pulsar las teclas Backspace, Supr.y las flechas
-* horizontales cuando se haya llegado al máximo número de caracteres.
-
-* @Author: Guillermo Boquizo Sánchez
-*/
+ * Mejorar el ejemplo anterior indicando en todo momento al usuario el número de 
+ * caracteres que aún puede escribir.
+ * Además, se debe permitir pulsar las teclas Backspace, Supr.y las flechas
+ * horizontales cuando se haya llegado al máximo número de caracteres.
+ *
+ * @author Guillermo Boquizo Sánchez
+ */
 {
 	const CHARACTERS_LIMIT = 100;
 
 	let text;
 	let infoMsg;
 	let characterCode;
-
-	document.addEventListener('DOMContentLoaded', init);
 
 	function init() {
 		text = document.getElementById('text');
@@ -46,4 +45,6 @@
 			infoMsg.innerHTML = 'Te faltan ' + (CHARACTERS_LIMIT - text.value.length) + ' para llegar al tope';
 		}
 	};
+
+	document.addEventListener('DOMContentLoaded', init);
 }

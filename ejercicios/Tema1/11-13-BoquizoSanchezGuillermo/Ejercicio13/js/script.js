@@ -1,11 +1,11 @@
 /**
-Conmpletar el código JavaScript proporcionado para que se añadan nuevos elementos a la lista cada vez que se pulsa sobre el botón.
-Autor: Guillermo Boquizo Sánchez
-*/
+ * Completar el código JavaScript proporcionado para que se añadan nuevos elementos 
+ * a la lista cada vez que se pulsa sobre el botón.
+ * @author Guillermo Boquizo Sánchez
+ */
 {
 	let list;
 	let btnAdd;
-	document.addEventListener('DOMContentLoaded', init);
 
 	function addElement() {
 		let element = document.createElement('li');
@@ -22,4 +22,6 @@ Autor: Guillermo Boquizo Sánchez
 
 		btnAdd.addEventListener('click', addElement);
 	}
+
+	document.addEventListener('DOMContentLoaded', init);
 }

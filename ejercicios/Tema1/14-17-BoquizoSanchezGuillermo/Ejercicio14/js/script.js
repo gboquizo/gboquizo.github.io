@@ -12,46 +12,28 @@
  */
 
 {
-    let content_1, content_2, content_3, link_1, link_2, link_3;
-    document.addEventListener('DOMContentLoaded', init);
-
-	let showHide = function(textContent, links) {
-		if (textContent.style.display === 'block' || textContent.style.display === '') {
-			textContent.style.display = 'none';
-			links.innerHTML = 'Mostrar más';
-		} else {
-			textContent.style.display = 'block';
-			links.innerHTML = 'Ocultar';
+	let init = function() {
+		let links = document.getElementsByTagName('a');
+		for (i = 0; i < links.length; i++) {
+			links[i].addEventListener('click', showHide);
 		}
-    };
-    
-    function init() {
-        
-		content_1 = document.getElementById('contenido_1');
-		content_2 = document.getElementById('contenido_2');
-		content_3 = document.getElementById('contenido_3');
-
-		link_1 = document.getElementById('enlace_1');
-		link_2 = document.getElementById('enlace_2');
-		link_3 = document.getElementById('enlace_3');
-
-		content_1.style.display = "block";
-		content_2.style.display = "block";
-		content_3.style.display = "block";
-
-		link_1.addEventListener('click', function(ev) {
-			ev.preventDefault;
-			showHide(content_1, this);
-		});
-
-		link_2.addEventListener('click', function(ev) {
-			ev.preventDefault;
-			showHide(content_2, this);
-		});
-
-		link_3.addEventListener('click', function(ev) {
-			ev.preventDefault;
-			showHide(content_3, this);
-		});
-	}
+	};
+	let showHide = function() {
+		let paragraphContent = document.getElementById('contenidos_' + this.id);
+		switch (paragraphContent.style.display) {
+			case 'none':
+				paragraphContent.style.display = 'block';
+				this.textContent = 'Ocultar contenidos';
+				break;
+			case 'block':
+				paragraphContent.style.display = 'none';
+				this.textContent = 'Mostrar contenidos';
+				break;
+			case '':
+				paragraphContent.style.display = 'none';
+				this.textContent = 'Mostrar contenidos';
+				break;
+		}
+	};
+	document.addEventListener('DOMContentLoaded', init);
 }
