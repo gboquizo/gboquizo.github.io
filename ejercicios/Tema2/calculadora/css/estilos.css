@@ -1,0 +1,98 @@
+* {
+    font-family: "Lato", sans-serif;
+    font-size: 16px;
+}
+
+h1 {
+    color: #ffffff;
+    text-align: center;
+    vertical-align: bottom;
+    text-shadow: 0 0 10px #000;
+}
+
+h2 {
+    color: #000000;
+    text-shadow: 0 0 10px #fff;
+    font-family: "Merienda", cursive;
+}
+
+h1,
+h2 {
+    font-size: 2.5rem;
+}
+
+body {
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: "header""main""footer";
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 20vh;
+    background: linear-gradient(to right,
+        rgba(0, 148, 255, 1),
+        rgba(189, 189, 189, 1));
+    width: 100%;
+    overflow: hidden;
+    font-family: "Merienda", cursive;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    background-color: rgb(178, 202, 175);
+
+}
+
+.calculadora {
+    margin: 20px auto;
+    width: 400px;
+    min-height: 400px;
+    background-color: #91cae0;
+    border: 2px solid rgba(204, 204, 204, 0.123);
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.containerInput {
+    margin: 15px auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.containerButton {
+
+    margin: 0 auto;
+}
+
+.entrada {
+    margin: 20px 20px;
+    text-align: right;
+    width: 69%;
+}
+
+.button {
+    width: 69px;
+    height: 49px;
+    margin: 3px;
+    font-size: 1.5rem;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 20vh;
+    background: linear-gradient(to left,
+        rgba(0, 148, 255, 1),
+        rgba(189, 189, 189, 1));
+}
