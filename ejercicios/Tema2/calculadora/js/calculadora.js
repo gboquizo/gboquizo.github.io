@@ -7,7 +7,7 @@
  */
 {
     //Se define un array para el texto de los botones
-    let textButtons = ["CE", "<=", "%", "+", "7", "8", "9", "-", "4", "5", "6", "x", "1", "2", "3", "/", "0", "+/-", ",", "="];
+    let textButtons = ["CE", "⬅", "%", "+", "7", "8", "9", "-", "4", "5", "6", "x", "1", "2", "3", "/", "0", "+/-", ",", "="];
 
     //Se define un contador para el recorrido que rellena los botones de elementos del array.
     let counter = 0;
