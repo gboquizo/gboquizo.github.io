@@ -7,14 +7,25 @@
  * @author Guillermo Boquizo Sánchez
  */
 {
-  let number = prompt("Introduce un número para hacer su factorial");
+  let number = prompt('Introduce un número para hacer su factorial');
+  let factorial = 1;
 
-  let factorial = number;
-
-  for (let i = number - 1; i > 0; i--) {
-    factorial = factorial * i;
+  function init() {
+    showResults();
   }
 
-  console.log("El factorial de " + number + " es: " + factorial);
-  alert("El factorial de " + number + " es: " + factorial);
+  function showResults() {
+    info = document.getElementById('info');
+    info.innerHTML =
+      '<h2> Resultado:</h2>' + '<h3>El factorial de ' + number + ' es ' + calculateFactorial() + '</h3>';
+  }
+
+  function calculateFactorial() {
+    for (let i = 1; i <= number; i++) {
+      factorial = factorial * i;
+    }
+    return factorial;
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
 }
