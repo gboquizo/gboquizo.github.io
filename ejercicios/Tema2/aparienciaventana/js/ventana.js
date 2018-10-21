@@ -113,8 +113,8 @@
                 </noscript>
                 <p class="bold">Se han utilizado las propiedades:</p>
                 <ul class="bold">
-                    <li>height=200</li>
-                    <li>width=300</li>
+                    <li>height=${windowOpened.innerHeight}</li>
+                    <li>width=${windowOpened.innerWidth}</li>
                 </ul>
                 <button class="button2" id ="windowClose"> Cerrar ventana </button>
             </body>
