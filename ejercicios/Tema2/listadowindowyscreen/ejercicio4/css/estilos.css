@@ -65,11 +65,11 @@ body {
 #server,
 #protocol,
 #route {
-    min-width: 100%;
+    min-width: 80%;
     font-size: 2rem;
     font-weight: bold;
-    padding-left: 300px;
-    padding-right: 100px;
+    padding-left: 200px;
+    padding-right: 50px;
 }
 
 .resultado {
