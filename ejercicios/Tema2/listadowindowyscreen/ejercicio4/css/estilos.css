@@ -24,8 +24,8 @@ h2 {
 body {
     display: grid;
     margin: 0 auto;
-    grid-template-columns: 1fr;
-    grid-template-areas: "header""main""ventana""footer";
+    grid-template-columns: 2fr;
+    grid-template-areas: "header""main""footer";
 }
 
 .header {
@@ -46,35 +46,36 @@ body {
     justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
-    width: 100%;
     background-color: #91cae0;
-    border: 2px solid rgba(204, 204, 204, 0.123);
 }
 
 .ejercicio {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    background: #ffffff;
+    align-items: flex-start;
+    background: #FFFFFF;
     position: sticky;
     top: 50px;
-    min-height: 70vh;
-    width: 70%;
+    min-width: 80%;
+    min-height: 80vh;
+    border: 2px solid black;
 }
 
 #server,
 #protocol,
 #route {
-    min-width: 300px;
+    min-width: 100%;
     font-size: 2rem;
     font-weight: bold;
+    padding-left: 300px;
+    padding-right: 100px;
 }
 
 .resultado {
     font-size: 1.5rem;
     color: #1e90ff;
-    font-weight: normal
+    font-weight: normal;
 }
 
 .footer {

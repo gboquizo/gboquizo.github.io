@@ -114,7 +114,7 @@
 
         server.innerHTML = " Servidor: " + "<span class=resultado>" + location.host + "</span>";
         protocol.innerHTML = "Protocolo: " + "<span class=resultado>" + location.protocol + "</span>";
-        route.innerHTML = "Ruta: " + "<span class=resultado>" + location.route + "</span>";
+        route.innerHTML = "Ruta: " + "<span class=resultado>" + location.href + "</span>";
 
     }
     //Se añade el evento para la carga de elementos DOM y de la función init.
