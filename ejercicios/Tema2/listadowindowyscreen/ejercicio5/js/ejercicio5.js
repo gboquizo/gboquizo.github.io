@@ -1,6 +1,6 @@
 /**
  * 
- * Mi URL.Crea una página que te muestre debidamente desglosada la url.(servidor, protocolo, ruta...)
+ * Reloj.Crea una página que cada segundo te muestre actualizado un reloj digital del tipo "22:14:09 h"(usa timing events del objeto window)
  * @author Guillermo Boquizo Sánchez
  */
 {
