@@ -48,7 +48,7 @@
         let containerButton = document.createElement("div");
         containerButton.className = "containerButton";
 
-        //Crea ek botón que abrirá la nueva ventana.
+        //Crea el botón que abrirá la nueva ventana.
         let button = document.createElement("button");
         button.className = "button";
         button.id = "btnOpen";
