@@ -26,7 +26,7 @@
 
         //Recorrido para la creación de 5 ventanas bajo el template indicado.
         for (let i = 0; i < 5; i++) {
-            let windowOpened = window.open("", "", "top=0,left=0,height=200,width=200");
+            let windowOpened = window.open("", "", "height=200,width=200,left=" + i + 10 + "px,top=" + i + 5 + "px");
             let html = `
             <!DOCTYPE html>
             <html lang="es">
