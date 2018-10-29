@@ -6,7 +6,6 @@
  * @author Guillermo Boquizo Sánchez
  */
 {
-
     //Crea un fragment donde insertar la información del ejercicio.
     let fragmento = document.createDocumentFragment();
 
@@ -22,22 +21,21 @@
      * Función que crea el layout de la página desde js.
      */
     let createPage = function () {
-
         /**
          * Sección header
          */
 
         //Crea el header y se le asigna una clase.
-        let header = document.createElement("header");
-        header.className = "header";
+        let header = document.createElement('header');
+        header.className = 'header';
 
         //Crea el título y se le asigna un texto.
-        let h1 = document.createElement("h1");
-        h1.textContent = "Desarrollo Web en Entorno Cliente";
+        let h1 = document.createElement('h1');
+        h1.textContent = 'Desarrollo Web en Entorno Cliente';
 
         //Crea el subtítulo y se le asigna un texto.
-        let h2 = document.createElement("h2");
-        h2.textContent = "Calculadora js";
+        let h2 = document.createElement('h2');
+        h2.textContent = 'Calculadora js';
 
         //Se añade el elemento h1 al header.
         header.appendChild(h1);
@@ -50,12 +48,12 @@
          */
 
         //Crea la sección main y se le asigna una clase.
-        let main = document.createElement("main");
-        main.className = "main";
+        let main = document.createElement('main');
+        main.className = 'main';
 
         //Crea un contenedor para la calculadora y se le asigna una clase.
-        let container = document.createElement("container");
-        container.className = "calculadora";
+        let container = document.createElement('container');
+        container.className = 'calculadora';
 
         //Llamada a la function que pinta la calculadora. Se le pasa el fragment por argumento.
         calculadora.dibujarCalculadora(fragmento);
@@ -96,40 +94,73 @@
         document.body.appendChild(footer);
     };
 
-
     let calculadora = {
-
         acumulado: 0,
 
         arrayIds: [
-            "btnCE", "btnBack", "btnPercent", "btnAdd",
-            "btn7", "btn8", "btn9", "btnMinus",
-            "btn4", "btn5", "btn6", "btnMultiplication",
-            "btn1", "btn2", "btn3", "btnDivision",
-            "btn0", "btnChangeSign", "btnComma", "btnEquals"
+            'btnCE',
+            'btnBack',
+            'btnPercent',
+            'btnAdd',
+            'btn7',
+            'btn8',
+            'btn9',
+            'btnMinus',
+            'btn4',
+            'btn5',
+            'btn6',
+            'btnMultiplication',
+            'btn1',
+            'btn2',
+            'btn3',
+            'btnDivision',
+            'btn0',
+            'btnChangeSign',
+            'btnComma',
+            'btnEquals'
         ],
 
         /*Función encargada de crear el layout de la calculadora. 
          *Se le pasa el fragment por argumento.
          */
         dibujarCalculadora: function (fragmento) {
-
             //Se define un array para el texto de los botones
-            let textButtons = ["CE", "⬅", "%", "+", "7", "8", "9", "-", "4", "5", "6", "x", "1", "2", "3", "/", "0", "+/-", ",", "="];
+            let textButtons = [
+                'CE',
+                '⬅',
+                '%',
+                '+',
+                '7',
+                '8',
+                '9',
+                '-',
+                '4',
+                '5',
+                '6',
+                'x',
+                '1',
+                '2',
+                '3',
+                '/',
+                '0',
+                '+/-',
+                ',',
+                '='
+            ];
 
             //Se define un contador para el recorrido que rellena los botones de elementos del array.
             let counter = 0;
 
             //Crea un contenedor para el input numérico y se le asigna una clase.
-            let containerInput = document.createElement("div");
-            containerInput.className = "containerInput";
+            let containerInput = document.createElement('div');
+            containerInput.className = 'containerInput';
 
             //Crea el input numérico, se le asigna una clase, un tipo y un value.
-            let input = document.createElement("input");
-            input.className = "entrada";
-            input.type = "text";
-            input.setAttribute("disabled", "");
-            input.id = "entrada";
+            let input = document.createElement('input');
+            input.className = 'entrada';
+            input.type = 'text';
+            input.setAttribute('disabled', '');
+            input.id = 'entrada';
             input.value = 0;
 
             //Se añade el elemento input a su contenedor.
@@ -140,61 +171,61 @@
 
             //Recorrido para generar los contenedores de los botones, los botones y añadirles texto.
             for (let i = 0; i < 5; i++) {
-                let containerButton = document.createElement("div");
-                containerButton.className = "containerButton";
+                let containerButton = document.createElement('div');
+                containerButton.className = 'containerButton';
 
                 for (let j = 0; j < 4; j++) {
-                    let button = document.createElement("button");
-                    button.type = "button";
+                    let button = document.createElement('button');
+                    button.type = 'button';
                     button.textContent = textButtons[counter];
                     button.value = textButtons[counter];
                     button.id = this.arrayIds[counter];
-                    button.className = "button";
+                    button.className = 'button';
                     containerButton.appendChild(button);
 
                     counter++;
                 }
                 fragmento.appendChild(containerButton);
             }
-
         }
     };
 
     let funcionalidadCalculadora = function () {
-        let calculatorButtons = document.getElementsByTagName("button");
-        let entrada = document.getElementById("entrada");
-        calculadora.arrayIds.forEach.call(calculatorButtons, element => {
-
+        let calculatorButtons = document.getElementsByTagName('button');
+        let entrada = document.getElementById('entrada');
+        calculadora.arrayIds.forEach.call(calculatorButtons, (element) => {
             //Coloco !isNaN para que no introduzca los demás caracteres
             if (!isNaN(element.value)) {
                 //evento al pulsar una tecla
-                element.addEventListener("click", function () {
+                element.addEventListener('click', function () {
                     console.log(this);
-                    entrada.value == 0 ? entrada.value = this.value : entrada.value += this.value;
+                    entrada.value == 0 ? (entrada.value = this.value) : (entrada.value += this.value);
                 });
             }
 
-            if (element.id === "btnBack") {
-                element.addEventListener("click", function () {
-                    entrada.value = entrada.value.length <= 1 ? 0 : entrada.value.substring(0, entrada.value.length - 1);
+            if (element.id === 'btnBack') {
+                element.addEventListener('click', function () {
+                    entrada.value = entrada.value.substring(0, entrada.value.length - 1);
+                    if (entrada.value.length == 0 || entrada.value == "-") {
+                        entrada.value = 0;
+                    }
                 });
             }
 
-            if (element.id === "btnCE") {
-                element.addEventListener("click", function () {
+            if (element.id === 'btnCE') {
+                element.addEventListener('click', function () {
                     entrada.value = 0;
                 });
             }
 
-            if (element.id === "btnChangeSign") {
-                element.addEventListener("click", function () {
-                    entrada.value *= -1;
+            if (element.id === 'btnChangeSign') {
+                element.addEventListener('click', function () {
+                    entrada.value > 0 ? (entrada.value = -Math.abs(entrada.value)) : (entrada.value = Math.abs(entrada.value));
                 });
             }
-
         });
     };
 
     //Se añade el evento para la carga de elementos DOM y de la función init.
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener('DOMContentLoaded', init);
 }
