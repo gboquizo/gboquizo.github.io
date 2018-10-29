@@ -6,7 +6,6 @@
  * @author Guillermo Boquizo Sánchez
  */
 {
-    let numero = 0;
 
     /**
      * Función que se encarga de la carga inicial.
@@ -152,18 +151,6 @@
                 }
                 fragmento.appendChild(containerButton);
             }
-        },
-        'sumar': (numero1, numero2) => {
-            return numero1 + numero2;
-        },
-        'restar': (numero1, numero2) => {
-            return numero1 - numero2;
-        },
-        'multiplicar': (numero1, numero2) => {
-            return numero1 * numero2;
-        },
-        'dividir': (numero1, numero2) => {
-            return numero1 / numero2;
         },
 
         funcionalidadCalculadora: function () {
