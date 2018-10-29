@@ -98,26 +98,11 @@
         acumulado: 0,
 
         arrayIds: [
-            'btnCE',
-            'btnBack',
-            'btnPercent',
-            'btnAdd',
-            'btn7',
-            'btn8',
-            'btn9',
-            'btnMinus',
-            'btn4',
-            'btn5',
-            'btn6',
-            'btnMultiplication',
-            'btn1',
-            'btn2',
-            'btn3',
-            'btnDivision',
-            'btn0',
-            'btnChangeSign',
-            'btnComma',
-            'btnEquals'
+            'btnCE', 'btnBack', 'btnPercent', 'btnAdd',
+            'btn7', 'btn8', 'btn9', 'btnMinus',
+            'btn4', 'btn5', 'btn6', 'btnMultiplication',
+            'btn1', 'btn2', 'btn3', 'btnDivision',
+            'btn0', 'btnChangeSign', 'btnComma', 'btnEquals'
         ],
 
         /*Función encargada de crear el layout de la calculadora. 
@@ -125,28 +110,7 @@
          */
         dibujarCalculadora: function (fragmento) {
             //Se define un array para el texto de los botones
-            let textButtons = [
-                'CE',
-                '⬅',
-                '%',
-                '+',
-                '7',
-                '8',
-                '9',
-                '-',
-                '4',
-                '5',
-                '6',
-                'x',
-                '1',
-                '2',
-                '3',
-                '/',
-                '0',
-                '+/-',
-                ',',
-                '='
-            ];
+            let textButtons = ['CE', '⬅', '%', '+', '7', '8', '9', '-', '4', '5', '6', 'x', '1', '2', '3', '/', '0', '+/-', ',', '='];
 
             //Se define un contador para el recorrido que rellena los botones de elementos del array.
             let counter = 0;
@@ -193,33 +157,32 @@
     let funcionalidadCalculadora = function () {
         let calculatorButtons = document.getElementsByTagName('button');
         let entrada = document.getElementById('entrada');
-        calculadora.arrayIds.forEach.call(calculatorButtons, (element) => {
+        Array.from(calculatorButtons).forEach((button) => {
             //Coloco !isNaN para que no introduzca los demás caracteres
-            if (!isNaN(element.value)) {
+            if (!isNaN(button.value)) {
                 //evento al pulsar una tecla
-                element.addEventListener('click', function () {
-                    console.log(this);
+                button.addEventListener('click', function () {
                     entrada.value == 0 ? (entrada.value = this.value) : (entrada.value += this.value);
                 });
             }
 
-            if (element.id === 'btnBack') {
-                element.addEventListener('click', function () {
+            if (button.id === 'btnBack') {
+                button.addEventListener('click', function () {
                     entrada.value = entrada.value.substring(0, entrada.value.length - 1);
-                    if (entrada.value.length == 0 || entrada.value == "-") {
+                    if (entrada.value.length == 0 || entrada.value == '-') {
                         entrada.value = 0;
                     }
                 });
             }
 
-            if (element.id === 'btnCE') {
-                element.addEventListener('click', function () {
+            if (button.id === 'btnCE') {
+                button.addEventListener('click', function () {
                     entrada.value = 0;
                 });
             }
 
-            if (element.id === 'btnChangeSign') {
-                element.addEventListener('click', function () {
+            if (button.id === 'btnChangeSign') {
+                button.addEventListener('click', function () {
                     entrada.value > 0 ? (entrada.value = -Math.abs(entrada.value)) : (entrada.value = Math.abs(entrada.value));
                 });
             }
