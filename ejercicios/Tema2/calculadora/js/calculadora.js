@@ -6,21 +6,23 @@
  * @author Guillermo Boquizo Sánchez
  */
 {
-    //Crea un fragment donde insertar la información del ejercicio.
-    let fragmento = document.createDocumentFragment();
+    let numero = 0;
 
     /**
      * Función que se encarga de la carga inicial.
      */
     function init() {
         createPage();
-        funcionalidadCalculadora();
+
+        calculadora.funcionalidadCalculadora();
     }
 
     /**
      * Función que crea el layout de la página desde js.
      */
     let createPage = function () {
+        //Crea un fragment donde insertar la información del ejercicio.
+        let fragmento = document.createDocumentFragment();
         /**
          * Sección header
          */
@@ -96,13 +98,12 @@
 
     let calculadora = {
         acumulado: 0,
-
         arrayIds: [
             'btnCE', 'btnBack', 'btnPercent', 'btnAdd',
-            'btn7', 'btn8', 'btn9', 'btnMinus',
-            'btn4', 'btn5', 'btn6', 'btnMultiplication',
-            'btn1', 'btn2', 'btn3', 'btnDivision',
-            'btn0', 'btnChangeSign', 'btnComma', 'btnEquals'
+            '7', '8', '9', 'btnMinus',
+            '4', '5', '6', 'btnMultiplication',
+            '1', '2', '3', 'btnDivision',
+            '0', 'btnChangeSign', 'btnComma', 'btnEquals'
         ],
 
         /*Función encargada de crear el layout de la calculadora. 
@@ -125,7 +126,7 @@
             input.type = 'text';
             input.setAttribute('disabled', '');
             input.id = 'entrada';
-            input.value = 0;
+            input.value = "0";
 
             //Se añade el elemento input a su contenedor.
             containerInput.appendChild(input);
@@ -151,44 +152,84 @@
                 }
                 fragmento.appendChild(containerButton);
             }
+        },
+        'sumar': (numero1, numero2) => {
+            return numero1 + numero2;
+        },
+        'restar': (numero1, numero2) => {
+            return numero1 - numero2;
+        },
+        'multiplicar': (numero1, numero2) => {
+            return numero1 * numero2;
+        },
+        'dividir': (numero1, numero2) => {
+            return numero1 / numero2;
+        },
+
+        funcionalidadCalculadora: function () {
+            let calculatorButtons = document.getElementsByTagName('button');
+            let entrada = document.getElementById('entrada');
+            Array.from(calculatorButtons).forEach((button) => {
+                let buttonId = button.getAttribute("id");
+
+                if (parseFloat(buttonId)) {
+                    document.getElementById(buttonId).addEventListener("click", function () {
+                        entrada.value === "0" ? (entrada.value = this.value) : (entrada.value += this.value);
+                    });
+                } else {
+                    let button = document.getElementById(buttonId);
+                    if (button) {
+                        button.addEventListener("click", () => {
+                            switch (buttonId) {
+                                case "btnBack":
+                                    if (entrada.value.includes("-") && entrada.value.length === 2) {
+                                        entrada.value = entrada.value.substring(1, 2);
+                                    } else if (entrada.value.includes("-") && entrada.value.includes(".")) {
+                                        entrada.value = "0";
+                                    } else if (entrada.value.includes(".") && !entrada.value.includes("-")) {
+                                        entrada.value = "0";
+                                    } else {
+                                        entrada.value = entrada.value.substring(0, entrada.value.length - 1);
+                                    }
+
+                                    if (entrada.value == "") {
+                                        entrada.value = "0";
+                                    }
+                                    break;
+                                case "btnCE":
+                                    entrada.value = "0";
+                                    break;
+                                case "btnChangeSign":
+                                    if (entrada.value != 0) {
+                                        if (!entrada.value.includes("-")) {
+                                            entrada.value = "-" + entrada.value;
+                                        } else {
+                                            entrada.value = entrada.value.replace("-", "");
+                                        }
+                                    }
+                                    break;
+                                case "btnComma":
+                                    if (!entrada.value.includes(".")) {
+                                        entrada.value += ".";
+                                    }
+                                    break;
+                                case "0":
+                                    if (entrada.value !== "0") {
+                                        entrada.value += "0";
+                                    }
+                                    break;
+                                case "btnAdd":
+
+                                default:
+                                    break;
+                            }
+
+                        });
+                    }
+                }
+            });
         }
     };
-
-    let funcionalidadCalculadora = function () {
-        let calculatorButtons = document.getElementsByTagName('button');
-        let entrada = document.getElementById('entrada');
-        Array.from(calculatorButtons).forEach((button) => {
-            //Coloco !isNaN para que no introduzca los demás caracteres
-            if (!isNaN(button.value)) {
-                //evento al pulsar una tecla
-                button.addEventListener('click', function () {
-                    entrada.value == 0 ? (entrada.value = this.value) : (entrada.value += this.value);
-                });
-            }
-
-            if (button.id === 'btnBack') {
-                button.addEventListener('click', function () {
-                    entrada.value = entrada.value.substring(0, entrada.value.length - 1);
-                    if (entrada.value.length == 0 || entrada.value == '-') {
-                        entrada.value = 0;
-                    }
-                });
-            }
-
-            if (button.id === 'btnCE') {
-                button.addEventListener('click', function () {
-                    entrada.value = 0;
-                });
-            }
-
-            if (button.id === 'btnChangeSign') {
-                button.addEventListener('click', function () {
-                    entrada.value > 0 ? (entrada.value = -Math.abs(entrada.value)) : (entrada.value = Math.abs(entrada.value));
-                });
-            }
-        });
-    };
-
     //Se añade el evento para la carga de elementos DOM y de la función init.
     document.addEventListener('DOMContentLoaded', init);
 }

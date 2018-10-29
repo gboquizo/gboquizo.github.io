@@ -16,8 +16,7 @@ h2 {
     font-family: "Merienda", cursive;
 }
 
-h1,
-h2 {
+h1, h2 {
     font-size: 2.5rem;
 }
 
@@ -34,9 +33,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 20vh;
-    background: linear-gradient(to right,
-        rgba(0, 148, 255, 1),
-        rgba(189, 189, 189, 1));
+    background: linear-gradient(to right, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
     width: 100%;
     overflow: hidden;
     font-family: "Merienda", cursive;
@@ -49,7 +46,6 @@ body {
     align-items: center;
     min-height: 50vh;
     background-color: rgb(178, 202, 175);
-
 }
 
 .calculadora {
@@ -69,7 +65,6 @@ body {
 }
 
 .containerButton {
-
     margin: 0 auto;
 }
 
@@ -92,7 +87,5 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 20vh;
-    background: linear-gradient(to left,
-        rgba(0, 148, 255, 1),
-        rgba(189, 189, 189, 1));
+    background: linear-gradient(to left, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
 }
