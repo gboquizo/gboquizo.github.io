@@ -1,26 +1,64 @@
+@font-face {
+  font-family: Roboto;
+  src: url(../fonts/Roboto-Regular-webfont.eot),
+    url(../fonts/Roboto-Regular-webfont.woff),
+    url(../fonts/Roboto-Regular-webfont.ttf),
+    url(../fonts/Roboto-Regular-webfont.svg);
+}
+
+@font-face {
+  font-family: Sosa;
+  src: url(../fonts/sosa-regular-webfont.eot),
+    url(../fonts/sosa-regular-webfont.woff),
+    url(../fonts/sosa-regular-webfont.ttf),
+    url(../fonts/sosa-regular-webfont.svg);
+}
+
+@font-face {
+  font-family: Merienda;
+  src: url(../fonts/Merienda-Regular.ttf),
+    url(../fonts/Merienda-Bold.ttf);
+}
+
+@font-face {
+  font-family: Lato;
+  src: url(../fonts/Lato-Regular.ttf),
+    url(../fonts/Lato-Black.ttf),
+    url(../fonts/Lato-BlackItalic.ttf),
+    url(../fonts/Lato-Bold.ttf),
+    url(../fonts/Lato-BoldItalic.ttf),
+    url(../fonts/Lato-Hairline.ttf),
+    url(../fonts/Lato-HairlineItalic.ttf),
+    url(../fonts/Lato-Italic.ttf),
+    url(../fonts/Lato-Light.ttf),
+    url(../fonts/Lato-LightItalic.ttf);
+}
+
 * {
-  font-family: "Lato", sans-serif;
+  font-family: "Lato", serif;
   font-size: 16px;
+  text-decoration: none;
 }
 
 h1 {
-  color: #ffffff;
+  font-family: "Roboto", sans-serif;
   text-align: center;
   vertical-align: bottom;
-  text-shadow: 0 0 10px #000;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 h2 {
-  color: #000000;
-  text-shadow: 0 0 10px #fff;
   font-family: "Merienda", cursive;
+  color: #000000;
+  text-shadow: 2px 0 5px #ffffff;
 }
 
 h3 {
+  font-family: "Lato", serif;
   color: #000000;
   text-shadow: 0 0 10px #fff;
-  font-family: "Merienda", cursive;
-  text-align: justify-content;
 }
 
 body {
@@ -138,9 +176,7 @@ body {
 
   .nav-icon {
     text-align: center;
-    background: linear-gradient(to right,
-      rgba(0, 148, 255, 1),
-      rgba(189, 189, 189, 1));
+    background: linear-gradient(to right, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
     padding-top: 0.5rem;
     width: 100%;
     padding-right: 2rem;
@@ -180,8 +216,7 @@ body {
     min-height: 400px;
     background-color: rgb(255, 255, 255);
     border: 5px solid black;
-    box-shadow: -2px -2px 2px 2px rgba(0, 0, 0, 0.35),
-      inset 3px 3px 3px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: -2px -2px 2px 2px rgba(0, 0, 0, 0.35), inset 3px 3px 3px -3px rgba(0, 0, 0, 0.75);
     word-break: normal;
   }
 
@@ -294,9 +329,7 @@ body {
 
   .social-icon-header {
     text-align: left;
-    background: linear-gradient(to left,
-      rgba(0, 148, 255, 1),
-      rgba(189, 189, 189, 1));
+    background: linear-gradient(to left, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
     padding-top: 0.5rem;
     width: 49%;
   }
@@ -311,9 +344,7 @@ body {
 
   .nav-icon {
     text-align: right;
-    background: linear-gradient(to right,
-      rgba(0, 148, 255, 1),
-      rgba(189, 189, 189, 1));
+    background: linear-gradient(to right, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
     padding-top: 0.5rem;
     width: 49%;
     padding-right: 2rem;
@@ -351,8 +382,7 @@ body {
     min-height: 400px;
     background-color: rgb(255, 255, 255);
     border: 5px solid black;
-    box-shadow: -3px -3px 3px 3px rgba(0, 0, 0, 0.35),
-      inset 5px 5px 5px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: -3px -3px 3px 3px rgba(0, 0, 0, 0.35), inset 5px 5px 5px -3px rgba(0, 0, 0, 0.75);
     word-break: normal;
   }
 
@@ -397,18 +427,14 @@ body {
 
   .footer-copyright {
     text-align: center;
-    background: linear-gradient(to right,
-      rgba(0, 148, 255, 1),
-      rgba(189, 189, 189, 1));
+    background: linear-gradient(to right, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
     min-height: 50px;
     width: 70%;
   }
 
   .social-icon {
     text-align: center;
-    background: linear-gradient(to left,
-      rgba(0, 148, 255, 1),
-      rgba(189, 189, 189, 1));
+    background: linear-gradient(to left, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
     min-height: 50px;
     width: 30%;
   }
@@ -456,9 +482,7 @@ body {
 
   .social-icon-header {
     text-align: left;
-    background: linear-gradient(to left,
-      rgba(0, 148, 255, 1),
-      rgba(189, 189, 189, 1));
+    background: linear-gradient(to left, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
     padding-top: 1rem;
     width: 49%;
   }
@@ -474,9 +498,7 @@ body {
 
   .nav-icon {
     text-align: right;
-    background: linear-gradient(to right,
-      rgba(0, 148, 255, 1),
-      rgba(189, 189, 189, 1));
+    background: linear-gradient(to right, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
     padding-top: 1rem;
     width: 49%;
     padding-right: 2rem;
@@ -514,8 +536,7 @@ body {
     min-height: 400px;
     background-color: rgb(255, 255, 255);
     border: 5px solid black;
-    box-shadow: -3px -3px 3px 3px rgba(0, 0, 0, 0.35),
-      inset 5px 5px 5px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: -3px -3px 3px 3px rgba(0, 0, 0, 0.35), inset 5px 5px 5px -3px rgba(0, 0, 0, 0.75);
     word-break: normal;
   }
 
@@ -556,7 +577,6 @@ body {
   }
 
   .contenedor>p,
-
   footer {
     display: flex;
     width: 100%;
@@ -565,18 +585,14 @@ body {
 
   .footer-copyright {
     text-align: center;
-    background: linear-gradient(to right,
-      rgba(0, 148, 255, 1),
-      rgba(189, 189, 189, 1));
+    background: linear-gradient(to right, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
     min-height: 50px;
     width: 70%;
   }
 
   .social-icon {
     text-align: center;
-    background: linear-gradient(to left,
-      rgba(0, 148, 255, 1),
-      rgba(189, 189, 189, 1));
+    background: linear-gradient(to left, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
     min-height: 50px;
     width: 30%;
   }
@@ -673,7 +689,6 @@ body {
 }
 
 footer p {
-  text-align: justify-all;
   font-family: "Merienda", cursive;
 }
 
