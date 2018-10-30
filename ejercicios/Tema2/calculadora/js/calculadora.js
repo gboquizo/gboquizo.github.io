@@ -97,8 +97,15 @@
 
     let calculadora = {
         acumulado: 0,
+
+        bandera: false,
+
+        controlIgual: false,
+
+        operacion: "",
+
         arrayIds: [
-            'btnCE', 'btnBack', 'btnPercent', 'btnAdd',
+            'btnCE', 'btnBack', 'btnPercentage', 'btnAdd',
             '7', '8', '9', 'btnMinus',
             '4', '5', '6', 'btnMultiplication',
             '1', '2', '3', 'btnDivision',
@@ -146,7 +153,6 @@
                     button.id = this.arrayIds[counter];
                     button.className = 'button';
                     containerButton.appendChild(button);
-
                     counter++;
                 }
                 fragmento.appendChild(containerButton);
@@ -158,10 +164,14 @@
             let entrada = document.getElementById('entrada');
             Array.from(calculatorButtons).forEach((button) => {
                 let buttonId = button.getAttribute("id");
-
                 if (parseFloat(buttonId)) {
                     document.getElementById(buttonId).addEventListener("click", function () {
-                        entrada.value === "0" ? (entrada.value = this.value) : (entrada.value += this.value);
+                        if (entrada.value === "0" || calculadora.bandera) {
+                            entrada.value = parseFloat(buttonId);
+                            calculadora.bandera = false;
+                        } else {
+                            entrada.value += parseFloat(buttonId);
+                        }
                     });
                 } else {
                     let button = document.getElementById(buttonId);
@@ -178,13 +188,14 @@
                                     } else {
                                         entrada.value = entrada.value.substring(0, entrada.value.length - 1);
                                     }
-
                                     if (entrada.value == "") {
                                         entrada.value = "0";
                                     }
                                     break;
                                 case "btnCE":
                                     entrada.value = "0";
+                                    calculadora.acumulado = 0;
+                                    calculadora.bandera = false;
                                     break;
                                 case "btnChangeSign":
                                     if (entrada.value != 0) {
@@ -200,21 +211,83 @@
                                         entrada.value += ".";
                                     }
                                     break;
+                                case "btnPercentage":
+                                    if (entrada.value !== "" && entrada.value !== "0")
+                                        entrada.value = parseFloat(entrada.value / 100);
+                                    break;
                                 case "0":
-                                    if (entrada.value !== "0") {
+                                    if (calculadora.operacion !== "") {
+                                        entrada.value = "0";
+                                    }
+                                    if (calculadora.operacion !== "" && entrada.value === "0") {
+                                        entrada.value = "0";
+                                    }
+                                    if (entrada.value !== "0" && calculadora.operacion !== "") {
+                                        entrada.value += "0";
+                                    }
+                                    if (entrada.value.includes(".")) {
                                         entrada.value += "0";
                                     }
                                     break;
                                 case "btnAdd":
-
+                                    calculadora.calcularAcumulador("suma");
+                                    break;
+                                case "btnMinus":
+                                    calculadora.calcularAcumulador("resta");
+                                    break;
+                                case "btnMultiplication":
+                                    calculadora.calcularAcumulador("multiplicacion");
+                                    break;
+                                case "btnDivision":
+                                    calculadora.calcularAcumulador("division");
+                                    break;
+                                case "btnEquals":
+                                    calculadora.calcularResultado();
+                                    break;
                                 default:
                                     break;
                             }
-
                         });
                     }
                 }
             });
+        },
+        calcularAcumulador: function (tipoOperacion) {
+            if (calculadora.operacion === "") {
+                calculadora.acumulado += parseFloat(entrada.value);
+            }
+            calculadora.bandera = true;
+            calculadora.operacion = tipoOperacion;
+            calculadora.controlIgual = false;
+        },
+        calcularResultado: function () {
+            if (!calculadora.controlIgual) {
+                switch (calculadora.operacion) {
+                    case "suma":
+                        calculadora.acumulado += parseFloat(entrada.value);
+                        entrada.value = calculadora.acumulado;
+                        calculadora.controlIgual = true;
+                        break;
+                    case "resta":
+                        calculadora.acumulado -= parseFloat(entrada.value);
+                        entrada.value = calculadora.acumulado;
+                        calculadora.controlIgual = true;
+                        break;
+                    case "multiplicacion":
+                        calculadora.acumulado *= parseFloat(entrada.value);
+                        entrada.value = calculadora.acumulado;
+                        calculadora.controlIgual = true;
+                        break;
+                    case "division":
+                        calculadora.acumulado /= parseFloat(entrada.value);
+                        entrada.value = calculadora.acumulado;
+                        calculadora.controlIgual = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            calculadora.bandera = false;
         }
     };
     //Se añade el evento para la carga de elementos DOM y de la función init.
