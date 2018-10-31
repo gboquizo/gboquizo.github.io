@@ -98,7 +98,7 @@
     let calculadora = {
         acumulado: 0,
 
-        bandera: false,
+        operacionRealizada: false,
 
         controlIgual: false,
 
@@ -166,9 +166,13 @@
                 let buttonId = button.getAttribute("id");
                 if (parseFloat(buttonId)) {
                     document.getElementById(buttonId).addEventListener("click", function () {
-                        if (entrada.value === "0" || calculadora.bandera) {
+                        if (calculadora.operacionRealizada) {
+                            entrada.value = "0";
+                        }
+                        if (entrada.value.charAt(0) === "0") {
                             entrada.value = parseFloat(buttonId);
-                            calculadora.bandera = false;
+                            calculadora.operacionRealizada = false;
+                            calculadora.controlIgual = false;
                         } else {
                             entrada.value += parseFloat(buttonId);
                         }
@@ -179,6 +183,9 @@
                         button.addEventListener("click", () => {
                             switch (buttonId) {
                                 case "btnBack":
+                                    if (entrada.value == "") {
+                                        entrada.value = "0";
+                                    }
                                     if (entrada.value.includes("-") && entrada.value.length === 2) {
                                         entrada.value = entrada.value.substring(1, 2);
                                     } else if (entrada.value.includes("-") && entrada.value.includes(".")) {
@@ -188,14 +195,15 @@
                                     } else {
                                         entrada.value = entrada.value.substring(0, entrada.value.length - 1);
                                     }
-                                    if (entrada.value == "") {
-                                        entrada.value = "0";
-                                    }
                                     break;
                                 case "btnCE":
-                                    entrada.value = "0";
-                                    calculadora.acumulado = 0;
-                                    calculadora.bandera = false;
+                                    if (entrada.value !== "") {
+                                        calculadora.acumulado = 0;
+                                        calculadora.operacion = "";
+                                        entrada.value = "0";
+                                        calculadora.operacionRealizada = false;
+                                        calculadora.controlIgual = false;
+                                    }
                                     break;
                                 case "btnChangeSign":
                                     if (entrada.value != 0) {
@@ -216,17 +224,21 @@
                                         entrada.value = parseFloat(entrada.value / 100);
                                     break;
                                 case "0":
-                                    if (calculadora.operacion !== "") {
+                                    if (calculadora.controlIgual) {
+                                        calculadora.acumulado = 0;
+                                        calculadora.operacion = "";
                                         entrada.value = "0";
+                                        calculadora.operacionRealizada = false;
+                                        calculadora.controlIgual = false;
                                     }
-                                    if (calculadora.operacion !== "" && entrada.value === "0") {
-                                        entrada.value = "0";
-                                    }
-                                    if (entrada.value !== "0" && calculadora.operacion !== "") {
-                                        entrada.value += "0";
-                                    }
-                                    if (entrada.value.includes(".")) {
-                                        entrada.value += "0";
+                                    if (!calculadora.operacionRealizada) {
+                                        if (entrada.value !== "0") {
+                                            entrada.value += "0";
+                                        }
+                                    } else {
+                                        if (!entrada.value.includes(".")) {
+                                            entrada.value = "0";
+                                        }
                                     }
                                     break;
                                 case "btnAdd":
@@ -252,12 +264,12 @@
                 }
             });
         },
-        calcularAcumulador: function (tipoOperacion) {
+        calcularAcumulador: function (operacionTipo) {
             if (calculadora.operacion === "") {
                 calculadora.acumulado += parseFloat(entrada.value);
             }
-            calculadora.bandera = true;
-            calculadora.operacion = tipoOperacion;
+            calculadora.operacionRealizada = true;
+            calculadora.operacion = operacionTipo;
             calculadora.controlIgual = false;
         },
         calcularResultado: function () {
@@ -287,7 +299,7 @@
                         break;
                 }
             }
-            calculadora.bandera = false;
+            calculadora.operacionRealizada = false;
         }
     };
     //Se añade el evento para la carga de elementos DOM y de la función init.
