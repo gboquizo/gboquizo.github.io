@@ -103,7 +103,6 @@
     };
 
     let createDefinans = function (fragment) {
-        //let array = [ 'a', 'b', 'c', 'd', 'e', 'f' ];
 
         let h4 = document.createElement('h4');
 
