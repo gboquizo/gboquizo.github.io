@@ -1,0 +1,159 @@
+@font-face {
+    font-family: Roboto;
+    src: url(../../../../../fonts/Roboto-Regular-webfont.eot), url(../../../../../fonts/Roboto-Regular-webfont.woff), url(../../../../../fonts/Roboto-Regular-webfont.ttf), url(../../../../../fonts/Roboto-Regular-webfont.svg);
+}
+
+@font-face {
+    font-family: Sosa;
+    src: url(../../../../../fonts/sosa-regular-webfont.eot), url(../../../../../fonts/sosa-regular-webfont.woff), url(../../../../../fonts/sosa-regular-webfont.ttf), url(../../../../../fonts/sosa-regular-webfont.svg);
+}
+
+@font-face {
+    font-family: Merienda;
+    src: url(../../../../../fonts/Merienda-Regular.ttf), url(../../../../../fonts/Merienda-Bold.ttf);
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../../../../../fonts/Lato-Regular.ttf), url(../../../../../fonts/Lato-Black.ttf), url(../../../../..//fonts/Lato-BlackItalic.ttf), url(../../../../../fonts/Lato-Bold.ttf), url(../../../../..//fonts/Lato-BoldItalic.ttf), url(../../../../../fonts/Lato-Hairline.ttf), url(../../../../../fonts/Lato-HairlineItalic.ttf), url(../../../../../fonts/Lato-Italic.ttf), url(../../../../../fonts/Lato-Light.ttf), url(../../../../../fonts/Lato-LightItalic.ttf);
+}
+
+* {
+    font-family: "Lato", serif;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+h1 {
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+    vertical-align: bottom;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+h2 {
+    font-family: "Merienda", cursive;
+    color: #000000;
+    text-shadow: 2px 0 5px #ffffff;
+    text-align: center;
+}
+
+h3 {
+    font-family: "Lato", sans-serif;
+    color: #000000;
+    text-shadow: 0 0 10px rgb(196, 182, 182);
+    text-align: center;
+}
+
+h4 {
+    font-family: "Lato", sans-serif;
+    color: #000000;
+    text-shadow: 0 0 10px rgb(196, 182, 182);
+    text-align: justify;
+}
+
+h1,
+h2 {
+    font-size: 2.5rem;
+}
+
+h3,
+h4 {
+    font-size: 1.5rem;
+}
+
+body {
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: "header""main""footer";
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 20vh;
+    background: linear-gradient(to right, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
+    width: 100%;
+    overflow: hidden;
+    font-family: "Merienda", cursive;
+}
+
+.info>li,
+.info {
+    color: #000000;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+.info2,
+.info2>li {
+    color: red;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+.info2 {
+    padding-bottom: 1rem;
+}
+
+.info3>li,
+.info3 {
+    line-height: 10px;
+    font-size: 1.5rem;
+    text-align: left;
+    list-style: none;
+}
+
+.info4 {
+    line-height: 40px;
+    color: #329fed;
+    font-size: 1.5rem;
+    text-align: left;
+    list-style: none;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 300vh;
+    width: 100%;
+    background-color: #91cae0;
+    border: 2px solid rgba(204, 204, 204, 0.123);
+    text-align: center;
+}
+
+.ejercicio {
+    position: sticky;
+    top: 100px;
+    bottom: 100px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 10vh;
+    width: 80%;
+    background: #ffffff;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 20vh;
+    background: linear-gradient(to left, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
+    z-index: 3;
+}
+
+footer p {
+    font-family: "Merienda", cursive;
+}
