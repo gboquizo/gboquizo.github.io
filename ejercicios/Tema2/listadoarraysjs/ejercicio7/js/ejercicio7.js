@@ -6,6 +6,8 @@
  *
  */
 {
+    let newline = "<br/>";
+
     /**
      * Función que se encarga de la carga inicial.
      */
@@ -110,54 +112,41 @@
         h4.innerHTML = '7. Crea una función que elimine todos los undefined de un array.';
 
         let firstParagraph = document.createElement('p');
-        firstParagraph.className = 'info';
-        firstParagraph.textContent = '';
+        firstParagraph.className = 'info4';
+        firstParagraph.innerHTML = 'Para eliminar los undefined de un array, se crea una función que comprueba al recorrer el array.' +
+            newline + newline +
+            'Si el typeof de array en esa iteración es undefined, lo elimina con slice() del mismo.';
 
         let secondParagraph = document.createElement('p');
         secondParagraph.className = 'info';
-        secondParagraph.textContent = '';
+        secondParagraph.innerHTML = 'Ejemplo:';
 
-        let definans = ['', '', ''];
+        let list = document.createElement('ol');
+        list.className = 'info';
 
-        let firstList = document.createElement('ol');
-        firstList.className = 'info';
-
-        let addElement = function (element) {
-            let node = document.createElement('li');
-            node.appendChild(document.createTextNode(element));
-            firstList.appendChild(node);
-        };
-
-        let showFirstDefinans = function (element) {
-            addElement(element);
-        };
-
-        let secondList = document.createElement('ol');
-        secondList.className = 'info';
-
-        let definans2 = [
-            "",
-            '',
-            '',
-            '' +
-            '',
-            ''
+        let definans = [
+            'let deleteUndefined = function (array) {',
+            '&nbsp&nbspfor (let i = 0; i < array.length; i++) {',
+            '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspif (typeof array[i] === "undefined") {',
+            '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsparray.splice(array[i], 1);',
+            '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp i--;',
+            '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}',
+            '&nbsp&nbsp }',
+            '}'
         ];
 
-        for (let i = 0; i < definans2.length; i++) {
+        for (let i = 0; i < definans.length; i++) {
             let li = document.createElement('li');
             li.className = 'info4';
-            li.innerHTML = '<p class="info4">' + definans2[i] + '</p>' + '<br>';
+            li.innerHTML = '<p class="info4">' + definans[i] + '</p>';
             fragment.appendChild(li);
         }
-        secondList.appendChild(fragment);
+        list.appendChild(fragment);
 
-        definans.forEach(showFirstDefinans);
         fragment.appendChild(h4);
         fragment.appendChild(firstParagraph);
-        fragment.appendChild(firstList);
         fragment.appendChild(secondParagraph);
-        fragment.appendChild(secondList);
+        fragment.appendChild(list);
     };
 
     let createExercise = function (fragment) {
@@ -168,26 +157,40 @@
         let paragraph = document.createElement('p');
         paragraph.className = 'info2';
 
-        let list = document.createElement('ol');
-        list.className = 'info2';
-        let array = [];
+        let mensaje = "";
 
-        let addElement = function (element) {
-            let node = document.createElement('li');
-            node.appendChild(document.createTextNode(element));
-            list.appendChild(node);
-        };
+        let deleteUndefined = function (array) {
+            for (let i = 0; i < array.length; i++) {
+                if (typeof array[i] === 'undefined') {
+                    array.splice(array[i], 1);
+                    i--;
+                }
+            }
+        }
 
-        let showArray = function (element, index, array) {
-            addElement('Array[' + index + '] = ' + '"' + element + '"' + ',' + ' array =' + JSON.stringify(array) + ';');
-        };
+        let createArray = function () {
+            let array = [];
+            array.length = 3;
+            array.push("Hello");
+            array.push("world");
+            array.push(5);
+            array.push(true);
+            return array;
+        }
 
-        array.forEach(showArray);
+        let array = createArray();
+
+        mensaje += "Array inicial:" + newline;
+        mensaje += array;
+
+        deleteUndefined(array);
+        mensaje += newline + newline + "Array final:" + newline;
+        mensaje += array;
+
+        paragraph.innerHTML = mensaje;
 
         fragment.appendChild(h2);
-        paragraph.append();
         fragment.appendChild(paragraph);
-        fragment.appendChild(list);
     };
 
     //Se añade el evento para la carga de elementos DOM y de la función init.

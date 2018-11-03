@@ -82,11 +82,13 @@ body {
     h1,
     h2 {
         font-size: 1.5rem;
+        padding: 1px;
     }
 
     h3,
     h4 {
         font-size: 0.9rem;
+        padding: 10px;
     }
 
     .header {
@@ -126,7 +128,7 @@ body {
         justify-content: flex-start;
         align-items: center;
         min-height: 10vh;
-        width: 80%;
+        width: 85%;
         background: #ffffff;
     }
 
@@ -134,7 +136,7 @@ body {
     .info {
         color: #000000;
         font-weight: bold;
-        font-size: 0.80rem;
+        font-size: 1rem;
         text-align: left;
     }
 
@@ -160,11 +162,14 @@ body {
 
     .info4>li,
     .info4 {
-        line-height: 15px;
+        margin: 20px auto;
+        line-height: 20px;
         color: #329fed;
-        font-size: 1rem;
+        font-size: 0.9rem;
         list-style: none;
-        white-space: initial;
+        text-align: left;
+        text-align-last: left;
+        white-space: pre-wrap;
     }
 
     footer {
@@ -188,7 +193,8 @@ body {
 
     h3,
     h4 {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+        padding: 10px;
     }
 
     .header {
@@ -258,12 +264,14 @@ body {
         list-style: none;
     }
 
-    .info4 {
+    .info4,
+    .info4>li {
         line-height: 20px;
         color: #329fed;
         font-size: 1rem;
         padding-left: 15px;
         list-style: none;
+        text-align: left;
     }
 
     .footer {
@@ -295,8 +303,10 @@ body {
         font-size: 2.5rem;
     }
 
-    h3 {
+    h3,
+    h4 {
         font-size: 2rem;
+        padding: 10px;
     }
 
     .header {
@@ -366,12 +376,14 @@ body {
         list-style: none;
     }
 
-    .info4 {
+    .info4,
+    .info4>li {
         line-height: 15px;
         color: #329fed;
         font-size: 1.1rem;
         padding-left: 30px;
         list-style: none;
+        text-align: left;
     }
 
     .footer {
