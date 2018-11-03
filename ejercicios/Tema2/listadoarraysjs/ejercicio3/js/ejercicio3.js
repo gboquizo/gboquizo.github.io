@@ -1,12 +1,12 @@
 /**
  * 
- * Indica la función que comprueba si un objeto es o no un Array.
- * Demuestra su uso mediante un ejemplo.
+ * Indica la utilidad del operador in con los arrays.Demuestra su uso mediante un ejemplo.
  * 
  * @author Guillermo Boquizo Sánchez
  *
  */
 {
+    let newline = "<br/>";
     /**
      * Función que se encarga de la carga inicial.
      */
@@ -106,59 +106,45 @@
 
     let createDefinans = function (fragment) {
 
+        let videoconsolas = ["Nintendo", "Sony", "Microsoft", "Sega"];
+        let mensaje = new String("Hola mundo");
+
         let h4 = document.createElement('h4');
 
-        h4.innerHTML = '3. Indica la función que comprueba si un objeto es o no un Array.<br>Demuestra su uso mediante un ejemplo.';
+        h4.innerHTML = '3. Indica la función que comprueba si un objeto es o no un Array.' + newline + 'Demuestra su uso mediante un ejemplo.';
 
         let firstParagraph = document.createElement('p');
-        firstParagraph.className = 'info';
-        firstParagraph.textContent = '';
+        firstParagraph.className = 'info4';
+        firstParagraph.innerHTML = 'Para comprobar si un objeto es o no un Array podemos hacer uso de la función isArray().' +
+            newline + newline +
+            'Esta función devuelve true si el objeto es de tipo Array, y false en caso contrario.';
 
         let secondParagraph = document.createElement('p');
         secondParagraph.className = 'info';
-        secondParagraph.textContent = '';
+        secondParagraph.innerHTML = 'Ejemplo:';
 
-        let definans = ['', '', ''];
+        let list = document.createElement('ol');
+        list.className = 'info';
 
-        let firstList = document.createElement('ol');
-        firstList.className = 'info';
-
-        let addElement = function (element) {
-            let node = document.createElement('li');
-            node.appendChild(document.createTextNode(element));
-            firstList.appendChild(node);
-        };
-
-        let showFirstDefinans = function (element) {
-            addElement(element);
-        };
-
-        let secondList = document.createElement('ol');
-        secondList.className = 'info';
-
-        let definans2 = [
-            "",
-            '',
-            '',
-            '' +
-            '',
-            ''
+        let definans = [
+            'let videoconsolas = ' + JSON.stringify(videoconsolas) + ';',
+            'let mensaje = ' + mensaje,
+            '¿videoconsolas es un array? : ' + (Array.isArray(videoconsolas)),
+            '¿mensaje es un array? : ' + (Array.isArray(mensaje)),
         ];
 
-        for (let i = 0; i < definans2.length; i++) {
+        for (let i = 0; i < definans.length; i++) {
             let li = document.createElement('li');
             li.className = 'info4';
-            li.innerHTML = '<p class="info4">' + definans2[i] + '</p>' + '<br>';
+            li.innerHTML = '<p class="info4">' + definans[i] + '</p>' + newline;
             fragment.appendChild(li);
         }
-        secondList.appendChild(fragment);
+        list.appendChild(fragment);
 
-        definans.forEach(showFirstDefinans);
         fragment.appendChild(h4);
         fragment.appendChild(firstParagraph);
-        fragment.appendChild(firstList);
         fragment.appendChild(secondParagraph);
-        fragment.appendChild(secondList);
+        fragment.appendChild(list);
     };
 
     let createExercise = function (fragment) {
@@ -169,26 +155,14 @@
         let paragraph = document.createElement('p');
         paragraph.className = 'info2';
 
-        let list = document.createElement('ol');
-        list.className = 'info2';
-        let array = [];
+        let videoconsolas = ["Nintendo ", "Sony ", "Microsoft ", "Sega "];
+        let mensaje = new String("Hola mundo");
 
-        let addElement = function (element) {
-            let node = document.createElement('li');
-            node.appendChild(document.createTextNode(element));
-            list.appendChild(node);
-        };
-
-        let showArray = function (element, index, array) {
-            addElement('Array[' + index + '] = ' + '"' + element + '"' + ',' + ' array =' + JSON.stringify(array) + ';');
-        };
-
-        array.forEach(showArray);
+        paragraph.innerHTML = "¿Es 'videoconsolas' un array? = " + Array.isArray(videoconsolas) + newline +
+            "¿Es 'mensaje' un array? = " + Array.isArray(mensaje);
 
         fragment.appendChild(h2);
-        paragraph.append();
         fragment.appendChild(paragraph);
-        fragment.appendChild(list);
     };
 
     //Se añade el evento para la carga de elementos DOM y de la función init.

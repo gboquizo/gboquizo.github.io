@@ -133,13 +133,13 @@
 
         let definans = [
             'let videoconsolas = ' + JSON.stringify(videoconsolas) + ';',
-            '0 in videoconsolas //' + (0 in videoconsolas),
-            '2 in videoconsolas //' + (2 in videoconsolas),
-            '5 in videoconsolas //' + (5 in videoconsolas),
-            'length in videoconsolas //' + (length in videoconsolas) + ' (los arrays tienen longitud.)',
-            'plataforma" in videoconsola //' + ("plataforma" in videoconsola),
-            '"sistema" in videoconsola //' + ("sistema" in videoconsola),
-            '"procesador" in videoconsola //' + ("procesador" in videoconsola),
+            '0 in videoconsolas = //' + (0 in videoconsolas),
+            '2 in videoconsolas = //' + (2 in videoconsolas),
+            '5 in videoconsolas = //' + (5 in videoconsolas),
+            'length in videoconsolas = //' + (length in videoconsolas) + ' (los arrays tienen longitud.)',
+            'plataforma" in videoconsola = //' + ("plataforma" in videoconsola),
+            '"sistema" in videoconsola = //' + ("sistema" in videoconsola),
+            '"procesador" in videoconsola = //' + ("procesador" in videoconsola)
         ];
 
         for (let i = 0; i < definans.length; i++) {
