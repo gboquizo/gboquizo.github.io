@@ -126,14 +126,12 @@
 
         let secondParagraph = document.createElement('p');
         secondParagraph.className = 'info';
-        secondParagraph.innerHTML = 'Ejemplo';
+        secondParagraph.innerHTML = 'Ejemplo:';
 
+        let list = document.createElement('ol');
+        list.className = 'info';
 
-
-        let secondList = document.createElement('ol');
-        secondList.className = 'info';
-
-        let definans2 = [
+        let definans = [
             'let videoconsolas = ' + JSON.stringify(videoconsolas) + ';',
             '0 in videoconsolas //' + (0 in videoconsolas),
             '2 in videoconsolas //' + (2 in videoconsolas),
@@ -144,18 +142,18 @@
             '"procesador" in videoconsola //' + ("procesador" in videoconsola),
         ];
 
-        for (let i = 0; i < definans2.length; i++) {
+        for (let i = 0; i < definans.length; i++) {
             let li = document.createElement('li');
             li.className = 'info4';
-            li.innerHTML = '<p class="info4">' + definans2[i] + '</p>' + newline;
+            li.innerHTML = '<p class="info4">' + definans[i] + '</p>' + newline;
             fragment.appendChild(li);
         }
-        secondList.appendChild(fragment);
+        list.appendChild(fragment);
 
         fragment.appendChild(h4);
         fragment.appendChild(firstParagraph);
         fragment.appendChild(secondParagraph);
-        fragment.appendChild(secondList);
+        fragment.appendChild(list);
     };
 
     let createExercise = function (fragment) {
