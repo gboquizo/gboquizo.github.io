@@ -128,16 +128,16 @@ body {
     .info {
         color: #000000;
         font-weight: bold;
-        font-size: 0.9rem;
+        font-size: 0.80rem;
         text-align: left;
     }
 
     .info2,
     .info2>li {
-        padding: 10px;
+
         color: red;
         font-size: 1rem;
-        text-align: center;
+        text-align: left;
     }
 
     .info2 {
