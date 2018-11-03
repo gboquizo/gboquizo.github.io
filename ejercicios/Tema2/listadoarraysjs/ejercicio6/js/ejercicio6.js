@@ -109,8 +109,49 @@
 			'6.Crea una función que devuelva un array con cada uno de los argumentos.' + newline +
 			'En caso de que alguno de sus argumentos sea un array,que introduzca sus elementos' + newline +
 			'uno a uno.';
+
+		let firstParagraph = document.createElement('p');
+
+		firstParagraph.className = 'info4';
+		firstParagraph.innerHTML = 'Para crear un array que devuelva argumentos, creamos una función que añada con array.push() el conjunto de los mismos.' +
+			newline + newline +
+			'Esta función recorrerá con un for hasta el tamaño indicado, rellenando el array vacío definido previamente.';
+		let secondParagraph = document.createElement('p');
+		secondParagraph.className = 'info';
+		secondParagraph.innerHTML = 'Ejemplo:';
+
+		let list = document.createElement('ol');
+		list.className = 'info';
+
+		let definans = [
+			'let createWithArgsArray = function () {',
+			'&nbsp&nbsplet arrayWithArgs = [];',
+			'&nbsp&nbspfor (let i = 0; i < arguments.length; i++) {',
+			'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsparrayWithArgs.push(arguments[i]);',
+			'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}',
+			'&nbsp&nbspreturn arrayWithArgs;',
+			'}',
+			'',
+			'paragraph.innerHTML = createWithArgumentArray',
+			'("argumento1", "argumento2", "argumento3",',
+			'["elemento1", "elemento2 ", "elemento3 "]);'
+		];
+
+		for (let i = 0; i < definans.length; i++) {
+			let li = document.createElement('li');
+			li.className = 'info4';
+			li.innerHTML = '<p class="info4">' + definans[i] + '</p>';
+			fragment.appendChild(li);
+		}
+		list.appendChild(fragment);
+
 		fragment.appendChild(h4);
+		fragment.appendChild(firstParagraph);
+		fragment.appendChild(secondParagraph);
+		fragment.appendChild(list);
 	};
+
+
 	let createExercise = function (fragment) {
 
 		let h2 = document.createElement('h2');
@@ -119,15 +160,15 @@
 		let paragraph = document.createElement('p');
 		paragraph.className = 'info2';
 
-		let createWithArgumentArray = function () {
-			let arrayWithArguments = [];
+		let createWithArgsArray = function () {
+			let arrayWithArgs = [];
 			for (let i = 0; i < arguments.length; i++) {
-				arrayWithArguments.push(arguments[i]);
+				arrayWithArgs.push(arguments[i]);
 			}
-			return arrayWithArguments;
+			return arrayWithArgs;
 		};
 
-		paragraph.innerHTML = createWithArgumentArray(
+		paragraph.innerHTML = createWithArgsArray(
 			"<span class='info2'>argumento1 ",
 			' argumento2 ',
 			' argumento3 ',

@@ -114,7 +114,7 @@
         firstParagraph.className = 'info4';
         firstParagraph.innerHTML = 'Para crear un array que devuelva argumentos, creamos una función que añada con array.push() el conjunto de los mismos.' +
             newline + newline +
-            'Esta función recorrerá con un for hasta el tamaño indicado, rellenando el array vacío definido previamente';
+            'Esta función recorrerá con un for hasta el tamaño indicado, rellenando el array vacío definido previamente.';
 
         let secondParagraph = document.createElement('p');
         secondParagraph.className = 'info';
