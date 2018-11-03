@@ -1,6 +1,7 @@
 /**
  * 
- * Indica la utilidad del operador in con los arrays.Demuestra su uso mediante un ejemplo.
+ * Indica la función que comprueba si un objeto es o no un Array.
+ * Demuestra su uso mediante un ejemplo.
  * 
  * @author Guillermo Boquizo Sánchez
  *
@@ -130,7 +131,7 @@
             'let videoconsolas = ' + JSON.stringify(videoconsolas) + ';',
             'let mensaje = ' + mensaje,
             '¿videoconsolas es un array? : ' + (Array.isArray(videoconsolas)),
-            '¿mensaje es un array? : ' + (Array.isArray(mensaje)),
+            '¿mensaje es un array? : ' + (Array.isArray(mensaje))
         ];
 
         for (let i = 0; i < definans.length; i++) {

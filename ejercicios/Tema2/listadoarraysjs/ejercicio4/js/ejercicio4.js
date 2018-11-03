@@ -7,6 +7,7 @@
  *
  */
 {
+    let newline = "<br/>";
     /**
      * Función que se encarga de la carga inicial.
      */
@@ -108,57 +109,45 @@
 
         let h4 = document.createElement('h4');
 
-        h4.innerHTML = '4. Crea una función que cree un array de la dimensión indicada,' + '<br>cuyo contenido sean los números naturales comenzando desde 0. ';
+        h4.innerHTML = '<p>4. Crea una función que cree un array de la dimensión indicada cuyo contenido' + newline + 'sean los números naturales comenzando desde 0.</p>';
 
         let firstParagraph = document.createElement('p');
-        firstParagraph.className = 'info';
-        firstParagraph.textContent = '';
+        firstParagraph.className = 'info4';
+        firstParagraph.innerHTML = 'Para crear un array de una dimensión indicada, creamos una función que añada con array.push().' +
+            newline + newline +
+            'Esta función recorrerá con un for hasta el tamaño indicado, rellenando el array vacío definido previamente';
 
         let secondParagraph = document.createElement('p');
         secondParagraph.className = 'info';
-        secondParagraph.textContent = '';
+        secondParagraph.innerHTML = 'Ejemplo:';
 
-        let definans = ['', '', ''];
+        let list = document.createElement('ol');
+        list.className = 'info';
 
-        let firstList = document.createElement('ol');
-        firstList.className = 'info';
-
-        let addElement = function (element) {
-            let node = document.createElement('li');
-            node.appendChild(document.createTextNode(element));
-            firstList.appendChild(node);
-        };
-
-        let showFirstDefinans = function (element) {
-            addElement(element);
-        };
-
-        let secondList = document.createElement('ol');
-        secondList.className = 'info';
-
-        let definans2 = [
-            "",
+        let definans = [
+            'let createArray = function (requestedSize)&nbsp&nbsp{',
+            '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsplet array = [];',
+            '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspfor (let i = 0; i < requestedSize; i++)&nbsp&nbsp{',
+            '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsparray.push(i);',
+            '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}',
+            '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspparagraph.innerHTML = "Array = [" + array + "]";',
+            '}',
             '',
-            '',
-            '' +
-            '',
-            ''
+            'createArray(10);'
         ];
 
-        for (let i = 0; i < definans2.length; i++) {
+        for (let i = 0; i < definans.length; i++) {
             let li = document.createElement('li');
             li.className = 'info4';
-            li.innerHTML = '<p class="info4">' + definans2[i] + '</p>' + '<br>';
+            li.innerHTML = '<p class="info4">' + definans[i] + '</p>';
             fragment.appendChild(li);
         }
-        secondList.appendChild(fragment);
+        list.appendChild(fragment);
 
-        definans.forEach(showFirstDefinans);
         fragment.appendChild(h4);
         fragment.appendChild(firstParagraph);
-        fragment.appendChild(firstList);
         fragment.appendChild(secondParagraph);
-        fragment.appendChild(secondList);
+        fragment.appendChild(list);
     };
 
     let createExercise = function (fragment) {
@@ -169,26 +158,18 @@
         let paragraph = document.createElement('p');
         paragraph.className = 'info2';
 
-        let list = document.createElement('ol');
-        list.className = 'info2';
-        let array = [];
+        let createArray = function (requestedSize) {
+            let array = [];
+            for (let i = 0; i < requestedSize; i++) {
+                array.push(i);
+            }
+            paragraph.innerHTML = "Array = [" + array + "]";
+        }
 
-        let addElement = function (element) {
-            let node = document.createElement('li');
-            node.appendChild(document.createTextNode(element));
-            list.appendChild(node);
-        };
-
-        let showArray = function (element, index, array) {
-            addElement('Array[' + index + '] = ' + '"' + element + '"' + ',' + ' array =' + JSON.stringify(array) + ';');
-        };
-
-        array.forEach(showArray);
+        createArray(10);
 
         fragment.appendChild(h2);
-        paragraph.append();
         fragment.appendChild(paragraph);
-        fragment.appendChild(list);
     };
 
     //Se añade el evento para la carga de elementos DOM y de la función init.
