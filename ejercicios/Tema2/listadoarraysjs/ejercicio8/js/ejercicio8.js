@@ -7,6 +7,8 @@
  *
  */
 {
+    let newline = "<br/>";
+    let sp = "&nbsp";
     /**
      * Función que se encarga de la carga inicial.
      */
@@ -106,54 +108,55 @@
 
     let createDefinans = function (fragment) {
         let h4 = document.createElement('h4');
-        h4.classname = 'info';
-        h4.innerHTML = '8. Indica la diferencia entre los siguientes métodos, y demuestra su uso con algunos arrays:<br>' +
-            '<ul class"info"><li class="info">Array.prototype.forEach(),</li>' +
-            '<li class="info">Array.prototype.every(),</li>' +
-            '<li class="info">Array.prototype.some()</li>' + '<li class="info">y Array.prototype.filter().</li></ul>';
+        h4.innerHTML = '8. Indica la diferencia entre los siguientes métodos,' + newline + 'y demuestra su uso con algunos arrays:' + newline + newline +
+            'Array.prototype.forEach(),' + newline +
+            'Array.prototype.every(),' + newline +
+            'Array.prototype.some()' + newline +
+            'y Array.prototype.filter().';
 
         let firstParagraph = document.createElement('p');
-        firstParagraph.className = 'info';
-        firstParagraph.textContent = '';
+        firstParagraph.className = 'info4';
+        firstParagraph.innerHTML =
 
-        let secondParagraph = document.createElement('p');
-        secondParagraph.className = 'info';
-        secondParagraph.textContent = '';
+            '<p class="info5">Array.prototype.forEach():<p>' +
+            '<p class="info3">Recorre el array elemento a elemento y los trata individualmente.' +
+            newline +
+            'Se utiliza del siguiente modo:</p>' +
+            '<p class="info3">Para un array dado, array = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"];</p>' +
+            '<p class="info3">array.forEach(valor, indice, array) {</p>' +
+            '<p class="info3">' + sp + sp + sp + sp + '("Array[" + indice + "] = " + valor);</p>' +
+            '<p class="info3">}</p>' +
 
-        let definans = ['', '', ''];
+            '<p class="info5">Array.prototype.every():<p>' +
+            '<p class="info3">Comprueba que todos los elementos validen una función prueba,' + newline + 'devolviendo true o false.' +
+            newline + newline + 'Se utiliza del siguiente modo:</p>' +
+            '<p class="info3">Para un array dado, array = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"];</p>' +
+            '<p class="info3">array.every(function(numero){return !isNaN(numero);}));</p>' +
+            '<p class="info3">Nos devolvería false, porque los elementos de la "A" a la "F" son string.' +
+            newline +
 
-        let firstList = document.createElement('ol');
-        firstList.className = 'info';
 
-        let addElement = function (element) {
-            let node = document.createElement('li');
-            node.appendChild(document.createTextNode(element));
-            firstList.appendChild(node);
-        };
+            '<p class="info5">Array.prototype.some():<p>' +
+            '<p class="info3">Comprueba que algún elemento valide una función prueba,' + newline + 'devolviendo true o false.' +
+            newline + newline +
+            'Se utiliza del siguiente modo:</p>' +
+            '<p class="info3">Para un array dado, array = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"];</p>' +
+            '<p class="info3">array.some(function(numero){return !isNaN(numero);}));</p>' +
+            '<p class="info3">Nos devolvería true, porque cualquier elemento de la "A" a la "F" son string.' +
+            newline +
 
-        let showFirstDefinans = function (element) {
-            addElement(element);
-        };
+            '<p class="info5">Array.prototype.filter():<p>' +
+            '<p class="info3">Filtra elementos de un array según el filtro pasado y devuelve un nuevo array con los' +
+            newline + 'elementos que lo satisfagan.' +
+            newline + newline +
 
-        let secondList = document.createElement('ol');
-        secondList.className = 'info';
+            'Se utiliza del siguiente modo:</p>' +
+            '<p class="info3">Para un array dado, array = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"];</p>' +
+            '<p class="info3">array.filter(function(numero){return !isNaN(numero);});</p>' +
+            '<p class="info3">Nos devolvería un nuevo array con los elementos numéricos del array.';
 
-        let definans2 = ['', '', '', '' + '', ''];
-
-        for (let i = 0; i < definans2.length; i++) {
-            let li = document.createElement('li');
-            li.className = 'info4';
-            li.innerHTML = '<p class="info4">' + definans2[i] + '</p>' + '<br>';
-            fragment.appendChild(li);
-        }
-        secondList.appendChild(fragment);
-
-        definans.forEach(showFirstDefinans);
         fragment.appendChild(h4);
         fragment.appendChild(firstParagraph);
-        fragment.appendChild(firstList);
-        fragment.appendChild(secondParagraph);
-        fragment.appendChild(secondList);
     };
 
     let createExercise = function (fragment) {
@@ -163,28 +166,48 @@
         let paragraph = document.createElement('p');
         paragraph.className = 'info2';
 
-        let list = document.createElement('ol');
-        list.className = 'info2';
-        let array = [];
+        let array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
 
-        let addElement = function (element) {
-            let node = document.createElement('li');
-            node.appendChild(document.createTextNode(element));
-            list.appendChild(node);
-        };
+        let mensaje = "";
 
-        let showArray = function (element, index, array) {
-            addElement(
-                'Array[' + index + '] = ' + '"' + element + '"' + ',' + ' array =' + JSON.stringify(array) + ';'
-            );
-        };
+        mensaje += "<h3>forEach:</h3>";
+        mensaje += "[";
+        array.forEach(function (numero) {
+            mensaje += numero;
 
-        array.forEach(showArray);
+            if (numero !== array[array.length - 1]) {
+                mensaje += ", ";
+            }
+        });
+        mensaje += "];";
+
+        mensaje += "<h3>every:</h3>";
+        mensaje += "¿Son todos los elementos un número?: ";
+        mensaje += array.every(function (numero) {
+            return !isNaN(numero);
+        });
+
+        mensaje += "<h3>some:</h3>";
+        mensaje += "¿Hay algún elemento de tipo string?: ";
+        mensaje += array.some(function (numero) {
+            return isNaN(numero);
+        });
+
+        mensaje += "<h3>filter:</h3>";
+        mensaje += "Elementos que no son números: ";
+        mensaje += "[";
+        mensaje += array.filter(function (numero) {
+            return isNaN(numero);
+        });
+        mensaje += "];";
+
+
+        paragraph.innerHTML = mensaje;
 
         fragment.appendChild(h2);
-        paragraph.append();
+
         fragment.appendChild(paragraph);
-        fragment.appendChild(list);
+
     };
 
     //Se añade el evento para la carga de elementos DOM y de la función init.

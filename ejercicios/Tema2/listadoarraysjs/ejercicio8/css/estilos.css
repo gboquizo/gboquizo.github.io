@@ -160,16 +160,25 @@ body {
         list-style: none;
     }
 
-    .info4>li,
+    .info4>p,
     .info4 {
         margin: 20px auto;
-        line-height: 20px;
+        line-height: 30px;
         color: #329fed;
         font-size: 0.9rem;
         list-style: none;
         text-align: left;
         text-align-last: left;
         white-space: pre-wrap;
+    }
+
+    .info5,
+    .info5>p {
+        color: #329fed;
+        font-weight: bold;
+        font-size: 1rem;
+        list-style: none;
+        text-align: left;
     }
 
     footer {
@@ -265,11 +274,20 @@ body {
     }
 
     .info4,
-    .info4>li {
-        line-height: 20px;
+    .info4>p {
+        line-height: 30px;
         color: #329fed;
         font-size: 1rem;
         padding-left: 15px;
+        list-style: none;
+        text-align: left;
+    }
+
+    .info5,
+    .info5>p {
+        color: #329fed;
+        font-weight: bold;
+        font-size: 1.2rem;
         list-style: none;
         text-align: left;
     }
@@ -307,6 +325,8 @@ body {
     h4 {
         font-size: 2rem;
         padding: 10px;
+        text-align: left;
+        text-align-last: center;
     }
 
     .header {
@@ -370,7 +390,6 @@ body {
 
     .info3>li,
     .info3 {
-        line-height: 10px;
         font-size: 1.5rem;
         text-align: left;
         list-style: none;
@@ -378,10 +397,18 @@ body {
 
     .info4,
     .info4>li {
-        line-height: 15px;
         color: #329fed;
-        font-size: 1.1rem;
+        font-size: 1.5rem;
         padding-left: 30px;
+        list-style: none;
+        text-align: left;
+    }
+
+    .info5,
+    .info5>p {
+        color: #329fed;
+        font-weight: bold;
+        font-size: 1.7rem;
         list-style: none;
         text-align: left;
     }
