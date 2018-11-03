@@ -6,6 +6,7 @@
  *
  */
 {
+    let newline = "<br/>";
     /**
      * Función que se encarga de la carga inicial.
      */
@@ -105,67 +106,54 @@
 
     let createDefinans = function (fragment) {
 
+        let videoconsolas = ["Nintendo", "Sony", "Microsoft", "Sega"];
+        let videoconsola = {
+            plataforma: "Nintendo",
+            sistema: "SNES"
+        };
+
         let h4 = document.createElement('h4');
 
-        h4.innerHTML = '2. Indica la utilidad del operador in con los arrays. Demuestra su uso mediante un ejemplo.';
+        h4.innerHTML = '2. Indica la utilidad del operador in con los arrays.' + newline + 'Demuestra su uso mediante un ejemplo.';
 
         let firstParagraph = document.createElement('p');
-        var newline = "\r\n";
-        var nbsp = "\u00a0";
         firstParagraph.className = 'info4';
-        firstParagraph.id = 'firstParagraph';
-        firstParagraph.style.whiteSpace = "pre"
-        firstParagraph.textContent = 'El operador in devuelve true o false si la propiedad que queremos comprobar está o no en el array.' +
-            newline + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp +
+        firstParagraph.innerHTML = 'El operador in devuelve true o false si la propiedad que queremos comprobar está o no en el array.' +
+            newline + newline +
             'En el caso de los índices, podemos comprobar si un índice está en el array o no.' +
-            newline + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp +
-            'En el caso de arrays con propiedades, podemos comprobar si un array determinado posee' +
-            newline + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp + nbsp +
-            'una propiedad concreta.';
+            newline + newline + 'En el caso de arrays con propiedades, podemos comprobar si un array determinado posee' +
+            ' una propiedad concreta.';
 
         let secondParagraph = document.createElement('p');
         secondParagraph.className = 'info';
-        secondParagraph.textContent = '';
+        secondParagraph.innerHTML = 'Ejemplo';
 
-        let definans = ['', '', ''];
 
-        let firstList = document.createElement('ol');
-        firstList.className = 'info';
-
-        let addElement = function (element) {
-            let node = document.createElement('li');
-            node.appendChild(document.createTextNode(element));
-            firstList.appendChild(node);
-        };
-
-        let showFirstDefinans = function (element) {
-            addElement(element);
-        };
 
         let secondList = document.createElement('ol');
         secondList.className = 'info';
 
         let definans2 = [
-            "",
-            '',
-            '',
-            '' +
-            '',
-            ''
+            'let videoconsolas = ' + JSON.stringify(videoconsolas) + ';',
+            '0 in videoconsolas //' + (0 in videoconsolas),
+            '2 in videoconsolas //' + (2 in videoconsolas),
+            '5 in videoconsolas //' + (5 in videoconsolas),
+            'length in videoconsolas //' + (length in videoconsolas) + ' (los arrays tienen longitud.)',
+            'plataforma" in videoconsola //' + ("plataforma" in videoconsola),
+            '"sistema" in videoconsola //' + ("sistema" in videoconsola),
+            '"procesador" in videoconsola //' + ("procesador" in videoconsola),
         ];
 
         for (let i = 0; i < definans2.length; i++) {
             let li = document.createElement('li');
             li.className = 'info4';
-            li.innerHTML = '<p class="info4">' + definans2[i] + '</p>' + '<br>';
+            li.innerHTML = '<p class="info4">' + definans2[i] + '</p>' + newline;
             fragment.appendChild(li);
         }
         secondList.appendChild(fragment);
 
-        definans.forEach(showFirstDefinans);
         fragment.appendChild(h4);
         fragment.appendChild(firstParagraph);
-        fragment.appendChild(firstList);
         fragment.appendChild(secondParagraph);
         fragment.appendChild(secondList);
     };
@@ -178,26 +166,22 @@
         let paragraph = document.createElement('p');
         paragraph.className = 'info2';
 
-        let list = document.createElement('ol');
-        list.className = 'info2';
-        let array = [];
-
-        let addElement = function (element) {
-            let node = document.createElement('li');
-            node.appendChild(document.createTextNode(element));
-            list.appendChild(node);
+        let videoconsolas = ["Nintendo ", "Sony ", "Microsoft ", "Sega "];
+        let videoconsola = {
+            plataforma: "Nintendo",
+            sistema: "SNES"
         };
 
-        let showArray = function (element, index, array) {
-            addElement('Array[' + index + '] = ' + '"' + element + '"' + ',' + ' array =' + JSON.stringify(array) + ';');
-        };
-
-        array.forEach(showArray);
+        paragraph.innerHTML = "0 in videoconsolas = " + (0 in videoconsolas) +
+            newline + "2 in videconsolas = " + (2 in videoconsolas) +
+            newline + "5 in videoconsolas = " + (5 in videoconsolas) +
+            newline + "length in videoconsolas = " + (length in videoconsolas) +
+            newline + newline + "plataforma in videoconsola = " + ("plataforma" in videoconsola) +
+            newline + "sistema in videoconsola = " + ("sistema" in videoconsola) +
+            newline + "procesador in videoconsola = " + ("procesador" in videoconsola);
 
         fragment.appendChild(h2);
-        paragraph.append();
         fragment.appendChild(paragraph);
-        fragment.appendChild(list);
     };
 
     //Se añade el evento para la carga de elementos DOM y de la función init.
