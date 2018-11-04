@@ -7,6 +7,7 @@
  *
  */
 {
+    let newline = "<br/>";
     /**
      * Función que se encarga de la carga inicial.
      */
@@ -108,63 +109,20 @@
 
         let h4 = document.createElement('h4');
 
-        h4.innerHTML = '9. Averigua qué método es el más eficiente para manejarse con arrays.<br/>' +
+        h4.innerHTML = '9. Averigua qué método es el más eficiente para manejarse con arrays.' + newline +
             'Compruébalo mediante performance.now() o similares.' +
             '<ol class="info">' +
-            '<li class="info" >Introduce 10 elementos en un array mediante push(), unshift(), <br/> ' +
-            'directamente, fijando tamaño en new Array...</li>' + '<br/>' +
+            '<li class="info" >Introduce 10 elementos en un array mediante push(), unshift(), ' +
+            'directamente, fijando tamaño en new Array...</li>' + newline +
             '<li class="info" >Elimina 10 elementos en un array mediante pop(), shift(),' +
-            '<br/> directamente, fijando tamaño...</li></ol>';
+            'directamente, fijando tamaño...</li></ol>';
 
         let firstParagraph = document.createElement('p');
         firstParagraph.className = 'info';
         firstParagraph.textContent = '';
 
-        let secondParagraph = document.createElement('p');
-        secondParagraph.className = 'info';
-        secondParagraph.textContent = '';
-
-        let definans = ['', '', ''];
-
-        let firstList = document.createElement('ol');
-        firstList.className = 'info';
-
-        let addElement = function (element) {
-            let node = document.createElement('li');
-            node.appendChild(document.createTextNode(element));
-            firstList.appendChild(node);
-        };
-
-        let showFirstDefinans = function (element) {
-            addElement(element);
-        };
-
-        let secondList = document.createElement('ol');
-        secondList.className = 'info';
-
-        let definans2 = [
-            "",
-            '',
-            '',
-            '' +
-            '',
-            ''
-        ];
-
-        for (let i = 0; i < definans2.length; i++) {
-            let li = document.createElement('li');
-            li.className = 'info4';
-            li.innerHTML = '<p class="info4">' + definans2[i] + '</p>' + '<br>';
-            fragment.appendChild(li);
-        }
-        secondList.appendChild(fragment);
-
-        definans.forEach(showFirstDefinans);
         fragment.appendChild(h4);
         fragment.appendChild(firstParagraph);
-        fragment.appendChild(firstList);
-        fragment.appendChild(secondParagraph);
-        fragment.appendChild(secondList);
     };
 
     let createExercise = function (fragment) {
@@ -175,26 +133,92 @@
         let paragraph = document.createElement('p');
         paragraph.className = 'info2';
 
-        let list = document.createElement('ol');
-        list.className = 'info2';
+        let mensaje = "";
+
         let array = [];
 
-        let addElement = function (element) {
-            let node = document.createElement('li');
-            node.appendChild(document.createTextNode(element));
-            list.appendChild(node);
-        };
+        /*Variables para controlar los tiempos de eficiencia*/
+        let initialTime;
+        let finalTime;
+        let pushTime;
+        let unshiftTime;
+        let popTime;
+        let shiftTime;
 
-        let showArray = function (element, index, array) {
-            addElement('Array[' + index + '] = ' + '"' + element + '"' + ',' + ' array =' + JSON.stringify(array) + ';');
-        };
+        /*-----push()-----*/
+        initialTime = performance.now();
+        for (let i = 0; i < 10; i++) {
+            array.push(i);
+        }
+        finalTime = performance.now();
 
-        array.forEach(showArray);
+        pushTime = finalTime - initialTime;
+        mensaje += "<h4>Eficiencia del push(): </h4>" + pushTime;
+
+        /*-----unshift()-----*/
+        array = []
+        initialTime = performance.now();
+        for (let i = 0; i < 10; i++) {
+            array.unshift(i);
+        }
+        finalTime = performance.now();
+
+        unshiftTime = finalTime - initialTime;
+        mensaje += "<h4>Eficiencia del unshift(): </h4>" + unshiftTime;
+
+        if (pushTime < unshiftTime) {
+            mensaje += "<h3>push() es más eficiente que unshift()</h3>";
+        } else if (pushTime > unshiftTime) {
+            mensaje += "<h3>unshift() es más eficiente que push()</h3>";
+        } else {
+            mensaje += "<h3>Ambos son iguales de eficientes</h3>";
+        }
+
+        /*-----shift()-----*/
+        array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        initialTime = performance.now();
+        for (let i = 0; i < 10; i++) {
+            array.shift();
+        }
+        finalTime = performance.now();
+
+        shiftTime = finalTime - initialTime;
+        mensaje += "<h4>Eficiencia del shift(): </h4>" + shiftTime;
+
+        if (popTime < shiftTime) {
+            mensaje += "<h3>pop() es más eficiente que shift()</h3>";
+        } else if (popTime > shiftTime) {
+            mensaje += "<h3>shift() es más eficiente que pop()</h3>";
+        } else {
+            mensaje += "<h3>Ambos son iguales de eficientes</h3>";
+        }
+
+        /*-----pop()-----*/
+        array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        initialTime = performance.now();
+        for (let i = 0; i < 10; i++) {
+            array.pop();
+        }
+        finalTime = performance.now();
+
+        popTime = finalTime - initialTime;
+        mensaje += "<h4>Eficiencia del pop(): </h4>" + popTime;
+
+        /*------El más eficiente de todos------*/
+        if (pushTime < shiftTime && pushTime < unshiftTime && pushTime < popTime)
+            mensaje += "<h3>push() es el más eficiente de todos</h3>";
+        else if (shiftTime < pushTime && shiftTime < unshiftTime && shiftTime < popTime)
+            mensaje += "<h3>shift() es el más eficiente de todos</h3>";
+        else if (popTime < pushTime && popTime < unshiftTime && popTime < shiftTime)
+            mensaje += "<h3>pop() es el más eficiente de todos</h3>";
+        else
+            mensaje += "<h3>unshift() es el más eficiente de todos</h3>";
+
+        paragraph.innerHTML = mensaje;
 
         fragment.appendChild(h2);
-        paragraph.append();
+
         fragment.appendChild(paragraph);
-        fragment.appendChild(list);
     };
 
     //Se añade el evento para la carga de elementos DOM y de la función init.
