@@ -141,7 +141,7 @@ body {
     }
 
     .info2,
-    .info2>li {
+    .info2>p {
         color: red;
         font-size: 1rem;
         text-align: center;
@@ -246,10 +246,10 @@ body {
     }
 
     .info2,
-    .info2>li {
+    .info2>p {
         color: red;
         font-size: 1.2rem;
-        text-align: left;
+        text-align: center;
     }
 
     .info2 {
@@ -307,6 +307,7 @@ body {
     h4 {
         font-size: 2rem;
         padding: 10px;
+        text-align: center;
     }
 
     .header {
@@ -358,10 +359,10 @@ body {
     }
 
     .info2,
-    .info2>li {
+    .info2>p {
         color: red;
         font-size: 1.5rem;
-        text-align: left;
+        text-align: center;
     }
 
     .info2 {

@@ -153,7 +153,7 @@
         finalTime = performance.now();
 
         pushTime = finalTime - initialTime;
-        mensaje += "<h4>Eficiencia del push(): </h4>" + pushTime;
+        mensaje += "<h4>Eficiencia del push(): </h4>" + "<p>" + pushTime + "</p>";
 
         /*-----unshift()-----*/
         array = []
