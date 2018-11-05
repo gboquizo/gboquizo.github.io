@@ -102,6 +102,8 @@
 
         operacion: "",
 
+        cambioDeValor: false,
+
         arrayIds: [
             'btnCE', 'btnBack', 'btnPercentage', 'btnAdd',
             '7', '8', '9', 'btnMinus',
@@ -175,7 +177,6 @@
 
         funcionalidad: function () {
             let valor = this.getAttribute("id");
-            console.log(valor);
             switch (valor) {
                 case "btnCE":
                     calculadora.entrada.value = "0";
@@ -210,7 +211,7 @@
                             calculadora.esAcumuladoFinito();
                         }
                     }
-
+                    calculadora.cambioDeValor = true;
                     break;
                 case "btnChangeSign":
                     if (calculadora.entrada.value != "" && calculadora.entrada.value != "0") {
@@ -240,11 +241,12 @@
                 default:
                     let regexDecimal = /-?\d+(\.\d+)/;
 
-                    if (regexDecimal.test(calculadora.entrada.value) && calculadora.operacion !== "") {
+                    // if (regexDecimal.test(calculadora.entrada.value) && calculadora.operacion !== "") {
+                    //    calculadora.entrada.value = valor;
+                    // }
+                    if (((calculadora.entrada.value === "0" || calculadora.cambioDeValor === true))) {
                         calculadora.entrada.value = valor;
-                    }
-                    if (((calculadora.entrada.value === "0" || calculadora.operacion != "") && !calculadora.entrada.value.includes("."))) {
-                        calculadora.entrada.value = valor;
+                        calculadora.cambioDeValor = false;
                     } else {
                         calculadora.entrada.value += valor;
                     }
