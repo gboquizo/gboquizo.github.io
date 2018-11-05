@@ -161,63 +161,94 @@
         h2.innerHTML = 'Resultado del ejercicio';
 
         let form = document.createElement('form');
-        form.className = 'info2';
+        form.className = 'formulario';
         form.action = "";
         form.method = "";
 
+        let containerNombre = document.createElement("div");
+        containerNombre.className = "field-group";
+        let containerNombreInput = document.createElement("div");
+        containerNombreInput.className = "field";
+
         let label1 = document.createElement('label');
         label1.htmlFor = 'entradaNombre';
-        label1.innerHTML = '<br>Nombre';
+        label1.innerHTML = 'Nombre';
+        label1.className = 'label';
 
         let input1 = document.createElement('input');
         input1.type = 'text';
         input1.name = "entradaNombre";
         input1.id = 'entradaNombre';
+        input1.placeholder = "Nombre y apellidos";
         input1.style.color = "blue"
 
         let span1 = document.createElement('span');
         span1.id = 'errorNombre';
 
+        containerNombre.appendChild(label1);
+        containerNombreInput.appendChild(input1);
+        containerNombreInput.appendChild(span1);
+        containerNombre.appendChild(containerNombreInput);
+
+        let containerDNI = document.createElement("div");
+        containerDNI.className = "field-group";
+
+        let containerDNIInput = document.createElement("div");
+        containerDNIInput.className = "field";
+
         let label2 = document.createElement('label');
         label2.htmlFor = 'entradaDNI';
-        label2.innerHTML = '<br>DNI';
+        label2.innerHTML = 'DNI';
+        label2.className = 'label';
 
         let input2 = document.createElement('input');
         input2.type = 'text';
         input2.name = "entradaDNI";
         input2.id = 'entradaDNI';
+        input2.placeholder = "DNI";
         input2.style.color = "blue"
 
         let span2 = document.createElement('span');
         span2.id = 'errorDNI';
 
+        containerDNI.appendChild(label2);
+        containerDNIInput.appendChild(input2);
+        containerDNIInput.appendChild(span2);
+        containerDNI.appendChild(containerDNIInput);
+
         let label3 = document.createElement('label');
         label3.htmlFor = 'entradaFecha';
-        label3.innerHTML = '<br>Fecha';
+        label3.innerHTML = 'Fecha';
+        label3.className = 'label';
+
+        let containerFecha = document.createElement('div');
+        containerFecha.className = "field-group";
+        let containerFechaInput = document.createElement("div");
+        containerFechaInput.className = "field";
 
         let input3 = document.createElement('input');
         input3.type = 'text';
         input3.name = "entradaFecha";
         input3.id = 'entradaFecha';
+        input3.placeholder = "Fecha";
         input3.style.color = "blue"
 
         let span3 = document.createElement('span');
         span3.id = 'errorFecha';
 
+        containerFecha.appendChild(label3);
+        containerFechaInput.appendChild(input3);
+        containerFechaInput.appendChild(span3);
+        containerFecha.appendChild(containerFechaInput);
+
         fragment.appendChild(h2);
-        form.appendChild(label1);
-        form.appendChild(input1);
-        form.appendChild(span1);
-        form.appendChild(label2);
-        form.appendChild(input2);
-        form.appendChild(span2);
-        form.appendChild(label3);
-        form.appendChild(input3);
-        form.appendChild(span3);
+        form.appendChild(containerNombre);
+        form.appendChild(containerDNI);
+        form.appendChild(containerFecha);
         fragment.appendChild(form);
     };
 
-    let validarDNI = function () {
+    let validarDNI = function (dni) {
         let pattern = /^(\d{8})[ -]?([TRWAGMYFPDXBNJZSQVHLCKET])$/i;
         if (entradaDNI.value === "") {
             mostrarError("Introduce un DNI");
@@ -226,9 +257,8 @@
                 mostrarError("Formato incorrecto");
             } else {
                 mostrarCorrecto("DNI válido");
-                let execDNI = pattern.exec(entradaDNI.value);
-                let numeros = execDNI[1];
-                let letras = execDNI[2].toUpperCase();
+                let numeros = dni.match(pattern)[1];
+                let letras = dni.match(pattern)[2].toUpperCase();
                 let letraValida = letrasValidas[parseInt(numeros) % 23].toUpperCase();
                 if (letras !== letraValida) {
                     mostrarError("Letra incorrecta");
@@ -239,10 +269,11 @@
 
     let mostrarError = function (mensaje) {
         errorDNI.innerHTML = mensaje;
+        entradaDNI.placeholder = mensaje;
         errorDNI.style.color = "red"
         entradaDNI.style.color = "red"
         errorDNI.classList.remove("exito");
-        errorDNI.classList.add("success");
+        errorDNI.classList.add("error");
     };
 
     let mostrarCorrecto = function (mensaje) {
@@ -250,7 +281,7 @@
         errorDNI.style.color = "green"
         entradaDNI.style.color = "green"
         errorDNI.classList.remove("error");
-        errorDNI.classList.add("success");
+        errorDNI.classList.add("exito");
     };
 
     //Se añade el evento para la carga de elementos DOM y de la función init.
