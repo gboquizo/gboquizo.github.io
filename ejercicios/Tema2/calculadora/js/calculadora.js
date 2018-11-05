@@ -239,11 +239,6 @@
                     }
                     break;
                 default:
-                    let regexDecimal = /-?\d+(\.\d+)/;
-
-                    // if (regexDecimal.test(calculadora.entrada.value) && calculadora.operacion !== "") {
-                    //    calculadora.entrada.value = valor;
-                    // }
                     if (((calculadora.entrada.value === "0" || calculadora.cambioDeValor === true))) {
                         calculadora.entrada.value = valor;
                         calculadora.cambioDeValor = false;
