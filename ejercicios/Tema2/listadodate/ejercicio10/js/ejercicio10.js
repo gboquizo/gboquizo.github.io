@@ -124,7 +124,7 @@
 
         let calculaFinAnio = function (fecha) {
             if (!esFecha(fecha))
-                throw new FechaException("No es una fecha.");
+                throw new fechaNoValidaException("No es una fecha.");
             let diasHastaFinAnio = 0;
             let fechaUltimoDia;
             for (let i = fecha.getMonth(); i < 12; i++) {
@@ -146,15 +146,15 @@
         }
 
         //Creación de excepción personalizada
-        let FechaException = function (aviso) {
-            this.aviso = aviso;
+        let fechaNoValidaException = function (mensaje) {
+            this.mensaje = mensaje;
             this.nombre = "FechaException";
         }
 
         try {
             paragraph.innerHTML = "Hasta fin de año faltan " + calculaFinAnio(fecha) + " días.";
         } catch (fechaException) {
-            paragraph.innerHTML = fechaException.aviso;
+            paragraph.innerHTML = fechaNoValidaException.mensaje;
         }
 
         fragment.appendChild(h2);
