@@ -253,7 +253,7 @@
             if (isFinite(calculadora.acumulado)) {
                 calculadora.entrada.value = calculadora.acumulado;
             } else {
-                calculadora.entrada.value = "0";
+                calculadora.entrada.value = "Error";
             }
         }
     };

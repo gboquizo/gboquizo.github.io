@@ -120,13 +120,11 @@
           `
             Date.now() devuelve el momento actual en milisegundos</li>
                     <p class = "info4">let dateEnMs = new Date(Date.now());</p>
-
                     <li>let fechaConString = new Date(string); 
                     - Crea una fecha según la cadena dada. En dicha cadena se especifica primero
                 el mes(en inglés), seguido del día, año, horas, minutos y segundos. 
                </li>
                 <p class = "info4">let fechaConString = new Date("11/7/2018");</p>
-
                 <li>let fechaConNewParametrizado = new Date(año, mes, dia, horas, minutos, segundos, milisegundos); 
                 - En este último caso, le pasamos los argumentos uno a uno para crear una fecha con dichos valores. 
                 </li>
