@@ -117,7 +117,7 @@
             newline + `la nueva fecha para mostrarnos una actual.` +
             newline +
             newline +
-          `
+            `
             Date.now() devuelve el momento actual en milisegundos</li>
                     <p class = "info4">let dateEnMs = new Date(Date.now());</p>
                     <li>let fechaConString = new Date(string); 
@@ -171,7 +171,7 @@
         list.appendChild(element);
 
         element = document.createElement("li");
-        texto = document.createTextNode("Con new Date(2018, 11, 7, 0, 0, 0, 0): " + fechaConNewParametrizado);
+        text = document.createTextNode("Con new Date(2018, 11, 7, 0, 0, 0, 0): " + fechaConNewParametrizado);
         element.appendChild(text);
         list.appendChild(element);
 
