@@ -125,7 +125,8 @@
             let resultado = document.createTextNode("Mostrando fecha válida: " + crearFecha());
             paragraph.appendChild(resultado);
         } catch (e) {
-            console.log(e.message);
+            let resultado = document.createTextNode(e.message);
+            paragraph.appendChild(resultado);
         }
         fragment.appendChild(h2);
         fragment.appendChild(paragraph);
