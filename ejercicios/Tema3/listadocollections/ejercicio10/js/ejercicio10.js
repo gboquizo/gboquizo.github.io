@@ -129,7 +129,14 @@
         let paragraph = document.createElement('p');
         paragraph.className = 'info2';
         paragraph.id = "paragraph";
+        paragraph.innerHTML = "Ver en consola";
 
+        let b = new WeakSet([{}, {}]);
+        let o = {};
+        let a = new WeakSet([o, o]);
+
+        // No puedes saber el tamaño de un WeakSet ya que su contenido son referencias de memoria, 
+        //de manera que interviene el garbage collector "Recolector de basura"
 
         fragment.appendChild(h2);
         fragment.appendChild(paragraph);
