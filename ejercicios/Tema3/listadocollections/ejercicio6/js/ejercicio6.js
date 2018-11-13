@@ -106,8 +106,8 @@
         firstParagraph.className = 'definans';
         firstParagraph.innerHTML =
             `
-                <h4>4.Entrega un código (debidamente comentado) donde demuestres los apartados del 
-                ejercicio anterior sobre la collection Map.<br> 
+                <h4>6.Entrega un código (debidamente comentado) donde demuestres los apartados del 
+                ejercicio anterior sobre la collection Set.<br> 
                 <br>Para ello utiliza como elementos los nombres y apellidos de cinco compañeros de clase.</h4>
         `;
 
@@ -134,26 +134,11 @@
          * Constructor del set, admite como parámetros el array: 
          */
         let array = [
-            [
-                ["nombre", "apellido1", "apellido2"],
-                ["Guillermo", "Boquizo", "Sánchez"]
-            ],
-            [
-                ["nombre", "apellido1", "apellido2"],
-                ["Jesús", "Mejías", "Leiva"]
-            ],
-            [
-                ["nombre", "apellido1", "apellido2"],
-                ["Francisco", "Ramírez", "Ruiz"]
-            ],
-            [
-                ["nombre", "apellido1", "apellido2"],
-                ["Marcos", "Gallardo", "Pérez"]
-            ],
-            [
-                ["nombre", "apellido1", "apellido2"],
-                ["Mario", "Navarro", "Madrid"]
-            ]
+            "Guillermo Boquizo Sánchez",
+            "Jesús Mejías Leiva",
+            "Francisco Ramírez Ruiz",
+            "Marcos Gallardo Pérez",
+            "Mario Navarro Madrid"
         ];
 
         /**
@@ -172,7 +157,7 @@
         };
 
         /**
-         * Function que permite mostrar el map de set.add.
+         * Function que permite mostrar el set de set.add.
          */
         let showSetAdd = function (value, key) {
             addElement(
@@ -190,11 +175,11 @@
         };
 
         /**
-         * Function que permite mostrar el set de set.get.
+         * Function que permite mostrar el set de set.has.
          */
         let showHas = function (value, key) {
             addElement(
-                'Buscando en el Set por ' + key + ':' + value + ';'
+                'Buscando en el Set por ' + "[" + key + "]" + ':' + value + ';'
             );
         };
 
@@ -204,7 +189,7 @@
         let showSize = function (value, key, set) {
             addElement(
                 'Mostrando el size del Set: ' +
-                '<br><br>[' + key + ',' + value + ']' + "=>" + set.size
+                '<br><br>[' + key + ']' + ' , ' + value + "=>" + set.size
             );
         };
 
@@ -213,7 +198,7 @@
          */
         let showForEach = function (value, key) {
             addElement(
-                'Mostrando el uso de Set.forEach:<br><br> ' + key + ':' + value + ';'
+                'Mostrando el uso de Set.forEach:<br><br>' + value + ';'
             );
         };
 
@@ -224,10 +209,10 @@
 
         let resultado;
         /**
-         * Usando set para añadir un elemento.
+         * Usando add para añadir un elemento.
          */
         let setAdd = new Set();
-        setAdd.add(["nombre", "apellido1"], ["Angelo", "Barbara"]);
+        setAdd.add("Angelo Barbara");
         setAdd.forEach(showSetAdd);
         console.log("Set add() -> " + setAdd);
 
@@ -235,10 +220,9 @@
          * Usando delete para eliminar un elemento.
          */
         let setDelete = new Set();
-        setDelete.add("Nombre1", "Angelo Barbara");
-        console.log(setDelete.has('Nombre1'));
-        setDelete.forEach(showSetDelete);
-        resultado = setDelete.delete('Nombre1');
+        setDelete.add("Angelo Barbara");
+        console.log(setDelete.has('Angelo Barbara'));
+        resultado = setDelete.delete('Angelo Barbara');
         console.log("Set delete() -> " + resultado);
         setDelete.forEach(showSetDelete);
 
@@ -246,7 +230,7 @@
          * Usando has para buscar un elemento.
          */
         let setHas = new Set();
-        setHas.add("nombre", "Benito");
+        setHas.add("Benito");
         resultado = setHas.has("nombre");
         setHas.forEach(showHas);
         console.log("Set has() -> " + resultado);
@@ -255,21 +239,21 @@
          * Usando size para ver el número de elementos.
          */
         let setSize = new Set();
-        setSize.add("apellido", "Lopera");
+        setSize.add("Lopera");
         resultado = setSize.size;
         setSize.forEach(showSize);
         console.log("Set size() -> " + resultado);
 
         /**
-         * Usando forEach recorrer el map.
+         * Usando forEach para recorrer el set.
          */
         let setForEach = new Set([
-            ['Nombre1', 'Guillermo Boquizo Sánchez'],
-            ['Nombre2', 'Marcos Gallardo Pérez'],
-            ['Nombre3', 'Mario Navarro Madrid'],
-            ['Nombre4', 'Jesús Mejías Leiva'],
-            ['Nombre4', 'Jesús Mejías Leiva'],
-            ['Nombre5', 'Francisco Ramírez Ruiz']
+            ['Guillermo Boquizo Sánchez'],
+            ['Marcos Gallardo Pérez'],
+            ['Mario Navarro Madrid'],
+            ['Jesús Mejías Leiva'],
+            ['Jesús Mejías Leiva'],
+            ['Francisco Ramírez Ruiz']
 
         ]);
 

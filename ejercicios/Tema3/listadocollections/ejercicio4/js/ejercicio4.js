@@ -261,7 +261,7 @@
         console.log("Map size() -> " + resultado);
 
         /**
-         * Usando forEach recorrer el map.
+         * Usando forEach para recorrer el map.
          */
         let mapForEach = new Map([
             ['Nombre1', 'Guillermo Boquizo Sánchez'],
