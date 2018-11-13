@@ -733,3 +733,7 @@ footer p {
 .darker-blue {
 	background-color: rgb(6, 32, 119);
 }
+
+.darkcyan {
+	background-color: darkcyan;
+}
