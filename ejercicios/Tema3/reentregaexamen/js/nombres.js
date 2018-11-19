@@ -25,18 +25,16 @@
 	};
 
 	let validarNombres = function() {
-		let patron = /(\s?[a-zA-ZáéíóúÁÉÍÓÚñÑ]+\s?) (\s?[a-zA-ZáéíóúÁÉÍÓÚñÑ]+\s?)+,(\s?[a-zA-ZáéíóúÁÉÍÓÚñÑ]+\s?)$/g;
+		let patron = '^((?:[a-záéíóúñ]{1,})(?:[ ]{1,}(?:[a-záéíóúñ]{1,}))*)' + '[ ]*,[ ]*' + '([a-záéíóúñ]{1,})$';
+		let regex = new RegExp(patron, 'i');
 		let valorEntrada = entrada.value;
-		let valores = patron.exec(valorEntrada);
+		let valores = regex.exec(valorEntrada.trim());
 		try {
-			console.log(patron.exec(valorEntrada));
-			if (patron.test(valorEntrada)) {
-				if (valores !== null) {
-					spanError.textContent = '';
-					[ , apellido1, apellido2, pnombre ] = valores;
-					nombre.textContent = `Nombre: ${pnombre}`;
-					apellidos.textContent = `Apellido: ${apellido1 + ' ' + apellido2}`;
-				}
+			if (valores !== null) {
+				spanError.textContent = '';
+				[ , rapellidos, rnombre ] = valores;
+				nombre.innerHTML = `Nombre:  <b>${rnombre}</b>`;
+				apellidos.innerHTML = `Apellidos:  <b>${rapellidos.replace(/\s+/g, ' ')}</b>`;
 			} else {
 				let miExcepcion = new ErrorException('Error. Formato correcto: Cuadrado Perfecto, Anacleto', 'error');
 				throw miExcepcion;
@@ -48,20 +46,11 @@
 	};
 
 	let comprobarRepeticion = function(setValidacion, spanError) {
-		if (!setValidacion.has(pnombre.trim())) {
-			setValidacion.add(pnombre.trim());
+		let nombreCompleto = rnombre + rapellidos.replace(/\s+/g, ' ');
+		if (!setValidacion.has(nombreCompleto)) {
+			setValidacion.add(nombreCompleto);
 		} else {
-			spanError.textContent += 'Nombre repetido. ';
-		}
-		if (!setValidacion.has(apellido1.trim())) {
-			setValidacion.add(apellido1.trim());
-		} else {
-			spanError.textContent += 'Primer apellido repetido.';
-		}
-		if (!setValidacion.has(apellido2.trim())) {
-			setValidacion.add(apellido2.trim());
-		} else {
-			spanError.textContent += 'Segundo apellido repetido.';
+			spanError.textContent = 'REPETIDO';
 		}
 	};
 
