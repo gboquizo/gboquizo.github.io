@@ -24,9 +24,9 @@
         powerRangers.set("rosa", "#FF0095");
         powerRangers.set("verde", "#00A316");
         try {
-            if (powerRangers.has(entrada.value)) {
+            if (powerRangers.has((entrada.value.toLowerCase()).trim())) {
                 spanError.textContent = "";
-                switch (entrada.value.toLowerCase()) {
+                switch (entrada.value.toLowerCase().trim()) {
 
                     case "rojo":
                         cajaEjercicio.style.background = powerRangers.get("rojo");
@@ -55,7 +55,7 @@
                     throw new Error("¡Aaaay aaay aay ay ay!.No tenemos Power Rangers por aquí :-(", "Error");
                 throw new Error("Esto no es un Power Ranger válido, avisa a Zordon :-(", "Error");
             }
-            
+
         } catch (e) {
             cajaEjercicio.style.background = "#FFFFFF";
             spanError.textContent = e.message;
