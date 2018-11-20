@@ -1,13 +1,11 @@
 @font-face {
 	font-family: Roboto;
-	src: url(../fonts/Roboto-Regular-webfont.eot), url(../fonts/Roboto-Regular-webfont.woff),
-		url(../fonts/Roboto-Regular-webfont.ttf), url(../fonts/Roboto-Regular-webfont.svg);
+	src: url(../fonts/Roboto-Regular-webfont.eot), url(../fonts/Roboto-Regular-webfont.woff), url(../fonts/Roboto-Regular-webfont.ttf), url(../fonts/Roboto-Regular-webfont.svg);
 }
 
 @font-face {
 	font-family: Sosa;
-	src: url(../fonts/sosa-regular-webfont.eot), url(../fonts/sosa-regular-webfont.woff),
-		url(../fonts/sosa-regular-webfont.ttf), url(../fonts/sosa-regular-webfont.svg);
+	src: url(../fonts/sosa-regular-webfont.eot), url(../fonts/sosa-regular-webfont.woff), url(../fonts/sosa-regular-webfont.ttf), url(../fonts/sosa-regular-webfont.svg);
 }
 
 @font-face {
@@ -17,10 +15,7 @@
 
 @font-face {
 	font-family: Lato;
-	src: url(../fonts/Lato-Regular.ttf), url(../fonts/Lato-Black.ttf), url(../fonts/Lato-BlackItalic.ttf),
-		url(../fonts/Lato-Bold.ttf), url(../fonts/Lato-BoldItalic.ttf), url(../fonts/Lato-Hairline.ttf),
-		url(../fonts/Lato-HairlineItalic.ttf), url(../fonts/Lato-Italic.ttf), url(../fonts/Lato-Light.ttf),
-		url(../fonts/Lato-LightItalic.ttf);
+	src: url(../fonts/Lato-Regular.ttf), url(../fonts/Lato-Black.ttf), url(../fonts/Lato-BlackItalic.ttf), url(../fonts/Lato-Bold.ttf), url(../fonts/Lato-BoldItalic.ttf), url(../fonts/Lato-Hairline.ttf), url(../fonts/Lato-HairlineItalic.ttf), url(../fonts/Lato-Italic.ttf), url(../fonts/Lato-Light.ttf), url(../fonts/Lato-LightItalic.ttf);
 }
 
 * {
@@ -131,8 +126,7 @@ body {
 }
 
 @media only screen and (min-width: 50px) and (max-width: 767px) {
-	h1,
-	h2 {
+	h1, h2 {
 		line-height: 5vmax;
 		font-size: 1.5rem;
 	}
@@ -204,7 +198,7 @@ body {
 		color: rgb(34, 157, 245);
 		min-height: 400px;
 	}
-	.principal > article {
+	.principal>article {
 		text-align: center;
 		margin-top: 1rem;
 		margin-bottom: 2rem;
@@ -234,7 +228,7 @@ body {
 		background-color: rgb(255, 255, 255);
 		width: 100%;
 	}
-	.contenedor > p {
+	.contenedor>p {
 		overflow-x: hidden;
 		text-align: left;
 		margin: 0;
@@ -279,8 +273,7 @@ body {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-	h1,
-	h2 {
+	h1, h2 {
 		font-size: 2rem;
 	}
 	h3 {
@@ -349,7 +342,7 @@ body {
 	.principal {
 		width: 100%;
 	}
-	.principal > article {
+	.principal>article {
 		margin-top: 1rem;
 		margin-bottom: 2rem;
 		margin-right: 1.5rem;
@@ -378,13 +371,13 @@ body {
 		background-color: rgb(255, 255, 255);
 		width: 100%;
 	}
-	.contenedor > p {
+	.contenedor>p {
 		margin-top: 2rem;
 		margin-bottom: 2rem;
 		max-width: 100%;
 		height: auto;
 	}
-	.responsive-img > img {
+	.responsive-img>img {
 		border-radius: 10%;
 		max-width: 100%;
 		height: auto;
@@ -410,8 +403,7 @@ body {
 }
 
 @media only screen and (min-width: 1024px) {
-	h1,
-	h2 {
+	h1, h2 {
 		font-size: 2.5rem;
 	}
 	h3 {
@@ -483,7 +475,7 @@ body {
 	.principal {
 		width: 100%;
 	}
-	.principal > article {
+	.principal>article {
 		margin-top: 1rem;
 		margin-bottom: 2rem;
 		margin-right: 1.5rem;
@@ -527,7 +519,7 @@ body {
 		min-width: 200px;
 		min-height: 300px;
 	}
-	.contenedor-main .contenidoCaja .caja > ol {
+	.contenedor-main .contenidoCaja .caja>ol {
 		text-align: justify;
 	}
 	.contenedor-main .contenidoCaja .caja ol {
@@ -536,20 +528,16 @@ body {
 	.contenedor-main .contenidoCaja .caja li a {
 		color: #000000;
 	}
-	.contenedor-main .contenidoCaja .caja ol li:hover,
-	.contenedor-main .contenidoCaja .caja ol li:hover:before {
+	.contenedor-main .contenidoCaja .caja ol li:hover, .contenedor-main .contenidoCaja .caja ol li:hover:before {
 		color: #ffffff;
 	}
-	.contenedor-main.contenidoCaja .caja ol .pendiente,
-	.contenedor-main .contenidoCaja .caja ol li .pendiente {
+	.contenedor-main.contenidoCaja .caja ol .pendiente, .contenedor-main .contenidoCaja .caja ol li .pendiente {
 		color: #5b6178;
 	}
-	.contenedor-main .contenidoCaja .caja ol .pendiente:hover,
-	.contenedor-main .contenidoCaja .caja ol .pendiente:hover:before {
+	.contenedor-main .contenidoCaja .caja ol .pendiente:hover, .contenedor-main .contenidoCaja .caja ol .pendiente:hover:before {
 		color: #5b6178;
 	}
-	.contenedor-main .contenidoCaja .caja li a:hover,
-	.contenedor-main .contenidoCaja .caja li a:hover:before {
+	.contenedor-main .contenidoCaja .caja li a:hover, .contenedor-main .contenidoCaja .caja li a:hover:before {
 		color: #ffffff;
 	}
 	.contenedor-proyectos {
@@ -572,8 +560,7 @@ body {
 		color: #fff;
 		min-height: 300px;
 	}
-	.contenedor > p,
-	footer {
+	.contenedor>p, footer {
 		display: flex;
 		width: 100%;
 		background-color: #1976d2;
@@ -592,13 +579,11 @@ body {
 	}
 }
 
-.social-icon a,
-.social-icon-header a {
+.social-icon a, .social-icon-header a {
 	color: #ffffff;
 }
 
-.social-icon .icon:hover,
-.social-icon-header .icon:hover {
+.social-icon .icon:hover, .social-icon-header .icon:hover {
 	transform: scale(1);
 	-webkit-transform: scale(1);
 	-webkit-transform: scale(1);
@@ -606,8 +591,7 @@ body {
 	-o-transform: scale(1);
 }
 
-.social-icon .icon,
-.social-icon-header .icon {
+.social-icon .icon, .social-icon-header .icon {
 	transform: scale(0.7);
 	-webkit-transform: scale(0.7);
 	-moz-transform: scale(0.7);
@@ -618,37 +602,27 @@ body {
 	-o-transition-duration: 0.5s;
 }
 
-.social-icon #social-fb:hover,
-.social-icon-header #social-fb:hover {
+.social-icon #social-fb:hover, .social-icon-header #social-fb:hover {
 	color: #3b5998;
 }
 
-.social-icon #social-tw:hover,
-.social-icon-header #social-tw:hover {
+.social-icon #social-tw:hover, .social-icon-header #social-tw:hover {
 	color: #4099ff;
 }
 
-.social-icon #social-em:hover,
-.social-icon-header #social-em:hover {
+.social-icon #social-em:hover, .social-icon-header #social-em:hover {
 	color: #f39c12;
 }
 
-.social-icon #social-li:hover,
-.social-icon-header #social-li:hover {
+.social-icon #social-li:hover, .social-icon-header #social-li:hover {
 	color: #006699;
 }
 
-.social-icon #social-gh:hover,
-.social-icon-header #social-gh:hover {
+.social-icon #social-gh:hover, .social-icon-header #social-gh:hover {
 	color: #323131;
 }
 
-.nav-icon #nav-inicio:hover,
-.nav-icon #nav-about:hover,
-#nav-contact:hover,
-#nav-back:hover,
-#nav-forward:hover,
-#nav-projects:hover {
+.nav-icon #nav-inicio:hover, .nav-icon #nav-about:hover, #nav-contact:hover, #nav-back:hover, #nav-forward:hover, #nav-projects:hover {
 	color: #228cac;
 }
 
@@ -678,7 +652,7 @@ body {
 	display: inline-flex;
 }
 
-.botonera > p {
+.botonera>p {
 	margin: 1rem;
 }
 
@@ -736,4 +710,8 @@ footer p {
 
 .darkcyan {
 	background-color: darkcyan;
+}
+
+.chocolate {
+	background-color: chocolate;
 }
