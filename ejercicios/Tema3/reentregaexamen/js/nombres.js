@@ -1,5 +1,5 @@
 /**
- *@Author: Guillermo Boquizo Sánchez.
+ *@author Guillermo Boquizo Sánchez.
  *
  */
 {
@@ -19,12 +19,12 @@
 		volver();
 	}
 
-	let ErrorException = function(msg, name) {
+	let ErrorException = function (msg, name) {
 		this.message = msg;
 		this.name = name;
 	};
 
-	let validarNombres = function() {
+	let validarNombres = function () {
 		let patron = '^((?:[a-záéíóúñ]{1,})(?:[ ]{1,}(?:[a-záéíóúñ]{1,}))*)' + '[ ]*,[ ]*' + '([a-záéíóúñ]{1,})$';
 		let regex = new RegExp(patron, 'i');
 		let valorEntrada = entrada.value;
@@ -32,7 +32,7 @@
 		try {
 			if (valores !== null) {
 				spanError.textContent = '';
-				[ , rapellidos, rnombre ] = valores;
+				[, rapellidos, rnombre] = valores;
 				nombre.innerHTML = `Nombre:  <b>${rnombre}</b>`;
 				apellidos.innerHTML = `Apellidos:  <b>${rapellidos.replace(/\s+/g, ' ')}</b>`;
 			} else {
@@ -45,7 +45,7 @@
 		}
 	};
 
-	let comprobarRepeticion = function(setValidacion, spanError) {
+	let comprobarRepeticion = function (setValidacion, spanError) {
 		let nombreCompleto = rnombre + rapellidos.replace(/\s+/g, ' ');
 		if (!setValidacion.has(nombreCompleto)) {
 			setValidacion.add(nombreCompleto);
@@ -54,7 +54,7 @@
 		}
 	};
 
-	let volver = function() {
+	let volver = function () {
 		let back = document.getElementById('back');
 		back.addEventListener('click', (ev) => {
 			ev.preventDefault;

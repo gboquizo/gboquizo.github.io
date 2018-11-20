@@ -1,5 +1,5 @@
-/*
- *@Author: Guillermo Boquizo Sánchez.
+/**
+ *@author Guillermo Boquizo Sánchez.
  *
  */
 {
