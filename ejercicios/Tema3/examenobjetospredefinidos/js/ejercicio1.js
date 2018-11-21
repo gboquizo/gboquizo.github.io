@@ -7,6 +7,9 @@
     let cajaEjercicio;
     let spanError;
 
+    /**
+     * Función encargada de la carga predeterminada del script ejercicio1.js
+     */
     function init() {
         entrada = document.getElementById('entrada');
         cajaEjercicio = document.getElementById('cajaEjercicio');
@@ -15,6 +18,9 @@
         volver();
     }
 
+    /**
+     * Función encargada de la validación del color cargado en la entrada de texto, en función de los elementos predefinidos en un objeto Map.
+     */
     let validarColor = function () {
         let powerRangers = new Map();
         powerRangers.set("rojo", "#FF0000");
@@ -62,7 +68,11 @@
         }
     };
 
-
+    /**
+     * Función encargada de gestionar el comportamiento del enlace "atrás". 
+     * Usa el objeto predeterminado Window con la propiedad  de solo lectura history para simular el retroceso de página.
+     *
+     */
     let volver = function () {
         let back = document.getElementById('back');
         back.addEventListener('click', (ev) => {
@@ -71,5 +81,6 @@
         });
     };
 
+    // Manejador del evento de document encargado de la carga inicial.
     document.addEventListener('DOMContentLoaded', init);
 }
