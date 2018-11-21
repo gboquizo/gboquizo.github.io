@@ -52,8 +52,8 @@
                 }
             } else {
                 if (entrada.value === "")
-                    throw new Error("¡Aaaay aaay aay ay ay!.No tenemos Power Rangers por aquí :-(", "Error");
-                throw new Error("Esto no es un Power Ranger válido, avisa a Zordon :-(", "Error");
+                    throw new Error("¡Aaaay aaay aay ay ay!.No tenemos Power Rangers por aquí :-(");
+                throw new Error("Esto no es un Power Ranger válido, avisa a Zordon :-(");
             }
 
         } catch (e) {
