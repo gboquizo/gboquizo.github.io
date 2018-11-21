@@ -13,6 +13,7 @@
     function init() {
         entrada = document.getElementById('entrada');
         cajaEjercicio = document.getElementById('cajaEjercicio');
+        cajaEjercicio.style.background = "#BDB7BD";
         spanError = document.getElementById('spanError');
         entrada.addEventListener("blur", validarColor);
         volver();
@@ -29,6 +30,7 @@
         powerRangers.set("negro", "#000000");
         powerRangers.set("rosa", "#FF0095");
         powerRangers.set("verde", "#00A316");
+        powerRangers.set("blanco", "#FFFFFF");
         try {
             if (powerRangers.has((entrada.value.toLowerCase()).trim())) {
                 spanError.textContent = "";
@@ -52,8 +54,11 @@
                     case "verde":
                         cajaEjercicio.style.background = powerRangers.get("verde");
                         break;
+                    case "blanco":
+                        cajaEjercicio.style.background = powerRangers.get("blanco");
+                        break;
                     default:
-                        cajaEjercicio.style.background = "#FFFFFF";
+                        cajaEjercicio.style.background = "#BDB7BD";
                         break;
                 }
             } else {
@@ -63,7 +68,7 @@
             }
 
         } catch (e) {
-            cajaEjercicio.style.background = "#FFFFFF";
+            cajaEjercicio.style.background = "#BDB7BD";
             spanError.textContent = e.message;
         }
     };
