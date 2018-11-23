@@ -34,33 +34,7 @@
 		try {
 			if (powerRangers.has(entrada.value.toLowerCase().trim())) {
 				spanError.textContent = '';
-                cajaEjercicio.style.background = powerRangers.get(entrada.value.toLowerCase().trim());
-				/* switch () {
-					case 'rojo':
-						cajaEjercicio.style.background = powerRangers.get('rojo');
-						break;
-					case 'amarillo':
-						cajaEjercicio.style.background = powerRangers.get('amarillo');
-						break;
-					case 'azul':
-						cajaEjercicio.style.background = powerRangers.get('azul');
-						break;
-					case 'negro':
-						cajaEjercicio.style.background = powerRangers.get('negro');
-						break;
-					case 'rosa':
-						cajaEjercicio.style.background = powerRangers.get('rosa');
-						break;
-					case 'verde':
-						cajaEjercicio.style.background = powerRangers.get('verde');
-						break;
-					case 'blanco':
-						cajaEjercicio.style.background = powerRangers.get('blanco');
-						break;
-					default:
-						cajaEjercicio.style.background = '#BDB7BD';
-						break;
-				} */
+				cajaEjercicio.style.background = powerRangers.get(entrada.value.toLowerCase().trim());
 			} else {
 				if (entrada.value === '')
 					throw new Error('¡Aaaay aaay aay ay ay!.No tenemos Power Rangers por aquí :-(');
