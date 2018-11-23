@@ -67,7 +67,7 @@
      *
      */
     let volver = function () {
-        let back = document.getElementById('back');
+        document.getElementById('back');
         back.addEventListener('click', (ev) => {
             ev.preventDefault;
             history.back();
