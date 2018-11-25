@@ -8,6 +8,7 @@
 {
     //Crea un fragment donde insertar la información del ejercicio.
     let fragmento = document.createDocumentFragment();
+
     /**
      * Función que se encarga de la carga inicial.
      */
@@ -94,6 +95,7 @@
         document.body.appendChild(footer);
     };
 
+    //Objeto literal calculadora.
     let calculadora = {
 
         acumulado: 0,
@@ -102,7 +104,7 @@
 
         operacion: "",
 
-        cambioDeValor: false,
+        controlDecimal: false,
 
         arrayIds: [
             'btnCE', 'btnBack', 'btnPercentage', 'btnAdd',
@@ -112,10 +114,11 @@
             '0', 'btnChangeSign', 'btnComma', 'btnEquals'
         ],
 
-        /*Función encargada de crear el layout de la calculadora. 
-         *Se le pasa el fragment por argumento.
+        /** 
+         * Función encargada de crear el layout de la calculadora. 
+         * @param Se le pasa el fragment por argumento.
          */
-        dibujarCalculadora: function (fragmento) {
+        dibujarCalculadora(fragmento) {
             //Se define un array para el texto de los botones
             let textButtons = ['CE', '⬅', '%', '+', '7', '8', '9', '-', '4', '5', '6', 'x', '1', '2', '3', '/', '0', '+/-', ',', '='];
 
@@ -146,7 +149,6 @@
             for (let i = 0; i < 5; i++) {
                 let containerButton = document.createElement('div');
                 containerButton.className = 'containerButton';
-
                 for (let j = 0; j < 4; j++) {
                     let button = document.createElement('button');
                     button.type = 'button';
@@ -162,7 +164,11 @@
             }
         },
 
-        calcularAcumulado: function () {
+        /** 
+         * Función encargada de calcular el acumulado.
+         * @return Devuelve el acumulado para cada operación dada.
+         */
+        calcularAcumulado() {
             switch (calculadora.operacion) {
                 case "btnAdd":
                     return parseFloat(calculadora.acumulado) + parseFloat(calculadora.entrada.value);
@@ -175,88 +181,156 @@
             }
         },
 
-        funcionalidad: function () {
+        /** 
+         * Función encargada de la funcionalidad de la calculadora.
+         *
+         */
+        funcionalidad() {
             let valor = this.getAttribute("id");
             switch (valor) {
                 case "btnCE":
-                    calculadora.entrada.value = "0";
-                    calculadora.operacion = "";
-                    calculadora.acumulado = 0;
+                    calculadora.resetear();
                     break;
                 case "btnBack":
-                    let cadenaRecortada = calculadora.entrada.value.substring(0, calculadora.entrada.value.length - 1);
-                    if (cadenaRecortada == 0 || (calculadora.entrada.value.includes("-") && calculadora.entrada.value.length === 2)) {
-                        calculadora.entrada.value = 0;
-                    } else {
-                        calculadora.entrada.value = cadenaRecortada;
-                    }
+                    calculadora.esNumeroValido() ? calculadora.borrado() : null;
                     break;
                 case "btnPercentage":
-                    if (calculadora.entrada.value !== "") {
-                        calculadora.entrada.value = parseFloat(calculadora.entrada.value) / 100;
-                    }
+                    calculadora.porcentaje();
                     break;
                 case "btnAdd":
                 case "btnMinus":
                 case "btnMultiplication":
                 case "btnDivision":
-                    if (calculadora.entrada.value !== "") {
-                        if (calculadora.operacion !== "") {
-                            calculadora.acumulado = calculadora.calcularAcumulado();
-                            calculadora.operacion = valor;
-                            calculadora.esAcumuladoFinito();
-                        } else {
-                            calculadora.acumulado = parseFloat(calculadora.entrada.value);
-                            calculadora.operacion = valor;
-                            calculadora.esAcumuladoFinito();
-                        }
-                    }
-                    calculadora.cambioDeValor = true;
+                    calculadora.calcular(valor);
                     break;
                 case "btnChangeSign":
-                    if (calculadora.entrada.value != "" && calculadora.entrada.value != "0") {
-                        let primerCaracter = calculadora.entrada.value.slice(0, 1);
-                        if (primerCaracter == "-") {
-                            calculadora.entrada.value = calculadora.entrada.value.replace("-", "");
-                        } else {
-                            calculadora.entrada.value = "-" + calculadora.entrada.value;
-                        }
-                    }
+                    calculadora.cambiarSigno();
                     break;
                 case "btnComma":
-                    if (calculadora.entrada.value != "" && !calculadora.entrada.value.includes(".")) {
-                        calculadora.entrada.value += ".";
-                    }
+                    calculadora.esNumeroValido() ? calculadora.crearDecimal() : null;
                     break;
                 case "btnEquals":
-                    if (calculadora.operacion != "" && calculadora.entrada.value.length > 0) {
-                        calculadora.acumulado = calculadora.calcularAcumulado();
-                        calculadora.esAcumuladoFinito();
-                        calculadora.operacion = "";
-                    } else {
-                        calculadora.operacion = "";
-                        calculadora.esAcumuladoFinito();
-                    }
+                    calculadora.esNumeroValido() ? calculadora.igualar() : null;
                     break;
                 default:
-                    if (((calculadora.entrada.value === "0" || calculadora.cambioDeValor === true))) {
-                        calculadora.entrada.value = valor;
-                        calculadora.cambioDeValor = false;
-                    } else {
-                        calculadora.entrada.value += valor;
-                    }
+                    calculadora.esNumeroValido() ? calculadora.esUnNumero(valor) : null;
                     break;
             }
         },
-        esAcumuladoFinito: function () {
 
-            if (isFinite(calculadora.acumulado)) {
-                calculadora.entrada.value = calculadora.acumulado;
-            } else {
-                calculadora.entrada.value = "Error";
+        /** 
+         * Función encargada de resetear la calculadora.
+         *
+         */
+        resetear() {
+            calculadora.entrada.value = "0";
+            calculadora.operacion = "";
+            calculadora.acumulado = 0;
+        },
+
+        /** 
+         * Función encargada del borrado con retroceso de la calculadora.
+         *
+         */
+        borrado() {
+            let cadenaRecortada = calculadora.entrada.value.substring(0, calculadora.entrada.value.length - 1);
+            cadenaRecortada == 0 ||
+                (calculadora.entrada.value.includes("-") && calculadora.entrada.value.length === 2) ? (calculadora.entrada.value = 0) :
+                (calculadora.entrada.value = cadenaRecortada);
+        },
+
+        /** 
+         * Función encargada del cálculo del porcentaje de la calculadora.
+         *
+         */
+        porcentaje() {
+            calculadora.entrada.value !== "" ? (calculadora.entrada.value = parseFloat(calculadora.entrada.value) / 100) : null;
+        },
+
+        /** 
+         * Función encargada de los cálculos de la calculadora.
+         * @param valor el valor de la operación.
+         */
+        calcular(valor) {
+            if (calculadora.entrada.value !== "") {
+                if (calculadora.operacion !== "") {
+                    calculadora.acumulado = calculadora.calcularAcumulado();
+                    calculadora.operacion = valor;
+                    calculadora.esAcumuladoFinito();
+                } else {
+                    calculadora.acumulado = parseFloat(calculadora.entrada.value);
+                    calculadora.operacion = valor;
+                    calculadora.esAcumuladoFinito();
+                }
             }
+            calculadora.controlDecimal = true;
+        },
+
+        /** 
+         * Función encargada del control del cambio de signo.
+         * 
+         */
+        cambiarSigno() {
+            if (calculadora.entrada.value != "" && calculadora.entrada.value != "0") {
+                let primerCaracter = calculadora.entrada.value.slice(0, 1);
+                primerCaracter == "-" ? (calculadora.entrada.value = calculadora.entrada.value.replace("-", "")) :
+                    (calculadora.entrada.value = "-" + calculadora.entrada.value);
+            }
+        },
+
+        /** 
+         * Función encargada del control de la introducción de la coma decimal.
+         * 
+         */
+        crearDecimal() {
+            calculadora.entrada.value != "" && !calculadora.entrada.value.includes(".") ? calculadora.entrada.value += "." : null;
+        },
+
+        /** 
+         * Función encargada del control del botón igual.
+         * 
+         */
+        igualar() {
+            if (calculadora.operacion != "" && calculadora.entrada.value.length > 0) {
+                calculadora.acumulado = calculadora.calcularAcumulado();
+                calculadora.esAcumuladoFinito();
+                calculadora.operacion = "";
+            } else {
+                calculadora.operacion = "";
+                calculadora.esAcumuladoFinito();
+            }
+        },
+
+        /** 
+         * Función encargada de la gestión de los botones que son números.
+         * @param valor el valor de la operación.
+         */
+        esUnNumero(valor) {
+            if (calculadora.entrada.value === "0" || calculadora.controlDecimal) {
+                calculadora.entrada.value = valor;
+                calculadora.controlDecimal = false;
+            } else {
+                calculadora.entrada.value += valor;
+            }
+        },
+
+        /** 
+         * Función encargada de comprobar si un número es válido o no.
+         * @return true o false en función de si es un número o no.
+         */
+        esNumeroValido() {
+            return calculadora.entrada.value !== "No es un número" ? true : false;
+        },
+
+        /** 
+         * Función encargada de comprobar si un acumulado es finito o no.
+         * 
+         */
+        esAcumuladoFinito() {
+            isFinite(calculadora.acumulado) ? (calculadora.entrada.value = calculadora.acumulado) : (calculadora.entrada.value = "No es un número");
         }
     };
+
     //Se añade el evento para la carga de elementos DOM y de la función init.
     document.addEventListener('DOMContentLoaded', init);
 }
