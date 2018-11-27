@@ -22,7 +22,7 @@ body main div #tablero {
 
 }
 
-body main div #tablero button {
+body main div #tablero input {
   display: flex;
   flex-direction: column;
   justify-content: center;
