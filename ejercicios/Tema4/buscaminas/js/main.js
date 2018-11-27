@@ -1,3 +1,31 @@
+/**
+ * 
+ * Entrega el juego del buscaminas en JavaScript.
+ *
+ * Habrá tres niveles de juego:
+ *  principiante(8 x8, 10 minas),
+ *  intermedio(16 x16, 40 minas) y
+ *  experto(16 x30, 99 minas)
+ *  Separarás la capa de presentación de la capa de negocio
+ * Para facilitar la corrección, dejarás público el método mostrarCampoMinas que mostrará la estructura por consola
+ * Define el objeto buscaminas que sólo tenga públicos los métodos necesarios.Los invocarás desde el DOM.
+ * Define correctamente el estado del buscaminas: campo de minas, dimensiones, número de minas
+ * Mostrarás en el marcador el tiempo y el número de minas que quedan por marcar
+ * Los eventos del ratón serán tres:
+ *    click(picar en el campo)
+ *    click derecho(marcar bandera en el campo o despejar)
+ *    click con ambos botones(dar pistas con los alrededores)
+ *
+ * Diseña de menos a más: primero sin banderas ni pistas, comprobando que detecta cuando se pierde y cuando se gana.
+ *
+ * Referencias:
+ *
+ *     https: //es.wikipedia.org/wiki/Buscaminas
+ *     https: //www.google.com/search?q=buscaminas&ie=utf-8&oe=utf-8&client=firefox-b-ab
+ * 
+ * @author Guillermo Boquizo Sánchez
+ *
+ */
 {
     let tablero;
     let spanError;
