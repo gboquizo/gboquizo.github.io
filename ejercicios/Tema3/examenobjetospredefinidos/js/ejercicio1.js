@@ -6,6 +6,7 @@
 	let entrada;
 	let cajaEjercicio;
 	let spanError;
+	let powerRangers;
 
 	/**
 	 * Función encargada de la carga predeterminada del script ejercicio1.js
@@ -15,6 +16,14 @@
 		cajaEjercicio = document.getElementById('cajaEjercicio');
 		cajaEjercicio.style.background = '#BDB7BD';
 		spanError = document.getElementById('spanError');
+		powerRangers = new Map();
+		powerRangers.set('rojo', '#FF0000');
+		powerRangers.set('amarillo', '#FBFF00');
+		powerRangers.set('azul', '#0800FF');
+		powerRangers.set('negro', '#000000');
+		powerRangers.set('rosa', '#FF0095');
+		powerRangers.set('verde', '#00A316');
+		powerRangers.set('blanco', '#FFFFFF');
 		entrada.addEventListener('blur', validarColor);
 		volver();
 	}
@@ -24,14 +33,6 @@
 	 */
 	let validarColor = function () {
 		let entradaValida = entrada.value.toLowerCase().trim();
-		let powerRangers = new Map();
-		powerRangers.set('rojo', '#FF0000');
-		powerRangers.set('amarillo', '#FBFF00');
-		powerRangers.set('azul', '#0800FF');
-		powerRangers.set('negro', '#000000');
-		powerRangers.set('rosa', '#FF0095');
-		powerRangers.set('verde', '#00A316');
-		powerRangers.set('blanco', '#FFFFFF');
 		try {
 			if (powerRangers.has(entradaValida)) {
 				spanError.innerHTML = '¡Go go Power Rangers! ' + "&nbsp" + 'El Power Ranger ' + entradaValida + ' se ha metamorfoseado.';
