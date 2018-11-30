@@ -53,33 +53,23 @@
         }
     };
 
-    /*  Gato.prototype.obtenerEdad = function () {
-         let fechaActual = new Date();
-
-         let fechaNacimiento = new Date(this.fechaNacimiento.toString());
-
-         let edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
-
-         return edad;
-     }; */
-
-    /* let obtenerEdad = function () {
+    /*  let obtenerEdad = function () {
         let fechaActual = new Date();
-        let fechaNacimiento = new Date(this.fechaNacimiento.toString());
+        let fecha = new Date(this.fechaNacimiento.toString());
         if (!esFecha(fechaNacimiento) || fechaNacimiento > fechaActual) throw new FechaException('No es una fecha.');
 
-        let year = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
-        let month = fechaActual.getMonth() - fechaNacimiento.getMonth();
-        let day = fechaActual.getDay() - fechaNacimiento.getDay();
+        let year = fechaActual.getFullYear() - fecha.getFullYear();
+        let month = fechaActual.getMonth() - fecha.getMonth();
+        let day = fechaActual.getDay() - fecha.getDay();
 
         if (year === 0 && month === 0) {
-            return day + ' días';
+             return day + ' días';
         } else if (year === 0 && month !== 0) {
-            return month + ' meses y ' + day + ' días';
+             return month + ' meses y ' + day + ' días';
         } else {
-            return year + ' años, ' + month + ' meses y ' + day + ' días';
+             return year + ' años, ' + month + ' meses y ' + day + ' días';
         }
-    }; */
+     }; */
 
     let obtenerEdad = function (fecha) {
         let fechaActual = new Date();
@@ -97,20 +87,19 @@
 
     let obtenerPeso = function (raza) {
         let peso = 0;
-        if (raza === "Savannah") {
+        if (raza === 'Savannah') {
             peso = 4;
-        } else if (raza === "Maine Coon") {
+        } else if (raza === 'Maine Coon') {
             peso = 6;
-        } else if (raza === "Azul Ruso") {
+        } else if (raza === 'Azul Ruso') {
             peso = 7;
-        } else if (raza === "Ragdoll") {
+        } else if (raza === 'Ragdoll') {
             peso = 5;
-        } else if (raza === "Abisinio") {
+        } else if (raza === 'Abisinio') {
             peso = 4;
         } else {
             peso = 3;
         }
-
         return peso;
     };
 }
