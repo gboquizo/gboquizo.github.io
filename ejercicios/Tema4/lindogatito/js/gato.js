@@ -22,90 +22,95 @@
  *
  */
 {
-    function Gato(nombre, fechaNacimiento, raza) {
+    function Gato(nombre, raza, fechaNacimiento) {
         this.nombre = nombre;
-        this.fechaNacimiento = fechaNacimiento;
         this.raza = raza;
+        this.fechaNacimiento = fechaNacimiento;
         this.peso = obtenerPeso(this.raza);
-        this.edad = calcularEdad(this.fechaNacimiento);
-
+        this.edad = obtenerEdad(this.fechaNacimiento);
     }
 
-    Gato.prototype.estado = "jugando";
+    Gato.prototype.estado = 'jugando';
 
     Gato.prototype.jugar = function () {
         this.peso -= 1;
-        this.estado = "jugando";
+        this.estado = 'jugando';
         this.comprobarPesoValido();
-    }
+    };
 
     Gato.prototype.comer = function () {
         this.peso += 1;
-        this.estado = "comiendo";
+        this.estado = 'comiendo';
         this.comprobarPesoValido();
-    }
+    };
 
     Gato.prototype.dormir = function () {
-        this.estado = "durmiendo";
-    }
+        this.estado = 'durmiendo';
+    };
     Gato.prototype.comprobarPesoValido = function () {
         if (this.peso < 1 || this.peso > 15) {
-            this.estado = "muerto";
+            this.estado = 'muerto';
         }
-    }
+    };
 
-    let calcularEdad = function (fecha) {
-        let fechaActual = Date.now;
-        if (!esFecha(fecha) || fecha > fechaActual)
-            throw new FechaException("No es una fecha.");
+    /*  Gato.prototype.obtenerEdad = function () {
+         let fechaActual = new Date();
 
-        let year = fechaActual.getFullYear - fecha.getFullYear();
-        let month = fechaActual.getMonth() - fecha.getMonth();
-        let day = fechaActual.getDay() - fecha.getDay();
+         let fechaNacimiento = new Date(this.fechaNacimiento.toString());
+
+         let edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+
+         return edad;
+     }; */
+
+    /* let obtenerEdad = function () {
+        let fechaActual = new Date();
+        let fechaNacimiento = new Date(this.fechaNacimiento.toString());
+        if (!esFecha(fechaNacimiento) || fechaNacimiento > fechaActual) throw new FechaException('No es una fecha.');
+
+        let year = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+        let month = fechaActual.getMonth() - fechaNacimiento.getMonth();
+        let day = fechaActual.getDay() - fechaNacimiento.getDay();
 
         if (year === 0 && month === 0) {
-            return day + " días";
+            return day + ' días';
         } else if (year === 0 && month !== 0) {
-            return month + " meses y " + day + " días";
+            return month + ' meses y ' + day + ' días';
         } else {
-            return year + " años, " + month + " meses y " + day + " días";
+            return year + ' años, ' + month + ' meses y ' + day + ' días';
         }
-    }
+    }; */
 
-    let esFecha = function (fecha) {
-        return !isNaN(Date.parse(fecha));
-    }
+    let obtenerEdad = function (fecha) {
+        let fechaActual = new Date();
 
-    obtenerPeso = function (raza) {
+        let fechaNacimiento = new Date(fecha.toString());
+
+        let edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+
+        return edad;
+    };
+
+    /*  let esFecha = function (fecha) {
+         return !isNaN(Date.parse(fecha));
+     }; */
+
+    let obtenerPeso = function (raza) {
         let peso = 0;
-        switch (raza) {
-            case "savannah":
-                peso = 4;
-                break;
-            case "azul ruso":
-                peso = 7;
-                break;
-            case "maine coon":
-                peso = 5;
-                break;
-            case "ragdoll":
-                peso = 4;
-                break;
-            case "abisinio":
-                peso = 6;
-                break;
-            default:
-                peso = 3;
-                break;
+        if (raza === "Savannah") {
+            peso = 4;
+        } else if (raza === "Maine Coon") {
+            peso = 6;
+        } else if (raza === "Azul Ruso") {
+            peso = 7;
+        } else if (raza === "Ragdoll") {
+            peso = 5;
+        } else if (raza === "Abisinio") {
+            peso = 4;
+        } else {
+            peso = 3;
         }
+
         return peso;
-    }
-
-    let generarVentana = function (object) {
-        let html = "";
-
-    }
-
-
-
+    };
 }

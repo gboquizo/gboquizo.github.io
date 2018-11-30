@@ -5,17 +5,28 @@
      * @author Guillermo Boquizo Sánchez
      */
     let boton;
+    let nombre;
+    let raza;
+    let fechaNac;
+    let errorNombre;
+    let errorFecha;
 
     function init() {
         createPage();
-        boton = document.getElementById("crearGato");
-        boton.addEventListener("click", crearVentana);
+        boton = document.getElementById('crearGato');
+        nombre = document.getElementById('nombre');
+        raza = document.getElementById('raza');
+        fechaNac = document.getElementById('fechaNac');
+        errorNombre = document.getElementById('errorNombre');
+        errorFecha = document.getElementById('errorFecha');
+        boton.addEventListener('click', crearGato);
+        nombre.addEventListener('blur', comprobarNombre);
+        //fechaNac.addEventListener('blur', comprobarFecha);
     }
     /**
      * Función que crea el layout de la página desde js.
      */
     let createPage = function () {
-
         /**
          * Sección main
          */
@@ -37,12 +48,12 @@
         //Se añade el fragment al div del ejercicio.
         exercise.appendChild(fragment);
 
-
         //Se añade el contenedor del botón al container principal.
         container.appendChild(exercise);
 
         //Se añade el elemento container al main.
         main.appendChild(container);
+
         /**
          * Sección footer
          */
@@ -65,21 +76,18 @@
         //Se añade el main al body.
         document.body.appendChild(main);
         document.body.appendChild(footer);
-
-
     };
-
 
     let createExercise = function (fragment) {
         let h2 = document.createElement('h2');
-        h2.textContent = "Creación de un lindo gatito."
+        h2.textContent = 'Creación de un lindo gatito.';
         let img = document.createElement('img');
-        img.src = "/ejercicios/Tema4/lindogatito/images/lindo.png"
+        img.src = '/ejercicios/Tema4/lindogatito/images/lindo.png';
         boton = document.createElement('button');
-        boton.id = "crearGato";
-        boton.className = "btn";
+        boton.id = 'crearGato';
+        boton.className = 'btn';
         boton.innerHTML = 'Crear Gato';
-        let descripcion = document.createElement("article");
+        let descripcion = document.createElement('article');
         descripcion.innerHTML = `
         <h4 class="condiciones">Condiciones de creación</h4>
         <ol>
@@ -89,17 +97,35 @@
             <li class="descripcion">Jugar disminuye el peso del gato en 1 kg</li>
             <li class="descripcion">Si el gato no cumple su peso, muere</li>
         </ol>
+        <label for="nombre">Nombre:</label>
+            <br>
+            <input type="text" name="nombre" id="nombre">
+            <span id="errorNombre" class="aviso"></span>
+            <br>
+            <br>
+            <label for="raza">Raza:</label>
+            <br>
+            <select name="raza" id="raza">
+                <option value="Savannah">Savannah</option>
+                <option value="Maine Coon">Maine Coon</option>
+                <option value="Azul Ruso">Azul Ruso</option>
+                <option value="Ragdoll">Ragdoll</option>
+                <option value="Abisinio">Abisinio</option>
+            </select>
+            <br>
+            <br>
+            <label for="fecha">Fecha de Nacimiento:</label>
+            <br>
+            <input type="date" name="fecha" id="fechaNac">
+            <span id="errorFecha" class="aviso"></span>
+            <br>
+            <br>
         `;
         fragment.appendChild(h2);
         fragment.appendChild(img);
         fragment.appendChild(descripcion);
         fragment.appendChild(boton);
     };
-
-
-    /*  let crearGato = () => {
-         let auryn = new Gato('Auryn', '01/01/2004', 'Siamesa', '4');
-     } */
 
     let crearVentana = function (object) {
         let ventana;
@@ -116,6 +142,7 @@
             <title>Nuevo gato</title>
             <link rel="stylesheet" href="css/estilos.css">
             <script type="text/javascript" src="js/gato.js"></script>
+            <script type="text/javascript" src="js/gatito.js"></script>
         </head>
         <body>
             <noscript>
@@ -128,8 +155,18 @@
             <main class="main">
             <container class="container">
             <ejercicio class="ejercicio">
-                <h2>Nuevo gatito js</h2>
-                <p>Prueba</p>
+                <div id="principal">
+                    <h1>Tu nuevo gatito</h1>
+                    <div id="divImg">
+                        <img id="imagenes" src="/ejercicios/Tema4/lindogatito/images/lindo.png"></img>
+                    </div>
+                    <div id="tabla"></div>
+                    <div id="botones">
+                    <p id="aviso"></p>
+                    <input type="button" value="Jugar" id="jugar">
+                    <input type="button" value="Dar Comida" id="comer">
+                    <input type="button" value="Dormir" id="dormir">
+                </div>
             </ejercicio>
             </container>
             </main>
@@ -144,6 +181,45 @@
         ventana.document.gato = object;
         ventana.document.write(html);
         ventana.document.close();
-    }
+    };
+
+    let comprobarNombre = function () {
+        let patronNombre = /^[A-Za-záéíóúÁÉÍÓÚÑñ]{2,}/;
+
+        if (!patronNombre.test(nombre.value)) {
+            errorNombre.innerHTML = 'El nombre no es correcto';
+        } else {
+            errorNombre.innerHTML = '';
+        }
+    };
+
+    let comprobarFecha = function () {
+        try {
+            obtenerEdad(new Date(fechaNac.value));
+            errorFecha.innerHTML = '';
+        } catch (fechaException) {
+            errorFecha.innerHTML = 'La fecha no es correcta';
+        }
+    };
+
+    let crearGato = function () {
+        //let fechaNacimiento = new Date(fechaNac.value);
+        let fechasNacimiento = ['February 21, 2015', 'January 25, 2007', 'April 7, 2002'];
+        let fNindice = Math.floor(Math.random() * (fechasNacimiento.length - 1 - 0)) + 0;
+        comprobarNombre();
+        //comprobarFecha();
+
+        if (nombre.value == '') {
+            errorNombre.innerHTML = 'Debes introducir un nombre';
+        } else {
+            //try {
+            let gato = new Gato(nombre.value, raza.value, fechasNacimiento[fNindice]);
+            crearVentana(gato);
+
+            // } catch (fechaException) {
+            //errorFecha.innerHTML = '¡La fecha no es correcta!';
+            //}
+        }
+    };
     document.addEventListener('DOMContentLoaded', init);
 }
