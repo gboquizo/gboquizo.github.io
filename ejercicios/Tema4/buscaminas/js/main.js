@@ -53,6 +53,7 @@
             for (let fila = 0; fila < numCasillas; fila++) {
                 for (let columna = 0; columna < numCasillas; columna++) {
                     let casilla = document.createElement("input");
+                    casilla.type = "button";
                     casilla.id = fila + "" + columna;
                     casilla.value = "0";
                     casilla.readOnly = true;
@@ -88,7 +89,7 @@
                 spanError.textContent = "Has perdido";
                 buscaminas.gameover = true;
                 this.style.background = "#AF2AF1";
-                buscaminas.deshabilitarAlPerderOGanar()();
+                buscaminas.deshabilitarAlPerderOGanar();
             } else {
                 if (coordenada.length === 2) {
                     buscaminas.pulsarCasillas(10, parseInt(coordenada[0]), parseInt(coordenada[1]));
@@ -109,6 +110,7 @@
                     buscaminas.mostrarAlPerderOGanar(10);
                 }
             }
+            this.disabled = true;
         },
         colocarMina(numCasillas) {
             for (let i = 0; i < 10; i++) {
@@ -194,6 +196,7 @@
             if (buscaminas.gameover || buscaminas.winner) {
                 Array.from(entradas).forEach(element => {
                     element.removeEventListener("click", buscaminas.clickarCasilla);
+                    element.disabled = true;
                 });
             }
         },
@@ -221,6 +224,7 @@
                     for (let k = Math.max(y - 1, 0); k <= Math.min(y + 1, numCasillas - 1); k++) {
                         document.getElementById(j + "" + k).style.background = "#FFFFFF";
                         buscaminas.pulsarCasillas(10, j, k);
+
                     }
                 }
             }
