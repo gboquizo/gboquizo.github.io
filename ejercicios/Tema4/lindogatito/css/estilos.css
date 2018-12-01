@@ -115,6 +115,21 @@ body {
 		text-align: center;
 	}
 
+	body main container ejercicio img {
+		height: 200px;
+	}
+
+	body main container ejercicio ol li {
+		font-size: 1.2rem;
+		text-align: left;
+	}
+
+	.condiciones {
+		font-size: 1.2rem;
+		text-align: center;
+		color: red;
+	}
+
 	.ejercicio {
 		margin: 0 auto;
 		padding: 10px;
@@ -180,6 +195,21 @@ body {
 		background-color: #91cae0;
 		border: 2px solid rgba(204, 204, 204, 0.123);
 		text-align: center;
+	}
+
+	body main container ejercicio img {
+		height: 200px;
+	}
+
+	body main container ejercicio ol li {
+		font-size: 1.3rem;
+		text-align: left;
+	}
+
+	.condiciones {
+		font-size: 1.3rem;
+		text-align: center;
+		color: red;
 	}
 
 	.ejercicio {
@@ -264,7 +294,8 @@ body {
 		font-size: 1.4rem;
 		text-align: left;
 	}
-.condiciones {
+
+	.condiciones {
 		font-size: 1.4rem;
 		text-align: center;
 		color: red;

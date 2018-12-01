@@ -82,7 +82,7 @@
         let h2 = document.createElement('h2');
         h2.textContent = 'Creación de un lindo gatito.';
         let img = document.createElement('img');
-        img.src = '/ejercicios/Tema4/lindogatito/images/lindo.png';
+        img.src = '/ejercicios/Tema4/lindogatito/images/lindo.jpg';
         boton = document.createElement('button');
         boton.id = 'crearGato';
         boton.className = 'btn';
@@ -158,7 +158,7 @@
                 <div id="principal">
                     <h1>Tu nuevo gatito</h1>
                     <div id="divImg">
-                        <img id="imagenes" src="/ejercicios/Tema4/lindogatito/images/lindo.png"></img>
+                        <img id="imagenes" src="/ejercicios/Tema4/lindogatito/images/linda.jpg"></img>
                     </div>
                     <div id="tabla"></div>
                     <div id="botones">

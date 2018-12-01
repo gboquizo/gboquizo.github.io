@@ -37,11 +37,11 @@
         let imagen = "";
 
         if (estado === "jugando") {
-            imagen = "/ejercicios/Tema4/lindogatito/images/jugando.jpeg";
+            imagen = "/ejercicios/Tema4/lindogatito/images/jugando.jpg";
         } else if (estado === "durmiendo") {
-            imagen = "/ejercicios/Tema4/lindogatito/images/dormido.jpg";
+            imagen = "/ejercicios/Tema4/lindogatito/images/durmiendo.jpg";
         } else if (estado === "comiendo") {
-            imagen = "/ejercicios/Tema4/lindogatito/images/comiendo.jpeg";
+            imagen = "/ejercicios/Tema4/lindogatito/images/comiendo.jpg";
         } else {
             imagen = "/ejercicios/Tema4/lindogatito/images/muerto.jpg";
         }
