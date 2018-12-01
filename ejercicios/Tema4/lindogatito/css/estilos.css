@@ -30,6 +30,15 @@
 	text-decoration: none;
 }
 
+*:focus {
+	outline: none;
+}
+
+/* box-shadow outlines rounded corners! */
+.focus-visible {
+	box-shadow: 0 0 0 2px lightgreen;
+}
+
 h1 {
 	font-family: "Roboto", sans-serif;
 	text-align: center;
@@ -145,7 +154,6 @@ body {
 		background: #ffffff;
 	}
 
-
 	footer {
 		align-items: center;
 		text-align: left;
@@ -198,6 +206,7 @@ body {
 	}
 
 	body main container ejercicio img {
+		width: 200px;
 		height: 200px;
 	}
 
@@ -218,13 +227,121 @@ body {
 		bottom: 100px;
 		display: inline-flex;
 		flex-direction: column;
-		justify-content: flex-start;
+		justify-content: center;
 		align-items: center;
 		min-height: 10vh;
 		width: 80%;
 		background: #ffffff;
 	}
 
+	#divImg img {
+		border-radius: 20px;
+		box-shadow: 0 0 20px black;
+	}
+
+	.entrada {
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+		align-items: flex-start;
+		text-align: center;
+		font-size: 1.4rem;
+		background-color: #91cae0;
+		opacity: 0.9;
+		color: rgba(0, 148, 255, 1);
+		box-shadow: -3px -3px 5px 3px rgba(255, 255, 255, 0.2);
+		padding: 5rem;
+		margin-bottom: 20px;
+		border: 1px solid;
+		border-radius: 15px;
+	}
+
+	.entrada .field-group {
+		display: flex;
+		flex-flow: row;
+		justify-content: flex-start;
+		align-items: flex-start;
+		text-align: left;
+		margin: 0 100px 20px 0;
+	}
+
+	.entrada .field-group .label {
+		flex: 1;
+		text-align: left;
+		margin: 0 5px 0 0;
+		padding: 2px 0;
+		width: 150px;
+	}
+
+	.entrada .field-group .field {
+		display: grid;
+		grid-template-columns: 1fr 50px;
+	}
+
+	input:focus {
+		outline: none;
+	}
+
+	button:focus {
+		text-decoration: none;
+		outline: none;
+		border: none;
+		box-shadow: none;
+	}
+
+	input:-moz-focusring,
+	button:-moz-focusring,
+	select:-moz-focusring {
+		color: transparent;
+		text-shadow: 0 0 0 #000;
+	}
+
+	.entrada .field input,
+	select {
+		padding: .2rem .2rem;
+		font-size: 1.2rem;
+		border: solid 1px #eee;
+		background: #fff;
+		box-sizing: border-box;
+		width: 90%;
+		min-width: 300px;
+	}
+
+	.entrada .field .aviso {
+		text-align: center;
+		color: #fff;
+		padding: .2rem .2rem;
+		font-size: 1rem;
+		box-sizing: border-box;
+		min-width: 180px;
+	}
+
+	.btn {
+		padding: 10px;
+		min-height: 45px;
+		min-width: 150px;
+		font-size: 1.5rem;
+		border-width: 0px;
+		background: rgb(36, 150, 170);
+		color: rgb(245, 236, 244);
+		outline: none;
+		border-radius: 5px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	.ejercicio {
+		position: sticky;
+		top: 100px;
+		bottom: 100px;
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		min-height: 10vh;
+		width: 80%;
+		background: #ffffff;
+	}
 
 	.footer {
 		display: flex;
@@ -287,6 +404,7 @@ body {
 	}
 
 	body main container ejercicio img {
+		width: 300px;
 		height: 300px;
 	}
 
@@ -295,8 +413,16 @@ body {
 		text-align: left;
 	}
 
+	body main container ejercicio article {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		flex-flow: column;
+		text-align: left;
+	}
+
 	.condiciones {
-		font-size: 1.4rem;
 		text-align: center;
 		color: red;
 	}
@@ -314,6 +440,94 @@ body {
 		background: #ffffff;
 	}
 
+	#divImg img {
+		border-radius: 20px;
+		box-shadow: 0 0 20px black;
+	}
+
+	.entrada {
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+		align-items: flex-start;
+		text-align: center;
+		font-size: 1.4rem;
+		background-color: #91cae0;
+		opacity: 0.9;
+		color: rgba(0, 148, 255, 1);
+		box-shadow: -3px -3px 5px 3px rgba(255, 255, 255, 0.2);
+		padding: 5rem;
+		margin-bottom: 20px;
+		border: 1px solid;
+		border-radius: 15px;
+	}
+
+	.entrada .field-group {
+		display: flex;
+		flex-flow: row;
+		justify-content: flex-start;
+		align-items: flex-start;
+		text-align: left;
+		margin: 0 100px 20px 0;
+	}
+
+	.entrada .field-group .label {
+		flex: 1;
+		text-align: left;
+		margin: 0 5px 0 0;
+		padding: 2px 0;
+		width: 150px;
+	}
+
+	.entrada .field-group .field {
+		display: grid;
+		grid-template-columns: 1fr 50px;
+	}
+
+	input:focus {
+		outline: none;
+	}
+
+	button:focus {
+		text-decoration: none;
+		outline: none;
+		border: none;
+		box-shadow: none;
+	}
+
+	input:-moz-focusring,
+	button:-moz-focusring,
+	select:-moz-focusring {
+		color: transparent;
+		text-shadow: 0 0 0 #000;
+	}
+
+	.entrada .field input,
+	select {
+		padding: .2rem .2rem;
+		font-size: 1.2rem;
+		border: solid 1px #eee;
+		background: #fff;
+		box-sizing: border-box;
+		width: 90%;
+		min-width: 300px;
+	}
+
+	.aviso {
+		text-align: center;
+		color: rgb(243, 17, 17);
+		font-size: 1.2rem;
+	}
+
+	.entrada .field .aviso {
+		text-align: center;
+		color: #fff;
+		padding: .2rem .2rem;
+		font-size: 1rem;
+		box-sizing: border-box;
+		min-width: 180px;
+	}
+
 	.btn {
 		padding: 10px;
 		min-height: 45px;
@@ -328,7 +542,6 @@ body {
 		margin-bottom: 20px;
 	}
 
-
 	.footer {
 		display: flex;
 		flex-direction: column;
@@ -337,6 +550,24 @@ body {
 		min-height: 20vh;
 		background: linear-gradient(to left, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
 		z-index: 3;
+	}
+
+	table {
+		margin: 10px auto;
+	}
+
+	table tr td {
+		padding: 5px;
+		min-height: 10px;
+		min-width: 150px;
+		font-size: 1.2rem;
+		font-weight: bold;
+		border-width: 0px;
+		color: rgb(245, 236, 244);
+		outline: none;
+		border-radius: 5px;
+		margin-top: 20px;
+		background: linear-gradient(to left, rgba(0, 148, 255, 1), rgba(189, 189, 189, 1));
 	}
 
 	footer p {

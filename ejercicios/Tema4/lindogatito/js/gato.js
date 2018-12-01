@@ -30,60 +30,56 @@
         this.edad = obtenerEdad(this.fechaNacimiento);
     }
 
-    Gato.prototype.estado = 'jugando';
+    Gato.prototype.estado = 'Jugando';
 
     Gato.prototype.jugar = function () {
         this.peso -= 1;
-        this.estado = 'jugando';
+        this.estado = 'Jugando';
         this.comprobarPesoValido();
     };
 
     Gato.prototype.comer = function () {
         this.peso += 1;
-        this.estado = 'comiendo';
+        this.estado = 'Comiendo';
         this.comprobarPesoValido();
     };
 
     Gato.prototype.dormir = function () {
-        this.estado = 'durmiendo';
+        this.estado = 'Durmiendo';
     };
     Gato.prototype.comprobarPesoValido = function () {
         if (this.peso < 1 || this.peso > 15) {
-            this.estado = 'muerto';
+            this.estado = 'Muerto';
         }
     };
 
-    /*  let obtenerEdad = function () {
-        let fechaActual = new Date();
-        let fecha = new Date(this.fechaNacimiento.toString());
-        if (!esFecha(fechaNacimiento) || fechaNacimiento > fechaActual) throw new FechaException('No es una fecha.');
-
-        let year = fechaActual.getFullYear() - fecha.getFullYear();
-        let month = fechaActual.getMonth() - fecha.getMonth();
-        let day = fechaActual.getDay() - fecha.getDay();
-
-        if (year === 0 && month === 0) {
-             return day + ' días';
-        } else if (year === 0 && month !== 0) {
-             return month + ' meses y ' + day + ' días';
-        } else {
-             return year + ' años, ' + month + ' meses y ' + day + ' días';
-        }
-     }; */
 
     let obtenerEdad = function (fecha) {
         let fechaActual = new Date();
 
-        let fechaNacimiento = new Date(fecha.toString());
+        if (!esFecha(fecha) || fecha > fechaActual)
+            throw new FechaException("No es una fecha.");
 
-        let edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+        let anio = fechaActual.getFullYear() - fecha.getFullYear();
+        let dia = fechaActual.getDay() - fecha.getDay();
+        let mes = fechaActual.getMonth() - fecha.getMonth();
 
-        return edad;
-    };
+        if (anio === 0 && mes === 0) {
+            return dia + " día(s)";
+        } else if (anio === 0 && mes !== 0 && mes > 1) {
+            return mes + " meses y " + dia + " día(s)";
+        } else if (anio === 0 && mes !== 0 && mes <= 1) {
+            return mes + " mes y " + dia + " día(s)";
+        } else if (anio === 1 && mes !== 0 && mes > 1 && mes < 12) {
+            return anio + " año, " + mes + " meses y " + dia + " día(s)";
+        } else {
+            return anio + " años, " + mes + " meses y " + dia + " día(s)";
+        }
+    }
 
-    /*  let esFecha = function (fecha) {
-         return !isNaN(Date.parse(fecha));
-     }; */
+    let esFecha = function (fecha) {
+        return !isNaN(Date.parse(fecha));
+    }
 
     let obtenerPeso = function (raza) {
         let peso = 0;

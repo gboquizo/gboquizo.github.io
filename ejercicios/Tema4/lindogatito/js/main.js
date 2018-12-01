@@ -21,7 +21,7 @@
         errorFecha = document.getElementById('errorFecha');
         boton.addEventListener('click', crearGato);
         nombre.addEventListener('blur', comprobarNombre);
-        //fechaNac.addEventListener('blur', comprobarFecha);
+        fechaNac.addEventListener('blur', comprobarFecha);
     }
     /**
      * Función que crea el layout de la página desde js.
@@ -97,29 +97,34 @@
             <li class="descripcion">Jugar disminuye el peso del gato en 1 kg</li>
             <li class="descripcion">Si el gato no cumple su peso, muere</li>
         </ol>
-        <label for="nombre">Nombre:</label>
-            <br>
-            <input type="text" name="nombre" id="nombre">
-            <span id="errorNombre" class="aviso"></span>
-            <br>
-            <br>
-            <label for="raza">Raza:</label>
-            <br>
-            <select name="raza" id="raza">
-                <option value="Savannah">Savannah</option>
-                <option value="Maine Coon">Maine Coon</option>
-                <option value="Azul Ruso">Azul Ruso</option>
-                <option value="Ragdoll">Ragdoll</option>
-                <option value="Abisinio">Abisinio</option>
-            </select>
-            <br>
-            <br>
-            <label for="fecha">Fecha de Nacimiento:</label>
-            <br>
-            <input type="date" name="fecha" id="fechaNac">
-            <span id="errorFecha" class="aviso"></span>
-            <br>
-            <br>
+        <div class="entrada" id="entrada">
+            <div class="field-group">
+                <label class="label" for="nombre">Nombre:</label>
+                <div class="field">
+                    <input type="text" name="nombre" id="nombre">
+                    <span id="errorNombre" class="aviso"></span>
+                </div>
+            </div>
+            <div class="field-group">
+                <label class="label" for="raza">Raza:</label>
+                <div class="field">
+                    <select name="raza" id="raza">
+                        <option value="Savannah">Savannah</option>
+                        <option value="Maine Coon">Maine Coon</option>
+                        <option value="Azul Ruso">Azul Ruso</option>
+                        <option value="Ragdoll">Ragdoll</option>
+                        <option value="Abisinio">Abisinio</option>
+                    </select>
+                </div>
+            </div>
+            <div class="field-group">
+                <label class="label" for="fecha">Fecha de Nacimiento:</label>
+                <div class="field">
+                    <input type="date" name="fecha" id="fechaNac">
+                    <span id="errorFecha" class="aviso"></span>
+                </div>
+            </div>
+        </div>
         `;
         fragment.appendChild(h2);
         fragment.appendChild(img);
@@ -156,16 +161,17 @@
             <container class="container">
             <ejercicio class="ejercicio">
                 <div id="principal">
-                    <h1>Tu nuevo gatito</h1>
+                    <h3>Tu nuevo gatito</h3>
                     <div id="divImg">
                         <img id="imagenes" src="/ejercicios/Tema4/lindogatito/images/linda.jpg"></img>
                     </div>
-                    <div id="tabla"></div>
                     <div id="botones">
-                    <p id="aviso"></p>
-                    <input type="button" value="Jugar" id="jugar">
-                    <input type="button" value="Dar Comida" id="comer">
-                    <input type="button" value="Dormir" id="dormir">
+                        <p id="aviso" class="aviso"></p>
+                        <input type="button" value="Jugar" id="jugar" class= "btn">
+                        <input type="button" value="Dar Comida" id="comer" class="btn">
+                        <input type="button" value="Dormir" id="dormir" class="btn">
+                    </div>
+                    <div id="tabla"></div>
                 </div>
             </ejercicio>
             </container>
@@ -184,9 +190,9 @@
     };
 
     let comprobarNombre = function () {
-        let patronNombre = /^[A-Za-záéíóúÁÉÍÓÚÑñ]{2,}/;
+        let patron = /^[A-Za-záéíóúÁÉÍÓÚÑñ]{3,}/;
 
-        if (!patronNombre.test(nombre.value)) {
+        if (!patron.test(nombre.value)) {
             errorNombre.innerHTML = 'El nombre no es correcto';
         } else {
             errorNombre.innerHTML = '';
@@ -198,27 +204,24 @@
             obtenerEdad(new Date(fechaNac.value));
             errorFecha.innerHTML = '';
         } catch (fechaException) {
-            errorFecha.innerHTML = 'La fecha no es correcta';
+            errorFecha.innerHTML = 'Fecha no válida';
         }
     };
 
     let crearGato = function () {
-        //let fechaNacimiento = new Date(fechaNac.value);
-        let fechasNacimiento = ['February 21, 2015', 'January 25, 2007', 'April 7, 2002'];
-        let fNindice = Math.floor(Math.random() * (fechasNacimiento.length - 1 - 0)) + 0;
+        let fechaNacimiento = new Date(fechaNac.value);
         comprobarNombre();
-        //comprobarFecha();
+        comprobarFecha();
 
         if (nombre.value == '') {
-            errorNombre.innerHTML = 'Debes introducir un nombre';
+            errorNombre.innerHTML = 'Introduce un nombre';
         } else {
-            //try {
-            let gato = new Gato(nombre.value, raza.value, fechasNacimiento[fNindice]);
-            crearVentana(gato);
-
-            // } catch (fechaException) {
-            //errorFecha.innerHTML = '¡La fecha no es correcta!';
-            //}
+            try {
+                let gato = new Gato(nombre.value, raza.value, fechaNacimiento);
+                crearVentana(gato);
+            } catch (fechaException) {
+                errorFecha.innerHTML = '¡La fecha no es correcta!';
+            }
         }
     };
     document.addEventListener('DOMContentLoaded', init);

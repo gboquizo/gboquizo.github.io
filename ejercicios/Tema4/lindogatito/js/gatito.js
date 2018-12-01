@@ -36,11 +36,11 @@
     let getImagen = function (estado) {
         let imagen = "";
 
-        if (estado === "jugando") {
+        if (estado === "Jugando") {
             imagen = "/ejercicios/Tema4/lindogatito/images/jugando.jpg";
-        } else if (estado === "durmiendo") {
+        } else if (estado === "Durmiendo") {
             imagen = "/ejercicios/Tema4/lindogatito/images/durmiendo.jpg";
-        } else if (estado === "comiendo") {
+        } else if (estado === "Comiendo") {
             imagen = "/ejercicios/Tema4/lindogatito/images/comiendo.jpg";
         } else {
             imagen = "/ejercicios/Tema4/lindogatito/images/muerto.jpg";
@@ -76,14 +76,15 @@
         estado.innerHTML = document.gato.estado;
 
         if (document.gato.peso === 2 || document.gato.peso === 15) {
-            aviso.innerHTML = "¡Cuidado! El gatito va a morir pronto!"
+            aviso.innerHTML = "¡Cuidado! ¡El gatito va a morir pronto!"
         }
 
-        if (document.gato.estado == "muerto") {
+        if (document.gato.estado == "Muerto") {
+
             botones[0].setAttribute("disabled", "");
             botones[1].setAttribute("disabled", "");
             botones[2].setAttribute("disabled", "");
-            aviso.innerHTML = "";
+            aviso.innerHTML = "Tu gatito ha muerto :-("
         }
         imagen.src = getImagen(document.gato.estado);
     }
