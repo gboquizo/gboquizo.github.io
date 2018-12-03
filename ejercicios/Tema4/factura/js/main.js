@@ -32,71 +32,118 @@
  *
  */
 {
+    let fragment;
+    let fecha;
+    let moneda;
+    let emisor;
+    let cifEmisor;
+    let direccionEmisor;
+    let emailEmisor;
+    let telefonoEmisor;
+    let logo;
+    let cliente;
+    let cifCliente;
+    let direccionCliente;
+    let emailCliente;
+    let telefonoCliente;
+    let btnGuardarEmisor;
+    let btnGuardarCliente;
+    let btnLimpiarEmisor;
+    let btnLimpiarCliente;
+    let arrayLineas;
+    let nuevaLinea;
+    let btnCrearFactura;
+    let spanDatosCliente;
+    let spanDatosEmisor;
+    let spanLinea;
+    let contLineas;
+    let area;
+    let irpf;
+    let re;
+    let total;
+
     function init() {
-        createPage();
+        mipagina = new CrearPagina();
+        fragment = mipagina.getFragment();
+        CrearPagina.prototype.createExercise = () => createExercise();
+        mipagina.createPage();
+        fecha = document.getElementById("fecha");
+        moneda = document.getElementById("moneda");
+        emisor = document.getElementById("emisor");
+        cifEmisor = document.getElementById("cifEmisor");
+        direccionEmisor = document.getElementById("direccionEmisor");
+        emailEmisor = document.getElementById("emailEmisor");
+        telefonoEmisor = document.getElementById("telefonoEmisor");
+        logo = document.getElementById("logo");
+        cliente = document.getElementById("cliente");
+        cifCliente = document.getElementById("cifCliente");
+        direccionCliente = document.getElementById("direccionCliente");
+        emailCliente = document.getElementById("emailCliente");
+        telefonoCliente = document.getElementById("telefonoCliente");
+        btnGuardarEmisor = document.getElementById("guardarEmisor");
+        btnGuardarCliente = document.getElementById("guardarCliente");
+        btnLimpiarEmisor = document.getElementById("limpiarEmisor");
+        btnLimpiarCliente = document.getElementById("limpiarCliente");
+        spanDatosCliente = document.getElementById("errorDatosCliente");
+        spanDatosEmisor = document.getElementById("errorDatosEmisor");
+        spanLinea = document.getElementById("errorLinea");
+        arrayLineas = [];
+        nuevaLinea = document.getElementById("nuevaLinea");
+        contLineas = document.getElementById("contLineas");
+        area = document.getElementById("area");
+        irpf = document.getElementById("irpf");
+        re = document.getElementById("re");
+        total = document.getElementById("total");
+        btnCrearFactura = document.getElementById("crearFactura");
+        console.log(btnGuardarEmisor);
+        btnGuardarEmisor.addEventListener("click", crearEmisor);
+        btnGuardarCliente.addEventListener("click", crearCliente);
+        btnLimpiarEmisor.addEventListener("click", limpiarInputsEmisor);
+        btnLimpiarCliente.addEventListener("click", limpiarInputsCliente);
     }
-    /**
-     * Función que crea el layout de la página desde js.
-     */
-    let createPage = function () {
-        /**
-         * Sección main
-         */
-        //Crea la sección main y se le asigna una clase.
-        let main = document.createElement('main');
-        main.className = 'main';
 
-        //Crea un contenedor para el ejercicio y se le asigna una clase.
-        let container = document.createElement('container');
-        container.className = 'container';
+    let crearEmisor = function () {
+        if (emisor.value !== "" && cifEmisor.value !== "" && direccionEmisor.value !== "" && emailEmisor.value !== "" && telefonoEmisor.value !== "" && logo.value !== "") {
+            spanDatosEmisor.textContent = "";
+            //return new Emisor(emisor.value, cifEmisor.value, direccionEmisor.value, emailEmisor.value, telefonoEmisor.value, logo.value)
+            console.log(new Emisor(emisor.value, cifEmisor.value, direccionEmisor.value, emailEmisor.value, telefonoEmisor.value, logo.value));
+        } else {
+            spanDatosEmisor.textContent = "Error, rellena todos los campos.";
+        }
+    }
 
-        //Crea un contenedor para el div y se le asigna una clase
-        let exercise = document.createElement('ejercicio');
-        exercise.className = 'ejercicio';
+    let crearCliente = function () {
+        if (cliente.value !== "" && cifCliente.value !== "" && direccionCliente.value !== "" && emailCliente.value !== "" && telefonoCliente.value !== "") {
+            spanDatosCliente.textContent = "";
+            //return new Cliente(cliente.value, cifCliente.value, direccionCliente.value, emailCliente.value, telefonoCliente.value);
+            console.log(new Cliente(cliente.value, cifCliente.value, direccionCliente.value, emailCliente.value, telefonoCliente.value));
+        } else {
+            spanDatosCliente.textContent = "Error, rellena todos los campos.";
+        }
+    }
 
-        //Crea un fragment donde insertar la información del ejercicio.
-        let fragment = document.createDocumentFragment();
-        createExercise(fragment);
-        //Se añade el fragment al div del ejercicio.
-        exercise.appendChild(fragment);
-
-        //Se añade el contenedor del botón al container principal.
-        container.appendChild(exercise);
-
-        //Se añade el elemento container al main.
-        main.appendChild(container);
-
-        /**
-         * Sección footer
-         */
-
-        //Crea un footer y se le asigna una clase.
-        let footer = document.createElement('footer');
-        footer.className = 'footer';
-
-        //Crea un elemento p para el copyright y se le asigna un texto.
-        let p = document.createElement('p');
-        p.className = 'footer-copyright';
-        p.textContent = 'Guillermo Boquizo Sánchez - DWECL 2 º DAW IES Gran Capitán';
-
-        //Se añade el elemento p al footer.
-        footer.appendChild(p);
-
-        /**
-         * Sección document
-         */
-        //Se añade el main al body.
-        document.body.appendChild(main);
-        document.body.appendChild(footer);
+    let limpiarInputsEmisor = function () {
+        let inputsEmisor = Array.from(
+            document.querySelectorAll("#entradaEmisor input")
+        );
+        inputsEmisor.forEach(input => input.value = "");
     };
 
-    let createExercise = function (fragment) {
+    let limpiarInputsCliente = function () {
+        let inputsCliente = Array.from(
+            document.querySelectorAll("#entradaCliente input")
+        );
+
+        inputsCliente.forEach(input => input.value = "");
+    };
+
+    let createExercise = function () {
         let h2 = document.createElement('h2');
-        h2.textContent = 'Factura en js.';
+        h2.textContent = "Factura en js.";
         boton = document.createElement('button');
-        boton.id = 'crearGato';
+        boton.id = "crearFactura";
         boton.className = 'btn';
-        boton.innerHTML = 'Crear factura';
+        boton.innerHTML = "Crear factura";
         let descripcion = document.createElement('article');
         descripcion.innerHTML = `
         <div class="entrada" id="entrada">
@@ -113,7 +160,7 @@
                 </div>
             </div>
         </div>
-        <div class="entrada" id="entrada">
+        <div class="entrada" id="entradaEmisor">
         <h3>Empresa</h3>
             <div class="field-group">
                 <label class="label" for="nombre">Nombre:</label>
@@ -124,25 +171,25 @@
             <div class="field-group">
                 <label class="label" for="CIF">CIF:</label>
                 <div class="field">
-                    <input type="text" name="cif" id="cif" value="21555354" required/>
+                    <input type="text" name="cifEmisor" id="cifEmisor" value="21555354" required/>
                 </div>
             </div>
             <div class="field-group">
                 <label class="label" for="direccion">Dirección:</label>
                 <div class="field">
-                    <input type="text" name="direccion" id="direccion" value="C\\Vaguada, nº 37" required/>
+                    <input type="text" name="direccionEmisor" id="direccionEmisor" value="C\\Vaguada, nº 37" required/>
                 </div>
             </div>
             <div class="field-group">
                 <label class="label" for="email">Email:</label>
                 <div class="field">
-                    <input type="text" name="email" id="email" value="info@gmail.com" required/>
+                    <input type="text" name="emailEmisor" id="emailEmisor" value="info@gmail.com" required/>
                 </div>
             </div>
             <div class="field-group">
                 <label class="label" for="telefono">Teléfono:</label>
                 <div class="field">
-                    <input type="text" name="telefono" id="telefono" value="666666666" required/>
+                    <input type="text" name="telefonoEmisor" id="telefonoEmisor" value="666666666" required/>
                 </div>
             </div>
             <div class="field-group">
@@ -152,12 +199,12 @@
                 </div>
             </div>
             <div class="field-group">
-                <button class="btn" id"btnGuardarEmisor">Guardar</button>
-                <button class="btn" id"btnLimpiarEmisor">Limpiar datos</button> 
+                <button class="btn" id="guardarEmisor">Guardar</button>
+                <button class="btn" id="limpiarEmisor">Limpiar datos</button> 
                 <span id="errorDatosEmisor" class="aviso"></span>  
             </div>
-
-
+        </div>
+        <div class="entrada" id="entradaCliente">
             <h3>Cliente</h3>
             <div class="field-group">
                 <label class="label" for="nombre">Nombre:</label>
@@ -168,36 +215,30 @@
             <div class="field-group">
                 <label class="label" for="CIF">CIF:</label>
                 <div class="field">
-                    <input type="text" name="cif" id="cif" value="27555354" required/>
+                    <input type="text" name="cifCliente" id="cifCliente" value="27555354" required/>
                 </div>
             </div>
             <div class="field-group">
                 <label class="label" for="direccion">Dirección:</label>
                 <div class="field">
-                    <input type="text" name="direccion" id="direccion" value="C\\Vaguada, nº 37" required/>
+                    <input type="text" name="direccionCliente" id="direccionCliente" value="C\\Vaguada, nº 37" required/>
                 </div>
             </div>
             <div class="field-group">
                 <label class="label" for="email">Email:</label>
                 <div class="field">
-                    <input type="text" name="email" id="email" value="info2@gmail.com" required/>
+                    <input type="text" name="emailCliente" id="emailCliente" value="info2@gmail.com" required/>
                 </div>
             </div>
             <div class="field-group">
                 <label class="label" for="telefono">Teléfono:</label>
                 <div class="field">
-                    <input type="text" name="telefono" id="telefono" value="777777777" required/>
+                    <input type="text" name="telefonoCliente" id="telefonoCliente" value="777777777" required/>
                 </div>
             </div>
             <div class="field-group">
-                <label class="label" for="logo">Logo:</label>
-                <div class="field">
-                    <input type="text" name="logo" id="logo" value="url" required/>
-                </div>
-            </div>
-            <div class="field-group">
-                <button class="btn" id"btnGuardarCliente">Guardar</button>
-                <button class="btn" id"btnLimpiarCliente">Limpiar datos</button>
+                <button class="btn" id="guardarCliente">Guardar</button>
+                <button class="btn" id="limpiarCliente">Limpiar datos</button>
                 <span id="errorDatosCliente" class="aviso"></span>  
             </div>
         </div>
@@ -255,8 +296,7 @@
                 <input class="field" id="re" type="text" required value="2" />
                 <p class="total" id="total">Total (EUROS)</p>
             </div>
-        </div>
-        `;
+        </div>`;
         fragment.appendChild(h2);
         fragment.appendChild(descripcion);
         fragment.appendChild(boton);
