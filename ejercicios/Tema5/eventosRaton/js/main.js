@@ -63,7 +63,7 @@
                 ctx.fillStyle = arrayColores[aleatorio];
             }
             ctx.fillStyle = arrayColores[aleatorio];
-            ctx.fillRect(0, 0, 500, 500);
+            ctx.fillRect(0, 0, 400, 400);
             ctx.font = "bold 2rem sans-serif";
             ctx.fillStyle = '#FFF';
 
@@ -98,5 +98,5 @@
         fragment.appendChild(descripcion);
     };
 
-    document.addEventListener('DOMContentLoaded', init);
+    window.addEventListener('load', init);
 }
