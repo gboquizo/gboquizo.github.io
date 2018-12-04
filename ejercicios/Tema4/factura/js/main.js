@@ -51,22 +51,25 @@
     let btnLimpiarEmisor;
     let btnLimpiarCliente;
     let arrayLineas;
+    let containerLineas;
     let nuevaLinea;
     let btnCrearFactura;
     let spanDatosCliente;
     let spanDatosEmisor;
-    let spanLinea;
     let contLineas;
+    let spanLinea;
     let area;
     let irpf;
     let re;
     let total;
 
     function init() {
+
         mipagina = new CrearPagina();
         fragment = mipagina.getFragment();
         CrearPagina.prototype.createExercise = () => createExercise();
         mipagina.createPage();
+
         fecha = document.getElementById("fecha");
         moneda = document.getElementById("moneda");
         emisor = document.getElementById("emisor");
@@ -89,18 +92,110 @@
         spanLinea = document.getElementById("errorLinea");
         arrayLineas = [];
         nuevaLinea = document.getElementById("nuevaLinea");
-        contLineas = document.getElementById("contLineas");
+        containerLineas = document.getElementById("containerLinea");
+        contLineas = document.getElementById("contLinea");
         area = document.getElementById("area");
         irpf = document.getElementById("irpf");
         re = document.getElementById("re");
         total = document.getElementById("total");
         btnCrearFactura = document.getElementById("crearFactura");
-        console.log(btnGuardarEmisor);
         btnGuardarEmisor.addEventListener("click", crearEmisor);
         btnGuardarCliente.addEventListener("click", crearCliente);
-        btnLimpiarEmisor.addEventListener("click", limpiarInputsEmisor);
-        btnLimpiarCliente.addEventListener("click", limpiarInputsCliente);
+        btnLimpiarEmisor.addEventListener("click", limpiarEntradasEmisor);
+        btnLimpiarCliente.addEventListener("click", limpiarEntradasCliente);
+        nuevaLinea.addEventListener("click", obtenerLineas);
+        btnCrearFactura.addEventListener("click", crearFactura);
+
+        crearHeaderLineas();
     }
+
+    let crearHeaderLineas = function () {
+        let header = document.createElement("label");
+        header.innerHTML = `sdksldksd
+       `
+       contLineas.appendChild(header);
+    };
+
+    let obtenerLineas = function () {
+        let productos = document.querySelectorAll("#producto");
+        let unidades = document.querySelectorAll("#unidades");
+        let descuento = document.querySelectorAll("#descuento");
+        let precio = document.querySelectorAll("#precio");
+        let iva = document.querySelectorAll("#iva");
+        let importe = document.querySelectorAll("#importe");
+
+        if (productos[productos.length - 1].value !== "" && unidades[unidades.length - 1].value !== "" &&
+            descuento[descuento.length - 1].value !== "" && precio[precio.length - 1].value !== "" &&
+            iva[iva.length - 1].value !== "") {
+            let productosPrecio =
+                parseFloat(precio[precio.length - 1].value) * parseInt(unidades[unidades.length - 1].value);
+            let productosPrecioDescuento =
+                productosPrecio - productosPrecio * (parseInt(descuento[descuento.length - 1].value) / 100);
+            let productosPrecioDescuentoIva =
+                productosPrecioDescuento + productosPrecioDescuento * (parseInt(iva[iva.length - 1].value) / 100);
+
+            arrayLineas.push(new Linea(
+                productos[productos.length - 1].value,
+                unidades[unidades.length - 1].value,
+                descuento[descuento.length - 1].value,
+                precio[precio.length - 1].value,
+                iva[iva.length - 1].value,
+                productosPrecioDescuentoIva.toFixed(2)
+            ));
+
+            contLineas.innerHTML = "";
+            crearHeaderLineas();
+            arrayLineas.forEach(element => {
+                for (const key in element) {
+                    if (element.hasOwnProperty(key)) {
+                        let div = document.createElement("p");
+
+                        div.innerHTML = `${element[key]}`;
+
+                        contLineas.appendChild(div);
+                    }
+                }
+            });
+            containerLineas.innerHTML = ` 
+            <h3>Crear línea</h3>
+            <div class="linea">
+                <div class="center">
+                    <label class="label" for="producto">Producto:</label>
+                    <p type="text" name="producto" class="fieldLinea" id="producto"></p>
+                </div>
+                <div class="center">
+                    <label class="label" for="producto">Uds:</label>
+                    <p type="number" name="unidades" id="unidades" class="fieldLinea"></p>
+                </div>
+                <div class="center">
+                    <label class="label" for="descuento">Descuento:</label>
+                    <p type="text" name="descuento" id="descuento" class="fieldLinea"></p>
+                </div>
+            </div
+            <div>
+                <div class="linea">
+                    <div class="center">
+                        <label class="label" for="precio">Precio:</label>
+                        <p type="text" name="precio" id="precio" class="fieldLinea"></p>
+                    </div>
+                    <div class="center">
+                        <label class="label" for="iva">I.V.A:</label>
+                        <p type="text" name="iva" id="iva" class="fieldLinea"></p>
+                    </div>
+                    <div class="center">
+                        <label class="label" for="importe">Importe:</label>
+                        <p type="text" name="importe" id="importe" class="fieldLinea"></p>
+                    </div>
+                </div  
+            </div>`;
+            spanLinea.textContent = "";
+            console.log(arrayLineas);
+        } else {
+            spanLinea.textContent = "Las líneas no pueden estar vacías";
+        }
+    }
+
+
 
     let crearEmisor = function () {
         if (emisor.value !== "" && cifEmisor.value !== "" && direccionEmisor.value !== "" && emailEmisor.value !== "" && telefonoEmisor.value !== "" && logo.value !== "") {
@@ -122,20 +217,37 @@
         }
     }
 
-    let limpiarInputsEmisor = function () {
+    let limpiarEntradasEmisor = function () {
         let inputsEmisor = Array.from(
             document.querySelectorAll("#entradaEmisor input")
         );
         inputsEmisor.forEach(input => input.value = "");
     };
 
-    let limpiarInputsCliente = function () {
+    let limpiarEntradasCliente = function () {
         let inputsCliente = Array.from(
             document.querySelectorAll("#entradaCliente input")
         );
 
         inputsCliente.forEach(input => input.value = "");
     };
+
+    let crearFactura = function () {
+        let factura = new Factura(
+            fecha.value,
+            moneda.value,
+            crearEmisor(),
+            crearCliente(),
+            arrayLineas,
+            irpf.value,
+            re.value,
+            area.value
+        );
+        console.log(factura);
+
+        total.innerHTML = `Total (EUROS) ${factura.total}`;
+
+    }
 
     let createExercise = function () {
         let h2 = document.createElement('h2');
@@ -201,8 +313,8 @@
             <div class="field-group">
                 <button class="btn" id="guardarEmisor">Guardar</button>
                 <button class="btn" id="limpiarEmisor">Limpiar datos</button> 
-                <span id="errorDatosEmisor" class="aviso"></span>  
             </div>
+            <span id="errorDatosEmisor" class="aviso"></span>  
         </div>
         <div class="entrada" id="entradaCliente">
             <h3>Cliente</h3>
@@ -238,12 +350,12 @@
             </div>
             <div class="field-group">
                 <button class="btn" id="guardarCliente">Guardar</button>
-                <button class="btn" id="limpiarCliente">Limpiar datos</button>
-                <span id="errorDatosCliente" class="aviso"></span>  
+                <button class="btn" id="limpiarCliente">Limpiar datos</button> 
             </div>
+            <span id="errorDatosCliente" class="aviso"></span> 
         </div>
         
-        <div class="entrada" id="entrada">
+        <div class="entrada" id="containerLinea">
             <h3>Crear línea</h3>
             <div class="linea">
                 <div class="center">
@@ -278,11 +390,40 @@
             <span id="errorLinea" class="aviso"></span> 
         </div>
         <button id="nuevaLinea" class="btn">Guardar / nueva linea</button>
-        <div class="entrada">
-            <h4>Líneas</h4>
-            <div id="contLineas">
+        <div class="entrada" id="contLinea">
+        <h3>Líneas</h3>
+        <div class="linea">
+            <div class="center">
+                <label class="label" for="producto">Producto:</label>
+                <p type="text" name="producto" class="fieldLinea" id="producto"></p>
             </div>
+            <div class="center">
+                <label class="label" for="producto">Uds:</label>
+                <p type="number" name="unidades" id="unidades" class="fieldLinea"></p>
+            </div>
+            <div class="center">
+                <label class="label" for="descuento">Descuento:</label>
+                <p type="text" name="descuento" id="descuento" class="fieldLinea"></p>
+            </div>
+        </div
+        <div>
+            <div class="linea">
+                <div class="center">
+                    <label class="label" for="precio">Precio:</label>
+                    <p type="text" name="precio" id="precio" class="fieldLinea"></p>
+                </div>
+                <div class="center">
+                    <label class="label" for="iva">I.V.A:</label>
+                    <p type="text" name="iva" id="iva" class="fieldLinea"></p>
+                </div>
+                <div class="center">
+                    <label class="label" for="importe">Importe:</label>
+                    <p type="text" name="importe" id="importe" class="fieldLinea"></p>
+                </div>
+            </div  
         </div>
+        <span id="errorLinea" class="aviso"></span> 
+    </div>
         <div class="entrada" id="otrosDatos">
             <div class="observaciones">
                 <h4>Observaciones:</h4>

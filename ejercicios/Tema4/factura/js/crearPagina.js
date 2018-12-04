@@ -6,6 +6,22 @@
      * Función que crea el layout de la página desde js.
      */
     CrearPagina.prototype.createPage = function () {
+
+        /**
+         * Sección header
+         */
+
+        //Crea el header y se le asigna una clase.
+        let header = document.createElement('header');
+        header.className = 'header';
+
+        //Crea el título y se le asigna un texto.
+        let h1 = document.createElement('h1');
+        h1.textContent = 'Desarrollo Web en Entorno Cliente';
+
+        //Se añade el elemento h1 al header.
+        header.appendChild(h1);
+
         /**
          * Sección main
          */
@@ -51,12 +67,15 @@
         /**
          * Sección document
          */
+        //Se añade el header al body.
+        document.body.appendChild(header);
         //Se añade el main al body.
         document.body.appendChild(main);
+        //Se añade el footer al body.
         document.body.appendChild(footer);
     };
 
-    CrearPagina.prototype.getFragment = function() {
+    CrearPagina.prototype.getFragment = function () {
         return this.fragment;
     }
 }
