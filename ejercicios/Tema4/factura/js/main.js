@@ -57,6 +57,12 @@
     let spanDatosCliente;
     let spanDatosEmisor;
     let contLineas;
+    let center;
+    let center2;
+    let center3;
+    let center4;
+    let center5;
+    let center6;
     let spanLinea;
     let area;
     let irpf;
@@ -94,6 +100,12 @@
         nuevaLinea = document.getElementById("nuevaLinea");
         containerLineas = document.getElementById("containerLinea");
         contLineas = document.getElementById("contLinea");
+        center = document.getElementById("center");
+        center2 = document.getElementById("center2");
+        center3 = document.getElementById("center3");
+        center4 = document.getElementById("center4");
+        center5 = document.getElementById("center5");
+        center6 = document.getElementById("center6");
         area = document.getElementById("area");
         irpf = document.getElementById("irpf");
         re = document.getElementById("re");
@@ -110,10 +122,24 @@
     }
 
     let crearHeaderLineas = function () {
-        let header = document.createElement("label");
-        header.innerHTML = `sdksldksd
-       `
-       contLineas.appendChild(header);
+        let div = document.createElement("div");
+        div.innerHTML = `<b>Producto</b>`;
+        contLineas.appendChild(div);
+        let div2 = document.createElement("div");
+        div2.innerHTML = `<b>Unidades</b>`;
+        contLineas.appendChild(div2);
+        let div3 = document.createElement("div");
+        div3.innerHTML = `<b>Descuento</b>`;
+        contLineas.appendChild(div3);
+        let div4 = document.createElement("div");
+        div4.innerHTML = `<b>Precio</b>`;
+        contLineas.appendChild(div4);
+        let div5 = document.createElement("div");
+        div5.innerHTML = `<b>Iva</b>`;
+        contLineas.appendChild(div5);
+        let div6 = document.createElement("div");
+        div6.innerHTML = `<b>Importe</b>`;
+        contLineas.appendChild(div6);
     };
 
     let obtenerLineas = function () {
@@ -123,6 +149,8 @@
         let precio = document.querySelectorAll("#precio");
         let iva = document.querySelectorAll("#iva");
         let importe = document.querySelectorAll("#importe");
+        let centrado = Array.from(document.querySelectorAll(".mostrar"));
+        console.log(centrado);
 
         if (productos[productos.length - 1].value !== "" && unidades[unidades.length - 1].value !== "" &&
             descuento[descuento.length - 1].value !== "" && precio[precio.length - 1].value !== "" &&
@@ -148,10 +176,10 @@
             arrayLineas.forEach(element => {
                 for (const key in element) {
                     if (element.hasOwnProperty(key)) {
-                        let div = document.createElement("p");
-
-                        div.innerHTML = `${element[key]}`;
-
+                        let div = document.createElement("div");
+                        let p = document.createElement("p");
+                        p.innerHTML = `${element[key]}`;
+                        div.appendChild(p);
                         contLineas.appendChild(div);
                     }
                 }
@@ -161,33 +189,34 @@
             <div class="linea">
                 <div class="center">
                     <label class="label" for="producto">Producto:</label>
-                    <p type="text" name="producto" class="fieldLinea" id="producto"></p>
+                    <input type="text" name="producto" class="field" id="producto" required/>
                 </div>
                 <div class="center">
                     <label class="label" for="producto">Uds:</label>
-                    <p type="number" name="unidades" id="unidades" class="fieldLinea"></p>
+                    <input type="number" name="unidades" id="unidades" class="field" required/>
                 </div>
                 <div class="center">
                     <label class="label" for="descuento">Descuento:</label>
-                    <p type="text" name="descuento" id="descuento" class="fieldLinea"></p>
+                    <input type="text" name="descuento" id="descuento" class="field" required/>
                 </div>
             </div
             <div>
                 <div class="linea">
                     <div class="center">
                         <label class="label" for="precio">Precio:</label>
-                        <p type="text" name="precio" id="precio" class="fieldLinea"></p>
+                        <input type="text" name="precio" id="precio" class="field" required/>
                     </div>
                     <div class="center">
                         <label class="label" for="iva">I.V.A:</label>
-                        <p type="text" name="iva" id="iva" class="fieldLinea"></p>
+                        <input type="text" name="iva" id="iva" class="field" required/>
                     </div>
                     <div class="center">
                         <label class="label" for="importe">Importe:</label>
-                        <p type="text" name="importe" id="importe" class="fieldLinea"></p>
+                        <input type="text" name="importe" id="importe" class="field" required readonly/>
                     </div>
                 </div  
-            </div>`;
+            </div>
+            <span id="errorLinea" class="aviso"></span> `;
             spanLinea.textContent = "";
             console.log(arrayLineas);
         } else {
@@ -200,8 +229,7 @@
     let crearEmisor = function () {
         if (emisor.value !== "" && cifEmisor.value !== "" && direccionEmisor.value !== "" && emailEmisor.value !== "" && telefonoEmisor.value !== "" && logo.value !== "") {
             spanDatosEmisor.textContent = "";
-            //return new Emisor(emisor.value, cifEmisor.value, direccionEmisor.value, emailEmisor.value, telefonoEmisor.value, logo.value)
-            console.log(new Emisor(emisor.value, cifEmisor.value, direccionEmisor.value, emailEmisor.value, telefonoEmisor.value, logo.value));
+            return new Emisor(emisor.value, cifEmisor.value, direccionEmisor.value, emailEmisor.value, telefonoEmisor.value, logo.value)
         } else {
             spanDatosEmisor.textContent = "Error, rellena todos los campos.";
         }
@@ -210,8 +238,7 @@
     let crearCliente = function () {
         if (cliente.value !== "" && cifCliente.value !== "" && direccionCliente.value !== "" && emailCliente.value !== "" && telefonoCliente.value !== "") {
             spanDatosCliente.textContent = "";
-            //return new Cliente(cliente.value, cifCliente.value, direccionCliente.value, emailCliente.value, telefonoCliente.value);
-            console.log(new Cliente(cliente.value, cifCliente.value, direccionCliente.value, emailCliente.value, telefonoCliente.value));
+            return new Cliente(cliente.value, cifCliente.value, direccionCliente.value, emailCliente.value, telefonoCliente.value);
         } else {
             spanDatosCliente.textContent = "Error, rellena todos los campos.";
         }
@@ -389,41 +416,15 @@
             </div>
             <span id="errorLinea" class="aviso"></span> 
         </div>
+
         <button id="nuevaLinea" class="btn">Guardar / nueva linea</button>
-        <div class="entrada" id="contLinea">
-        <h3>Líneas</h3>
-        <div class="linea">
-            <div class="center">
-                <label class="label" for="producto">Producto:</label>
-                <p type="text" name="producto" class="fieldLinea" id="producto"></p>
+        <div class="container-contLinea">
+            <h3>Líneas</h3>
+            <div id="contLinea">
+
             </div>
-            <div class="center">
-                <label class="label" for="producto">Uds:</label>
-                <p type="number" name="unidades" id="unidades" class="fieldLinea"></p>
-            </div>
-            <div class="center">
-                <label class="label" for="descuento">Descuento:</label>
-                <p type="text" name="descuento" id="descuento" class="fieldLinea"></p>
-            </div>
-        </div
-        <div>
-            <div class="linea">
-                <div class="center">
-                    <label class="label" for="precio">Precio:</label>
-                    <p type="text" name="precio" id="precio" class="fieldLinea"></p>
-                </div>
-                <div class="center">
-                    <label class="label" for="iva">I.V.A:</label>
-                    <p type="text" name="iva" id="iva" class="fieldLinea"></p>
-                </div>
-                <div class="center">
-                    <label class="label" for="importe">Importe:</label>
-                    <p type="text" name="importe" id="importe" class="fieldLinea"></p>
-                </div>
-            </div  
         </div>
-        <span id="errorLinea" class="aviso"></span> 
-    </div>
+
         <div class="entrada" id="otrosDatos">
             <div class="observaciones">
                 <h4>Observaciones:</h4>
