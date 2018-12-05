@@ -57,12 +57,6 @@
     let spanDatosCliente;
     let spanDatosEmisor;
     let contLineas;
-    let center;
-    let center2;
-    let center3;
-    let center4;
-    let center5;
-    let center6;
     let spanLinea;
     let area;
     let irpf;
@@ -100,12 +94,6 @@
         nuevaLinea = document.getElementById("nuevaLinea");
         containerLineas = document.getElementById("containerLinea");
         contLineas = document.getElementById("contLinea");
-        center = document.getElementById("center");
-        center2 = document.getElementById("center2");
-        center3 = document.getElementById("center3");
-        center4 = document.getElementById("center4");
-        center5 = document.getElementById("center5");
-        center6 = document.getElementById("center6");
         area = document.getElementById("area");
         irpf = document.getElementById("irpf");
         re = document.getElementById("re");
@@ -155,12 +143,12 @@
         if (productos[productos.length - 1].value !== "" && unidades[unidades.length - 1].value !== "" &&
             descuento[descuento.length - 1].value !== "" && precio[precio.length - 1].value !== "" &&
             iva[iva.length - 1].value !== "") {
-            let productosPrecio =
-                parseFloat(precio[precio.length - 1].value) * parseInt(unidades[unidades.length - 1].value);
-            let productosPrecioDescuento =
-                productosPrecio - productosPrecio * (parseInt(descuento[descuento.length - 1].value) / 100);
-            let productosPrecioDescuentoIva =
-                productosPrecioDescuento + productosPrecioDescuento * (parseInt(iva[iva.length - 1].value) / 100);
+            let productosPrecio = 
+            parseFloat(precio[precio.length - 1].value) * parseInt(unidades[unidades.length - 1].value);
+            let productosPrecioDescuento = productosPrecio - productosPrecio * 
+            (parseInt(descuento[descuento.length - 1].value) / 100);
+            let productosPrecioDescuentoIva = productosPrecioDescuento + productosPrecioDescuento * 
+            (parseInt(iva[iva.length - 1].value) / 100);
 
             arrayLineas.push(new Linea(
                 productos[productos.length - 1].value,
@@ -223,8 +211,6 @@
             spanLinea.textContent = "Las líneas no pueden estar vacías";
         }
     }
-
-
 
     let crearEmisor = function () {
         if (emisor.value !== "" && cifEmisor.value !== "" && direccionEmisor.value !== "" && emailEmisor.value !== "" && telefonoEmisor.value !== "" && logo.value !== "") {
@@ -443,6 +429,5 @@
         fragment.appendChild(descripcion);
         fragment.appendChild(boton);
     };
-
     document.addEventListener('DOMContentLoaded', init);
 }
