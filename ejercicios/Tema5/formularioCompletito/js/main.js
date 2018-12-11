@@ -5,7 +5,7 @@
  * Utiliza el modelo de registro avanzado de eventos según W3C(addEventListener), así como las expresiones regulares.
  * Asegúrate de validar lo siguiente:
  *
- *     Obligatoriedad(campo de texto, opción seleccionada(checkbox, radio button y selección) 
+ * Obligatoriedad(campo de texto, opción seleccionada(checkbox, radio button y selección) 
  * Tipo de dato introducido(numérico...) 
  * Dirección de correo válida 
  * Número de DNI válido 
