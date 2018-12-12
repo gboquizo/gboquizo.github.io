@@ -54,6 +54,7 @@
         fragment = mipagina.getFragment();
         CrearPagina.prototype.createExercise = () => createExercise();
         mipagina.createPage();
+
         collectionNoValidos = new Map();
 
         nombre = document.getElementById('inputNombre');
