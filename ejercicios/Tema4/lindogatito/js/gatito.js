@@ -84,13 +84,13 @@
 		let peso = document.getElementById('p');
 		let estado = document.getElementById('estado');
 		let aviso = document.getElementById('aviso');
-		aviso.innerHTML = '';
 		peso.innerHTML = document.gato.peso + ' Kg';
 		estado.innerHTML = document.gato.estado;
 
 		if (document.gato.peso === 2 || document.gato.peso === 15) {
 			aviso.innerHTML = '¡Cuidado! ¡El gatito va a morir pronto!';
 		}
+		aviso.innerHTML = '';
 		if (document.gato.estado == 'Muerto') {
 			botones[0].setAttribute('disabled', '');
 			botones[1].setAttribute('disabled', '');
