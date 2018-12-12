@@ -80,7 +80,6 @@
         }
 
         if (document.gato.estado == "Muerto") {
-
             botones[0].setAttribute("disabled", "");
             botones[1].setAttribute("disabled", "");
             botones[2].setAttribute("disabled", "");
