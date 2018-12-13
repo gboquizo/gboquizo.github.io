@@ -370,6 +370,70 @@ body {
     width: 200px;
   }
 
+  .ejercicio form .radioButtonRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+  }
+
+  .ejercicio form .radioButtonRow div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 100px;
+    width: 100px;
+    background-color: #fff;
+  }
+
+  .ejercicio form .radioButtonRow.columnaRadio {
+    padding: 20px;
+    padding-bottom: 50px;
+  }
+
+  .ejercicio form .radioButtonRow.columnaRadio .containerRadio {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+  }
+
+  .containerRadio input {
+    display: block;
+    margin-right: 7px;
+  }
+
+  .containerRadio label {
+    display: block;
+    font-weight: bold;
+    color: #0288D1;
+  }
+
+  .containerCheckbox label {
+    display: block;
+    font-weight: bold;
+    color: #0288D1;
+  }
+
+  .ejercicio form .oneColumn .containerCheckbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    min-height: 70px;
+    width: 500px;
+    background-color: #fff;
+
+  }
+
+  .ejercicio form .oneColumn .containerCheckbox input {
+    width: 20px;
+
+  }
+
   .ejercicio form .oneColumn div {
     display: flex;
     flex-direction: column;

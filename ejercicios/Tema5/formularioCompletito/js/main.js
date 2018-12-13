@@ -49,6 +49,14 @@
 
     let collectionNoValidos;
 
+    let radioSexoMujer;
+
+    let radioSexoHombre;
+
+    let radioSexoOtro;
+
+    let checkboxTerminos;
+
     function init() {
         mipagina = new CrearPagina();
         fragment = mipagina.getFragment();
@@ -77,6 +85,12 @@
 
         direccionWeb = document.getElementById('inputUrl');
         lbUrl = document.getElementById('lbUrl');
+
+        radioSexoMujer = document.getElementById("radioMujer");
+        radioSexoHombre = document.getElementById("radioHombre");
+        radioSexoOtro = document.getElementById("radioHombre");
+
+        checkboxTerminos = document.getElementById("checkboxTerminos");
 
         enviaFormulario = document.getElementById('enviaFormulario');
 
@@ -139,6 +153,28 @@
                         <span id="lbCuenta"></span>
                     </div>
                 </div>
+                <div class="columnaRadio">
+                <div class="radioButtonRow">
+                    <div class="containerRadio">
+                        <input type="radio" name="sexo" value="Mujer" id="radioMujer"/>
+                        <label for="radioMujer">Mujer</label>
+                    </div>
+                    <div class="containerRadio">
+                        <input type="radio" name="sexo" value="Hombre" id="radioHombre"/>
+                        <label for="radioHombre">Hombre</label>
+                    </div>
+                    <div class="containerRadio">
+                    <input type="radio" name="sexo" value="Otro" id="radioOtro"/>
+                    <label for="radioOtro">Otro</label>
+                </div>
+                </div>
+                <div class="oneColumn">
+                        <div class="containerCheckbox">
+                            <input type="checkbox" id="checkboxTerminos" name="checkBoxTerminos" required/>
+                            <label>Acepto términos</label>
+                        </div>
+                        <span id="lbDni"></span>
+                </div>
                 <span id="spanError"></span>
                 <input id="enviaFormulario" type="submit" name="enviar" value="Enviar" />
             </form>
@@ -152,6 +188,7 @@
             /^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ]+[/\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ])+[/\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ])?$/g,
             'Nombre y apellido, mínimo 3 caracteres, comienza en mayúscula'
         ],
+        telefono: [/[0-9]{9,}/, "Telefono no válido"],
         dni: [
             /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i,
             'Formato válido 12345678z',
@@ -159,25 +196,131 @@
         ],
         correo: [
             /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-            'Formato de correo no válido'
+            'Correo no válido'
         ],
         cuentaCorriente: [/[/\d]{20}/, 'Error en el formato de la cuenta corriente'],
+
         direccionWeb: [/^(http|https|ftp)\:\/\/[a-z0-9\.-]+\.[a-z]{2,4}/gi, 'Error en el formato de la dirección web']
     };
 
-    let validarNombre = function () {
-        let regexNombre = new RegExp(patrones.nombre[0]);
-        if (!regexNombre.test(nombre.value)) {
-            collectionNoValidos.set('nombre', nombre);
-            lbNombre.textContent = patrones.nombre[1];
-        } else {
-            if (collectionNoValidos.has('nombre')) {
-                collectionNoValidos.delete('nombre');
+    let tester = {
+
+        /**
+         * Valida un input
+         * @param patron patron de búsqueda para el regex.
+         * @param campo input a validar.
+         * @param elementoMsg elemento del DOM, donde se mostrarán los mensaje pertinentes.
+         * @param mapKey key que se usará en la collection map para añadir y eliminar elementos.
+         */
+        test(patron, campo, elementoMsg, mapkey) {
+            let regex = new RegExp(patron[0]);
+            if (!regex.test(campo.value)) {
+                collectionNoValidos.set(mapkey, campo);
+                elementoMsg.textContent = patron[1];
+            } else {
+                if (collectionNoValidos.has(mapkey)) {
+                    collectionNoValidos.delete(mapkey);
+                }
+                elementoMsg.textContent = "";
+                spanError.textContent = "";
             }
-            lbNombre.textContent = '';
-            spanError.textContent = '';
+        },
+
+        /**
+         * Valida un input dni.
+         * @param patron patron de búsqueda para el regex.
+         * @param campo input a validar.
+         * @param elementoMsg elemento del DOM, donde se mostrarán los mensaje pertinentes.
+         * @param mapKey key que se usará en la collection map para añadir y eliminar elementos.
+         */
+        testDNI(patron, campo, elementoMsg) {
+            let regex = new RegExp(patron[0]);
+            if (!regex.test(campo.value)) {
+                elementoMsg.textContent = "Formato incorrecto";
+                collectionNoValidos.set(campo, campo);
+            } else {
+                elementoMsg.textContent = "DNI válido";
+                if (collectionNoValidos.has(mapkey)) {
+                    collectionNoValidos.delete(mapkey);
+                }
+                elementoMsg.textContent = "";
+                spanError.textContent = "";
+                [, numeros, letra] = regex.exec(campo.value);
+                let letraValida = letrasValidas[parseInt(numeros) % 23].toUpperCase();
+
+                if (letra.toUpperCase() !== letraValida) {
+                    elementoMsg.textContent = "Letra incorrecta";
+                    collectionNoValidos.set(campo, campo);
+                }
+            }
+        },
+        testRadio() {
+            if (!radioSexoHombre.checked && !radioSexoMujer.checked && !radioSexoOtro.checked) {
+                collectionNoValidos.set("radioMujer", radioSexoMujer);
+            } else {
+                spanError.textContent = "";
+                if (collectionNoValidos.has("radioMujer")) {
+                    collectionNoValidos.delete("radioMujer");
+                }
+            }
+        },
+        testCheckbox() {
+            if (!checkboxTerminos.checked) {
+                collectionNoValidos.set("checkBoxTerminos", checkboxTerminos);
+            } else {
+                spanError.textContent = "";
+                if (collectionNoValidos.has("checkBoxTerminos")) {
+                    collectionNoValidos.delete("checkBoxTerminos");
+                }
+            }
+        },
+
+        /**
+         * Valida un input fechaNacimiento
+         * @param campo input a validar
+         * @param elementoMsg elemento del DOM, donde se mostrarán los mensaje pertinentes
+         * @param mapKey key que se usará en la collection map para añadir y eliminar elementos
+         */
+        testFecha(campo, elementoMsg, mapKey) {
+            let valorFecha = Date.parse(campo.value);
+            let annoIntroducido;
+            let annoActual;
+
+            if (!isNaN(valorFecha)) {
+                let fechaIntroducida = new Date(valorFecha);
+                let fechaActual = new Date();
+
+                annoIntroducido = fechaIntroducida.getFullYear();
+                mesIntroducido = fechaIntroducida.getMonth() + 1;
+                diaIntroducido = fechaIntroducida.getDay();
+
+                annoActual = fechaActual.getFullYear();
+                mesActual = fechaActual.getMonth() + 1;
+                diaActual = fechaActual.getDay();
+            }
+            if (isNaN(valorFecha)) {
+                elementoMsg.textContent = "La fecha nacimiento no puede estar vacía";
+                collectionNoValidos.set(mapKey, campo);
+            } else if (
+                annoIntroducido > annoActual ||
+                ((annoIntroducido === annoActual) && (mesIntroducido > mesActual) ||
+                    ((annoIntroducido === annoActual) && (mesIntroducido === mesActual) && (diaIntroducido > diaActual)))
+            ) {
+                elementoMsg.textContent = "La fecha nacimiento no puede ser superior a la fecha actual";
+                collectionNoValidos.set(mapKey, campo);
+            } else {
+                elementoMsg.textContent = "";
+                spanError.textContent = "";
+                if (collectionNoValidos.has(mapKey)) {
+                    collectionNoValidos.delete(mapKey);
+                }
+            }
+            console.log(collectionNoValidos);
         }
-        console.log(collectionNoValidos);
+    };
+
+    let validarNombre = function () {
+        tester.test(patrones.nombre, nombre, lbNombre, "inputNombre");
     };
 
     /**
@@ -185,138 +328,29 @@
      * acepta los siguientes formatos (12345678A, 12345678a, 12345678 A, 12345678 a, 12345678-a, 12345678-A).
      */
     let validarDni = function () {
-        let letrasValidas = [
-            'T',
-            'R',
-            'W',
-            'A',
-            'G',
-            'M',
-            'Y',
-            'F',
-            'P',
-            'D',
-            'X',
-            'B',
-            'N',
-            'J',
-            'Z',
-            'S',
-            'Q',
-            'V',
-            'H',
-            'L',
-            'C',
-            'K',
-            'E'
-        ];
-        let regexCorreo = new RegExp(patrones.dni[0]);
-        let valorFinalDni = dni.value.replace(/-|\s/, '');
-
-        //letra introducia por el usuario.
-        let letraUsuario;
-
-        // letra valida para el dni introducido.
-        let letraValida;
-
-        if (!regexCorreo.test(valorFinalDni)) {
-            lbDni.textContent = patrones.dni[1];
-            collectionNoValidos.set('dni', dni);
-        } else if (regexCorreo.test(valorFinalDni) && valorFinalDni.length === 9) {
-            letraUsuario = valorFinalDni[8];
-            let numerosDniUsuario = parseInt(valorFinalDni.substr(0, 8));
-            letraValida = letrasValidas[numerosDniUsuario % 23];
-
-            if (letraUsuario.toUpperCase() != letraValida.toUpperCase()) {
-                lbDni.textContent = patrones.dni[2];
-                collectionNoValidos.set('dni', dni);
-            } else {
-                lbDni.textContent = '';
-                if (collectionNoValidos.has('dni')) {
-                    collectionNoValidos.delete('dni');
-                }
-            }
-        } else {
-            lbDni.textContent = '';
-            spanError.textContent = '';
-            if (collectionNoValidos.has('dni')) {
-                collectionNoValidos.delete('dni');
-            }
-        }
-
-        console.log(collectionNoValidos);
+        tester.test(patrones.dni, dni, lbDni, "inputDni");
     };
 
     /**
      * Validará una dirección de correo electrónico.
      */
     let validarCorreo = function () {
-        let regexCorreo = new RegExp(patrones.correo[0]);
-        if (!regexCorreo.test(correo.value)) {
-            collectionNoValidos.set('correo', correo);
-            lbCorreo.textContent = patrones.correo[1];
-        } else {
-            if (collectionNoValidos.has('correo')) {
-                collectionNoValidos.delete('correo');
-            }
-            lbCorreo.textContent = '';
-            spanError.textContent = '';
-        }
-        console.log(collectionNoValidos);
+        tester.test(patrones.correo, correo, lbCorreo, "inputCorreo");
     };
+
 
     /**
      * Validará una fecha de nacimiento.
      */
     let validarFechaNacimiento = function () {
-        let valorFecha = Date.parse(fechaNacimiento.value);
-        let annoIntroducido;
-        let annoActual;
-
-        if (!isNaN(valorFecha)) {
-            let fechaIntroducida = new Date(valorFecha);
-            let fechaActual = new Date();
-
-            annoIntroducido = fechaIntroducida.getFullYear();
-            annoActual = fechaActual.getFullYear();
-        }
-
-        if (isNaN(valorFecha)) {
-            lbFecha.innerHTML = 'La fecha nacimiento no puede estar vacía';
-            collectionNoValidos.set('fecha', fechaNacimiento);
-        } else if (annoIntroducido > annoActual) {
-            lbFecha.innerHTML = 'La fecha nacimiento no puede ser superior a la fecha actual';
-            collectionNoValidos.set('fecha', fechaNacimiento);
-        } else {
-            lbFecha.innerHTML = '';
-            spanError.textContent = '';
-            if (collectionNoValidos.has('fecha')) {
-                collectionNoValidos.delete('fecha');
-            }
-        }
+        tester.testFecha(fechaNacimiento, lbFecha, "inputFecha");
     };
 
     /**
      * Validará un número telefónico.
      */
     let validarTelefono = function () {
-        let valorTelefono = telefono.value;
-
-        if (valorTelefono === '') {
-            lbTelefono.innerHTML = 'El teléfono no puede estar vacío';
-            collectionNoValidos.set('telefono', telefono);
-        } else if (valorTelefono.length < 9) {
-            lbTelefono.innerHTML = 'El teléfono introducido es muy corto';
-            collectionNoValidos.set('telefono', telefono);
-        } else if (!parseInt(valorTelefono)) {
-            lbTelefono.innerHTML = 'El formato de teléfono introducido es incorrecto';
-            collectionNoValidos.set('telefono', telefono);
-        } else {
-            lbTelefono.innerHTML = '';
-            if (collectionNoValidos.has('telefono')) {
-                collectionNoValidos.delete('telefono');
-            }
-        }
+        tester.test(patrones.telefono, telefono, lbTelefono, "inputTelefono");
     };
 
     /**
@@ -324,35 +358,14 @@
      * por tanto validaría los 20 dígitos de la cuenta.
      */
     let validarCuenta = function () {
-        let regexCuenta = new RegExp(patrones.cuentaCorriente[0]);
-
-        if (!regexCuenta.test(cuentaCorriente.value)) {
-            collectionNoValidos.set('cuenta', cuentaCorriente);
-            lbCuenta.textContent = patrones.cuentaCorriente[1];
-        } else {
-            if (collectionNoValidos.has('cuenta')) {
-                collectionNoValidos.delete('cuenta');
-            }
-            lbCuenta.textContent = '';
-        }
-        console.log(collectionNoValidos);
+        tester.test(patrones.cuentaCorriente, cuentaCorriente, lbCuenta, "inputCuenta");
     };
 
     /**
      * Validará una dirección web.
      */
     let validarUrl = function () {
-        let regexUrl = new RegExp(patrones.direccionWeb[0]);
-        if (!regexUrl.test(direccionWeb.value)) {
-            collectionNoValidos.set('url', direccionWeb);
-            lbUrl.textContent = patrones.direccionWeb[1];
-        } else {
-            if (collectionNoValidos.has('url')) {
-                collectionNoValidos.delete('url');
-            }
-            lbUrl.textContent = '';
-        }
-        console.log(collectionNoValidos);
+        tester.test(patrones.direccionWeb, direccionWeb, lbUrl, "inputUrl");
     };
 
     /**
@@ -361,6 +374,8 @@
      */
     let validar = function () {
         try {
+            tester.testRadio();
+            tester.testCheckbox();
             if (
                 nombre.value === '' ||
                 dni.value === '' ||
@@ -378,7 +393,7 @@
             } else {
                 if (collectionNoValidos.size === 0) {
                     spanError.textContent = '';
-                    alert('se enviaría el formulario');
+                    alert('Se enviaría el formulario');
                 } else {
                     spanError.textContent = '';
                     collectionNoValidos.forEach((element) => {
