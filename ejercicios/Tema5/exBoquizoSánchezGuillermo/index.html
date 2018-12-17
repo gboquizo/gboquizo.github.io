@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Guillermo Boquizo Sánchez">
+    <meta name="description" content="Formulario de reservas">
+    <meta name="keywords" content="HTML,CSS,JavaScript">
+    <title>Guillermo Boquizo Sánchez</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/estilos.min.css">
+    <script type="text/javascript" src="js/reserva.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="js/main.js" charset="UTF-8"></script>
+</head>
+
+<body>
+    <noscript>
+        <p>Por favor, comprueba que tu navegador es compatible con javascript, o bien
+            comprueba si lo tienes activado</p>
+    </noscript>
+    <h1>Guillermo Boquizo Sánchez</h1>
+    <h2>Examen Diciembre 2018</h2>
+    <h2>Formulario de reservas</h2>
+    <p>Bienvenido a la página de reservas de la casa rural "Mantita y Chimenea".Reservar con nosotros es fácil.Completa
+        este formulario de reserva.Le<br>
+        enviaremos un email con la forma de pago.Recuerda efectuar el pago de tu reserva. El plazo máximo es de 48
+        horas desde la fecha de reserva.
+    </p>
+    <form id="formulario" method="" action="">
+        <div>
+            <label for="nombre">Nombre completo:</label>
+            <input id="nombre" type="text" placeholder="Nombre completo" />
+            <span id="spanNombre"></span>
+        </div>
+        <div>
+            <label for="correo">Correo electrónico:</label>
+            <input id="correo" type="email" placeholder="Correo electrónico" />
+            <span id="spanCorreo"></span>
+        </div>
+        <div>
+            <label for="fechaLlegada">Fecha de llegada:</label>
+            <input id="fechaLlegada" type="date" />
+            <span id="spanFechaLlegada"></span>
+        </div>
+        <div>
+            <label for="horaLlegada">Hora de llegada:</label>
+            <input id="horaLlegada" type="time" placeholder="--:00" />
+            <span id="spanHoraLlegada"></span>
+        </div>
+        <div>
+            <label for="numNoches">Número de noches:</label>
+            <input id="numNoches" type="number" placeholder="Nº de noches" />
+            <span id="spanNumNoches"></span>
+        </div>
+        <div>
+            <label for="numPersonas">Número de personas:</label>
+            <input id="numPersonas" type="number" placeholder="Nº de personas" />
+            <span id="spanNumPersonas"></span>
+        </div>
+        <fieldset>
+            <legend>Servicio de restaurante:</legend>
+            <div>
+                <input type="checkbox" id="checkDesayuno" value="Desayuno" />
+                <label for="checkDesayuno">Desayuno</label>
+            </div>
+            <div>
+                <input type="checkbox" id="checkAlmuerzo" value="Almuerzo" />
+                <label for="checkAlmuerzo">Almuerzo</label>
+            </div>
+            <div>
+                <input type="checkbox" id="checkCena" value="Cena" />
+                <label for="checkCena">Cena</label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Edad del cliente:</legend>
+            <div>
+                <input type="radio" id="radioJoven" value="Menos de 20" name="edad" checked />
+                <label for="radioJoven">Menos de 20</label>
+            </div>
+            <div>
+                <input type="radio" id="radioMediano" value="Entre 20 y 40" name="edad" />
+                <label for="radioMediano">Entre 20 y 40</label>
+            </div>
+            <div>
+                <input type="radio" id="radioMaduro" value="Más de 40" name="edad" />
+                <label for="radioMaduro">Más de 40</label>
+            </div>
+        </fieldset>
+        <input id="enviarReserva" type="submit" name="enviarFormulario" value="Enviar reserva" />
+        <span id="spanError"></span>
+    </form>
+</body>
+
+</html>
