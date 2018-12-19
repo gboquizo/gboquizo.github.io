@@ -49,8 +49,11 @@
             element.addEventListener(element.getAttribute("id"), (ev) => {
                 let aleatorio = Math.floor(Math.random() * (arrayColores.length - 0)) + 0;
                 pintarCanvas(element, aleatorio, ev.offsetX, ev.offsetY, ev.button, ev.buttons);
+
             });
+            element.addEventListener("contextmenu", eliminarMenu);
             pintarCanvas(element);
+
         });
     }
 
@@ -97,6 +100,10 @@
         fragment.appendChild(h2);
         fragment.appendChild(descripcion);
     };
+
+    let eliminarMenu = function (ev) {
+        ev.preventDefault();
+    }
 
     window.addEventListener('load', init);
 }
