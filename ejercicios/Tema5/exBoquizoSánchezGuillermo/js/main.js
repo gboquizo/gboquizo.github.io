@@ -21,11 +21,9 @@
 	let spanNumNoches;
 	let spanNumPersonas;
 	let spanError;
-	let inputInvalidos;
+	let inputInvalidos = new Map();
 
 	function init() {
-		inputInvalidos = new Map();
-
 		let form = document.getElementsByTagName('form')[0];
 
 		nombre = document.getElementById('nombre');
@@ -61,12 +59,15 @@
 		});
 	}
 
+	/**
+	 * 
+	 */
 	let patrones = {
 		nombre: [
 			/^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ]+[/\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ])+[/\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ])?$/g,
 			'Nombre y apellido, mínimo 3 caracteres, comienza en mayúscula.'
 		],
-		hora: [/(?:[01]\d|2[0123]):(?:[012345]\d)$/gm, 'Formato válido hh:mm' ],
+		hora: [/(?:[01]\d|2[0123]):(?:[012345]\d)$/gm, 'Formato válido hh:mm'],
 		correo: [
 			/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
 			'Correo no válido'
@@ -77,8 +78,7 @@
 		testearNumeros(campo, elementMsg, mapKey) {
 			if (campo.value <= 0 || campo.value === '') {
 				inputInvalidos.set(mapKey, campo);
-				if (campo.value < 0) {
-				}
+				if (campo.value < 0) {}
 				elementMsg.textContent = 'Error, número inválido.';
 				if (campo.value === '') {
 					elementMsg.textContent = 'Rellene este campo.';
@@ -121,7 +121,7 @@
 	let comprobarNumNoches = () => tester.testearNumeros(numNoches, spanNumNoches, 'Numero_noches');
 	let comprobarNumPersonas = () => tester.testearNumeros(numPersonas, spanNumPersonas, 'Numero_personas');
 
-	let comprobarCheckBox = function() {
+	let comprobarCheckBox = function () {
 		let checkBoxs = Array.from(document.querySelectorAll("input[type='checkbox']"));
 		let chequeados = [];
 		checkBoxs.forEach((element) => {
@@ -132,7 +132,7 @@
 		return chequeados;
 	};
 
-	let comprobarRadios = function() {
+	let comprobarRadios = function () {
 		if (radioJoven.checked) {
 			return radioJoven.value;
 		} else if (radioMediano.checked) {
@@ -142,7 +142,7 @@
 		}
 	};
 
-	let crearReserva = function() {
+	let crearReserva = function () {
 		try {
 			inputInvalidos.clear();
 			comprobarNombre();
