@@ -40,37 +40,51 @@
 		tableroCopia: [],
 		tableroVisible: [],
 		tableroPulsadas: [],
-		tableroBanderas: [],
 		filas: 8,
 		columnas: 8,
 		minas: 10,
 
+		/**
+		 * Realiza la carga inicial de la funcionalidad del buscaminas.
+		 */
 		init() {
 			buscaminas.generarTableros();
 			buscaminas.mostrar();
 			buscaminas.generarMinas();
 			buscaminas.cargarNumeros();
-			//buscaminas.abrirTodasParaGanar();
-			buscaminas.comprobarGanador();
 		},
 
+		/**
+		 * Muestra los tableros al cargar.
+		 */
+		mostrar() {
+			console.log('Tablero de lógica:\n');
+			console.table(buscaminas.tableroLogica);
+			console.log('Tablero visible:\n');
+			console.table(buscaminas.tableroVisible);
+		},
+
+		/**
+		 * Genera los tableros y los inicializa con valores por defecto.
+		 */
 		generarTableros() {
 			for (let i = 0; i < buscaminas.filas; i++) {
 				buscaminas.tableroLogica[i] = [];
 				buscaminas.tableroVisible[i] = [];
 				buscaminas.tableroCopia[i] = [];
 				buscaminas.tableroPulsadas[i] = [];
-				buscaminas.tableroBanderas[i] = [];
 				for (let j = 0; j < buscaminas.columnas; j++) {
 					buscaminas.tableroLogica[i][j] = 0;
 					buscaminas.tableroVisible[i][j] = 'X';
 					buscaminas.tableroCopia[i][j] = 0;
-					buscaminas.tableroPulsadas[i][j] = 0;
-					buscaminas.tableroBanderas[i][j] = 0;
+					buscaminas.tableroPulsadas[i][j] = 'NP';
 				}
 			}
 		},
 
+		/**
+		 * Genera y coloca las minas.
+		 */
 		generarMinas() {
 			for (let i = 0; i < buscaminas.minas; i++) {
 				let fila = Math.floor(Math.random() * (buscaminas.filas - 1 - 0) + 0);
@@ -85,13 +99,9 @@
 			}
 		},
 
-		mostrar() {
-			console.table(buscaminas.tableroLogica);
-			console.table(buscaminas.tableroVisible);
-			//console.table(buscaminas.tableroPulsadas);
-			//console.table(buscaminas.tableroBanderas);
-		},
-
+		/**
+		 * Carga los números en función de las minas cercanas.
+		 */
 		cargarNumeros() {
 			for (let i = 0; i < buscaminas.filas; i++) {
 				for (let j = 0; j < buscaminas.columnas; j++) {
@@ -120,6 +130,13 @@
 			}
 		},
 
+		/**
+		 * Cuenta y coloca el número de minas.
+		 * @param inicioFila - Inicio de la fila.
+		 * @param inicioColumna - Inicio de la columna.
+		 * @param finFila - Fin de la fila.
+		 * @param finColumna - Fin de la columna.
+		 */
 		contarMinas(inicioFila, inicioColumna, finFila, finColumna) {
 			for (let i = inicioFila; i <= finFila; i++) {
 				for (let j = inicioColumna; j <= finColumna; j++) {
@@ -136,6 +153,44 @@
 			}
 		},
 
+		/**
+		 * Pica una casilla.
+		 * @param  i coordenada para la fila.
+		 * @param  j coordenada para la columna.
+		 */
+		picar(i, j) {
+			try {
+				if (buscaminas.tableroLogica[i][j] === '*') {
+					throw new Error('Pulsaste una mina');
+				} else if (buscaminas.tableroPulsadas[i][j] === '#') {
+					throw new Error('Esta casilla ya fue pulsada');
+				} else {
+					buscaminas.abrirCeros(i, j);
+					buscaminas.cargarPulsacion(i, j);
+					buscaminas.actualizaCambios();
+					console.log('Tablero de lógica:\n');
+					console.table(buscaminas.tableroLogica);
+					console.log('Tablero visible:\n');
+					console.table(buscaminas.tableroVisible);
+					console.log('Tablero de pulsadas:\n');
+					console.table(buscaminas.tableroPulsadas);
+					buscaminas.comprobarGanador();
+				}
+			} catch (e) {
+				if (e.message === 'Pulsaste una mina') {
+					console.error(e.message);
+					buscaminas.init();
+				} else {
+					console.log(e.message);
+				}
+			}
+		},
+
+		/**
+		 * Descubre las casillas, mediante recursividad.
+		 * @param  x coordenada para la fila.
+		 * @param  y coordenada para la columna.
+		 */
 		abrirCeros(x, y) {
 			if (buscaminas.tableroCopia[x][y] === 0) {
 				buscaminas.tableroCopia[x][y] = -1;
@@ -150,34 +205,18 @@
 			}
 		},
 
+		/**
+		 * Carga las casillas pulsadas en su correspondiente matriz.
+		 * @param x coordenada para la fila.
+		 * @param  y coordenada para la columna.
+		 */
 		cargarPulsacion(x, y) {
 			buscaminas.tableroPulsadas[x][y] = '#';
 		},
 
-		picar(i, j) {
-			try {
-				if (buscaminas.tableroLogica[i][j] === '*') {
-					throw new Error('Pulsaste una mina');
-				} else if (buscaminas.tableroPulsadas[i][j] === '#') {
-					throw new Error('Esta casilla ya fue pulsada');
-				} else {
-					buscaminas.abrirCeros(i, j);
-					buscaminas.cargarPulsacion(i, j);
-					buscaminas.actualizaCambios();
-					console.table(buscaminas.tableroLogica);
-					console.table(buscaminas.tableroVisible);
-					console.table(buscaminas.tableroPulsadas);
-				}
-			} catch (e) {
-				if (e.message === 'Pulsaste una mina') {
-					console.error(e.message);
-					buscaminas.init();
-				} else {
-					console.log(e.message);
-				}
-			}
-		},
-
+		/**
+		 * Actualiza los cambios en el tablero visible.
+		 */
 		actualizaCambios() {
 			for (let i = 0; i < buscaminas.filas; i++) {
 				for (let j = 0; j < buscaminas.columnas; j++) {
@@ -188,6 +227,9 @@
 			}
 		},
 
+		/**
+		 * Devuelve el número de casillas pulsadas en el tablero.
+		 */
 		obtenerPulsadas() {
 			let contador = 0;
 			for (let i = 0; i < buscaminas.filas; i++) {
@@ -199,6 +241,10 @@
 			}
 			return contador;
 		},
+
+		/**
+		 * Devuelve el número de casillas que deben quedar pendientes para ganar del tablero.
+		 */
 		obtenerPendientesParaGanar() {
 			let contador = 0;
 			for (let i = 0; i < buscaminas.filas; i++) {
@@ -211,18 +257,9 @@
 			return contador;
 		},
 
-		obtenerTotalBanderas() {
-			let contador = 0;
-			for (let i = 0; i < buscaminas.filas; i++) {
-				for (let j = 0; j < buscaminas.columnas; j++) {
-					if (buscaminas.tableroBanderas[i][j] === '!') {
-						contador++;
-					}
-				}
-			}
-			return contador;
-		},
-
+		/**
+		 * Comprueba si se gana de manera convencional.
+		 */
 		comprobarGanador() {
 			try {
 				if (buscaminas.obtenerPulsadas() === buscaminas.obtenerPendientesParaGanar()) {
@@ -230,37 +267,55 @@
 				}
 			} catch (e) {
 				console.log(e.message);
+				buscaminas.init();
 			}
 		},
 
+		/**
+		 * Marca y desmarca una casilla con una bandera.
+		 * 
+		 * @param x coordenada para la fila.
+		 * @param y coordenada para la columna.
+		 */
 		marcar(x, y) {
 			try {
-				if (buscaminas.tableroLogica[x][y] !== '' && buscaminas.tableroPulsadas[x][y] !== '#') {
-					buscaminas.tableroBanderas[x][y] = '!';
-					console.table(buscaminas.tableroBanderas);
-				} else {
+				if (buscaminas.tableroPulsadas[x][y] !== '#' && buscaminas.tableroVisible[x][y] !== '!') {
+					buscaminas.tableroVisible[x][y] = '!';
+					console.table(buscaminas.tableroVisible);
+				} else if (buscaminas.tableroPulsadas[x][y] === '#') {
 					throw new Error('No puedes colocar una bandera en una casilla descubierta');
+				} else if (buscaminas.tableroPulsadas[x][y] !== '#' && buscaminas.tableroVisible[x][y] === '!') {
+					buscaminas.tableroVisible[x][y] = 'X';
+					console.table(buscaminas.tableroVisible);
 				}
+				buscaminas.comprobarGanadorConBanderas();
 			} catch (e) {
 				console.log(e.message);
 			}
 		},
 
-		abrirTodasParaGanar() {
+		/**
+		 * Comprueba si se ha ganado mediante el uso de banderas.
+		 */
+		comprobarGanadorConBanderas() {
+			let contadorBanderas = 0;
 			for (let i = 0; i < buscaminas.filas; i++) {
 				for (let j = 0; j < buscaminas.columnas; j++) {
-					if (
-						buscaminas.tableroLogica[i][j] !== '*' &&
-						buscaminas.tableroVisible[i][j] !== '' &&
-						buscaminas.tableroPulsadas[i][j] !== '#'
-					)
-						buscaminas.picar(i, j);
+					if (buscaminas.tableroVisible[i][j] === '!' && buscaminas.tableroLogica[i][j] === '*') {
+						contadorBanderas++;
+					}
 				}
+			}
+			if (contadorBanderas === buscaminas.minas) {
+				throw new Error('Has ganado la partida');
 			}
 		}
 	};
 
-	publicar = (function() {
+	/**
+	 * Funciones públicas accesibles desde el exterior.
+	 */
+	realizar = (function() {
 		return {
 			init: () => buscaminas.init(),
 			picar: (x, y) => buscaminas.picar(x, y),
@@ -268,8 +323,11 @@
 		};
 	})();
 
+	/**
+	 * Función de carga inicial.
+	 */
 	function init() {
-		publicar.init();
+		realizar.init();
 	}
 
 	document.addEventListener('DOMContentLoaded', init);
