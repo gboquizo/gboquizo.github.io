@@ -86,7 +86,6 @@
 		},
 
 		mostrar() {
-			//console.clear();
 			console.table(buscaminas.tableroLogica);
 			console.table(buscaminas.tableroVisible);
 			//console.table(buscaminas.tableroPulsadas);
@@ -172,11 +171,9 @@
 			} catch (e) {
 				if (e.message === 'Pulsaste una mina') {
 					console.error(e.message);
-					//console.clear();
 					buscaminas.init();
 				} else {
 					console.log(e.message);
-					//console.clear();
 				}
 			}
 		},
@@ -202,7 +199,7 @@
 			}
 			return contador;
 		},
-		obtenerParaGanar() {
+		obtenerPendientesParaGanar() {
 			let contador = 0;
 			for (let i = 0; i < buscaminas.filas; i++) {
 				for (let j = 0; j < buscaminas.columnas; j++) {
@@ -214,9 +211,21 @@
 			return contador;
 		},
 
+		obtenerTotalBanderas() {
+			let contador = 0;
+			for (let i = 0; i < buscaminas.filas; i++) {
+				for (let j = 0; j < buscaminas.columnas; j++) {
+					if (buscaminas.tableroBanderas[i][j] === '!') {
+						contador++;
+					}
+				}
+			}
+			return contador;
+		},
+
 		comprobarGanador() {
 			try {
-				if (buscaminas.obtenerPulsadas() === buscaminas.obtenerParaGanar()) {
+				if (buscaminas.obtenerPulsadas() === buscaminas.obtenerPendientesParaGanar()) {
 					throw new Error('¡¡¡ Enhorabuena, has ganado !!!');
 				}
 			} catch (e) {
