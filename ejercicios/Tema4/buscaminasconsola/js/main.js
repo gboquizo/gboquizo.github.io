@@ -48,10 +48,38 @@
 		 * Realiza la carga inicial de la funcionalidad del buscaminas.
 		 */
 		init() {
+			buscaminas.seleccionarNivel();
 			buscaminas.generarTableros();
 			buscaminas.mostrar();
 			buscaminas.generarMinas();
 			buscaminas.cargarNumeros();
+		},
+
+		seleccionarNivel() {
+			let nivel = "";
+			do {
+				nivel = prompt("Selecciona el nivel: (fácil, difícil, experto)");
+			}
+			while (nivel.toLowerCase() === "fácil" && nivel.toLowerCase() === "difícil" && nivel.toLowerCase() === "experto");
+			switch (nivel.toLowerCase()) {
+				case "fácil":
+					buscaminas.filas = 8;
+					buscaminas.columnas = 8;
+					buscaminas.minas = 10;
+					break;
+				case "difícil":
+					buscaminas.filas = 16;
+					buscaminas.columnas = 16;
+					buscaminas.minas = 40;
+					break;
+				case "experto":
+					buscaminas.filas = 16;
+					buscaminas.columnas = 30;
+					buscaminas.minas = 99;
+					break;
+				default:
+					break;
+			}
 		},
 
 		/**
@@ -315,7 +343,7 @@
 	/**
 	 * Funciones públicas accesibles desde el exterior.
 	 */
-	realizar = (function() {
+	realizar = (function () {
 		return {
 			init: () => buscaminas.init(),
 			picar: (x, y) => buscaminas.picar(x, y),
