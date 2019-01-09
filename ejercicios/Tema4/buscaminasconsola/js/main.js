@@ -207,6 +207,8 @@
 					console.table(buscaminas.tableroLogica);
 					console.log('Tablero visible:\n');
 					console.table(buscaminas.tableroVisible);
+					console.log('Tablero pulsadas:\n');
+					console.table(buscaminas.tableroPulsadas);
 					buscaminas.comprobarGanador();
 				}
 			} catch (e) {
@@ -326,6 +328,126 @@
 		},
 
 		/**
+		 * Intenta destapar las casillas colindantes, sólo si el número de banderas
+		 * se corresponden con las que indica la casilla. Entonces muestra el campo 
+		 * de minas actualizado.
+		 * En caso de estar las banderas equivocadas se indica que se ha perdido el
+		 * juego.
+		 * @param x coordenada para la fila.
+		 * @param y coordenada para la columna.
+		 */
+		despejar(x, y) {
+
+			let numBanderas = 0;
+
+			if (x > buscaminas.filas || y > buscaminas.columnas) {
+				throw new Error("Coordenadas inválidas.");
+			}
+
+			if (buscaminas.tableroPulsadas[x][y] === "#") {
+				if (x > 0 && y > 0) {
+					if (buscaminas.tableroVisible[x - 1][y - 1] === "!") {
+						numBanderas++;
+					}
+				}
+				if (y > 0) {
+					if (buscaminas.tableroVisible[x][y - 1] === "!") {
+						numBanderas++;
+					}
+				}
+
+				if (y > 0 && x < buscaminas.filas - 1) {
+					if (buscaminas.tableroVisible[x + 1][y - 1] === "!") {
+						numBanderas++;
+					}
+				}
+
+				if (x > 0) {
+					if (buscaminas.tableroVisible[x - 1][y] === "!") {
+						numBanderas++;
+					}
+				}
+
+				if (x < buscaminas.filas - 1) {
+					if (buscaminas.tableroVisible[x + 1][y] === "!") {
+						numBanderas++;
+					}
+				}
+
+				if (y < buscaminas.columnas - 1) {
+					if (buscaminas.tableroVisible[x][y + 1] === "!") {
+						numBanderas++;
+					}
+				}
+
+				if (x < buscaminas.filas - 1 && y < buscaminas.columnas - 1) {
+					if (buscaminas.tableroVisible[x + 1][y + 1] === "!") {
+						numBanderas++;
+					}
+				}
+
+				if (x > 0 && y < buscaminas.columnas - 1) {
+					if (buscaminas.tableroVisible[x - 1][y + 1] === "!") {
+						numBanderas++;
+					}
+				}
+
+			}
+
+			if (numBanderas === buscaminas.tableroLogica[x][y]) {
+
+				if (x > 0 && y > 0) {
+					if (buscaminas.tableroVisible[x - 1][y - 1] !== "!" && buscaminas.tableroPulsadas[x - 1][y - 1] !== "#") {
+						buscaminas.picar(x - 1, y - 1);
+					}
+				}
+
+				if (y > 0) {
+					if (buscaminas.tableroVisible[x][y - 1] !== "!" && buscaminas.tableroPulsadas[x][y - 1] !== "#") {
+						buscaminas.picar(x, y - 1);
+					}
+				}
+
+				if (y > 0 && x < buscaminas.filas - 1) {
+					if (buscaminas.tableroVisible[x + 1][y - 1] !== "!" && buscaminas.tableroPulsadas[x + 1][y - 1] !== "#") {
+						buscaminas.picar(x + 1, y - 1);
+					}
+				}
+
+				if (x > 0) {
+					if (buscaminas.tableroVisible[x - 1][y] !== "!" && buscaminas.tableroPulsadas[x - 1][y] !== "#") {
+						buscaminas.picar(x - 1, y);
+					}
+				}
+
+				if (x < buscaminas.filas - 1) {
+					if (buscaminas.tableroVisible[x + 1][y] !== "!" && buscaminas.tableroPulsadas[x + 1][y] !== "#") {
+						buscaminas.picar(x + 1, y);
+					}
+				}
+
+				if (y < buscaminas.columnas - 1) {
+					if (buscaminas.tableroVisible[x][y + 1] !== "!" && buscaminas.tableroPulsadas[x][y + 1] !== "#") {
+						buscaminas.picar(x, y + 1);
+					}
+				}
+
+				if (x < buscaminas.filas - 1 && y < buscaminas.columnas - 1) {
+					if (buscaminas.tableroVisible[x + 1][y + 1] !== "!" && buscaminas.tableroPulsadas[x + 1][y + 1] !== "#") {
+						buscaminas.picar(x + 1, y + 1);
+					}
+				}
+
+				if (x > 0 && y < buscaminas.columnas - 1) {
+					if (buscaminas.tableroVisible[x - 1][y + 1] !== "!" && buscaminas.tableroPulsadas[x - 1][y + 1] !== "#") {
+						buscaminas.picar(x - 1, y + 1);
+					}
+				}
+
+			}
+		},
+
+		/**
 		 * Comprueba si se ha ganado mediante el uso de banderas.
 		 */
 		comprobarGanadorConBanderas() {
@@ -345,7 +467,6 @@
 				buscaminas.deseaContinuar(e.message);
 			}
 		},
-
 
 		/**
 		 * Pregunta si deseas volver a jugar, en caso afirmativo inicializa el juego.
@@ -373,7 +494,8 @@
 		return {
 			init: () => buscaminas.init(),
 			picar: (x, y) => buscaminas.picar(x, y),
-			marcar: (x, y) => buscaminas.marcar(x, y)
+			marcar: (x, y) => buscaminas.marcar(x, y),
+			despejar: (x, y) => buscaminas.despejar(x, y)
 		};
 	})();
 
