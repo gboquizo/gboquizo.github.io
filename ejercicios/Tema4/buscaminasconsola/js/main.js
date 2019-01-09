@@ -52,6 +52,7 @@
 		 */
 		init() {
 			buscaminas.seleccionarNivel();
+			buscaminas.instrucciones();
 			buscaminas.generarTableros();
 			buscaminas.generarMinas();
 			buscaminas.cargarNumeros();
@@ -86,6 +87,16 @@
 				default:
 					break;
 			}
+		},
+
+		instrucciones() {
+			let newline = "\n";
+			console.log(
+				"Bienvenido al buscaminas." + newline + "Para jugar debes hacer uso de realizar.método():" + newline +
+				"Para picar usa realizar.picar(x,y) donde x e y son las coordenadas de la casilla," + newline +
+				"Para poner una bandera usa realizar.marcar(x,y)." + newline +
+				"Para despejar una casilla usa realizar.despejar(x,y)," +
+				"lo que despejará una casilla con banderas en sus proximidades.");
 		},
 
 		/**
