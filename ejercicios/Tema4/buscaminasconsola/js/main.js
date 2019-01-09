@@ -35,14 +35,17 @@
  */
 
 {
+	/**
+	 * Objeto buscaminas con la funcionalidad por consola.
+	 */
 	let buscaminas = {
 		tableroLogica: [],
 		tableroCopia: [],
 		tableroVisible: [],
 		tableroPulsadas: [],
-		filas: 8,
-		columnas: 8,
-		minas: 10,
+		filas: 0,
+		columnas: 0,
+		minas: 0,
 
 		/**
 		 * Realiza la carga inicial de la funcionalidad del buscaminas.
@@ -50,11 +53,14 @@
 		init() {
 			buscaminas.seleccionarNivel();
 			buscaminas.generarTableros();
-			buscaminas.mostrar();
 			buscaminas.generarMinas();
 			buscaminas.cargarNumeros();
+			buscaminas.mostrar();
 		},
 
+		/**
+		 * Permite seleccionar el nivel de juego.
+		 */
 		seleccionarNivel() {
 			let nivel = "";
 			do {
@@ -74,7 +80,7 @@
 					break;
 				case "experto":
 					buscaminas.filas = 16;
-					buscaminas.columnas = 30;
+					buscaminas.columnas = 20;
 					buscaminas.minas = 99;
 					break;
 				default:
@@ -196,18 +202,16 @@
 					buscaminas.abrirCeros(i, j);
 					buscaminas.cargarPulsacion(i, j);
 					buscaminas.actualizaCambios();
+					console.clear();
 					console.log('Tablero de lógica:\n');
 					console.table(buscaminas.tableroLogica);
 					console.log('Tablero visible:\n');
 					console.table(buscaminas.tableroVisible);
-					console.log('Tablero de pulsadas:\n');
-					console.table(buscaminas.tableroPulsadas);
 					buscaminas.comprobarGanador();
 				}
 			} catch (e) {
 				if (e.message === 'Pulsaste una mina') {
-					console.error(e.message);
-					buscaminas.init();
+					buscaminas.deseaContinuar(e.message);
 				} else {
 					console.log(e.message);
 				}
@@ -294,8 +298,7 @@
 					throw new Error('¡¡¡ Enhorabuena, has ganado !!!');
 				}
 			} catch (e) {
-				console.log(e.message);
-				buscaminas.init();
+				buscaminas.deseaContinuar(e.message);
 			}
 		},
 
@@ -334,8 +337,31 @@
 					}
 				}
 			}
-			if (contadorBanderas === buscaminas.minas) {
-				throw new Error('Has ganado la partida');
+			try {
+				if (contadorBanderas === buscaminas.minas) {
+					throw new Error('Has ganado la partida');
+				}
+			} catch (e) {
+				buscaminas.deseaContinuar(e.message);
+			}
+		},
+
+
+		/**
+		 * Pregunta si deseas volver a jugar, en caso afirmativo inicializa el juego.
+		 * @param mensaje mensaje para mostrar al usuario
+		 */
+		deseaContinuar(mensaje) {
+			let deseaContinuar = "";
+			do {
+				deseaContinuar = prompt(mensaje + ", ¿Deseas continuar jugando? (s/n)");
+			} while (
+				deseaContinuar.toLowerCase() === "s" && deseaContinuar.toLowerCase() === "n"
+			);
+			if (deseaContinuar.toLowerCase() === "s") {
+				buscaminas.init();
+			} else {
+				return;
 			}
 		}
 	};
@@ -358,5 +384,8 @@
 		realizar.init();
 	}
 
+	/**
+	 * Carga inicial en el DOM del documento.
+	 */
 	document.addEventListener('DOMContentLoaded', init);
 }
