@@ -63,23 +63,26 @@
 		 * Permite seleccionar el nivel de juego.
 		 */
 		seleccionarNivel() {
-			let nivel = "";
+			let nivel = '';
 			do {
-				nivel = prompt("Selecciona el nivel: (fácil, difícil, experto)");
-			}
-			while (nivel.toLowerCase() === "fácil" && nivel.toLowerCase() === "difícil" && nivel.toLowerCase() === "experto");
+				nivel = prompt('Selecciona el nivel: (fácil, difícil, experto)');
+			} while (
+				nivel.toLowerCase() === 'fácil' &&
+				nivel.toLowerCase() === 'difícil' &&
+				nivel.toLowerCase() === 'experto'
+			);
 			switch (nivel.toLowerCase()) {
-				case "fácil":
+				case 'fácil':
 					buscaminas.filas = 8;
 					buscaminas.columnas = 8;
 					buscaminas.minas = 10;
 					break;
-				case "difícil":
+				case 'difícil':
 					buscaminas.filas = 16;
 					buscaminas.columnas = 16;
 					buscaminas.minas = 40;
 					break;
-				case "experto":
+				case 'experto':
 					buscaminas.filas = 16;
 					buscaminas.columnas = 20;
 					buscaminas.minas = 99;
@@ -90,13 +93,19 @@
 		},
 
 		instrucciones() {
-			let newline = "\n";
+			let newline = '\n';
 			console.log(
-				"Bienvenido al buscaminas." + newline + "Para jugar debes hacer uso de realizar.método():" + newline +
-				"Para picar usa realizar.picar(x,y) donde x e y son las coordenadas de la casilla," + newline +
-				"Para poner una bandera usa realizar.marcar(x,y)." + newline +
-				"Para despejar una casilla usa realizar.despejar(x,y)," +
-				"lo que despejará una casilla con banderas en sus proximidades.");
+				'Bienvenido al buscaminas.' +
+					newline +
+					'Para jugar debes hacer uso de realizar.método():' +
+					newline +
+					'Para picar usa realizar.picar(x,y) donde x e y son las coordenadas de la casilla,' +
+					newline +
+					'Para poner una bandera usa realizar.marcar(x,y).' +
+					newline +
+					'Para despejar una casilla usa realizar.despejar(x,y),' +
+					'lo que despejará una casilla con banderas en sus proximidades.'
+			);
 		},
 
 		/**
@@ -348,113 +357,125 @@
 		 * @param y coordenada para la columna.
 		 */
 		despejar(x, y) {
-
 			let numBanderas = 0;
 
 			if (x > buscaminas.filas || y > buscaminas.columnas) {
-				throw new Error("Coordenadas inválidas.");
+				throw new Error('Coordenadas inválidas.');
 			}
 
-			if (buscaminas.tableroPulsadas[x][y] === "#") {
+			if (buscaminas.tableroPulsadas[x][y] !== '#') {
+				throw new Error('No se puede despejar una casilla no pulsada previamente.');
+			}
+
+			if (buscaminas.tableroPulsadas[x][y] === '#') {
 				if (x > 0 && y > 0) {
-					if (buscaminas.tableroVisible[x - 1][y - 1] === "!") {
+					if (buscaminas.tableroVisible[x - 1][y - 1] === '!') {
 						numBanderas++;
 					}
 				}
 				if (y > 0) {
-					if (buscaminas.tableroVisible[x][y - 1] === "!") {
+					if (buscaminas.tableroVisible[x][y - 1] === '!') {
 						numBanderas++;
 					}
 				}
 
 				if (y > 0 && x < buscaminas.filas - 1) {
-					if (buscaminas.tableroVisible[x + 1][y - 1] === "!") {
+					if (buscaminas.tableroVisible[x + 1][y - 1] === '!') {
 						numBanderas++;
 					}
 				}
 
 				if (x > 0) {
-					if (buscaminas.tableroVisible[x - 1][y] === "!") {
+					if (buscaminas.tableroVisible[x - 1][y] === '!') {
 						numBanderas++;
 					}
 				}
 
 				if (x < buscaminas.filas - 1) {
-					if (buscaminas.tableroVisible[x + 1][y] === "!") {
+					if (buscaminas.tableroVisible[x + 1][y] === '!') {
 						numBanderas++;
 					}
 				}
 
 				if (y < buscaminas.columnas - 1) {
-					if (buscaminas.tableroVisible[x][y + 1] === "!") {
+					if (buscaminas.tableroVisible[x][y + 1] === '!') {
 						numBanderas++;
 					}
 				}
 
 				if (x < buscaminas.filas - 1 && y < buscaminas.columnas - 1) {
-					if (buscaminas.tableroVisible[x + 1][y + 1] === "!") {
+					if (buscaminas.tableroVisible[x + 1][y + 1] === '!') {
 						numBanderas++;
 					}
 				}
 
 				if (x > 0 && y < buscaminas.columnas - 1) {
-					if (buscaminas.tableroVisible[x - 1][y + 1] === "!") {
+					if (buscaminas.tableroVisible[x - 1][y + 1] === '!') {
 						numBanderas++;
 					}
 				}
-
 			}
 
 			if (numBanderas === buscaminas.tableroLogica[x][y]) {
-
 				if (x > 0 && y > 0) {
-					if (buscaminas.tableroVisible[x - 1][y - 1] !== "!" && buscaminas.tableroPulsadas[x - 1][y - 1] !== "#") {
+					if (
+						buscaminas.tableroVisible[x - 1][y - 1] !== '!' &&
+						buscaminas.tableroPulsadas[x - 1][y - 1] !== '#'
+					) {
 						buscaminas.picar(x - 1, y - 1);
 					}
 				}
 
 				if (y > 0) {
-					if (buscaminas.tableroVisible[x][y - 1] !== "!" && buscaminas.tableroPulsadas[x][y - 1] !== "#") {
+					if (buscaminas.tableroVisible[x][y - 1] !== '!' && buscaminas.tableroPulsadas[x][y - 1] !== '#') {
 						buscaminas.picar(x, y - 1);
 					}
 				}
 
 				if (y > 0 && x < buscaminas.filas - 1) {
-					if (buscaminas.tableroVisible[x + 1][y - 1] !== "!" && buscaminas.tableroPulsadas[x + 1][y - 1] !== "#") {
+					if (
+						buscaminas.tableroVisible[x + 1][y - 1] !== '!' &&
+						buscaminas.tableroPulsadas[x + 1][y - 1] !== '#'
+					) {
 						buscaminas.picar(x + 1, y - 1);
 					}
 				}
 
 				if (x > 0) {
-					if (buscaminas.tableroVisible[x - 1][y] !== "!" && buscaminas.tableroPulsadas[x - 1][y] !== "#") {
+					if (buscaminas.tableroVisible[x - 1][y] !== '!' && buscaminas.tableroPulsadas[x - 1][y] !== '#') {
 						buscaminas.picar(x - 1, y);
 					}
 				}
 
 				if (x < buscaminas.filas - 1) {
-					if (buscaminas.tableroVisible[x + 1][y] !== "!" && buscaminas.tableroPulsadas[x + 1][y] !== "#") {
+					if (buscaminas.tableroVisible[x + 1][y] !== '!' && buscaminas.tableroPulsadas[x + 1][y] !== '#') {
 						buscaminas.picar(x + 1, y);
 					}
 				}
 
 				if (y < buscaminas.columnas - 1) {
-					if (buscaminas.tableroVisible[x][y + 1] !== "!" && buscaminas.tableroPulsadas[x][y + 1] !== "#") {
+					if (buscaminas.tableroVisible[x][y + 1] !== '!' && buscaminas.tableroPulsadas[x][y + 1] !== '#') {
 						buscaminas.picar(x, y + 1);
 					}
 				}
 
 				if (x < buscaminas.filas - 1 && y < buscaminas.columnas - 1) {
-					if (buscaminas.tableroVisible[x + 1][y + 1] !== "!" && buscaminas.tableroPulsadas[x + 1][y + 1] !== "#") {
+					if (
+						buscaminas.tableroVisible[x + 1][y + 1] !== '!' &&
+						buscaminas.tableroPulsadas[x + 1][y + 1] !== '#'
+					) {
 						buscaminas.picar(x + 1, y + 1);
 					}
 				}
 
 				if (x > 0 && y < buscaminas.columnas - 1) {
-					if (buscaminas.tableroVisible[x - 1][y + 1] !== "!" && buscaminas.tableroPulsadas[x - 1][y + 1] !== "#") {
+					if (
+						buscaminas.tableroVisible[x - 1][y + 1] !== '!' &&
+						buscaminas.tableroPulsadas[x - 1][y + 1] !== '#'
+					) {
 						buscaminas.picar(x - 1, y + 1);
 					}
 				}
-
 			}
 		},
 
@@ -484,13 +505,11 @@
 		 * @param mensaje mensaje para mostrar al usuario
 		 */
 		deseaContinuar(mensaje) {
-			let deseaContinuar = "";
+			let deseaContinuar = '';
 			do {
-				deseaContinuar = prompt(mensaje + ", ¿Deseas continuar jugando? (s/n)");
-			} while (
-				deseaContinuar.toLowerCase() === "s" && deseaContinuar.toLowerCase() === "n"
-			);
-			if (deseaContinuar.toLowerCase() === "s") {
+				deseaContinuar = prompt(mensaje + ', ¿Deseas continuar jugando? (s/n)');
+			} while (deseaContinuar.toLowerCase() === 's' && deseaContinuar.toLowerCase() === 'n');
+			if (deseaContinuar.toLowerCase() === 's') {
 				buscaminas.init();
 			} else {
 				return;
@@ -501,7 +520,7 @@
 	/**
 	 * Funciones públicas accesibles desde el exterior.
 	 */
-	realizar = (function () {
+	realizar = (function() {
 		return {
 			init: () => buscaminas.init(),
 			picar: (x, y) => buscaminas.picar(x, y),
