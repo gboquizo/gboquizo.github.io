@@ -10,7 +10,9 @@ function init() {
         $("#destino").load("recibe-parametros.php", {
             nombre: "Pepe",
             edad: 45
-        }, () => alert("recibidos los datos por ajax"));
+        }, function () {
+            alert("recibidos los datos por ajax")
+        });
     });
 }
 
