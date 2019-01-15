@@ -27,7 +27,7 @@
 	//Compruébalo en las distintas plataformas, tanto con input como con radio buttons
 	function ejercicio1() {
 		$('input')
-			.change(function() {
+			.change(function () {
 				let $input = $(this);
 				$('#ejercicio1').html(`<h3>Resultados</h3>
                 .selected: <b> ${$input.selected} </b><br>
@@ -42,14 +42,15 @@
 
 	//De tres 'input type="checkbox"' que te deshabilite 2 al seleccionar una de ellas
 	function ejercicio2() {
-		$('.ejercicio2').click(function() {
+		$('.ejercicio2').click(function () {
 			if (!this.checked) $('.ejercicio2').removeAttr('disabled');
 			else $('.ejercicio2').attr('disabled', true);
 		});
 
-		$('#boton').click(function() {
+		$('#boton').click(function () {
 			$('.ejercicio2').prop('checked', false);
 			$('.ejercicio2').removeAttr('disabled');
+			$('#mensaje1').text('').css('background-color', 'white').css('color', 'black');
 		});
 	}
 
@@ -57,60 +58,60 @@
 	function ejercicio3() {
 		cargarCheck();
 		cargarRadio();
-    }
-    
-	let cargarCheck = function() {
+	}
+
+	let cargarCheck = function () {
 		$(':checkbox').on({
-			click: function() {
+			click: function () {
 				$('#mensaje1')
 					.text('Hola, soy el checkbox con id: ' + $(this).prop('id'))
-					.css('background-color', 'orange');
+					.css('background-color', 'orange').css('color', 'white');
 			},
 
-			mouseleave: function() {
-				$('#mensaje1').text('Encantado por tu visita, hasta otra').css('background-color', 'green');
+			mouseleave: function () {
+				$('#mensaje1').text('Encantado por tu visita, hasta otra').css('background-color', 'green').css('color', 'white');
 			},
 
-			mouseover: function(ev) {
+			mouseover: function (ev) {
 				$('#mensaje1')
 					.text('Hola, soy un checkbox y estoy en la posición: ' + 'X:' + ev.pageX + ', Y:' + ev.pageY)
-					.css('background-color', 'blue');
+					.css('background-color', 'blue').css('color', 'white');
 			},
 
-			contextmenu: function(ev) {
+			contextmenu: function (ev) {
 				ev.preventDefault();
-				$('#mensaje1').html('Click derecho está deshabilitado').css('background-color', '#1cdbc4');
+				$('#mensaje1').html('Click derecho está deshabilitado').css('background-color', '#1cdbc4').css('color', 'white');
 			}
 		});
 	};
-	let cargarRadio = function() {
+	let cargarRadio = function () {
 		$(':radio').on({
-			click: function() {
+			click: function () {
 				$('#mensaje1')
 					.text('Hola, soy el radio seleccionado con value: ' + $(this).prop('value'))
-					.css('background-color', 'orange');
+					.css('background-color', 'orange').css('color', 'white');
 			},
 
-			mouseleave: function() {
-				$('#mensaje1').text('Encantado por tu visita, hasta otra').css('background-color', 'green');
+			mouseleave: function () {
+				$('#mensaje1').text('Encantado por tu visita, hasta otra').css('background-color', 'green').css('color', 'white');
 			},
 
-			mouseover: function(ev) {
+			mouseover: function (ev) {
 				$('#mensaje1')
 					.text('Hola, soy un radiobutton y estoy en la posición: ' + 'X:' + ev.pageX + ', Y:' + ev.pageY)
-					.css('background-color', 'blue');
+					.css('background-color', 'blue').css('color', 'white');
 			},
 
-			contextmenu: function(ev) {
+			contextmenu: function (ev) {
 				ev.preventDefault();
-				$('#mensaje1').html('Click derecho está deshabilitado').css('background-color', '#1cdbc4');
+				$('#mensaje1').html('Click derecho está deshabilitado').css('background-color', '#1cdbc4').css('color', 'white');
 			}
 		});
 	};
 
 	//Demostración de uso de pageX, pageY, currentTarget, timeStamp.
 	function ejercicio5() {
-		$('.ejercicio5').mouseover(function(ev) {
+		$('.ejercicio5').mouseover(function (ev) {
 			$('#ejercicio5').html(`
                 Estos atributos pertenecen al objeto event <br>
                 Coordenada X: ${ev.pageX} <br>
