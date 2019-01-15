@@ -11,9 +11,8 @@ function init() {
             $mensaje.css("color", "red");
         } else {
             $mensaje.text("");
-            elementosSeleccionados = $(selectorEscrito);
-            elementosSeleccionados.fadeOut("slow", function () {
-                elementosSeleccionados.fadeIn("slow");
+            $(selectorEscrito).fadeOut("slow", function () {
+                $(selectorEscrito).fadeIn("slow");
             });
         }
     });
