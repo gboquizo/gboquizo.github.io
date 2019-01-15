@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Guillermo Boquizo Sánchez">
+    <meta name="description" content="Ejemplos teoría jQuery">
+    <meta name="keywords" content="HTML,CSS,JavaScript,jQuery">
+    <title>Web de aplicación de la teoría el ejercicio </title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/script.js" charset="UTF-8"></script>
+    <link rel="stylesheet" href="css/estilos.min.css">
+</head>
+
+<body>
+    <noscript>
+        <p>Por favor, compruebe que su navegador sea compatible con javascript, o bien compruebe si lo tiene activado.</p>
+    </noscript>
+    <h1>Guillermo Boquizo Sánchez - Teoría Manual JQuery Partes IV a VI</h1>
+    <h2>1.Distintas formas de acceder al atributo checked. Compruébalo en las
+        distintas plataformas, tanto con input como con
+        radio buttons
+    </h2>
+    <!-- EJERCICIO 1 -->
+    <form>
+        <label for="check">Checkbox Ejercicio 1</label>
+        <input id="checkbox0" name="checkboxEjercicio1" type="checkbox" checked /><br>
+        <label for="radio">Radiobutton Ejercicio 1</label>
+        <input type="radio" name="radio" value="radio1" checked selected />
+        <input type="radio" name="radio" value="radio2" />
+        <input type="radio" name="radio" value="radio3" />
+        <br>
+        <br>
+        <div id="ejercicio1"></div>
+    </form>
+
+    <!-- EJERCICIO 2 -->
+    <h2>2.De tres 'input type="checkbox"' que te deshabilite 2 al seleccionar una de ellas</h2>
+    <form>
+        <label for="check">Checkbox Ejercicio 2</label>
+        <input type="checkbox" id="checkbox1" class="ejercicio2" />
+        <input type="checkbox" id="checkbox2" class="ejercicio2" />
+        <input type="checkbox" id="checkbox3" class="ejercicio2" />
+        <input type="button" id="boton" value="Recargar"><br><br>
+    </form>
+    <br>
+
+    <!-- EJERCICIO 3 -->
+    <h2>3.Asociar dintintos eventos mediante .on()</h2>
+    <div id="ejercicio3" class="cuadro"><span id="mensaje1"></span><br></div>
+
+
+    <!-- EJERCICIO 4 -->
+    <h2>4.Indica los eventos estándares en el DOM</h2>
+    <ul>
+        <li><b>DOMSubtreeModified</b>Actúa al añadir o eliminar nodos en el subárbol de un documento o elemento</li><br>
+        <li><b>DOMNodeInserted</b>Actúa al añadir un nodo como hijo de otro nodo</li><br>
+        <li><b>DOMNodeRemoved</b>Actúa al eliminar un nodo que es hijo de otro nodo</li><br>
+        <li><b>DOMNodeRemovedFromDocument</b>Actúa al eliminar un nodo del documento</li><br>
+        <li><b>DOMNodeInsertedIntoDocument</b>Actúa al añadir un nodo al documento</li><br>
+    </ul>
+
+    <!-- EJERCICIO 5 -->
+    <h2>5.- Los atributos pageX, pageY, currentTarget, timeStamp... ¿A qué objeto pertenecen? Demuestra su uso</h2>
+    <div class="ejercicio5">
+        <p id="ejercicio5">Estos atributos pertenecen al objeto event</p>
+    </div>
+
+    <!-- EJERCICIO 6 -->
+    <h2>6.- Diferencia entre .on(), .live(). bind() y .delegate()</h2>
+    <ul>
+        <li><b>on():</b>
+            Proporciona todas las funciones necesarias para adjuntar controladores de eventos.<br>
+            Es la conversión de los 3 siguientes eventos que quedaron obsoletos.</li><br>
+        <li><b>live():</b>
+            Actua del mismo modo que bind, con la diferencia de que asocia el evento a la raíz del DOM y puede
+            conllevar grandes<br>
+            cargas si el DOM es demasiado amplio.
+            <span id="rojo">Este método se encuentra deprecated desde la versión 1.7</span> </li><br>
+        <li><b>bind():</b>
+            Asigna por defecto eventos a los diferentes elementos del DOM.
+            <span id="rojo">Este método se encuentra deprecated desde la versión 3.0</span></li><br>
+        <li><b>delegate():</b>Similar a live con la diferencia de que podemos asociar el evento a un selector en lugar
+            de asociarlo al DOM<br>
+            <span id="rojo">Este método se encuentra deprecated desde la versión 3.0</span></li>
+    </ul>
+</body>
+
+</html>

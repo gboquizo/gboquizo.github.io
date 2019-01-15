@@ -1,8 +1,8 @@
 /**
- * Demo 1, parte V
+ * Demo 2, parte V
  * @author Guillermo Boquizo Sánchez
  */
 function init() {
-    console.log($("#micapa").css("color"));
+    $("#micapa").css("color", "green");
 }
 $(init);
