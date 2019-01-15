@@ -5,9 +5,12 @@
 function init() {
     $("#boton").click(function () {
         let selectorEscrito = $("#camposelector").val();
+        let $mensaje = $("#mensaje")
         if (selectorEscrito == "") {
-            alert("Escribe algo en el campo de texto");
+            $mensaje.text("Escribe algo en el campo de texto");
+            $mensaje.css("color", "red");
         } else {
+            $mensaje.text("");
             elementosSeleccionados = $(selectorEscrito);
             elementosSeleccionados.fadeOut("slow", function () {
                 elementosSeleccionados.fadeIn("slow");
