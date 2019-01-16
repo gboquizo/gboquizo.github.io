@@ -814,10 +814,22 @@ footer p {
 	background-color: rgb(139, 245, 97);
 }
 
+.kitana{
+	background-color: #577B98;
+}
+
 .mileena {
-	background-color: rgb(210, 127, 243);
+	background-color: #820687;
 }
 
 .raiden {
 	background-color: #1A89D5;
+}
+
+.scorpion{
+	background-color: #AD8204;
+}
+
+.reptile{
+	background-color: #398347;
 }
