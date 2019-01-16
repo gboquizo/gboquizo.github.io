@@ -157,28 +157,28 @@
 	let crearReserva = function() {
 		validarAcciones('submitAction');
 		try {
-		spans.forEach((elemento, indice) => {
-			if (elemento.textContent !== '') {
-				inputs[indice].focus();
-				throw false;
+			spans.forEach((elemento, indice) => {
+				if (elemento.textContent !== '') {
+					inputs[indice].focus();
+					throw false;
+				}
+			});
+			spanError.textContent = '';
+			try {
+				let reserva = new Reserva(
+					inputsText[0].value,
+					inputsMail[0].value,
+					new Date(inputsDate[0].value),
+					inputsTime[0].value,
+					inputsNumber[0].value,
+					inputsNumber[1].value,
+					comprobarCheckBox(),
+					comprobarRadios()
+				);
+				reserva.mostrar();
+			} catch (error) {
+				spanError.textContent = error.message;
 			}
-		});
-		spanError.textContent = '';
-		try {
-			let reserva = new Reserva(
-				inputsText[0].value,
-				inputsMail[0].value,
-				new Date(inputsDate[0].value),
-				inputsTime[0].value,
-				inputsNumber[0].value,
-				inputsNumber[1].value,
-				comprobarCheckBox(),
-				comprobarRadios()
-			);
-			reserva.mostrar();
-		} catch (error) {
-			spanError.textContent = error.message;
-		}
 		} catch (e) {}
 	};
 	window.addEventListener('load', init);
