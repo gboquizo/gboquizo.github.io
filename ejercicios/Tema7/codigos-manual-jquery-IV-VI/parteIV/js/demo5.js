@@ -2,10 +2,12 @@
  * Demo 5, parte IV
  * @author Guillermo Boquizo Sánchez
  */
-function init() {
-    $("#boton").click(function (i) {
-        $("td").removeAttr("noWrap");
-    });
+{
+    let init = function () {
+        $("#boton").click(function (i) {
+            $("td").removeAttr("noWrap");
+        });
 
+    }
+    $(init);
 }
-$(init);

@@ -16,7 +16,7 @@
  */
 
 {
-	function init() {
+	let init = function () {
 		ejercicio1();
 		ejercicio2();
 		ejercicio3();
@@ -25,7 +25,7 @@
 
 	//Distintas formas de acceder al atributo checked.
 	//Compruébalo en las distintas plataformas, tanto con input como con radio buttons
-	function ejercicio1() {
+	let ejercicio1 = function () {
 		$('input')
 			.change(function () {
 				let $input = $(this);
@@ -41,7 +41,7 @@
 	}
 
 	//De tres 'input type="checkbox"' que te deshabilite 2 al seleccionar una de ellas
-	function ejercicio2() {
+	let ejercicio2 = function () {
 		$('.ejercicio2').click(function () {
 			if (!this.checked) $('.ejercicio2').removeAttr('disabled');
 			else $('.ejercicio2').attr('disabled', true);
@@ -55,7 +55,7 @@
 	}
 
 	//Asociar distintos eventos mediante .on().
-	function ejercicio3() {
+	let ejercicio3 = function () {
 		cargarCheck();
 		cargarRadio();
 	}
@@ -110,7 +110,7 @@
 	};
 
 	//Demostración de uso de pageX, pageY, currentTarget, timeStamp.
-	function ejercicio5() {
+	let ejercicio5 = function () {
 		$('.ejercicio5').mouseover(function (ev) {
 			$('#ejercicio5').html(`
                 Estos atributos pertenecen al objeto event <br>

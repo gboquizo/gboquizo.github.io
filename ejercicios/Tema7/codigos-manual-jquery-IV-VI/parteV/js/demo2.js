@@ -2,7 +2,9 @@
  * Demo 2, parte V
  * @author Guillermo Boquizo Sánchez
  */
-function init() {
-    $("#micapa").css("color", "green");
+{
+    let init = function () {
+        $("#micapa").css("color", "green");
+    }
+    $(init);
 }
-$(init);

@@ -2,7 +2,9 @@
  * Demo 2, parte IV
  * @author Guillermo Boquizo Sánchez
  */
-function init() {
-    $('li').attr("type", "square");
+{
+    let init = function () {
+        $('li').attr("type", "square");
+    }
+    $(init);
 }
-$(init);
