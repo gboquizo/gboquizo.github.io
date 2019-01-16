@@ -1,7 +1,7 @@
 /**
- * 
- * 
- * 
+ *
+ *
+ *
  * @author Guillermo Boquizo Sánchez
  */
 {
@@ -60,7 +60,7 @@
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	let patrones = {
 		nombre: [
@@ -122,24 +122,11 @@
 	let comprobarNumPersonas = () => tester.testearNumeros(numPersonas, spanNumPersonas, 'Numero_personas');
 
 	let comprobarCheckBox = function () {
-		let checkBoxs = Array.from(document.querySelectorAll("input[type='checkbox']"));
-		let chequeados = [];
-		checkBoxs.forEach((element) => {
-			if (element.checked) {
-				chequeados.push(element.value);
-			}
-		});
-		return chequeados;
+		return Array.from(document.querySelectorAll("input[type='checkbox']:checked"));
 	};
 
 	let comprobarRadios = function () {
-		if (radioJoven.checked) {
-			return radioJoven.value;
-		} else if (radioMediano.checked) {
-			return radioMediano.value;
-		} else if (radioMaduro.checked) {
-			return radioMaduro.value;
-		}
+	return Array.from(document.querySelectorAll("input[type='radio']:checked"))[0].value;
 	};
 
 	let crearReserva = function () {

@@ -1,14 +1,14 @@
 {
     /**
      * Constructor del objeto Reserva.
-     * @param {Nombre completo del cliente.} nombre 
-     * @param {Correo del cliente.} correo 
-     * @param {Fecha de llegada.} fechaLlegada 
-     * @param {Hora de llegada.} horaLlegada 
-     * @param {Número de noches reservadas.} numNoches 
-     * @param {Número de personas.} numPersonas 
-     * @param {Servicios de restauración contratados.} restaurante 
-     * @param {Edad del cliente.} edad 
+     * @param {Nombre completo del cliente.} nombre
+     * @param {Correo del cliente.} correo
+     * @param {Fecha de llegada.} fechaLlegada
+     * @param {Hora de llegada.} horaLlegada
+     * @param {Número de noches reservadas.} numNoches
+     * @param {Número de personas.} numPersonas
+     * @param {Servicios de restauración contratados.} restaurante
+     * @param {Edad del cliente.} edad
      */
     function Reserva(
         nombre, correo, fechaLlegada, horaLlegada, numNoches, numPersonas, restaurante, edad) {
@@ -113,11 +113,11 @@
         if (restaurante.length > 1) {
             let cadena = "";
             restaurante.forEach((element, index) => {
-                index == restaurante.length - 1 ? cadena += element + "." : cadena += element + ", ";
+                index == restaurante.length - 1 ? cadena += element.value + "." : cadena += element.value + ", ";
             });
             return cadena;
         } else if (restaurante.length === 1) {
-            return restaurante[0];
+            return restaurante[0].value;
         } else {
             return "No hay servicios";
         }
