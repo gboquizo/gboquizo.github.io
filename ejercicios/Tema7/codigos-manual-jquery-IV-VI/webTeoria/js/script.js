@@ -50,7 +50,10 @@
 		$('#boton').click(function () {
 			$('.ejercicio2').prop('checked', false);
 			$('.ejercicio2').removeAttr('disabled');
-			$('#mensaje1').text('').css('background-color', 'white').css('color', 'black');
+			$('#mensaje1').text('').css({
+				"background-color": "white",
+				"color": "black"
+			});
 		});
 	}
 
@@ -65,22 +68,34 @@
 			click: function () {
 				$('#mensaje1')
 					.text('Hola, soy el checkbox con id: ' + $(this).prop('id'))
-					.css('background-color', 'orange').css('color', 'white');
+					.css({
+						"background-color": "orange",
+						"color": "white"
+					});
 			},
 
 			mouseleave: function () {
-				$('#mensaje1').text('Encantado por tu visita, hasta otra').css('background-color', 'green').css('color', 'white');
+				$('#mensaje1').text('Encantado por tu visita, hasta otra').css({
+					"background-color": "green",
+					"color": "white"
+				});
 			},
 
 			mouseover: function (ev) {
 				$('#mensaje1')
 					.text('Hola, soy un checkbox y estoy en la posición: ' + 'X:' + ev.pageX + ', Y:' + ev.pageY)
-					.css('background-color', 'blue').css('color', 'white');
+					.css({
+						"background-color": "blue",
+						"color": "white"
+					});
 			},
 
 			contextmenu: function (ev) {
 				ev.preventDefault();
-				$('#mensaje1').html('Click derecho está deshabilitado').css('background-color', '#1cdbc4').css('color', 'white');
+				$('#mensaje1').html('Click derecho está deshabilitado').css({
+					"background-color": "#1cdbc4",
+					"color": "white"
+				});
 			}
 		});
 	};
@@ -89,22 +104,34 @@
 			click: function () {
 				$('#mensaje1')
 					.text('Hola, soy el radio seleccionado con value: ' + $(this).prop('value'))
-					.css('background-color', 'orange').css('color', 'white');
+					.css({
+						"background-color": "orange",
+						"color": "white"
+					});
 			},
 
 			mouseleave: function () {
-				$('#mensaje1').text('Encantado por tu visita, hasta otra').css('background-color', 'green').css('color', 'white');
+				$('#mensaje1').text('Encantado por tu visita, hasta otra').css({
+					"background-color": "green",
+					"color": "white"
+				});
 			},
 
 			mouseover: function (ev) {
 				$('#mensaje1')
 					.text('Hola, soy un radiobutton y estoy en la posición: ' + 'X:' + ev.pageX + ', Y:' + ev.pageY)
-					.css('background-color', 'blue').css('color', 'white');
+					.css({
+						"background-color": "blue",
+						"color": "white"
+					});
 			},
 
 			contextmenu: function (ev) {
 				ev.preventDefault();
-				$('#mensaje1').html('Click derecho está deshabilitado').css('background-color', '#1cdbc4').css('color', 'white');
+				$('#mensaje1').html('Click derecho está deshabilitado').css({
+					"background-color": "#1cdbc4",
+					"color": "white"
+				});
 			}
 		});
 	};
