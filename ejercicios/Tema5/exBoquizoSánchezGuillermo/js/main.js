@@ -5,54 +5,66 @@
  * @author Guillermo Boquizo Sánchez
  */
 {
-	let nombre;
-	let correo;
-	let fechaLlegada;
-	let horaLlegada;
-	let numNoches;
-	let numPersonas;
-	let radioJoven;
-	let radioMediano;
-	let radioMaduro;
-	let spanNombre;
-	let spanCorreo;
-	let spanFechaLlegada;
-	let spanHoraLlegada;
-	let spanNumNoches;
-	let spanNumPersonas;
-	let spanError;
+	// let nombre;
+	// let correo;
+	// let fechaLlegada;
+	// let horaLlegada;
+	// let numNoches;
+	// let numPersonas;
+	// let radioJoven;
+	// let radioMediano;
+	// let radioMaduro;
+	// let spanNombre;
+	// let spanCorreo;
+	// let spanFechaLlegada;
+	// let spanHoraLlegada;
+	// let spanNumNoches;
+	// let spanNumPersonas;
+	// let spanError;
+	let inputsText;
+	let inputsDate;
+	let inputsTime;
+	let inputsMail;
+	let inputsNumber;
+	let spans;
 	let inputInvalidos = new Map();
 
 	function init() {
 		let form = document.getElementsByTagName('form')[0];
+		inputsText = Array.from(document.querySelectorAll("input[type='text']"));
+		inputsDate = Array.from(document.querySelectorAll("input[type='date']"));
+		inputsTime = Array.from(document.querySelectorAll("input[type='time']"));
+		inputsMail = Array.from(document.querySelectorAll("input[type='mail']"));
+		inputsNumber = Array.from(document.querySelectorAll("input[type='number']"));
+		allinputs = Array.from(document.getElementsByTagName("input"));
+		spans = Array.from(document.querySelectorAll("span"));
+		// nombre = document.getElementById('nombre');
+		// correo = document.getElementById('correo');
+		// fechaLlegada = document.getElementById('fechaLlegada');
+		// horaLlegada = document.getElementById('horaLlegada');
+		// numNoches = document.getElementById('numNoches');
+		// numPersonas = document.getElementById('numPersonas');
+		// checkDesayuno = document.getElementById('checkDesayuno');
+		// checkAlmuerzo = document.getElementById('checkAlmuerzo');
+		// checkCena = document.getElementById('checkCena');
+		// radioJoven = document.getElementById('radioJoven');
+		// radioMediano = document.getElementById('radioMediano');
+		// radioMaduro = document.getElementById('radioMaduro');
+		//
+		// spanNombre = document.getElementById('spanNombre');
+		// spanCorreo = document.getElementById('spanCorreo');
+		// spanFechaLlegada = document.getElementById('spanFechaLlegada');
+		// spanHoraLlegada = document.getElementById('spanHoraLlegada');
+		// spanNumNoches = document.getElementById('spanNumNoches');
+		// spanNumPersonas = document.getElementById('spanNumPersonas');
+		// spanError = document.getElementById('spanError');
 
-		nombre = document.getElementById('nombre');
-		correo = document.getElementById('correo');
-		fechaLlegada = document.getElementById('fechaLlegada');
-		horaLlegada = document.getElementById('horaLlegada');
-		numNoches = document.getElementById('numNoches');
-		numPersonas = document.getElementById('numPersonas');
-		checkDesayuno = document.getElementById('checkDesayuno');
-		checkAlmuerzo = document.getElementById('checkAlmuerzo');
-		checkCena = document.getElementById('checkCena');
-		radioJoven = document.getElementById('radioJoven');
-		radioMediano = document.getElementById('radioMediano');
-		radioMaduro = document.getElementById('radioMaduro');
-
-		spanNombre = document.getElementById('spanNombre');
-		spanCorreo = document.getElementById('spanCorreo');
-		spanFechaLlegada = document.getElementById('spanFechaLlegada');
-		spanHoraLlegada = document.getElementById('spanHoraLlegada');
-		spanNumNoches = document.getElementById('spanNumNoches');
-		spanNumPersonas = document.getElementById('spanNumPersonas');
-		spanError = document.getElementById('spanError');
-
-		nombre.addEventListener('blur', comprobarNombre);
-		correo.addEventListener('blur', comprobarCorreo);
-		fechaLlegada.addEventListener('blur', comprobarFechaLlegada);
-		horaLlegada.addEventListener('blur', comprobarHoraLlegada);
-		numNoches.addEventListener('blur', comprobarNumNoches);
-		numPersonas.addEventListener('blur', comprobarNumPersonas);
+		// nombre.addEventListener('blur', comprobarNombre);
+		// correo.addEventListener('blur', comprobarCorreo);
+		// fechaLlegada.addEventListener('blur', comprobarFechaLlegada);
+		// horaLlegada.addEventListener('blur', comprobarHoraLlegada);
+		// numNoches.addEventListener('blur', comprobarNumNoches);
+		// numPersonas.addEventListener('blur', comprobarNumPersonas);
 		form.addEventListener('submit', (ev) => {
 			ev.preventDefault();
 			crearReserva();
