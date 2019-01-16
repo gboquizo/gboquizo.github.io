@@ -5,71 +5,32 @@
  * @author Guillermo Boquizo Sánchez
  */
 {
-	// let nombre;
-	// let correo;
-	// let fechaLlegada;
-	// let horaLlegada;
-	// let numNoches;
-	// let numPersonas;
-	// let radioJoven;
-	// let radioMediano;
-	// let radioMaduro;
-	// let spanNombre;
-	// let spanCorreo;
-	// let spanFechaLlegada;
-	// let spanHoraLlegada;
-	// let spanNumNoches;
-	// let spanNumPersonas;
-	// let spanError;
 	let inputsText;
 	let inputsDate;
 	let inputsTime;
 	let inputsMail;
 	let inputsNumber;
 	let spans;
-	let inputInvalidos = new Map();
+	let form;
+	let spanError;
+	let inputs;
 
-	function init() {
-		let form = document.getElementsByTagName('form')[0];
+	let init = function() {
+		form = document.getElementsByTagName('form')[0];
 		inputsText = Array.from(document.querySelectorAll("input[type='text']"));
 		inputsDate = Array.from(document.querySelectorAll("input[type='date']"));
 		inputsTime = Array.from(document.querySelectorAll("input[type='time']"));
-		inputsMail = Array.from(document.querySelectorAll("input[type='mail']"));
+		inputsMail = Array.from(document.querySelectorAll("input[type='email']"));
 		inputsNumber = Array.from(document.querySelectorAll("input[type='number']"));
-		allinputs = Array.from(document.getElementsByTagName("input"));
-		spans = Array.from(document.querySelectorAll("span"));
-		// nombre = document.getElementById('nombre');
-		// correo = document.getElementById('correo');
-		// fechaLlegada = document.getElementById('fechaLlegada');
-		// horaLlegada = document.getElementById('horaLlegada');
-		// numNoches = document.getElementById('numNoches');
-		// numPersonas = document.getElementById('numPersonas');
-		// checkDesayuno = document.getElementById('checkDesayuno');
-		// checkAlmuerzo = document.getElementById('checkAlmuerzo');
-		// checkCena = document.getElementById('checkCena');
-		// radioJoven = document.getElementById('radioJoven');
-		// radioMediano = document.getElementById('radioMediano');
-		// radioMaduro = document.getElementById('radioMaduro');
-		//
-		// spanNombre = document.getElementById('spanNombre');
-		// spanCorreo = document.getElementById('spanCorreo');
-		// spanFechaLlegada = document.getElementById('spanFechaLlegada');
-		// spanHoraLlegada = document.getElementById('spanHoraLlegada');
-		// spanNumNoches = document.getElementById('spanNumNoches');
-		// spanNumPersonas = document.getElementById('spanNumPersonas');
-		// spanError = document.getElementById('spanError');
-
-		// nombre.addEventListener('blur', comprobarNombre);
-		// correo.addEventListener('blur', comprobarCorreo);
-		// fechaLlegada.addEventListener('blur', comprobarFechaLlegada);
-		// horaLlegada.addEventListener('blur', comprobarHoraLlegada);
-		// numNoches.addEventListener('blur', comprobarNumNoches);
-		// numPersonas.addEventListener('blur', comprobarNumPersonas);
+		inputs = Array.from(document.getElementsByTagName('input'));
+		spans = Array.from(document.querySelectorAll('.spanErrorMsg'));
+		spanError = document.getElementById('spanError');
 		form.addEventListener('submit', (ev) => {
 			ev.preventDefault();
 			crearReserva();
 		});
-	}
+		validarAcciones('blur');
+	};
 
 	/**
 	 *
@@ -79,7 +40,7 @@
 			/^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ]+[/\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ])+[/\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ])?$/g,
 			'Nombre y apellido, mínimo 3 caracteres, comienza en mayúscula.'
 		],
-		hora: [/(?:[01]\d|2[0123]):(?:[012345]\d)$/gm, 'Formato válido hh:mm'],
+		horaLlegada: [ /(?:[01]\d|2[0123]):(?:[012345]\d)$/gm, 'Formato válido hh:mm' ],
 		correo: [
 			/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
 			'Correo no válido'
@@ -87,95 +48,138 @@
 	};
 
 	let tester = {
-		testearNumeros(campo, elementMsg, mapKey) {
+		testearNumeros(campo, elementMsg) {
 			if (campo.value <= 0 || campo.value === '') {
-				inputInvalidos.set(mapKey, campo);
-				if (campo.value < 0) {}
+				if (campo.value < 0) {
+				}
 				elementMsg.textContent = 'Error, número inválido.';
 				if (campo.value === '') {
 					elementMsg.textContent = 'Rellene este campo.';
 				}
 			} else {
-				tester.limpiar(spanError, elementMsg, mapKey);
+				tester.limpiar(spanError, elementMsg);
 			}
 		},
-		test(patron, campo, elementMsg, mapKey) {
+		test(patron, campo, elementMsg) {
 			let regex = new RegExp(patron[0]);
 			if (!regex.test(campo.value)) {
-				inputInvalidos.set(mapKey, campo);
 				elementMsg.textContent = patron[1];
 			} else {
-				tester.limpiar(spanError, elementMsg, mapKey);
+				tester.limpiar(spanError, elementMsg);
 			}
 		},
-		testFecha(campo, elementMsg, mapKey) {
+		testFecha(campo, elementMsg) {
 			let valorFecha = Date.parse(campo.value);
 			if (isNaN(valorFecha)) {
 				elementMsg.textContent = 'La fecha de llegada no puede estar vacía.';
-				inputInvalidos.set(mapKey, campo);
 			} else {
-				tester.limpiar(spanError, elementMsg, mapKey);
+				tester.limpiar(spanError, elementMsg);
 			}
 		},
-		limpiar(spanError, elementMsg, mapKey) {
-			if (inputInvalidos.has(mapKey)) {
-				inputInvalidos.delete(mapKey);
-			}
+		limpiar(spanError, elementMsg) {
 			elementMsg.textContent = '';
 			spanError.textContent = '';
 		}
 	};
 
-	let comprobarNombre = () => tester.test(patrones.nombre, nombre, spanNombre, 'Nombre_completo');
-	let comprobarCorreo = () => tester.test(patrones.correo, correo, spanCorreo, 'Correo');
-	let comprobarFechaLlegada = () => tester.testFecha(fechaLlegada, spanFechaLlegada, 'Fecha_de_llegada');
-	let comprobarHoraLlegada = () => tester.test(patrones.hora, horaLlegada, spanHoraLlegada, 'Hora_llegada');
-	let comprobarNumNoches = () => tester.testearNumeros(numNoches, spanNumNoches, 'Numero_noches');
-	let comprobarNumPersonas = () => tester.testearNumeros(numPersonas, spanNumPersonas, 'Numero_personas');
+	let comprobarInputs = function(elemento, indiceSpan) {
+		if (elemento.getAttribute('id')) {
+			tester.test(
+				patrones[elemento.getAttribute('id')],
+				elemento,
+				spans[indiceSpan],
+				elemento.getAttribute('id')
+			);
+		}
+	};
 
-	let comprobarCheckBox = function () {
+	let comprobarInputsNumber = function(elemento, indiceSpan) {
+		tester.testearNumeros(elemento, spans[indiceSpan]);
+	};
+
+	let comprobarInputsDate = function(elemento, indiceSpan) {
+		tester.testFecha(elemento, spans[indiceSpan]);
+	};
+
+	let validarAcciones = function(accion) {
+		inputs.forEach(function(elemento, index) {
+			switch (elemento.getAttribute('type')) {
+				case 'text':
+					if (accion === 'blur') {
+						elemento.addEventListener('blur', comprobarInputs.bind(null, elemento, index));
+					} else {
+						comprobarInputs(elemento, index);
+					}
+					break;
+				case 'number':
+					if (accion === 'blur') {
+						elemento.addEventListener('blur', comprobarInputsNumber.bind(null, elemento, index));
+					} else {
+						comprobarInputsNumber(elemento, index);
+					}
+					break;
+				case 'email':
+					if (accion === 'blur') {
+						elemento.addEventListener('blur', comprobarInputs.bind(null, elemento, index));
+					} else {
+						comprobarInputs(elemento, index);
+					}
+					break;
+				case 'date':
+					if (accion === 'blur') {
+						elemento.addEventListener('blur', comprobarInputsDate.bind(null, elemento, index));
+					} else {
+						comprobarInputsDate(elemento, index);
+					}
+					break;
+				case 'time':
+					if (accion === 'blur') {
+						elemento.addEventListener('blur', comprobarInputs.bind(null, elemento, index));
+					} else {
+						comprobarInputs(elemento, index);
+					}
+					break;
+
+				default:
+					break;
+			}
+		});
+	};
+
+	let comprobarCheckBox = function() {
 		return Array.from(document.querySelectorAll("input[type='checkbox']:checked"));
 	};
 
-	let comprobarRadios = function () {
-	return Array.from(document.querySelectorAll("input[type='radio']:checked"))[0].value;
+	let comprobarRadios = function() {
+		return Array.from(document.querySelectorAll("input[type='radio']:checked"))[0].value;
 	};
 
-	let crearReserva = function () {
+	let crearReserva = function() {
+		validarAcciones('submitAction');
 		try {
-			inputInvalidos.clear();
-			comprobarNombre();
-			comprobarCorreo();
-			comprobarFechaLlegada();
-			comprobarHoraLlegada();
-			comprobarNumNoches();
-			comprobarNumPersonas();
-			if (inputInvalidos.size > 0) {
-				spanError.textContent = '';
-				inputInvalidos.forEach((element) => {
-					element.focus();
-					throw false;
-				});
-			} else if (inputInvalidos.size === 0) {
-				try {
-					spanError.textContent = '';
-					let reserva = new Reserva(
-						nombre.value,
-						correo.value,
-						new Date(fechaLlegada.value),
-						horaLlegada.value,
-						numNoches.value,
-						numPersonas.value,
-						comprobarCheckBox(),
-						comprobarRadios()
-					);
-					reserva.mostrar();
-				} catch (error) {
-					spanError.textContent = error.message;
-				}
+		spans.forEach((elemento, indice) => {
+			if (elemento.textContent !== '') {
+				inputs[indice].focus();
+				throw false;
 			}
+		});
+		spanError.textContent = '';
+		try {
+			let reserva = new Reserva(
+				inputsText[0].value,
+				inputsMail[0].value,
+				new Date(inputsDate[0].value),
+				inputsTime[0].value,
+				inputsNumber[0].value,
+				inputsNumber[1].value,
+				comprobarCheckBox(),
+				comprobarRadios()
+			);
+			reserva.mostrar();
+		} catch (error) {
+			spanError.textContent = error.message;
+		}
 		} catch (e) {}
 	};
-
-	document.addEventListener('DOMContentLoaded', init);
+	window.addEventListener('load', init);
 }
