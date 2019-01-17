@@ -4,7 +4,7 @@
  */
 {
     let init = function () {
-
-    }
+        $("textarea").cuentaCaracteres();
+    };
     $(init);
 }
