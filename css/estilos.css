@@ -814,7 +814,7 @@ footer p {
 	background-color: rgb(139, 245, 97);
 }
 
-.kitana{
+.kitana {
 	background-color: #577B98;
 }
 
@@ -826,10 +826,14 @@ footer p {
 	background-color: #1A89D5;
 }
 
-.scorpion{
+.scorpion {
 	background-color: #AD8204;
 }
 
-.reptile{
+.reptile {
 	background-color: #398347;
+}
+
+.sub-zero {
+	background-color: #006FF6;
 }
