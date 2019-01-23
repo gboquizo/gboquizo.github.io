@@ -9,16 +9,15 @@
 	let inputs;
 
 	let init = function () {
-
 		form = document.getElementsByTagName('form')[0];
-		inputs = Array.from(document.getElementsByTagName('input'));
+		inputs = Array.from(document.querySelectorAll("input:not([type='submit']):not([type='checkbox']):not([type='radio'])"));
 		spans = Array.from(document.querySelectorAll('.spanErrorMsg'));
 		spanError = document.getElementById('spanError');
+		validarAcciones();
 		form.addEventListener('submit', (ev) => {
 			ev.preventDefault();
 			crearReserva();
 		});
-		validarAcciones('blur');
 	};
 
 	let patrones = {
@@ -31,8 +30,29 @@
 			/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
 			'Correo no válido'
 		],
-		fechaLlegada: [/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/, "Formato de fecha yyyy-mm-DD"],
-		numero: [/^[1-9]{1,}$/, "El número ha de ser mayor de 0"]
+		fechaLlegada: [/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/, 'Formato de fecha yyyy-mm-DD'],
+		numero: [/^[1-9]{1,}$/, 'El número ha de ser mayor de 0']
+	};
+
+
+	let validarAcciones = function (accion) {
+		inputs.forEach(function (elemento, index) {
+			if (accion === 'trigger') {
+				elemento.addEventListener('blur', (function () {
+					comprobarInputs(elemento, index);
+				})());
+			} else {
+				elemento.addEventListener('blur', function () {
+					comprobarInputs(elemento, index);
+				});
+			}
+		});
+	};
+
+	let comprobarInputs = function (elemento, indiceSpan) {
+		if (elemento.getAttribute('class')) {
+			tester.test(patrones[elemento.getAttribute('class')], elemento, spans[indiceSpan]);
+		}
 	};
 
 	let tester = {
@@ -44,32 +64,10 @@
 				tester.limpiar(spanError, elementMsg);
 			}
 		},
-
 		limpiar(spanError, elementMsg) {
 			elementMsg.textContent = '';
 			spanError.textContent = '';
 		}
-	};
-
-	let comprobarInputs = function (elemento, indiceSpan) {
-		if (elemento.getAttribute('class')) {
-			tester.test(
-				patrones[elemento.getAttribute('class')],
-				elemento,
-				spans[indiceSpan],
-				elemento.getAttribute('class')
-			);
-		}
-	};
-
-	let validarAcciones = function (accion) {
-		inputs.forEach(function (elemento, index) {
-			if (accion === 'blur') {
-				elemento.addEventListener('blur', comprobarInputs.bind(null, elemento, index));
-			} else {
-				comprobarInputs(elemento, index);
-			}
-		});
 	};
 
 	let comprobarCheckBox = function () {
@@ -83,16 +81,16 @@
 	let obtenerIndiceSpanErroneos = function () {
 		let spanErroneos = [];
 		spans.forEach((elemento, indice) => {
-			if (elemento.textContent !== "") {
-				spanErroneos.push(indice)
+			if (elemento.textContent !== '') {
+				spanErroneos.push(indice);
 			}
 		});
 		return spanErroneos;
-	}
+	};
 
 	let crearReserva = function () {
-		validarAcciones('submitAction');
-		if (obtenerIndiceSpanErroneos().length != 0) {
+		validarAcciones('trigger');
+		if (obtenerIndiceSpanErroneos().length > 0) {
 			inputs[obtenerIndiceSpanErroneos()[0]].focus();
 			return;
 		}
@@ -112,7 +110,6 @@
 		} catch (error) {
 			spanError.textContent = error.message;
 		}
-
 	};
 	window.addEventListener('load', init);
 }
