@@ -1,0 +1,83 @@
+=flex-center($direction)
+    display: flex
+    flex-direction: $direction
+    justify-content: center
+    align-items: center
+
+=tile-size($width, $height,$fontsize)
+    width: $width
+    height: $height
+    font-size: $fontsize
+    border: 1px solid #fff
+    +flex-center(column)
+    margin: 0px
+    outline: none
+    cursor: pointer
+    text-align: center   
+
+.easy-tile
+    +tile-size(60px,60px,1.2rem)
+
+.medium-tile
+    +tile-size(35px,35px,1rem)
+
+.hard-tile
+    +tile-size(30px,30px,0.8rem)
+
+.cover-tile
+    background-color: #000
+
+.uncover-tile
+    background-color: #fff
+    border: 1px solid #000
+    color: #000
+
+.cover-flag
+    background-color: #F87
+
+.color1
+    background-color: #F98933
+
+.color2
+    background-color: #F96546
+
+.color3
+    background-color: #B56788
+
+.color4
+    background-color: #A10678
+
+.color5
+    background-color: #E54324
+
+.color6
+    background-color: #A32130
+
+.color7
+    background-color: #B00187
+
+.color8
+    background-color: #EEEAAA
+
+.color9
+    background-color: #AAAFFF
+
+.color10
+    background-color: #AFACCC
+
+body
+    margin: 0px
+    padding: 0px
+    font-family: 'Lato', sans-serif
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+    main
+        +flex-center(column)
+        min-height: 100vh
+        width: 100%
+        section
+            +flex-center(column)
+            #board
+                width: auto
