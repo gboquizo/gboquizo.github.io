@@ -1,3 +1,14 @@
+$primary-color: #3F51B5
+$dark-primary-color: #303F9F
+$accent-color: #FF5722
+$light-primary-color: #C5CAE9
+$primary-text-color: #212121
+$secondary-text-color: #757575
+$divider-color: #BDBDBD
+$white-color: #fff
+$error-color: #EF4343
+$succes-color: #29E571
+
 =flex-center($direction)
     display: flex
     flex-direction: $direction
@@ -8,7 +19,7 @@
     width: $width
     height: $height
     font-size: $fontsize
-    border: 1px solid #fff
+    border: 1px solid $white-color
     +flex-center(column)
     margin: 0px
     outline: none
@@ -16,7 +27,7 @@
     text-align: center   
 
 .easy-tile
-    +tile-size(60px,60px,1.2rem)
+    +tile-size(52px,52px,1.2rem)
 
 .medium-tile
     +tile-size(35px,35px,1rem)
@@ -25,15 +36,15 @@
     +tile-size(30px,30px,0.8rem)
 
 .cover-tile
-    background-color: #000
+    background-color: $primary-color
 
 .uncover-tile
-    background-color: #fff
-    border: 1px solid #000
-    color: #000
+    background-color: $white-color
+    border: 1px solid $primary-color
+    color: $primary-color
 
 .cover-flag
-    background-color: #F87
+    background-color: #FF5722
 
 .color1
     background-color: #F98933
@@ -65,6 +76,32 @@
 .color10
     background-color: #AFACCC
 
+#btnPlayAgain
+    min-height: 25px
+    min-width: 70px
+    border-width: 0px
+    padding: 15px
+    background: $dark-primary-color
+    color: $white-color
+    font-weight: bold
+    border-radius: 5px
+    font-size: 1.3rem
+    margin-top: 20px
+    margin-bottom: 20px
+
+.shadowMaterialButton
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
+    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
+    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
+.shadowMaterial
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    -ms-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    -o-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+
 body
     margin: 0px
     padding: 0px
@@ -79,5 +116,23 @@ body
         width: 100%
         section
             +flex-center(column)
+            article
+                +flex-center(row)
+                text-align: center
+                background-color: $primary-color
+            select
+                height: 35px
+                font-size: 1.3rem
+                background-color: $primary-color
+                border-radius: 5px
+                border-width: 0px
+                outline: none
+                color: $white-color
+                text-align-last: center
+                -moz-appearance: none
+                -webkit-appearance: none
+                appearance: none
+                font-weight: bold
+                margin: 10px
             #board
                 width: auto

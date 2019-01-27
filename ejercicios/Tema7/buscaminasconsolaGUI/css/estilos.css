@@ -1,6 +1,6 @@
 .easy-tile {
-  width: 60px;
-  height: 60px;
+  width: 52px;
+  height: 52px;
   font-size: 1.2rem;
   border: 1px solid #fff;
   display: flex;
@@ -44,17 +44,17 @@
 }
 
 .cover-tile {
-  background-color: #000;
+  background-color: #3F51B5;
 }
 
 .uncover-tile {
   background-color: #fff;
-  border: 1px solid #000;
-  color: #000;
+  border: 1px solid #3F51B5;
+  color: #3F51B5;
 }
 
 .cover-flag {
-  background-color: #F87;
+  background-color: #FF5722;
 }
 
 .color1 {
@@ -97,6 +97,36 @@
   background-color: #AFACCC;
 }
 
+#btnPlayAgain {
+  min-height: 25px;
+  min-width: 70px;
+  border-width: 0px;
+  padding: 15px;
+  background: #303F9F;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.shadowMaterialButton {
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.shadowMaterial {
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -ms-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -o-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
 body {
   margin: 0px;
   padding: 0px;
@@ -121,6 +151,31 @@ body main section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+body main section article {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #3F51B5;
+}
+
+body main section select {
+  height: 35px;
+  font-size: 1.3rem;
+  background-color: #3F51B5;
+  border-radius: 5px;
+  border-width: 0px;
+  outline: none;
+  color: #fff;
+  text-align-last: center;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-weight: bold;
+  margin: 10px;
 }
 
 body main section #board {
