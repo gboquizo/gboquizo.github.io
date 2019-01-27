@@ -15,28 +15,44 @@ let $time;
 
 let init = function () {
     $('#seleccionNivel').change(buscaminasGUI.start);
+    $containerLevelSelector = $("#containerLevelSelector");
     $board = $('#board');
+    $clock = $("#clock");
+    $time = $("time");
+
+    $containerLevelSelector.addClass("shadowMaterialButton");
 };
+
+
 
 let buscaminasGUI = {
     start() {
         buscaminas.nivel = $(this).val();
         buscaminas.init();
-        $(this).prop("disabled", true);
+        $(this).prop('disabled', true);
         buscaminasGUI.generateGUIBoard();
         buscaminasGUI.disableContextMenu();
+        buscaminasGUI.preloadCSS();
+        buscaminasGUI.playAgain();
+    },
+
+    preloadCSS() {
+        $containerLevelSelector.css("width", "100%");
+        $containerLevelSelector.css("border-bottom", "2px solid #BDBDBD");
+        $("#clock").css("min-width", "80px");
+        $board.addClass("shadowMaterial").css("min-width", "100%");
     },
 
     generateGUIBoard() {
         $board.css({
-            "display": "grid",
-            "grid-template-columns": "repeat(" + buscaminas.columnas + ",1fr)"
+            display: 'grid',
+            'grid-template-columns': 'repeat(' + buscaminas.columnas + ',1fr)'
         });
         let $fragment = $(document.createDocumentFragment());
         for (let i = 0; i < buscaminas.filas; i++) {
             for (let j = 0; j < buscaminas.columnas; j++) {
                 let $tile = $(`<input type="text" id="${i}-${j}" readonly></input>`);
-                buscaminasGUI.levelStyles("cover-tile", $tile);
+                buscaminasGUI.levelStyles('cover-tile', $tile);
                 $tile.click(function () {
                     buscaminasGUI.picarGUI($(this));
                 });
@@ -46,12 +62,12 @@ let buscaminasGUI = {
                             buscaminasGUI.marcarGUI($(this));
                             break;
                         case 3:
-                            //buscaminasGUI.despejarGui($(this));
+                            buscaminasGUI.despejarGui($(this));
                             break;
                         default:
                     }
                 });
-                $fragment.append($tile)
+                $fragment.append($tile);
             }
         }
         $board.append($fragment);
@@ -64,98 +80,109 @@ let buscaminasGUI = {
             buscaminasGUI.actualizarGui();
         } catch (e) {
             buscaminasGUI.descubrirMinas();
-            $("#span").text(e.message);
+            // $('#span').text(e.message);
+        }
+    },
+
+    marcarGUI(element) {
+        let coordenada = buscaminasGUI.obtenerCoordenada(element);
+        try {
+            buscaminas.marcar(coordenada.fila, coordenada.columna);
+            if (buscaminas.tableroVisible[coordenada.fila][coordenada.columna] === '🏴') {
+                buscaminasGUI.levelStyles('cover-flag', element);
+            } else if (buscaminas.tableroPulsadas[coordenada.fila][coordenada.columna] !== '🞫') {
+                buscaminasGUI.levelStyles('cover-tile', element);
+            }
+        } catch (e) {
+            $('#span').text(e.message);
+        }
+    },
+
+    despejarGui(element) {
+        let coordenada = buscaminasGUI.obtenerCoordenada(element);
+        try {
+            buscaminas.despejar(coordenada.fila, coordenada.columna);
+            buscaminasGUI.actualizarGui();
+        } catch (e) {
+            buscaminasGUI.descubrirMinas();
+            /* if (e.message === "'¡¡¡ Enhorabuena, has ganado !!!'") {
+                setTimeout(function () {
+                    buscaMinasGUI.swalVolverAJugar(e.message, "success");
+                }, 4000);
+            } else {
+                buscaMinasGUI.reproducirAudio("explosion.mp3");
+                buscaMinasGUI.animacionAbrirMinasNivel(e.message);
+            } */
         }
     },
 
     obtenerCoordenada(element) {
         return {
-            fila: parseInt(element.prop("id").split("-")[0]),
-            columna: parseInt(element.prop("id").split("-")[1])
-        }
+            fila: parseInt(element.prop('id').split('-')[0]),
+            columna: parseInt(element.prop('id').split('-')[1])
+        };
     },
 
     actualizarGui() {
-        for (const item of buscaminas.guardarAlAbrir) {
-            let fila = parseInt(item.split("-")[0]);
-            let columna = parseInt(item.split("-")[1]);
 
-            let $element = $("#" + fila + "-" + columna)
+        if (buscaminas.flagPerder || buscaminas.flagGanar) {
+            buscaminasGUI.descubrirMinas();
+            return;
+        }
+
+        for (const item of buscaminas.guardarAperturaCasillas) {
+
+            let fila = parseInt(item.split('-')[0]);
+            let columna = parseInt(item.split('-')[1]);
+            let $element = $('#' + fila + '-' + columna);
 
             buscaminasGUI.limpiarClasesCss($element);
 
-            if (buscaminas.tableroVisible[fila][columna] !== "🏴" && buscaminas.tableroVisible[fila][columna] !== "■") {
+            if (buscaminas.tableroVisible[fila][columna] !== '🏴' && buscaminas.tableroVisible[fila][columna] !== '■') {
                 if (buscaminas.tableroVisible[fila][columna] === 0) {
-                    $element.val("");
+                    $element.val('');
                 } else {
                     $element.val(buscaminas.tableroVisible[fila][columna]);
-                };
-                buscaminasGUI.levelStyles(
-                    "uncover-tile",
-                    $element
-                );
+                }
+                buscaminasGUI.levelStyles('uncover-tile', $element);
             }
         }
-        buscaminas.guardarAlAbrir.clear();
-    },
-    marcarGUI(element) {
-        let coordenada = buscaminasGUI.obtenerCoordenada(element);
-        try {
-            buscaminas.marcar(coordenada.fila, coordenada.columna);
-            if (buscaminas.tableroVisible[coordenada.fila][coordenada.columna] === "🏴") {
-                buscaminasGUI.levelStyles(
-                    "cover-flag",
-                    element
-                )
-            } else if (buscaminas.tableroPulsadas[coordenada.fila][coordenada.columna] !== "🞫") {
-                buscaminasGUI.levelStyles(
-                    "cover-tile",
-                    element
-                )
-            }
-        } catch (e) {
-            $("#span").text(e.message);
-        }
+        buscaminas.guardarAperturaCasillas.clear();
     },
 
     disableContextMenu() {
         if ($(document).on()) {
             $(document).contextmenu(function (e) {
-                    e.preventDefault();
-                },
-                false);
+                e.preventDefault();
+            }, false);
         } else {
-            $(document).attachEvent("oncontextmenu", function () {
+            $(document).attachEvent('oncontextmenu', function () {
                 $(window).event.returnValue = false;
             });
         }
     },
 
     animationInput(input, classs, nivel) {
-
-        if (classs === "cover-tile") {
-            buscaminasGUI.limpiarClasesCss(input)
+        if (classs === 'cover-tile') {
+            buscaminasGUI.limpiarClasesCss(input);
             input.addClass(nivel + ' ' + classs);
         } else {
-            buscaminasGUI.limpiarClasesCss(input)
+            buscaminasGUI.limpiarClasesCss(input);
             input.addClass(nivel + ' ' + classs);
         }
     },
 
     levelStyles(classs, input) {
         switch (buscaminas.nivel) {
-            case "fácil":
-                buscaminasGUI.animationInput(input, classs, "easy-tile")
+            case 'fácil':
+                buscaminasGUI.animationInput(input, classs, 'easy-tile');
                 break;
-
-            case "difícil":
-                buscaminasGUI.animationInput(input, classs, "medium-tile")
+            case 'difícil':
+                buscaminasGUI.animationInput(input, classs, 'medium-tile');
                 break;
-
-            case "experto":
-                buscaminasGUI.animationInput(input, classs, "hard-tile")
+            case 'experto':
+                buscaminasGUI.animationInput(input, classs, 'hard-tile');
                 break;
-
             default:
                 break;
         }
@@ -163,45 +190,46 @@ let buscaminasGUI = {
 
     limpiarClasesCss(element) {
         if (element) {
-            if (
-                element.hasClass("cover-tile") ||
-                element.hasClass("cover-flag") ||
-                element.hasClass("uncover-tile")
-            ) {
-                element.prop("class", "");
+            if (element.hasClass('cover-tile') || element.hasClass('cover-flag') || element.hasClass('uncover-tile')) {
+                element.prop('class', '');
             }
         }
     },
 
     descubrirMinas() {
-        buscaminas.descubrirMinas();
         let colors = [
-            "color1",
-            "color2",
-            "color3",
-            "color4",
-            "color5",
-            "color6",
-            "color7",
-            "color8",
-            "color9",
-            "color10"
-        ]
-        for (let mina of buscaminas.guardarAlAbrir) {
-            let $element = $("#" + mina);
+            'color1',
+            'color2',
+            'color3',
+            'color4',
+            'color5',
+            'color6',
+            'color7',
+            'color8',
+            'color9',
+            'color10'
+        ];
+        for (let mina of buscaminas.guardarAperturaMinas) {
+            let $element = $('#' + mina);
             if (buscaminas.flagGanar) {
-                buscaminasGUI.levelStyles(
-                    "green",
-                    $element
-                );
+                buscaminasGUI.levelStyles('green', $element);
             } else {
                 buscaminasGUI.levelStyles(
-                    colors[Math.floor(Math.random() * ((colors.length - 1) - 0)) + 0],
-                    "uncover-tile",
+                    colors[Math.floor(Math.random() * (colors.length - 1 - 0)) + 0],
                     $element
                 );
             }
         }
+    },
+
+    playAgain() {
+        let $btnPlayAgain = $("<button id='btnPlayAgain'>Jugar de nuevo</button>");
+        $("#playAgain").append($btnPlayAgain);
+        $btnPlayAgain.addClass("shadowMaterialButton");
+        $("#btnPlayAgain").click(() => {
+            $("#seleccionNivel").val("");
+            location.reload();
+        });
     },
 };
 
