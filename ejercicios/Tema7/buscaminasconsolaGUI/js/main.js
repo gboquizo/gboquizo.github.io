@@ -3,7 +3,6 @@
  * @author Guillermo Boquizo Sánchez.
  */
 
-
 /**
  * Objeto buscaminas con la funcionalidad por consola.
  */
@@ -12,14 +11,15 @@ export let buscaminas = {
     tableroCopia: [],
     tableroVisible: [],
     tableroPulsadas: [],
-    nivel: "",
+    nivel: '',
     filas: 0,
     columnas: 0,
     minas: 0,
     banderas: 0,
     flagPerder: false,
     flagGanar: false,
-    guardarAlAbrir: new Set(),
+    guardarAperturaCasillas: new Set(),
+    guardarAperturaMinas: new Set(),
 
     /**
      * Realiza la carga inicial de la funcionalidad del buscaminas.
@@ -123,6 +123,7 @@ export let buscaminas = {
             }
             buscaminas.tableroLogica[fila][columna] = '💣';
             buscaminas.tableroCopia[fila][columna] = '💣';
+            buscaminas.guardarAperturaMinas.add(fila + "-" + columna);
         }
     },
 
@@ -187,13 +188,17 @@ export let buscaminas = {
      */
     picar(i, j) {
 
+        if (buscaminas.flagPerder || buscaminas.flagGanar || buscaminas.tableroPulsadas[i][j] === '🞫') {
+            return;
+        }
+
         if (buscaminas.tableroLogica[i][j] === '💣') {
             buscaminas.flagPerder = true;
             throw new Error('Pulsaste una mina');
         }
 
-        if (buscaminas.flagPerder || buscaminas.flagGanar || buscaminas.tableroPulsadas[i][j] === '🞫') {
-            return;
+        if (buscaminas.tableroVisible[i][j] === "🏴") {
+            buscaminas.tableroVisible[i][j] = buscaminas.tableroLogica[i][j];
         }
 
         buscaminas.abrirCeros(i, j);
@@ -235,7 +240,7 @@ export let buscaminas = {
      */
     cargarPulsacion(x, y) {
         buscaminas.tableroPulsadas[x][y] = '🞫';
-        buscaminas.guardarAlAbrir.add(x + "-" + y);
+        buscaminas.guardarAperturaCasillas.add(x + '-' + y);
     },
 
     /**
@@ -244,22 +249,8 @@ export let buscaminas = {
     actualizaCambios() {
         for (let i = 0; i < buscaminas.filas; i++) {
             for (let j = 0; j < buscaminas.columnas; j++) {
-                if (buscaminas.tableroPulsadas[i][j] === '🞫') {
+                if (buscaminas.tableroPulsadas[i][j] === '🞫' && buscaminas.tableroVisible[i][j] === "■") {
                     buscaminas.tableroVisible[i][j] = buscaminas.tableroLogica[i][j];
-                }
-            }
-        }
-    },
-
-    /**
-     * Descubre las minas
-     */
-    descubrirMinas() {
-        for (let i = 0; i < buscaminas.filas; i++) {
-            for (let j = 0; j < buscaminas.columnas; j++) {
-                if (buscaminas.tableroLogica[i][j] === "💣") {
-
-                    buscaminas.guardarAlAbrir.add(i + "-" + j);
                 }
             }
         }
@@ -272,10 +263,7 @@ export let buscaminas = {
      * @param y coordenada para la columna.
      */
     marcar(x, y) {
-        if (buscaminas.flagPerder || buscaminas.flagGanar || buscaminas.tableroPulsadas[x][y] === '🞫') {
-            return;
-        }
-        if (buscaminas.tableroPulsadas[x][y] !== '🞫' && buscaminas.tableroVisible[x][y] !== '🏴') {
+        if (buscaminas.tableroPulsadas[x][y] !== '🞫' && buscaminas.tableroVisible[x][y] !== '🏴' && !buscaminas.flagGanar && !buscaminas.flagPerder) {
             if (buscaminas.obtenerBanderasDelTablero() < buscaminas.minas) {
                 buscaminas.tableroVisible[x][y] = "🏴";
                 buscaminas.banderas = buscaminas.banderas - buscaminas.obtenerBanderasDelTablero();
@@ -286,19 +274,20 @@ export let buscaminas = {
                 console.table(buscaminas.tableroVisible);
                 console.log('Tablero pulsadas:\n');
                 console.table(buscaminas.tableroPulsadas);
-            } else if (buscaminas.tableroPulsadas[x][y] !== '🞫' && buscaminas.tableroVisible[x][y] === '🏴') {
-                buscaminas.tableroVisible[x][y] = '■';
-                buscaminas.banderas++;
-                console.clear();
-                console.log('Tablero de lógica:\n');
-                console.table(buscaminas.tableroLogica);
-                console.log('Tablero visible:\n');
-                console.table(buscaminas.tableroVisible);
-                console.log('Tablero pulsadas:\n');
-                console.table(buscaminas.tableroPulsadas);
             }
-            buscaminas.comprobarGanadorConBanderas();
+        } else if (buscaminas.tableroPulsadas[x][y] !== '🞫' && buscaminas.tableroVisible[x][y] === '🏴') {
+            buscaminas.tableroVisible[x][y] = '■';
+            buscaminas.banderas++;
+            console.clear();
+            console.log('Tablero de lógica:\n');
+            console.table(buscaminas.tableroLogica);
+            console.log('Tablero visible:\n');
+            console.table(buscaminas.tableroVisible);
+            console.log('Tablero pulsadas:\n');
+            console.table(buscaminas.tableroPulsadas);
         }
+        buscaminas.comprobarGanadorConBanderas();
+
     },
 
     /**
@@ -385,51 +374,51 @@ export let buscaminas = {
      */
     obtenerBanderasAlrededor(x, y) {
         let banderas = 0;
-        if (buscaminas.tableroPulsadas[x][y] === "🞫") {
+        if (buscaminas.tableroPulsadas[x][y] === '🞫') {
             if (x > 0 && y > 0) {
-                if (buscaminas.tableroVisible[x - 1][y - 1] === "🏴") {
+                if (buscaminas.tableroVisible[x - 1][y - 1] === '🏴') {
                     banderas++;
                 }
             }
 
             if (y > 0) {
-                if (buscaminas.tableroVisible[x][y - 1] === "🏴") {
+                if (buscaminas.tableroVisible[x][y - 1] === '🏴') {
                     banderas++;
                 }
             }
 
             if (y > 0 && x < buscaminas.filas - 1) {
-                if (buscaminas.tableroVisible[x + 1][y + 1] === "🏴") {
+                if (buscaminas.tableroVisible[x + 1][y + 1] === '🏴') {
                     banderas++;
                 }
             }
 
             if (x > 0) {
-                if (buscaminas.tableroVisible[x - 1][y] === "🏴") {
+                if (buscaminas.tableroVisible[x - 1][y] === '🏴') {
                     banderas++;
                 }
             }
 
             if (x < buscaminas.filas - 1) {
-                if (buscaminas.tableroVisible[x + 1][y] === "🏴") {
+                if (buscaminas.tableroVisible[x + 1][y] === '🏴') {
                     banderas++;
                 }
             }
 
             if (y < buscaminas.columnas - 1) {
-                if (buscaminas.tableroVisible[x][y + 1] === "🏴") {
+                if (buscaminas.tableroVisible[x][y + 1] === '🏴') {
                     banderas++;
                 }
             }
 
             if (x < buscaminas.filas - 1 && y < buscaminas.columnas - 1) {
-                if (buscaminas.tableroVisible[x + 1][y + 1] === "🏴") {
+                if (buscaminas.tableroVisible[x + 1][y + 1] === '🏴') {
                     banderas++;
                 }
             }
 
             if (x > 0 && buscaminas.columnas - 1) {
-                if (buscaminas.tableroVisible[x - 1][y + 1] === "🏴") {
+                if (buscaminas.tableroVisible[x - 1][y + 1] === '🏴') {
                     banderas++;
                 }
             }
@@ -441,12 +430,9 @@ export let buscaminas = {
      * Comprueba si se gana de manera convencional.
      */
     comprobarGanador() {
-        try {
-            if (buscaminas.obtenerPulsadas() === buscaminas.obtenerPendientesParaGanar()) {
-                throw new Error('¡¡¡ Enhorabuena, has ganado !!!');
-            }
-        } catch (e) {
-            buscaminas.deseaContinuar(e.message);
+        if (buscaminas.obtenerPulsadas() === buscaminas.obtenerPendientesParaGanar()) {
+            buscaminas.flagGanar = true;
+            throw new Error('¡¡¡ Enhorabuena, has ganado !!!');
         }
     },
 
@@ -487,7 +473,7 @@ export let buscaminas = {
         let banderas = 0;
         for (let i = 0; i < buscaminas.filas; i++) {
             for (let j = 0; j < buscaminas.columnas; j++) {
-                if (buscaminas.tableroVisible[i][j] === "🏴") {
+                if (buscaminas.tableroVisible[i][j] === '🏴') {
                     banderas++;
                 }
             }
@@ -504,43 +490,22 @@ export let buscaminas = {
         let casillasParaGanar = 0;
         for (let i = 0; i < buscaminas.filas; i++) {
             for (let j = 0; j < buscaminas.columnas; j++) {
-                if (buscaminas.tableroPulsadas[i][j] === "🞫") {
+                if (buscaminas.tableroPulsadas[i][j] === '🞫') {
                     casillasYaPulsadas++;
                 }
-                if (buscaminas.tableroPulsadas[i][j] !== "🞫") {
+                if (buscaminas.tableroPulsadas[i][j] !== '🞫') {
                     casillasNoPulsadas++;
                     if (
-                        (casillasNoPulsadas === buscaminas.minas) &&
-                        (buscaminas.tableroLogica[i][j] === "💣" && buscaminas.tableroVisible[i][j] === "🏴")
+                        casillasNoPulsadas === buscaminas.minas &&
+                        (buscaminas.tableroLogica[i][j] === '💣' && buscaminas.tableroVisible[i][j] === '🏴')
                     ) {
-                        casillasParaGanar++
+                        casillasParaGanar++;
                     }
                 }
             }
         }
-        try {
-            if (casillasYaPulsadas > 1 && (casillasParaGanar === buscaminas.minas)) {
-                throw new Error('Has ganado la partida');
-            }
-        } catch (e) {
-            buscaminas.deseaContinuar(e.message);
+        if (casillasYaPulsadas > 1 && casillasParaGanar === buscaminas.minas) {
+            throw new Error('Has ganado la partida');
         }
     },
-
-    /**
-     * Pregunta si deseas volver a jugar, en caso afirmativo inicializa el juego.
-     * @param mensaje mensaje para mostrar al usuario
-     */
-    deseaContinuar(mensaje) {
-        let deseaContinuar = '';
-        do {
-            deseaContinuar = prompt(mensaje + ', ¿Deseas continuar jugando? (s/n)');
-        } while (deseaContinuar.toLowerCase() === 's' && deseaContinuar.toLowerCase() === 'n');
-        if (deseaContinuar.toLowerCase() === 's') {
-            console.clear();
-            buscaminas.init();
-        } else {
-            return;
-        }
-    }
 };
