@@ -42,8 +42,8 @@ export let buscaminas = {
             case 'fácil':
                 buscaminas.filas = 8;
                 buscaminas.columnas = 8;
-                buscaminas.minas = 10;
-                buscaminas.banderas = 10;
+                buscaminas.minas = 2;
+                buscaminas.banderas = 2;
                 break;
             case 'difícil':
                 buscaminas.filas = 16;

@@ -80,7 +80,16 @@ let buscaminasGUI = {
             buscaminasGUI.actualizarGui();
         } catch (e) {
             buscaminasGUI.descubrirMinas();
-            // $('#span').text(e.message);
+            if (e.message === '¡¡¡ Enhorabuena, has ganado !!!') {
+                console.log("ganando");
+
+                setTimeout(function () {
+                    buscaminasGUI.swalPlayAgain(e.message, "success");
+                }, 3000);
+            } else {
+                console.log("perdiendo");
+                
+            }
         }
     },
 
@@ -94,7 +103,13 @@ let buscaminasGUI = {
                 buscaminasGUI.levelStyles('cover-tile', element);
             }
         } catch (e) {
-            $('#span').text(e.message);
+            if (e.message === "'¡¡¡ Enhorabuena, has ganado !!!'") {
+                setTimeout(function () {
+                    buscaminasGUI.swalPlayAgain(e.message, "success");
+                }, 3000);
+            } else {
+                
+            }
         }
     },
 
@@ -105,14 +120,13 @@ let buscaminasGUI = {
             buscaminasGUI.actualizarGui();
         } catch (e) {
             buscaminasGUI.descubrirMinas();
-            /* if (e.message === "'¡¡¡ Enhorabuena, has ganado !!!'") {
+            if (e.message === "'¡¡¡ Enhorabuena, has ganado !!!'") {
                 setTimeout(function () {
-                    buscaMinasGUI.swalVolverAJugar(e.message, "success");
-                }, 4000);
+                    buscaminasGUI.swalPlayAgain(e.message, "success");
+                }, 3000);
             } else {
-                buscaMinasGUI.reproducirAudio("explosion.mp3");
-                buscaMinasGUI.animacionAbrirMinasNivel(e.message);
-            } */
+                
+            }
         }
     },
 
@@ -229,6 +243,50 @@ let buscaminasGUI = {
         $("#btnPlayAgain").click(() => {
             $("#seleccionNivel").val("");
             location.reload();
+        });
+    },
+
+    swalPlayAgain(msg, icon) {
+
+        let message = "";
+        let title = msg;
+
+        Swal.fire({
+            title: title,
+            text: message + "¿Deseas jugar de nuevo?",
+            type: icon,
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No',
+            confirmButtonColor: "#28a745",
+            cancelButtonColor: "#dc3545",
+            allowOutsideClick: true,
+            allowEscapeKey: true,
+            allowEnterKey: true,
+
+        }).then(result => {
+            if (result.value) {
+                let timerInterval;
+                Swal.fire({
+                        title: 'Reiniciando partida',
+                        html: 'Tu partida se reiniciará en <strong></strong> segundos.',
+                        type: 'info',
+                        timer: 5000,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                            timerInterval = setInterval(() => {
+                                Swal.getContent().querySelector('strong')
+                                    .textContent = (Swal.getTimerLeft() / 1000) .toFixed(0)
+                            }, 100)
+                        },
+                        onClose: () => {
+                            clearInterval(timerInterval)
+                            $("#seleccionNivel").val("");
+                            location.reload();
+                        }
+                    }
+                )
+            }
         });
     },
 };
