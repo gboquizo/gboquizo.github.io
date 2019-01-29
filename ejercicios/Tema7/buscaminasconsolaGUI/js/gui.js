@@ -246,7 +246,7 @@ let buscaminasGUI = {
         });
     },
 
-    swalPlayAgain(msg, icon) {
+    swalPlayAgain(msg, type) {
 
         let message = "";
         let title = msg;
@@ -254,7 +254,7 @@ let buscaminasGUI = {
         Swal.fire({
             title: title,
             text: message + "¿Deseas jugar de nuevo?",
-            type: icon,
+            type: type,
             showCancelButton: true,
             confirmButtonText: 'Sí',
             cancelButtonText: 'No',
