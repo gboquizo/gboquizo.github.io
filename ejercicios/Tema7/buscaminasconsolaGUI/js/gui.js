@@ -226,7 +226,7 @@ let buscaminasGUI = {
         for (let mina of buscaminas.guardarAperturaMinas) {
             let $element = $('#' + mina);
             if (buscaminas.flagGanar) {
-                buscaminasGUI.levelStyles('green', $element);
+                buscaminasGUI.levelStyles('color4', $element);
             } else {
                 buscaminasGUI.levelStyles(
                     colors[Math.floor(Math.random() * (colors.length - 1 - 0)) + 0],
