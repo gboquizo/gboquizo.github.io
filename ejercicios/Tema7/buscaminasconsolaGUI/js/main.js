@@ -194,7 +194,7 @@ export let buscaminas = {
 
         if (buscaminas.tableroLogica[i][j] === '💣') {
             buscaminas.flagPerder = true;
-            throw new Error('Pulsaste una mina');
+            throw new Error('Pulsaste una mina, has perdido');
         }
 
         if (buscaminas.tableroVisible[i][j] === "🏴") {

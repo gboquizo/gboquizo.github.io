@@ -88,7 +88,7 @@ let buscaminasGUI = {
                 }, 3000);
             } else {
                 console.log("perdiendo");
-                
+                buscaminasGUI.openMinesByLevelAnimationTime(e.message);
             }
         }
     },
@@ -108,7 +108,7 @@ let buscaminasGUI = {
                     buscaminasGUI.swalPlayAgain(e.message, "success");
                 }, 3000);
             } else {
-                
+                buscaminasGUI.openMinesByLevelAnimationTime(e.message);
             }
         }
     },
@@ -125,7 +125,7 @@ let buscaminasGUI = {
                     buscaminasGUI.swalPlayAgain(e.message, "success");
                 }, 3000);
             } else {
-                
+                buscaminasGUI.openMinesByLevelAnimationTime(e.message);
             }
         }
     },
@@ -268,27 +268,48 @@ let buscaminasGUI = {
             if (result.value) {
                 let timerInterval;
                 Swal.fire({
-                        title: 'Reiniciando partida',
-                        html: 'Tu partida se reiniciará en <strong></strong> segundos.',
-                        type: 'info',
-                        timer: 5000,
-                        onBeforeOpen: () => {
-                            Swal.showLoading()
-                            timerInterval = setInterval(() => {
-                                Swal.getContent().querySelector('strong')
-                                    .textContent = (Swal.getTimerLeft() / 1000) .toFixed(0)
-                            }, 100)
-                        },
-                        onClose: () => {
-                            clearInterval(timerInterval)
-                            $("#seleccionNivel").val("");
-                            location.reload();
-                        }
+                    title: 'Reiniciando partida',
+                    html: 'Tu partida se reiniciará en <strong></strong> segundos.',
+                    type: 'info',
+                    timer: 5000,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                            Swal.getContent().querySelector('strong')
+                                .textContent = (Swal.getTimerLeft() / 1000).toFixed(0)
+                        }, 100)
+                    },
+                    onClose: () => {
+                        clearInterval(timerInterval)
+                        $("#seleccionNivel").val("");
+                        location.reload();
                     }
-                )
+                })
             }
         });
     },
+
+    openMinesByLevelAnimationTime(message) {
+        switch (buscaminas.nivel) {
+            case "fácil":
+                setTimeout(function () {
+                    buscaminasGUI.swalPlayAgain(message, "error");
+                }, 4000);
+                break;
+            case "difícil":
+                setTimeout(function () {
+                    buscaminasGUI.swalPlayAgain(message, "error");
+                }, 8000);
+                break;
+            case "experto":
+                setTimeout(function () {
+                    buscaminasGUI.swalPlayAgain(message, "error");
+                }, 15000);
+                break;
+            default:
+                return;
+        }
+    }
 };
 
 $(init);
