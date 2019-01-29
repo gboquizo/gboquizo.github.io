@@ -226,7 +226,9 @@ let buscaminasGUI = {
         for (let mina of buscaminas.guardarAperturaMinas) {
             let $element = $('#' + mina);
             if (buscaminas.flagGanar) {
-                buscaminasGUI.levelStyles('color4', $element);
+                $element.removeClass('cover-flag') || $element.removeClass('cover-tile')
+                $element.addClass('uncover-tile')
+                $element.addClass('uncover-win')
             } else {
                 buscaminasGUI.levelStyles(
                     colors[Math.floor(Math.random() * (colors.length - 1 - 0)) + 0],

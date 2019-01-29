@@ -97,6 +97,10 @@
   background-color: #AFACCC;
 }
 
+.uncover-win {
+  background: #29E571 url("../images/mina.png") no-repeat center;
+}
+
 #btnPlayAgain {
   min-height: 25px;
   min-width: 70px;
