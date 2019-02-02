@@ -48,14 +48,26 @@
   background-size: contain;
 }
 
+.cover-tile:hover {
+  background: #F4CD1E url("../images/bloque-hover.svg") no-repeat;
+}
+
 .uncover-tile {
   background: #fff url("../images/sinbloque.svg") no-repeat;
   border: 1px solid #BDBDBD;
   color: #3F51B5;
 }
 
+.uncover-tile:hover {
+  background: #F4CD1E;
+}
+
 .cover-flag {
   background: #FF5722 url("../images/bandera.svg") no-repeat center;
+}
+
+.cover-flag:hover {
+  background: #F4CD1E url("../images/bandera-hover.svg") no-repeat;
 }
 
 .color1 {
@@ -198,6 +210,9 @@ body main section select {
 
 body main section #board {
   width: auto;
+  height: auto;
+  border: 0px;
+  position: relative;
 }
 
 body footer {
