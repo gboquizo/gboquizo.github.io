@@ -3,7 +3,9 @@
  * @author Guillermo Boquizo Sánchez.
  */
 
-import { buscaminas } from './main.js';
+import {
+	buscaminas
+} from './main.js';
 
 let $containerLevelSelector;
 let $board;
@@ -13,7 +15,7 @@ let $time;
 /**
  * Carga la interfaz de juego.
  */
-let init = function() {
+let init = function () {
 	$('#seleccionNivel')[0].selectedIndex = 0;
 	$('#seleccionNivel').change(buscaminasGUI.start);
 	$containerLevelSelector = $('#containerLevelSelector');
@@ -28,8 +30,8 @@ let init = function() {
  */
 let buscaminasGUI = {
 	/**
-     * Carga el juego.
-     */
+	 * Carga el juego.
+	 */
 	start() {
 		buscaminas.nivel = $(this).val();
 		buscaminas.init();
@@ -46,8 +48,8 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Establece una serie de propiedades css al iniciar.
-     */
+	 * Establece una serie de propiedades css al iniciar.
+	 */
 	preloadCSS() {
 		$containerLevelSelector.css('width', '100%');
 		$containerLevelSelector.css('border-bottom', '2px solid #BDBDBD');
@@ -56,8 +58,8 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Genera el tablero GUI.
-     */
+	 * Genera el tablero GUI.
+	 */
 	generateGUIBoard() {
 		$board.css({
 			display: 'grid',
@@ -68,10 +70,10 @@ let buscaminasGUI = {
 			for (let j = 0; j < buscaminas.columnas; j++) {
 				let $tile = $(`<input type="text" id="${i}-${j}" readonly></input>`);
 				buscaminasGUI.levelStyles('cover-tile', $tile);
-				$tile.click(function() {
+				$tile.click(function () {
 					buscaminasGUI.picarGUI($(this));
 				});
-				$tile.mousedown(function(event) {
+				$tile.mousedown(function (event) {
 					switch (event.buttons) {
 						case 2:
 							buscaminasGUI.marcarGUI($(this));
@@ -89,9 +91,9 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Realiza la acción de picar y actualiza la GUI
-     * @param element elemento del DOM tratado.
-     */
+	 * Realiza la acción de picar y actualiza la GUI
+	 * @param element elemento del DOM tratado.
+	 */
 	picarGUI(element) {
 		let coordenada = buscaminasGUI.getCoordinates(element);
 		try {
@@ -105,7 +107,7 @@ let buscaminasGUI = {
 			if (e.message === '¡¡¡ Enhorabuena, has ganado !!!') {
 				buscaminasGUI.checkRecord();
 				buscaminasGUI.levelStyles('uncover-tile', element);
-				setTimeout(function() {
+				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(e.message, 'success');
 				}, 3000);
 			} else {
@@ -116,9 +118,9 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Realiza la acción de marcar y actualiza la GUI
-     * @param element elemento del DOM tratado.
-     */
+	 * Realiza la acción de marcar y actualiza la GUI
+	 * @param element elemento del DOM tratado.
+	 */
 	marcarGUI(element) {
 		let coordenada = buscaminasGUI.getCoordinates(element);
 		try {
@@ -127,6 +129,7 @@ let buscaminasGUI = {
 				buscaminasGUI.playAudio('flag.mp3');
 				buscaminasGUI.levelStyles('cover-flag', element);
 			} else if (buscaminas.tableroPulsadas[coordenada.fila][coordenada.columna] !== '🞫') {
+				buscaminasGUI.playAudio('unflag.mp3');
 				buscaminasGUI.levelStyles('cover-tile', element);
 			}
 			buscaminasGUI.updateFlags();
@@ -134,7 +137,7 @@ let buscaminasGUI = {
 			if (e.message === "'¡¡¡ Enhorabuena, has ganado !!!'") {
 				buscaminasGUI.checkRecord();
 				buscaminasGUI.levelStyles('uncover-tile', element);
-				setTimeout(function() {
+				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(e.message, 'success');
 				}, 3000);
 			} else {
@@ -145,9 +148,9 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Realiza la acción de despejar y actualiza la GUI
-     * @param element elemento del DOM tratado.
-     */
+	 * Realiza la acción de despejar y actualiza la GUI
+	 * @param element elemento del DOM tratado.
+	 */
 	despejarGui(element) {
 		let coordenada = buscaminasGUI.getCoordinates(element);
 		try {
@@ -159,7 +162,7 @@ let buscaminasGUI = {
 			buscaminasGUI.uncoverMines();
 			if (e.message === '¡¡¡ Enhorabuena, has ganado !!!') {
 				buscaminasGUI.levelStyles('uncover-tile', element);
-				setTimeout(function() {
+				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(e.message, 'success');
 				}, 3000);
 			} else {
@@ -170,10 +173,10 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Permite obtener la coordenada del elemento casilla parametrizado 
-     * y devuelve un objeto con las coordenadas
-     * @param element elemento del DOM tratado como casilla.
-     */
+	 * Permite obtener la coordenada del elemento casilla parametrizado 
+	 * y devuelve un objeto con las coordenadas
+	 * @param element elemento del DOM tratado como casilla.
+	 */
 	getCoordinates(element) {
 		return {
 			fila: parseInt(element.prop('id').split('-')[0]),
@@ -182,9 +185,9 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Actualiza la GUI en función de los datos internos del tablero visible, 
-     * en caso de victoria o derrota descubre las minas y actualiza las clases de las casillas.
-     */
+	 * Actualiza la GUI en función de los datos internos del tablero visible, 
+	 * en caso de victoria o derrota descubre las minas y actualiza las clases de las casillas.
+	 */
 	updateGUI() {
 		if (buscaminas.flagPerder || buscaminas.flagGanar) {
 			buscaminasGUI.uncoverMines();
@@ -209,11 +212,11 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Añade animaciones al input pasado por parámetro.
-     * @param input elemento DOM.
-     * @param classs clase css que contiene la animación.
-     * @param nivel nivel actual de la partida.
-     */
+	 * Añade animaciones al input pasado por parámetro.
+	 * @param input elemento DOM.
+	 * @param classs clase css que contiene la animación.
+	 * @param nivel nivel actual de la partida.
+	 */
 	animationInput(input, classs, nivel) {
 		if (classs === 'cover-tile') {
 			buscaminasGUI.cleanCSSClass(input);
@@ -225,10 +228,10 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Establece una serie de clases CSS según el nivel.
-     * @param classs clase que se añadirá al input.
-     * @param input elemento al que se le añade la clase
-     */
+	 * Establece una serie de clases CSS según el nivel.
+	 * @param classs clase que se añadirá al input.
+	 * @param input elemento al que se le añade la clase
+	 */
 	levelStyles(classs, input) {
 		switch (buscaminas.nivel) {
 			case 'fácil':
@@ -246,9 +249,9 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Limpia las clases del elemento pasado por parámetro.
-     * @param element elemento del DOM.
-     */
+	 * Limpia las clases del elemento pasado por parámetro.
+	 * @param element elemento del DOM.
+	 */
 	cleanCSSClass(element) {
 		if (element) {
 			if (element.hasClass('cover-tile') || element.hasClass('cover-flag') || element.hasClass('uncover-tile')) {
@@ -258,8 +261,8 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Descubre las minas
-     */
+	 * Descubre las minas
+	 */
 	uncoverMines() {
 		buscaminas.eliminarBanderas();
 		let colors = [
@@ -287,16 +290,16 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Crea un reloj
-     */
+	 * Crea un reloj
+	 */
 	createTimer() {
 		$clock.html(`<img src="images/reloj.svg" /><p id="time"></p>`);
 		$time = $('#time');
 	},
 
 	/**
-     * Muestra el tiempo de juego.
-     */
+	 * Muestra el tiempo de juego.
+	 */
 	showGameTime() {
 		let seconds = 0;
 		let interval = setInterval(() => {
@@ -313,8 +316,8 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Crea un contador con el número de bombas presentes en el tablero.
-     */
+	 * Crea un contador con el número de bombas presentes en el tablero.
+	 */
 	createBombsCounter() {
 		let $article = $('<div></div>');
 		$article.prop('id', 'totalMines');
@@ -323,8 +326,8 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Crea un contador con el número de banderas presentes en el tablero.
-     */
+	 * Crea un contador con el número de banderas presentes en el tablero.
+	 */
 	createFlagCounter() {
 		let $article = $('<div></div>');
 		$article.prop('id', 'totalFlags');
@@ -333,8 +336,8 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Muestra el récord establecido en el tablero.
-     */
+	 * Muestra el récord establecido en el tablero.
+	 */
 	createRecordCounter() {
 		buscaminasGUI.createTimer();
 		if ($('#record')) {
@@ -352,8 +355,8 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Comprueba y actualiza el récord.
-     */
+	 * Comprueba y actualiza el récord.
+	 */
 	checkRecord() {
 		let time = parseInt($('#clock p').text());
 		if (localStorage.getItem(buscaminas.nivel) === null) {
@@ -366,8 +369,8 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Comprueba y actualiza el número de banderas a mostrar.
-     */
+	 * Comprueba y actualiza el número de banderas a mostrar.
+	 */
 	updateFlags() {
 		if ($('#ptotalFlags')) {
 			$('#ptotalFlags').text(`${buscaminas.banderas}`);
@@ -375,8 +378,8 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Devuelve y actualiza el récord actual del nivel. 
-     */
+	 * Devuelve y actualiza el récord actual del nivel. 
+	 */
 	getCurrentRecord() {
 		if (localStorage.getItem(buscaminas.nivel) === null) {
 			return 0;
@@ -388,8 +391,8 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Crea un button para reiniciar la partida.
-     */
+	 * Crea un button para reiniciar la partida.
+	 */
 	playAgain() {
 		let $btnPlayAgain = $("<button id='btnPlayAgain'>Jugar de nuevo</button>");
 		$('#playAgain').append($btnPlayAgain);
@@ -401,10 +404,10 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Carga la librería sweetAlert2 para preguntar si se desea volver a jugar.
-     * @param msg mensaje a mostrar.
-     * @param type tipo de mensaje a mostrar.
-     */
+	 * Carga la librería sweetAlert2 para preguntar si se desea volver a jugar.
+	 * @param msg mensaje a mostrar.
+	 * @param type tipo de mensaje a mostrar.
+	 */
 	swalPlayAgain(msg, type) {
 		let gameTime = parseInt($('#clock #time').text());
 		let levelRecord = buscaminasGUI.getCurrentRecord();
@@ -461,24 +464,24 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Se encarga de gestionar el tiempo que transcurre hasta abrir una ventana modal una vez
-     * se inicia la apertura de minas, al variar su número según el nivel de dificultad.
-     * @param message mensaje a mostrar.
-     */
+	 * Se encarga de gestionar el tiempo que transcurre hasta abrir una ventana modal una vez
+	 * se inicia la apertura de minas, al variar su número según el nivel de dificultad.
+	 * @param message mensaje a mostrar.
+	 */
 	openMinesByLevelAnimationTime(message) {
 		switch (buscaminas.nivel) {
 			case 'fácil':
-				setTimeout(function() {
+				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(message, 'error');
 				}, 4000);
 				break;
 			case 'difícil':
-				setTimeout(function() {
+				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(message, 'error');
 				}, 8000);
 				break;
 			case 'experto':
-				setTimeout(function() {
+				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(message, 'error');
 				}, 15000);
 				break;
@@ -488,23 +491,23 @@ let buscaminasGUI = {
 	},
 
 	/**
-     * Deshabilita el menú contextual.
-     */
+	 * Deshabilita el menú contextual.
+	 */
 	disableContextMenu() {
 		if ($(document).on()) {
-			$(document).contextmenu(function(e) {
+			$(document).contextmenu(function (e) {
 				e.preventDefault();
 			}, false);
 		} else {
-			$(document).attachEvent('oncontextmenu', function() {
+			$(document).attachEvent('oncontextmenu', function () {
 				$(window).event.returnValue = false;
 			});
 		}
 	},
 
 	/**
-     * Permite reproducir audio.
-     */
+	 * Permite reproducir audio.
+	 */
 	playAudio(file) {
 		let $play = new Audio();
 		$play.src = './sounds/' + file;
