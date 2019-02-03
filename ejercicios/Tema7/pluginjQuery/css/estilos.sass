@@ -1,0 +1,91 @@
+=flex-center($direction)
+    display: flex
+    flex-direction: $direction
+    justify-content: center
+    align-items: center
+
+@mixin linear-gradient($direction, $color-stops...)
+    @if is-direction($direction) == false
+        $color-stops: $direction, $color-stops;
+        $direction: 180deg;
+    background: nth(nth($color-stops, 1), 1)
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops)
+    background: linear-gradient($direction, $color-stops)
+
+body
+    +flex-center(column)
+    min-height: 120vh
+    background: #B58234
+    background-image: linear-gradient(to right, #31B7D7 0%, #FFFFFF 50%, #4FB4E8 80%)
+    color: #000
+    main
+        position: relative
+        +flex-center(column)
+        width: 100%
+        form
+            +flex-center(column)
+            padding: 80px
+            min-width: 45%
+            background: rgba(255,255,255,0.1)
+            border-radius: 10px
+            font-weight: bold
+            label
+                padding: 3px
+                font-size: 1.5rem
+            input:not([type='submit'])
+                min-width: 300px
+                min-height: 40px
+                border-radius: 3px
+                border-width: 0px
+                font-weight: bold
+                background: red
+                margin-bottom: 20px
+                background: rgba(99, 179, 219, 0.5)
+                font-size: 1.5rem
+                color: #000
+                text-align: center
+                padding: 6px
+            input[type='submit']
+                margin-top: 35px
+                border-radius: 3px
+                border-width: 0px
+                padding: 10px
+                background: rgba(0,0,0,0.9)
+                color: #fff
+                font-size: 1.5rem
+                min-width: 200px
+            textarea
+                min-width: 200px
+                border-width: 0px
+                border-radius: 5px
+                font-size: 1.5rem
+                padding: 5px
+                color: #000
+                text-align: center
+                font-weight: bold
+                background: rgba(99, 179, 219, 0.5)
+    h1
+        text-align: center
+        font-size: 2.5rem
+        color: #212121
+
+#mostrarDatos
+    word-wrap: break-word
+    max-width: 200px
+    position: fixed
+    left: 1%
+    font-size: 1.3rem
+
+.input
+    outline: none
+    min-width: 250px
+    min-height: 35px
+    border-radius: 5px
+    border-width: 0px
+    background: red
+    margin-bottom: 10px
+    background: rgba(255,255,255,0.4)
+    font-size: 1.2rem
+    color: #000
+    text-align: center
+    padding: 4px
