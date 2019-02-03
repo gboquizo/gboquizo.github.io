@@ -367,6 +367,9 @@ let buscaminasGUI = {
         }
     },
 
+     /**
+     * Comprueba y actualiza el número de banderas a mostrar.
+     */
     updateFlags(){
         if ($("#ptotalFlags")) {
             $("#ptotalFlags").text(`${buscaminas.banderas}`)
