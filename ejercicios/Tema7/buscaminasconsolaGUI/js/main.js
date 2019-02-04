@@ -21,6 +21,7 @@ export let buscaminas = {
 	guardarAperturaCasillas: new Set(),
 	guardarAperturaMinas: new Set(),
 	guardarCoordenadasBanderas: new Set(),
+	guardarSeleccionContiguas: new Set(),
 
 	/**
      * Realiza la carga inicial de la funcionalidad del buscaminas.
@@ -87,6 +88,7 @@ export let buscaminas = {
      * Muestra los tableros al cargar.
      */
 	mostrar() {
+		console.clear();
 		console.log('Tablero de lógica:\n');
 		console.table(buscaminas.tableroLogica);
 	},
@@ -320,6 +322,7 @@ export let buscaminas = {
      * @param y coordenada para la columna.
      */
 	despejar(x, y) {
+		buscaminas.guardarSeleccionContiguas.clear();
 		if (x > buscaminas.filas || y > buscaminas.columnas) {
 			throw new Error('Coordenadas inválidas.');
 		}
@@ -382,6 +385,59 @@ export let buscaminas = {
 					buscaminas.tableroPulsadas[x - 1][y + 1] !== '🞫'
 				) {
 					buscaminas.picar(x - 1, y + 1);
+				}
+			}
+		} else {
+			if (x > 0 && y > 0) {
+				if (
+					buscaminas.tableroVisible[x - 1][y - 1] !== '🏴' &&
+					buscaminas.tableroPulsadas[x - 1][y - 1] !== '🞫'
+				) {
+					buscaminas.guardarSeleccionContiguas.add(x - 1 + '-' + (y - 1));
+				}
+			}
+			if (y > 0) {
+				if (buscaminas.tableroVisible[x][y - 1] !== '🏴' && buscaminas.tableroPulsadas[x][y - 1] !== '🞫') {
+					buscaminas.guardarSeleccionContiguas.add(x + '-' + (y - 1));
+				}
+			}
+			if (y > 0 && x < buscaminas.filas - 1) {
+				if (
+					buscaminas.tableroVisible[x + 1][y - 1] !== '🏴' &&
+					buscaminas.tableroPulsadas[x + 1][y - 1] !== '🞫'
+				) {
+					buscaminas.guardarSeleccionContiguas.add(x + 1 + '-' + (y - 1));
+				}
+			}
+			if (x > 0) {
+				if (buscaminas.tableroVisible[x - 1][y] !== '🏴' && buscaminas.tableroPulsadas[x - 1][y] !== '🞫') {
+					buscaminas.guardarSeleccionContiguas.add(x - 1 + '-' + y);
+				}
+			}
+			if (x < buscaminas.filas - 1) {
+				if (buscaminas.tableroVisible[x + 1][y] !== '🏴' && buscaminas.tableroPulsadas[x + 1][y] !== '🞫') {
+					buscaminas.guardarSeleccionContiguas.add(x + 1 + '-' + y);
+				}
+			}
+			if (y < buscaminas.columnas - 1) {
+				if (buscaminas.tableroVisible[x][y + 1] !== '🏴' && buscaminas.tableroPulsadas[x][y + 1] !== '🞫') {
+					buscaminas.guardarSeleccionContiguas.add(x + '-' + (y + 1));
+				}
+			}
+			if (x < buscaminas.filas - 1 && y < buscaminas.columnas - 1) {
+				if (
+					buscaminas.tableroVisible[x + 1][y + 1] !== '🏴' &&
+					buscaminas.tableroPulsadas[x + 1][y + 1] !== '🞫'
+				) {
+					buscaminas.guardarSeleccionContiguas.add(x + 1 + '-' + (y + 1));
+				}
+			}
+			if (x > 0 && y < buscaminas.columnas - 1) {
+				if (
+					buscaminas.tableroVisible[x - 1][y + 1] !== '🏴' &&
+					buscaminas.tableroPulsadas[x - 1][y + 1] !== '🞫'
+				) {
+					buscaminas.guardarSeleccionContiguas.add(x - 1 + '-' + (y + 1));
 				}
 			}
 		}
