@@ -21,7 +21,6 @@ let init = function () {
 	$containerLevelSelector = $('#containerLevelSelector');
 	$clock = $('#clock');
 	$board = $('#board');
-	$time = $('time');
 	$containerLevelSelector.addClass('shadowMaterialButton');
 };
 
@@ -54,7 +53,7 @@ let buscaminasGUI = {
 	preloadCSS() {
 		$containerLevelSelector.css('width', '100%');
 		$containerLevelSelector.css('border-bottom', '2px solid #BDBDBD');
-		$('#clock').css('min-width', '100px');
+		$('#clock').css('min-width', '80px');
 		$board.addClass('shadowMaterial').css('min-width', '100%');
 	},
 
@@ -296,7 +295,7 @@ let buscaminasGUI = {
 	 * Crea un reloj
 	 */
 	createTimer() {
-		$clock.html(`<img src="images/reloj.svg" /><p id="time"></p>`);
+		$clock.html(`<img src="images/reloj.svg"/><p id="time"></p>`);
 		$time = $('#time');
 	},
 
@@ -308,7 +307,7 @@ let buscaminasGUI = {
 		let interval = setInterval(() => {
 			if (!buscaminas.flagPerder && !buscaminas.flagGanar) {
 				seconds++;
-				time.textContent = seconds;
+				$time.text(seconds);
 			} else {
 				clearInterval(interval);
 				if (buscaminas.flagGanar) {
@@ -334,7 +333,7 @@ let buscaminasGUI = {
 	createFlagCounter() {
 		let $article = $('<div></div>');
 		$article.prop('id', 'totalFlags');
-		$article.html(`<img src="images/bandera.svg" height="30px"/><p id="ptotalFlags">${buscaminas.banderas}</p>`);
+		$article.html(`<img src="images/bandera.svg"/><p id="ptotalFlags">${buscaminas.banderas}</p>`);
 		$containerLevelSelector.append($article);
 	},
 
@@ -348,11 +347,10 @@ let buscaminasGUI = {
 		}
 		let $article = $('<div></div>');
 		$article.prop('id', 'record');
-		$time.html(`<div id="record"></div>`);
 		if (localStorage.getItem(buscaminas.nivel) !== null) {
-			$article.html(`<img src="images/record.svg" height="30px"/> ${localStorage.getItem(buscaminas.nivel)}`);
+			$article.html(`<img src="images/record.svg"/> ${localStorage.getItem(buscaminas.nivel)}`);
 		} else {
-			$article.html(`<img src="images/record.svg" height="30px"/> 0`);
+			$article.html(`<img src="images/record.svg" /> 0`);
 		}
 		$containerLevelSelector.append($article);
 	},

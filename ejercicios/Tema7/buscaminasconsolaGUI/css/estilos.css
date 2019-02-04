@@ -1,6 +1,6 @@
 .easy-tile {
-  width: 65px;
-  height: 65px;
+  width: 70px;
+  height: 70px;
   font-size: 1.5rem;
   border: 1px solid #fff;
   display: flex;
@@ -135,7 +135,7 @@
 }
 
 #clock {
-  margin: 0 auto;
+  margin-right: 20px;
 }
 
 #clock p {
@@ -266,7 +266,7 @@ body main section select {
   appearance: none;
   font-weight: bold;
   margin: 10px;
-  width: 160px;
+  width: 200px;
 }
 
 body main section div {
