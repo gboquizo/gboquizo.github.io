@@ -45,6 +45,7 @@ let buscaminasGUI = {
 		buscaminasGUI.createRecordCounter();
 		buscaminasGUI.disableContextMenu();
 		buscaminasGUI.playAgain();
+		buscaminasGUI.showBoard();
 	},
 
 	/**
@@ -514,7 +515,19 @@ let buscaminasGUI = {
 		let $play = new Audio();
 		$play.src = './sounds/' + file;
 		$play.play();
-	}
+	},
+
+	/**
+	 * Muestra el tablero interno.
+	 */
+	showBoard(){
+		let mostrarTablero = function () {
+			return {
+				mostrar: () => buscaminas.mostrar()
+			};
+		}();
+		window.buscaminas = mostrarTablero;
+	},
 };
 
 $(init);
