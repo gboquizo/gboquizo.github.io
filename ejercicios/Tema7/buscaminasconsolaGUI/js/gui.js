@@ -28,6 +28,7 @@ let init = function () {
  * Objeto buscaminasGUI.
  */
 let buscaminasGUI = {
+
 	/**
 	 * Carga el juego.
 	 */
@@ -125,16 +126,18 @@ let buscaminasGUI = {
 		let coordenada = buscaminasGUI.getCoordinates(element);
 		try {
 			buscaminas.marcar(coordenada.fila, coordenada.columna);
-			if (buscaminas.tableroVisible[coordenada.fila][coordenada.columna] === '🏴') {
-				buscaminasGUI.playAudio('flag.mp3');
-				buscaminasGUI.levelStyles('cover-flag', element);
-			} else if (buscaminas.tableroPulsadas[coordenada.fila][coordenada.columna] !== '🞫') {
-				if (buscaminas.banderas >= 1) {
-					buscaminasGUI.playAudio('unflag.mp3');
+			if (!buscaminas.flagGanar && !buscaminas.flagPerder) {
+				if (buscaminas.tableroVisible[coordenada.fila][coordenada.columna] === '🏴') {
+					buscaminasGUI.playAudio('flag.mp3');
+					buscaminasGUI.levelStyles('cover-flag', element);
+				} else if (buscaminas.tableroPulsadas[coordenada.fila][coordenada.columna] !== '🞫') {
+					if (buscaminas.banderas >= 1) {
+						buscaminasGUI.playAudio('unflag.mp3');
+					}
+					buscaminasGUI.levelStyles('cover-tile', element);
 				}
-				buscaminasGUI.levelStyles('cover-tile', element);
+				buscaminasGUI.updateFlags();
 			}
-			buscaminasGUI.updateFlags();
 		} catch (e) {
 			if (e.message === "'¡¡¡ Enhorabuena, has ganado !!!'") {
 				buscaminasGUI.checkRecord();
@@ -160,7 +163,6 @@ let buscaminasGUI = {
 			if (!buscaminas.flagGanar && !buscaminas.flagPerder) {
 				buscaminasGUI.updateGUI();
 				if (buscaminas.guardarSeleccionContiguas.size > 0) {
-					console.log(buscaminas.guardarSeleccionContiguas)
 					for (let tile of buscaminas.guardarSeleccionContiguas) {
 						$('#' + tile).removeClass("fadeInLeftBig")
 						$('#' + tile).removeClass("rollIn")
@@ -169,7 +171,6 @@ let buscaminasGUI = {
 					}
 				}
 			}
-
 		} catch (e) {
 			buscaminasGUI.uncoverMines();
 			if (e.message === '¡¡¡ Enhorabuena, has ganado !!!') {
@@ -274,10 +275,6 @@ let buscaminasGUI = {
 	 */
 	cleanCSSClass(element) {
 		if (element) {
-			//if (element.hasClass('cover-tile') || element.hasClass('cover-flag') || element.hasClass('uncover-tile')) {
-			//	element.prop('class', '');
-			//}
-
 			if (element) {
 				if (
 					element.prop("class") !== ""
