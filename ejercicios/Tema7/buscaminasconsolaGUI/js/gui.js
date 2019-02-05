@@ -555,19 +555,25 @@ let buscaminasGUI = {
 		window.buscaminas = mostrarTablero;
 	},
 
+	/**
+	 * Establece la configuración de la música de fondo.
+	 */
 	musicSettings() {
 		$music = $('#music');
 		let $activateMusic = $('#activarMusica');
 		$music.prop('playing', !$music.prop('playing'));
 		if ($music.prop('playing')) {
-			$activateMusic.prop('src', './images/mina.svg');
+			$activateMusic.prop('src', './images/stop.svg');
 			$music.html('<audio controls autoplay loop> <source src="sounds/musica.mp3" type="audio/mpeg" /></audio>');
 		} else {
-			$activateMusic.prop('src', './images/estrella.svg');
+			$activateMusic.prop('src', './images/play.svg');
 			buscaminasGUI.stopMusic();
 		}
 	},
 
+	/**
+	 * Permite parar la música.
+	 */
 	stopMusic() {
 		$music.html('<audio controls muted></audio>');
 	}
