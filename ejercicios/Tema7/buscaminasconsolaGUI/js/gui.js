@@ -497,12 +497,12 @@ let buscaminasGUI = {
 			case 'difícil':
 				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(message, 'error');
-				}, 8000);
+				}, 6000);
 				break;
 			case 'experto':
 				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(message, 'error');
-				}, 15000);
+				}, 11000);
 				break;
 			default:
 				return;
