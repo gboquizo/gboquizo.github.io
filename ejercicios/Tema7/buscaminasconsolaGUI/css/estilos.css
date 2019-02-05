@@ -51,6 +51,12 @@
   background-size: contain;
 }
 
+.cover-tile-opacity {
+  background: #3F51B5 url("../images/bloque.svg") no-repeat;
+  background-size: contain;
+  opacity: 0.5;
+}
+
 .cover-tile:hover {
   background: #F4CD1E url("../images/bloque-hover.svg") no-repeat;
 }

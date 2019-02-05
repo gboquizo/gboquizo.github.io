@@ -3,7 +3,9 @@
  * @author Guillermo Boquizo Sánchez.
  */
 
-import { buscaminas } from './main.js';
+import {
+	buscaminas
+} from './main.js';
 
 let $containerLevelSelector;
 let $board;
@@ -13,7 +15,7 @@ let $time;
 /**
  * Carga la interfaz de juego.
  */
-let init = function() {
+let init = function () {
 	$('#seleccionNivel')[0].selectedIndex = 0;
 	$('#seleccionNivel').change(buscaminasGUI.start);
 	$containerLevelSelector = $('#containerLevelSelector');
@@ -68,10 +70,10 @@ let buscaminasGUI = {
 			for (let j = 0; j < buscaminas.columnas; j++) {
 				let $tile = $(`<input type="text" id="${i}-${j}" readonly></input>`);
 				buscaminasGUI.levelStyles('cover-tile', $tile);
-				$tile.click(function() {
+				$tile.click(function () {
 					buscaminasGUI.picarGUI($(this));
 				});
-				$tile.mousedown(function(event) {
+				$tile.mousedown(function (event) {
 					switch (event.buttons) {
 						case 2:
 							buscaminasGUI.marcarGUI($(this));
@@ -105,7 +107,7 @@ let buscaminasGUI = {
 			if (e.message === '¡¡¡ Enhorabuena, has ganado !!!') {
 				buscaminasGUI.checkRecord();
 				buscaminasGUI.levelStyles('uncover-tile', element);
-				setTimeout(function() {
+				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(e.message, 'success');
 				}, 3000);
 			} else {
@@ -137,7 +139,7 @@ let buscaminasGUI = {
 			if (e.message === "'¡¡¡ Enhorabuena, has ganado !!!'") {
 				buscaminasGUI.checkRecord();
 				buscaminasGUI.levelStyles('uncover-tile', element);
-				setTimeout(function() {
+				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(e.message, 'success');
 				}, 3000);
 			} else {
@@ -157,12 +159,12 @@ let buscaminasGUI = {
 			buscaminas.despejar(coordenada.fila, coordenada.columna);
 			if (!buscaminas.flagGanar && !buscaminas.flagPerder) {
 				buscaminasGUI.updateGUI();
-			}
-			if (buscaminas.guardarSeleccionContiguas.size > 0) {
-				for (let tile of buscaminas.guardarSeleccionContiguas) {
-					for (let index = 0; index < 2; index++) {
-						$('#' + tile).removeClass('cover-tile').animate({ opacity: 0.5 }, 200);
-						$('#' + tile).addClass('cover-tile').animate({ opacity: 1 }, 200);
+				if (buscaminas.guardarSeleccionContiguas.size > 0) {
+					for (let tile of buscaminas.guardarSeleccionContiguas) {
+						for (let index = 0; index < 2; index++) {
+							$('#' + tile).addClass('cover-tile-opacity', 400,
+								() => $('#' + tile).removeClass('cover-tile-opacity'))
+						}
 					}
 				}
 			}
@@ -170,7 +172,7 @@ let buscaminasGUI = {
 			buscaminasGUI.uncoverMines();
 			if (e.message === '¡¡¡ Enhorabuena, has ganado !!!') {
 				buscaminasGUI.levelStyles('uncover-tile', element);
-				setTimeout(function() {
+				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(e.message, 'success');
 				}, 3000);
 			} else {
@@ -478,17 +480,17 @@ let buscaminasGUI = {
 	openMinesByLevelAnimationTime(message) {
 		switch (buscaminas.nivel) {
 			case 'fácil':
-				setTimeout(function() {
+				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(message, 'error');
 				}, 4000);
 				break;
 			case 'difícil':
-				setTimeout(function() {
+				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(message, 'error');
 				}, 8000);
 				break;
 			case 'experto':
-				setTimeout(function() {
+				setTimeout(function () {
 					buscaminasGUI.swalPlayAgain(message, 'error');
 				}, 15000);
 				break;
@@ -502,11 +504,11 @@ let buscaminasGUI = {
 	 */
 	disableContextMenu() {
 		if ($(document).on()) {
-			$(document).contextmenu(function(e) {
+			$(document).contextmenu(function (e) {
 				e.preventDefault();
 			}, false);
 		} else {
-			$(document).attachEvent('oncontextmenu', function() {
+			$(document).attachEvent('oncontextmenu', function () {
 				$(window).event.returnValue = false;
 			});
 		}
@@ -525,7 +527,7 @@ let buscaminasGUI = {
 	 * Muestra el tablero interno.
 	 */
 	showBoard() {
-		let mostrarTablero = (function() {
+		let mostrarTablero = (function () {
 			return {
 				mostrar: () => buscaminas.mostrar()
 			};
