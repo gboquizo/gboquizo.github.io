@@ -147,7 +147,6 @@ let buscaminasGUI = {
 					buscaminasGUI.swalPlayAgain(e.message, 'success');
 				}, 3000);
 			} else {
-				buscaminasGUI.playAudio('explosion.mp3');
 				buscaminasGUI.openMinesByLevelAnimationTime(e.message);
 			}
 		}
@@ -181,6 +180,7 @@ let buscaminasGUI = {
 					buscaminasGUI.swalPlayAgain(e.message, 'success');
 				}, 3000);
 			} else {
+				buscaminasGUI.stopMusic();
 				buscaminasGUI.playAudio('explosion.mp3');
 				buscaminasGUI.openMinesByLevelAnimationTime(e.message);
 			}
