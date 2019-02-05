@@ -160,14 +160,16 @@ let buscaminasGUI = {
 			if (!buscaminas.flagGanar && !buscaminas.flagPerder) {
 				buscaminasGUI.updateGUI();
 				if (buscaminas.guardarSeleccionContiguas.size > 0) {
+					console.log(buscaminas.guardarSeleccionContiguas)
 					for (let tile of buscaminas.guardarSeleccionContiguas) {
-						for (let index = 0; index < 2; index++) {
-							$('#' + tile).addClass('cover-tile-opacity', 400,
-								() => $('#' + tile).removeClass('cover-tile-opacity'))
-						}
+						$('#' + tile).removeClass("fadeInLeftBig")
+						$('#' + tile).removeClass("rollIn")
+						$('#' + tile).addClass("cover-tile-opacity", 400,
+							() => $('#' + tile).removeClass("cover-tile-opacity"));
 					}
 				}
 			}
+
 		} catch (e) {
 			buscaminasGUI.uncoverMines();
 			if (e.message === '¡¡¡ Enhorabuena, has ganado !!!') {
@@ -218,9 +220,9 @@ let buscaminasGUI = {
 					$element.val(buscaminas.tableroVisible[fila][columna]);
 				}
 				buscaminasGUI.levelStyles(
-				'uncover-tile', 
-				$element,
-				"delay-" + counterDelay + "s");
+					'uncover-tile',
+					$element,
+					"delay-" + counterDelay + "s");
 			}
 			buscaminasGUI.playAudio('abrir.mp3');
 		}
@@ -232,16 +234,16 @@ let buscaminasGUI = {
 	 * @param input elemento DOM.
 	 * @param targetClass clase css que contiene la animación.
 	 * @param initialAnimation animación que se le añadirá a los input con la clase inicial.
- 	 * @param callbackAnimation animación que se le añadirá a los input que no tengan la clase inicial.
+	 * @param callbackAnimation animación que se le añadirá a los input que no tengan la clase inicial.
 	 * @param level nivel actual de la partida.
 	 */
 	animationInput(input, targetClass, initialAnimation, callbackAnimation, level) {
 		if (targetClass === 'cover-tile') {
 			buscaminasGUI.cleanCSSClass(input);
-			input.addClass('animated ' + initialAnimation + ' faster ' +  level + ' ' + targetClass);
+			input.addClass('animated ' + initialAnimation + ' faster ' + level + ' ' + targetClass);
 		} else {
 			buscaminasGUI.cleanCSSClass(input);
-			input.addClass('animated ' + callbackAnimation + ' faster ' +  level + ' ' + targetClass);
+			input.addClass('animated ' + callbackAnimation + ' faster ' + level + ' ' + targetClass);
 		}
 	},
 
@@ -272,8 +274,16 @@ let buscaminasGUI = {
 	 */
 	cleanCSSClass(element) {
 		if (element) {
-			if (element.hasClass('cover-tile') || element.hasClass('cover-flag') || element.hasClass('uncover-tile')) {
-				element.prop('class', '');
+			//if (element.hasClass('cover-tile') || element.hasClass('cover-flag') || element.hasClass('uncover-tile')) {
+			//	element.prop('class', '');
+			//}
+
+			if (element) {
+				if (
+					element.prop("class") !== ""
+				) {
+					element.prop("class", "");
+				}
 			}
 		}
 	},
