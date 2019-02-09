@@ -680,7 +680,7 @@ let buscaminasGUI = {
 		instructionsWindow.document.write(html);
 		instructionsWindow.document.close();
 	},
-
+	
 };
 
 $(init);
