@@ -71,8 +71,6 @@
 			});
 		};
 
-		
-
 		// Valida los inputs que no son submit, si se dan.
 		let $fields = $("input[type='text']", $(this));
 
@@ -91,6 +89,7 @@
 				if ($fieldsErrors.length === 0) {
 					fetch(ajaxInfo.url)
 						.then(function (response) {
+							saveDefaultStyles($fields);
 							return response.text();
 						})
 						.then(function (text) {
