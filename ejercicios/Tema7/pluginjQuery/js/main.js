@@ -45,31 +45,26 @@
 *
 */
 {
-	let init = function() {
-		$('form').validar(
-			{
-				// Se añade un objeto con las regex y mensajes a mostrar.
-				objPatterns: {
-					nombre: [ /([a-zA-Z]{1,}\s?){1,3}/, 'Probando extends con el patrón nombre.' ],
-					apellidos: [ /([a-zA-Z]{1,}\s?){1,3}/, 'Probando extends con el patrón apellidos.' ],
-					correo: [
-						/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-						'Probando extends con el patrón correo.'
-					],
-					textarea: [ /(\w\s?.?\s?){10,}/, 'Probando extends con el patrón textarea.' ]
-				}
-			},
+	let init = function () {
+		// Se añade un objeto con las regex y mensajes a mostrar.
+		let objPatterns = {
+			nombre: [/([a-zA-ZÁÉÍÓÚñáéíóúÑ]{1,}\s?){1,3}/, 'Mínimo un nombre.'],
+			apellidos: [/([a-zA-ZÁÉÍÓÚñáéíóúÑ]{1,}\s?){1,3}/, 'Mínimo un apellido.'],
+			correo: [
+				/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+				'Formato de correo no válido.'
+			],
+			textarea: [/(\w\s?.?\s?){10,}/, 'Mínimo 10 caracteres.']
+		};
 
-			// Se añade clase css para el foco.
-			'input',
+		// Se añade clase css para el foco.
+		let infoAjax = {
+			url: './index.html',
+			element: $('textarea')
+		};
 
-			//Se pasa un objeto con los parámetros para AJAX.
-			{
-				type: 'POST',
-				url: './data.php',
-				element: $('#showData')
-			}
-		);
-	};
+		$("form").validar(objPatterns, infoAjax);
+
+	}
 	$(init);
 }
