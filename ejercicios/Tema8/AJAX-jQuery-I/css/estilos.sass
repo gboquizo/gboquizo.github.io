@@ -1,0 +1,52 @@
+=flex-center($direction)
+    display: flex
+    flex-direction: $direction
+    justify-content: center
+    align-items: center
+
+@mixin linear-gradient($direction, $color-stops...)
+    @if is-direction($direction) == false
+        $color-stops: $direction, $color-stops;
+        $direction: 180deg;
+    background: nth(nth($color-stops, 1), 1)
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops)
+    background: linear-gradient($direction, $color-stops)
+
+body
+    +flex-center(column)
+    width: 100%
+    min-height: 120vh
+    background: #B58234
+    background-image: linear-gradient(to right, #31B7D7 0%, #FFFFFF 50%, #4FB4E8 80%)
+    color: #000
+    font-size: 1.5rem
+    header
+        h1
+            text-align: center
+            font-size: 2.3rem
+            color: #212121
+    main
+        position: relative
+        +flex-center(column)
+        width: 100%
+        button
+            margin: 20px
+        section
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            margin: 20px
+            article
+                font-weight: bold
+                background-color: #ffffff
+                div
+                    border: 2px solid black
+                    background-color: #ffffff
+                    min-height: 3rem
+
+#infoArticle
+    max-width: 300px
+    max-height: 300px
+    padding: 15px 20px
+    overflow: scroll
