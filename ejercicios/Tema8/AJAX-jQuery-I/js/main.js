@@ -25,10 +25,10 @@
             beforeSend: () => actions += "<p>beforeSend</p>",
             complete: () => {
                 actions += "<p>complete</p>";
-                $("#articleState").html(actions);
+                $("#stateArticle").html(actions);
             },
             success: (data) => {
-                $("#articleInfo").text(data);
+                $("#infoArticle").text(data);
                 actions += "<p>success</p>";
             },
             error: () => actions += "<p>error</p>"
