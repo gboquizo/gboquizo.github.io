@@ -14,7 +14,6 @@
 
 body
     +flex-center(column)
-    width: 100%
     min-height: 120vh
     background: #B58234
     background-image: linear-gradient(to right, #31B7D7 0%, #FFFFFF 50%, #4FB4E8 80%)
@@ -28,7 +27,6 @@ body
     main
         position: relative
         +flex-center(column)
-        width: 100%
         button
             min-height: 25px
             min-width: 70px
@@ -49,6 +47,7 @@ body
         section
             +flex-center(column)
             margin: 20px
+            
             article
                 text-align: center
                 font-weight: bold
@@ -56,11 +55,9 @@ body
                 border: 2px solid black
                 min-width: 80%
                 min-height: 3rem
-                div
-                    
-
+                
 #infoArticle
-    max-width: 400px
+    max-width: 300px
     max-height: 400px
     padding: 15px 20px
     overflow: scroll

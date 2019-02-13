@@ -10,18 +10,21 @@
  */
 {
     let init = function () {
-
+        let currentURL = jQuery(location).attr('href');
+        console.log(currentURL);
+        
+        $("#url").html(currentURL);
         $("#btnShow").click(showHTML);
 
     }
 
     let showHTML = function () {
-
+        let url = "showedHTML.html" 
         let actions = "";
 
         $.ajax({
             method: "GET",
-            url: "showedHTML.html",
+            url: url,
             beforeSend: () => actions += "<p>beforeSend</p>",
             complete: () => {
                 actions += "<p>complete</p>";
@@ -33,9 +36,8 @@
             },
             error: () => actions += "<p>error</p>"
         });
-
+        $("#url").html(url);
     }
-
     $(init)
 
 }
