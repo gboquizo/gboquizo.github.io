@@ -1,0 +1,50 @@
+=flex-center($direction)
+    display: flex
+    flex-direction: $direction
+    justify-content: center
+    align-items: center
+
+@mixin linear-gradient($direction, $color-stops...)
+    @if is-direction($direction) == false
+        $color-stops: $direction, $color-stops;
+        $direction: 180deg;
+    background: nth(nth($color-stops, 1), 1)
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops)
+    background: linear-gradient($direction, $color-stops)
+
+body
+    +flex-center(column)
+    min-height: 120vh
+    background: #B58234
+    background-image: linear-gradient(to left, #31B7D7 0%, #FFFFFF 50%, #4334E8 100%)
+    color: #000
+    font-size: 1.5rem
+    header
+        h1
+            text-align: center
+            font-size: 2.3rem
+            color: #212121
+    main
+        position: relative
+        +flex-center(column)
+        button
+            min-height: 40px
+            min-width: 70px
+            border-width: 0px
+            padding: 15px
+            background: #4FB4E8
+            color: #fff
+            font-weight: bold
+            border-radius: 5px
+            font-size: 1.3rem
+            margin-top: 20px
+            margin-right: 20px
+            margin-bottom: 20px
+            -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.32), 0 3px 6px rgba(0, 0, 0, 0.64)
+            -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.32), 0 3px 6px rgba(0, 0, 0, 0.64)
+            -ms-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.32), 0 3px 6px rgba(0, 0, 0, 0.64)
+            -o-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.32), 0 3px 6px rgba(0, 0, 0, 0.64)
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.32), 0 3px 6px rgba(0, 0, 0, 0.64)
+        section
+            +flex-center(row)
+            margin: 20px

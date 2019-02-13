@@ -1,0 +1,50 @@
+[{
+        "aptitude": "Autoconocimiento",
+        "report": "Reconocimiento de nuestra personalidad, características, idiosincrasia, fortalezas, debilidades, aspiraciones, expectativas, etc."
+    },
+
+    {
+        "aptitude": "Empatía",
+        "report": "Capacidad para ponerse en el lugar de otra persona y desde esa posición captar sus sentimientos."
+    },
+
+    {
+        "aptitude": "Comunicación efectiva o asertiva",
+        "report": "Habilidad para expresarse de manera apropiada al contexto relacional y social en el que se vive."
+    },
+
+    {
+        "aptitude": "Relaciones interpersonales",
+        "report": "Competencia para interactuar positivamente con las demás personas."
+    },
+
+    {
+        "aptitude": "Toma de decisiones",
+        "report": "Capacidad para construir racionalmente las decisiones cotidianas de nuestra vida."
+    },
+
+    {
+        "aptitude": "Solución de problemas y conflictos",
+        "report": "Destreza para afrontar constructivamente las exigencias de la vida cotidiana."
+    },
+
+    {
+        "aptitude": "Pensamiento creativo",
+        "report": "Utilización de los procesos de pensamiento para buscar respuestas innovadoras a los diversos desafíos vitales."
+    },
+
+    {
+        "aptitude": "Pensamiento crítico",
+        "report": "Capacidad para analizar con objetividad experiencias e información, sin asumir pasivamente criterios ajenos."
+    },
+
+    {
+        "aptitude": "Manejo de emociones y sentimientos",
+        "report": "Reconocimiento y gestión positiva de nuestro mundo emocional."
+    },
+
+    {
+        "aptitude": "Manejo de tensiones y estrés",
+        "report": "Capacidad para reconocer nuestras fuentes de tensión y actuar positivamente para su control."
+    }
+]

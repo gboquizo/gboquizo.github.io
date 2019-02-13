@@ -1,0 +1,17 @@
+[{
+        "type": "Desarrollador Front-end",
+        "skills": ["HTML", "CSS", "JavaScript", "jQuery"]
+    },
+
+    {
+        "type": "Desarrollador Back-end",
+        "skills": ["ASP.NET", "PHP", "Ruby", "Python", "Node.js", "Java", "SQL Server", "MySQL", "Oracle", "PostgreSQL", "MongoDB"]
+    },
+
+    {
+        "type": "Desarrollador Full stack",
+        "skills": ["Arquitectura de servidores y sistemas"]
+    }
+
+
+]
