@@ -54,10 +54,7 @@ body main section {
 }
 
 body main section article {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   font-weight: bold;
   background-color: #ffffff;
   border: 2px solid black;
@@ -66,8 +63,8 @@ body main section article {
 }
 
 #infoArticle {
-  max-width: 50%;
-  max-height: 40vh;
+  max-width: 400px;
+  max-height: 400px;
   padding: 15px 20px;
   overflow: scroll;
 }
