@@ -7,7 +7,7 @@
                     type: 'GET',
                     url: './info.php',
                     data: {
-                        suggestedSearch: value
+                        search: value
                     },
                     dataType: 'text',
                     success: function (results) {
@@ -17,11 +17,12 @@
                             $('#searchedInfo').html('');
                             let html = ``;
                             for (let i in resultsJson) {
-                                html += `<p class="suggest">${resultsJson[i].first_name} ${resultsJson[i].last_name}</p>`;
+                                html += `<p class="suggest">${resultsJson[i].first_name} ${resultsJson[i]
+									.last_name}</p>`;
                             }
                             $('#searchedInfo').append(html);
                             $('.suggest').click(function () {
-                            $('#suggestedSearch').val($(this).text());
+                                $('#suggestedSearch').val($(this).text());
                             });
                         } else {
                             $('#searchedInfo').html(`<p>No se encontraron resultados</p>`);
