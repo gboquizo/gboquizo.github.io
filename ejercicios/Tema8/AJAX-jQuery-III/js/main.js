@@ -37,10 +37,10 @@
                     success: function (response) {
                         let responseJSON =
                             response !== '' && response !== 'No hay coincidencias' ? JSON.parse(response) : {};
-                        if (!$.isEmptyObject(responseJson)) {
+                        if (!$.isEmptyObject(responseJSON)) {
                             $('#searchedInfo').html('');
                             let html = ``;
-                            for (let i in responseJson) {
+                            for (let i in responseJSON) {
                                 html += `<p class="suggest ripple animated rollIn delay-${i}s">${responseJSON[i].first_name} ${responseJSON[i]
 									.last_name}</p>`;
                             }
