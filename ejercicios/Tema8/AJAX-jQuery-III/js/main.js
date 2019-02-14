@@ -34,14 +34,14 @@
                         search: value
                     },
                     dataType: 'text',
-                    success: function (results) {
-                        let resultsJson =
-                            results !== '' && results !== 'No hay coincidencias' ? JSON.parse(results) : {};
-                        if (!$.isEmptyObject(resultsJson)) {
+                    success: function (response) {
+                        let responseJSON =
+                            response !== '' && response !== 'No hay coincidencias' ? JSON.parse(response) : {};
+                        if (!$.isEmptyObject(responseJson)) {
                             $('#searchedInfo').html('');
                             let html = ``;
-                            for (let i in resultsJson) {
-                                html += `<p class="suggest ripple animated rollIn delay-${i}s">${resultsJson[i].first_name} ${resultsJson[i]
+                            for (let i in responseJson) {
+                                html += `<p class="suggest ripple animated rollIn delay-${i}s">${responseJSON[i].first_name} ${responseJSON[i]
 									.last_name}</p>`;
                             }
                             $('#searchedInfo').append(html);
