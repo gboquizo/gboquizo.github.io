@@ -21,6 +21,7 @@ $students = [
     ["first_name" => "Rafael", "last_name" => "Sojo Ruíz"]
 ];
 $searchs = array();
+
 if ($_GET["search"]) {
     foreach ($students as $key => $student) {
         if (preg_match('/' . $_GET["search"] . '/i', $student['first_name'] . " " . $student['last_name'])) {
@@ -34,3 +35,4 @@ if (sizeof($searchs) === 0) {
 } else {
     echo json_encode($searchs, JSON_UNESCAPED_UNICODE);
 }
+
