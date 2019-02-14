@@ -21,16 +21,16 @@ $students = [
     ["first_name" => "Rafael", "last_name" => "Sojo Ruíz"]
 ];
 $searchs = array();
-?>
-<?php if ($_GET["search"]): ?>
-    <?php foreach ($students as $key => $student): ?>
-        <?php if (preg_match('/' . $_GET["search"] . '/i', $student['first_name'] . " " . $student['last_name'])):
-    array_push($searchs, $student);?>
-				<?php endif?>
-    <?php endforeach?>
-    <?php if (sizeof($searchs) === 0): ?>
-        <?php echo "No se encontraron resultados" ?>
-    <?php else: ?>
-        <?php echo json_encode($searchs, JSON_UNESCAPED_UNICODE) ?>
-    <?php endif?>
-<?php endif?>
+if ($_GET["search"]) {
+    foreach ($students as $key => $student) {
+        if (preg_match('/' . $_GET["search"] . '/i', $student['first_name'] . " " . $student['last_name'])) {
+            array_push($searchs, $student);
+        }
+    }
+}
+
+if (sizeof($searchs) === 0) {
+    echo 'No se encontraron resultados';
+} else {
+    echo json_encode($searchs, JSON_UNESCAPED_UNICODE);
+}
