@@ -1,3 +1,27 @@
+/**
+ *   Utilizando Ajax, realiza una comunicación con el servidor que reciba sugerencias de nombres almacenadas en un array php.
+ *   El funcionamiento será el siguiente:
+ *
+ *   Página html con un input
+ *       Conforme se introduzca texto, se buscarán las coincidencias en un array php que contendrá 
+ *       los nombres de los compañeros del módulo(introduce nombre y apellidos, para ver más coincidencias, de al menos 10 compañeros)
+ *   Las sugerencias(coincidencias en el array) se mostrarán.
+ *   En caso de no haber coincidencia, se mostrará el mensaje "No hay coincidencias"
+ *
+ *   Responde a las siguientes preguntas:
+ *       ¿Cómo se trata el envío de un parámetro a php ?. Indica todos los pasos(html, javascript, php)
+ *      En HTML se prepara un input <input id="suggestedSearch" type="search" name="search">.
+ *      En js se realiza una petición AJAX, indicando en el data que se precisan los valores de search, a obtener por GET.
+ *      En php si se da la variable $_GET para search, se recorre el array, se fragmenta por nombre y apellido, se añade a un array que se pasa a JSON.
+ *      Finalmente en js se trata, si la petición tiene éxito, los resultados parseados a JSON y se hace un append para mostrar en un div con un id determinado en HTML.
+ * 
+ *   Atributo donde se recibe la respuesta
+ *   La respuesta, una vez realizada con éxito la petición, se recibe en el atributo success.
+ *
+ *   Envía el ejercicio operativo online y copia de los ficheros
+ * @author Guillermo Boquizo Sánchez
+ */
+
 {
     let init = function () {
         $('#suggestedSearch').keyup(function () {
@@ -12,7 +36,7 @@
                     dataType: 'text',
                     success: function (results) {
                         let resultsJson =
-                            results !== '' && results !== 'No se encontraron resultados' ? JSON.parse(results) : {};
+                            results !== '' && results !== 'No hay coincidencias' ? JSON.parse(results) : {};
                         if (!$.isEmptyObject(resultsJson)) {
                             $('#searchedInfo').html('');
                             let html = ``;
@@ -25,7 +49,7 @@
                                 $('#suggestedSearch').val($(this).text());
                             });
                         } else {
-                            $('#searchedInfo').html(`<p class="animated jello">No se encontraron resultados</p>`);
+                            $('#searchedInfo').html(`<p class="animated jello">No hay coincidencias</p>`);
                         }
                     },
                     complete: function () {

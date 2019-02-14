@@ -18,7 +18,7 @@ $students = [
     ["first_name" => "Mario", "last_name" => "Navarro Madrid"],
     ["first_name" => "Francisco", "last_name" => "Ramírez Ruíz"],
     ["first_name" => "José María", "last_name" => "Romero Ruíz"],
-    ["first_name" => "Rafael", "last_name" => "Sojo Ruíz"]
+    ["first_name" => "Rafael", "last_name" => "Sojo Ruíz"],
 ];
 $searchs = array();
 
@@ -31,8 +31,7 @@ if ($_GET["search"]) {
 }
 
 if (sizeof($searchs) === 0) {
-    echo 'No se encontraron resultados';
+    echo 'No hay coincidencias';
 } else {
     echo json_encode($searchs, JSON_UNESCAPED_UNICODE);
 }
-
