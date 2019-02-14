@@ -113,19 +113,19 @@ body main form input {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25), 0 3px 6px rgba(0, 0, 0, 0.5);
 }
 
-body main form #showSearch {
+body main form #searchedInfo {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
-body main form #showSearch .suggest {
+body main form #searchedInfo .suggest {
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: center;
