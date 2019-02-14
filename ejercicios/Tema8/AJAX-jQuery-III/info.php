@@ -18,7 +18,7 @@ $students = [
     ["first_name" => "Mario", "last_name" => "Navarro Madrid"],
     ["first_name" => "Francisco", "last_name" => "Ramírez Ruíz"],
     ["first_name" => "José María", "last_name" => "Romero Ruíz"],
-    ["first_name" => "Rafael", "last_name" => "Sojo Ruíz"],
+    ["first_name" => "Rafael", "last_name" => "Sojo Ruíz"]
 ];
 $searchs = array();
 
