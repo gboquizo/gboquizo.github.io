@@ -25,7 +25,7 @@
                                 $('#suggestedSearch').val($(this).text());
                             });
                         } else {
-                            $('#searchedInfo').html(`<p class="animated jello>No se encontraron resultados</p>`);
+                            $('#searchedInfo').html(`<p class="animated jello">No se encontraron resultados</p>`);
                         }
                     },
                     complete: function () {
