@@ -17,7 +17,7 @@
                             $('#searchedInfo').html('');
                             let html = ``;
                             for (let i in resultsJson) {
-                                html += `<p class="suggest">${resultsJson[i].first_name} ${resultsJson[i]
+                                html += `<p class="suggest ripple animated rollIn delay-${i}s">${resultsJson[i].first_name} ${resultsJson[i]
 									.last_name}</p>`;
                             }
                             $('#searchedInfo').append(html);
@@ -25,7 +25,7 @@
                                 $('#suggestedSearch').val($(this).text());
                             });
                         } else {
-                            $('#searchedInfo').html(`<p>No se encontraron resultados</p>`);
+                            $('#searchedInfo').html(`<p class="animated jello>No se encontraron resultados</p>`);
                         }
                     },
                     complete: function () {
