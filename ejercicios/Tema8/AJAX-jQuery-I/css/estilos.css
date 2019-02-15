@@ -60,9 +60,19 @@ body main section article {
   min-height: 3rem;
 }
 
+body main section input {
+  text-align: center;
+  font-weight: bold;
+  background-color: #ffffff;
+  border: 2px solid black;
+  min-width: 80%;
+  min-height: 3rem;
+}
+
 #infoArticle {
-  max-width: 300px;
-  max-height: 400px;
+  text-align: left;
+  max-width: 500px;
+  max-height: 500px;
   padding: 15px 20px;
   overflow: scroll;
 }
