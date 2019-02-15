@@ -18,16 +18,16 @@
         $.ajax({
             method: "GET",
             url: $("#url").val(),
-            beforeSend: () => actions += "<p>beforeSend</p>",
-            complete: () => {
-                actions += "<p>complete</p>";
-                $("#stateArticle").html(actions);
-            },
+            beforeSend: () => actions += "<p>No inicializada, pasando por beforeSend</p>",
             success: (data) => {
                 $("#infoArticle").text(data);
-                actions += "<p>success</p>";
+                actions += "<p>Exitosa, pasando por success</p>";
             },
-            error: () => actions += "<p>error</p>"
+            error: () => actions += "<p>Errónea, pasando por error</p>",
+            complete: () => {
+                actions += "<p>Completada, pasando por complete</p>";
+                $("#stateArticle").html(actions);
+            }
         });
     }
     $(init)
