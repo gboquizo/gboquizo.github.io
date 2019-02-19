@@ -17,7 +17,8 @@
     let init = function () {
         $("button").click(function () {
             showJSON("./json/" + $(this).attr("json"));
-            $("button").css("background", "#4334E8")
+            $('button').removeClass('active');
+            $(this).addClass('active');
             $("#boxInfo").css({
                 "width": "900px",
                 "padding": "15px 20px",
@@ -39,22 +40,47 @@
 
     let showJSON = function (url) {
         $.getJSON(url, function (data) {
-            let html = ``;
+            let dinamicSelect = `<select name="" id="dinamicSelect" >`;
+            let devDivs = ``;
             $.each(data, function (index, value) {
                 $("#boxInfo").css("text-align", "justify");
                 if (value.aptitude && value.report) {
-                    html += `<h4><b>${value.aptitude}</b>.</h4><p>${value.report}</p>`
+                    dinamicSelect += `<option value="${value.report}">${value.aptitude}</option>`;
                 } else if (value.itProfile && value.definition) {
-                    html += `<h4><b>${value.itProfile}</b>.</h4><p>${value.definition}</p>`
+                    dinamicSelect += `<option value="${value.definition}">${value.itProfile}</option>`;
                 } else if (value.type && value.skills) {
                     $("#boxInfo").css("text-align", "center");
-                    html += `<h4><b>${value.type}</b></h4>`;
+
+                    devDivs += `<div class="container">
+                                <h4><b>${value.type}</b></h4>
+                                <div class="skills">
+                    `;
                     for (let skill of value.skills) {
-                        html += `<p>${skill}</p>`
+                        devDivs += `<p>${skill}</p>`
                     }
+                    devDivs += `</div>`;
                 }
             });
-            $("#boxInfo").html(html)
+
+            dinamicSelect += `</select><p class='show'></p>`;
+            $("#boxInfo").html(dinamicSelect)
+            $(".show").html($("#dinamicSelect").val());
+            $("#dinamicSelect").change(function () {
+                $(".show").html($(this).val());
+            });
+
+            if (devDivs !== '') {
+                devDivs += `</div>`;
+                $("#boxInfo").html(devDivs);
+                $(".skills").css("display", "none");
+                $(".container h4 ").click(function () {
+                    let parentElement = $(this).parent();
+                    let div = parentElement.children(".skills")
+                    div.slideToggle("slow");
+                });
+            }
+
+
         });
     }
     $(init);

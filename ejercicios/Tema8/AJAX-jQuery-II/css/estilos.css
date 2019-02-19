@@ -44,6 +44,10 @@ body main button {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.32), 0 3px 6px rgba(0, 0, 0, 0.64);
 }
 
+body main .active {
+  background-color: #4334E8;
+}
+
 body main section {
   display: flex;
   flex-direction: row;
