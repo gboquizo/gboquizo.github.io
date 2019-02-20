@@ -21,6 +21,7 @@
             $(this).addClass('active');
             $("#boxInfo").css({
                 "width": "900px",
+                "min-width": "700px",
                 "padding": "15px 20px",
                 "overflow": "hidden",
                 "background": "#fff",
@@ -51,9 +52,10 @@
                 } else if (value.type && value.skills) {
                     $("#boxInfo").css("text-align", "center");
 
-                    devDivs += `<div class="container">
-                                <h4><b>${value.type}</b></h4>
-                                <div class="skills">
+                    devDivs += 
+                    `<div class="container">
+                        <h4><b>${value.type}</b></h4>
+                        <div class="skills">
                     `;
                     for (let skill of value.skills) {
                         devDivs += `<p>${skill}</p>`
@@ -79,8 +81,6 @@
                     div.slideToggle("slow");
                 });
             }
-
-
         });
     }
     $(init);
