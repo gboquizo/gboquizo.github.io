@@ -55,3 +55,27 @@ body main section {
   align-items: center;
   margin: 20px;
 }
+
+body main .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body main .skills {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+body main .skills label {
+  max-width: 150px;
+  word-wrap: break-word;
+}
+
+body main .skills input {
+  margin-right: 10px;
+}

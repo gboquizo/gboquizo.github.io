@@ -13,8 +13,8 @@
  * @author Guillermo Boquizo Sánchez
  */
 {
-	let init = function() {
-		$('button').click(function() {
+	let init = function () {
+		$('button').click(function () {
 			showJSON('./json/' + $(this).attr('json'));
 			$('button').removeClass('active');
 			$(this).addClass('active');
@@ -38,11 +38,11 @@
 		});
 	};
 
-	let showJSON = function(url) {
-		$.getJSON(url, function(data) {
+	let showJSON = function (url) {
+		$.getJSON(url, function (data) {
 			let dinamicSelect = `<select name="" id="dinamicSelect" >`;
 			let devDivs = ``;
-			$.each(data, function(index, value) {
+			$.each(data, function (index, value) {
 				$('#boxInfo').css('text-align', 'justify');
 				if (value.aptitude && value.report) {
 					dinamicSelect += `<option value="${value.report}">${value.aptitude}</option>`;
@@ -56,7 +56,7 @@
                         <div class="skills">
                     `;
 					for (let skill of value.skills) {
-						devDivs += `<p>${skill}</p>`;
+						devDivs += `<label><input type="checkbox">${skill}</label>`;
 					}
 					devDivs += `</div>`;
 				}
@@ -65,7 +65,7 @@
 			dinamicSelect += `</select><p class='show'></p>`;
 			$('#boxInfo').html(dinamicSelect);
 			$('.show').html($('#dinamicSelect').val());
-			$('#dinamicSelect').change(function() {
+			$('#dinamicSelect').change(function () {
 				$('.show').html($(this).val());
 			});
 
@@ -73,7 +73,7 @@
 				devDivs += `</div>`;
 				$('#boxInfo').html(devDivs);
 				$('.skills').css('display', 'none');
-				$('.container h4 ').click(function() {
+				$('.container h4 ').click(function () {
 					let parentElement = $(this).parent();
 					let div = parentElement.children('.skills');
 					div.slideToggle('slow');
