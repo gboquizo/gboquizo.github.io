@@ -9,27 +9,29 @@
  * @author Guillermo Boquizo Sánchez
  */
 {
-    let init = function () {
-        $("#btnShow").click(showHTML);
-    }
+	let init = function() {
+		$('#btnShow').click(showHTML);
+	};
 
-    let showHTML = function () {
-        let actions = "";
-        $.ajax({
-            method: "GET",
-            url: $("#url").val(),
-            beforeSend: () => actions += "<p>No inicializada, pasando por beforeSend</p>",
-            success: (data) => {
-                $("#infoArticle").text(data);
-                actions += "<p>Exitosa, pasando por success</p>";
-            },
-            error: () => actions += "<p>Errónea, pasando por error</p>",
-            complete: () => {
-                actions += "<p>Completada, pasando por complete</p>";
-                $("#stateArticle").html(actions);
-            }
-        });
-    }
-    $(init)
-
+	let showHTML = function() {
+		let actions = '';
+		$.ajax({
+			method: 'GET',
+			url: $('#url').val(),
+			beforeSend: () => (actions += '<p>No inicializada, pasando por beforeSend</p>'),
+			success: (data) => {
+				$('#infoArticle').text(data);
+				actions += '<p>Exitosa, pasando por success</p>';
+			},
+			error: () => {
+				actions += '<p>Errónea, pasando por error</p>';
+				$('#infoArticle').text('');
+			},
+			complete: () => {
+				actions += '<p>Completada, pasando por complete</p>';
+				$('#stateArticle').html(actions);
+			}
+		});
+	};
+	$(init);
 }
