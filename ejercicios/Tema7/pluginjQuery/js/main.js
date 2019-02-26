@@ -59,7 +59,7 @@
 
 		// Se añade clase css para el foco.
 		let infoAjax = {
-			url: './index.html',
+			url: './autor.txt',
 			element: $('textarea')
 		};
 
