@@ -1,25 +1,25 @@
 Responde a las siguientes preguntas:
 
-¿Cómo se trata el envío de un parámetro a php ?. Indica todos los pasos(html, javascript, php)
+1. ¿Cómo se trata el envío de un parámetro a php ?. Indica todos los pasos(html, javascript, php)
 
-1. 
+    I. HTML
 
-En HTML se prepara un input, en este caso <input id="suggestedSearch" type="search" name="search">.
+    En HTML se prepara un input, en este caso <input id="suggestedSearch" type="search" name="search">.
 
-2. 
+    II. JS
 
-En js se realiza una petición AJAX, indicando en el data que se precisan los valores 
-    de search, a obtener por GET.
+    En js se realiza una petición AJAX, indicando en el data que se precisan los valores 
+        de search, a obtener por GET.
 
-3.
+    III. PHP
 
-En php si se da la variable $_GET para search, se recorre el array, se fragmenta por nombre y 
-    apellido, se añade a un array que se pasa a JSON.
+    En php si se da la variable $_GET para search, se recorre el array, se fragmenta por nombre y 
+        apellido, se añade a un array que se pasa a JSON con json_encode.
 
-4. 
+    IV. JS
 
-Finalmente en js se trata, si la petición tiene éxito, los resultados parseados a JSON y 
-    se hace un append para mostrar en un div con un id determinado en HTML.
+    Finalmente en js se trata, si la petición tiene éxito, los resultados parseados a JSON con JSON.parse y 
+        se hace un append para mostrar en un div con un id determinado en HTML.
 
-Atributo donde se recibe la respuesta
+2. Atributo donde se recibe la respuesta
     La respuesta, una vez realizada con éxito la petición, se recibe en el atributo success.
