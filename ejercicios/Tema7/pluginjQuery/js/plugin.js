@@ -1,7 +1,18 @@
 (function ($) {
 	$.fn.validar = function (cssStyles, patterns, ajaxInfo) {
 
-		// Patrones por defecto.
+		/**
+		 * Control de la carga de la librería toast.
+		 */
+		try {
+			toastr;
+		} catch (error) {
+			throw new Error("La dependencia toastr no está importada, por favor, inclúyala desde https://github.com/CodeSeven/toastr");
+		}
+
+		/**
+		 * Patrones por defecto.
+		 */
 		let defaultPatterns = {
 			nombre: [/([a-zA-ZÁÉÍÓÚñáéíóúÑ]{1,}\s?){1,3}/],
 			apellidos: [/([a-zA-ZÁÉÍÓÚñáéíóúÑ]{1,}\s?){1,3}/],
@@ -11,19 +22,30 @@
 			textarea: [/(\w\s?.?\s?){10,}/]
 		};
 
-		//Estilos por defecto
+		/**
+		 * Estilos por defecto.
+		 */
 		let defaultCss = {
 			color: '#ff0000',
 			background: '#ffDEDE',
 			border: '2px solid #ffD3D7'
 		}
 
-		// Configuración por defecto.
+		/**
+		 * Configuración extendida del plugin.
+		 */
 		let extendPattern = $.extend(defaultPatterns, patterns);
 		let extendCss = $.extend(defaultCss, cssStyles);
 
+		/**
+		 * Estilos que van a recibir los inputs.
+		 */
 		let defaultCssInput = {};
 
+		/**
+		 * Devuelve el css de un elemento del DOM.
+		 * @param element el elemento del DOM.
+		 */
 		let getObjectCss = function (element) {
 			let dom = element.get(0);
 			let style;
@@ -51,7 +73,11 @@
 			return element.css();
 		};
 
-		// guarda u obtiene los estilos de un elemento en el DOM
+		/**
+		 * Guarda u obtiene los estilos de un elemento en el DOM.
+		 * @param action acciones a realizar .
+		 * @param element elemento donde realizar las operaciones.
+		 */
 		let saveOrSetStyles = function (action, element) {
 			switch (element.prop("tagName").toUpperCase()) {
 				case "INPUT":
@@ -64,23 +90,27 @@
 			}
 		};
 
+		/**
+		 * Carga las opciones por defecto para el toast.
+		 */
 		let toastrOption = function () {
-			if (toastr) {
-				toastr.options.preventDuplicates = true;
-				toastr.options.progressBar = true;
-				toastr.options.showEasing = 'swing';
-				toastr.options.hideEasing = 'swing';
-				toastr.options.closeEasing = 'swing';
-				toastr.options.showMethod = 'fadeIn';
-				toastr.options.hideMethod = 'slideUp';
-				toastr.options.closeMethod = 'fadeOut';
-				toastr.options.newestOnTop = false;
-				toastr.options.timeOut = 1800;
-				toastr.options.extendedTimeOut = 3000;
-			}
+			toastr.options.preventDuplicates = true;
+			toastr.options.progressBar = true;
+			toastr.options.showEasing = 'swing';
+			toastr.options.hideEasing = 'swing';
+			toastr.options.closeEasing = 'swing';
+			toastr.options.showMethod = 'fadeIn';
+			toastr.options.hideMethod = 'slideUp';
+			toastr.options.closeMethod = 'fadeOut';
+			toastr.options.newestOnTop = false;
+			toastr.options.timeOut = 1800;
+			toastr.options.extendedTimeOut = 3000;
 		}
 
-		// guarda los estilos por defecto de los elementos del formulario
+		/**
+		 * Guarda los estilos por defecto de los elementos del formulario
+		 * @param inputs inputs donde salvar los estilos por defecto.
+		 */
 		let saveDefaultStyles = function (inputs) {
 			inputs.each(function (index, element) {
 				saveOrSetStyles("save", $(element))
@@ -90,36 +120,27 @@
 		// Valida los inputs que no son submit, si se dan.
 		let $fields = $("input[type='text']", $(this));
 		toastrOption();
-
 		saveDefaultStyles($fields)
 
 		let $fieldsErrors = [];
-
 		if ($fields.length > 0) {
 			// Al hacer submit
 			$(this).submit(function (ev) {
 				ev.preventDefault();
 				$fieldsErrors = [];
 				$fields.trigger('blur');
-
 				// Si no hay errores se realiza la petición AJAX.
 				if ($fieldsErrors.length === 0) {
 					if (ajaxInfo.url === undefined || ajaxInfo.url === "") {
-						if (toastr) {
-							toastr.error("Url enviada no válida", "Error en el envío")
-						}
+						toastr.error("Url enviada no válida", "Error en el envío")
 						return;
 						//throw new Error("Url inválida");
 					}
-
 					if (ajaxInfo.element === undefined || ajaxInfo.element === "") {
-						if (toastr) {
-							toastr.error("Elemento seleccionado para mostrar la información no válido", "Error en el envío")
-						}
+						toastr.error("Elemento seleccionado para mostrar la información no válido", "Error en el envío")
 						return;
 						//throw new Error("Elemento inválido");
 					}
-
 					fetch(ajaxInfo.url)
 						.then(function (response) {
 							saveDefaultStyles($fields);
@@ -129,29 +150,21 @@
 							ajaxInfo.element.val(text);
 							saveDefaultStyles($fields);
 						});
-
 				} else {
 					$fieldsErrors[0].focus();
-
 				}
 			});
 
 			// Al hacer blur.
 			$fields.blur(function () {
-
 				let $input = $(this);
-
 				if ($input.attr("tipo") === undefined) {
 					return;
 				}
-
 				let indexRegex = $input.attr('tipo');
-
 				if (!patterns[indexRegex][0].test($input.val())) {
 					$(this).css(extendCss);
-					if (toastr) {
-						toastr.info(extendPattern[indexRegex][1], 'Formato ' + indexRegex + ' no válido .');
-					}
+					toastr.info(extendPattern[indexRegex][1], 'Formato ' + indexRegex + ' no válido .');
 					$('textarea').val('');
 					$fieldsErrors.push($input);
 				} else {
