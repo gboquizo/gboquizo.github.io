@@ -1,5 +1,5 @@
 (function ($) {
-	$.fn.validar = function (patterns, ajaxInfo, cssStyles) {
+	$.fn.validar = function (cssStyles, patterns, ajaxInfo) {
 
 		// Patrones por defecto.
 		let defaultPatterns = {
@@ -64,6 +64,22 @@
 			}
 		};
 
+		let toastrOption = function () {
+			if (toastr) {
+				toastr.options.preventDuplicates = true;
+				toastr.options.progressBar = true;
+				toastr.options.showEasing = 'swing';
+				toastr.options.hideEasing = 'swing';
+				toastr.options.closeEasing = 'swing';
+				toastr.options.showMethod = 'fadeIn';
+				toastr.options.hideMethod = 'slideUp';
+				toastr.options.closeMethod = 'fadeOut';
+				toastr.options.newestOnTop = false;
+				toastr.options.timeOut = 1800;
+				toastr.options.extendedTimeOut = 3000;
+			}
+		}
+
 		// guarda los estilos por defecto de los elementos del formulario
 		let saveDefaultStyles = function (inputs) {
 			inputs.each(function (index, element) {
@@ -73,6 +89,7 @@
 
 		// Valida los inputs que no son submit, si se dan.
 		let $fields = $("input[type='text']", $(this));
+		toastrOption();
 
 		saveDefaultStyles($fields)
 
@@ -87,6 +104,22 @@
 
 				// Si no hay errores se realiza la petición AJAX.
 				if ($fieldsErrors.length === 0) {
+					if (ajaxInfo.url === undefined || ajaxInfo.url === "") {
+						if (toastr) {
+							toastr.error("Url enviada no válida", "Error en el envío")
+						}
+						return;
+						//throw new Error("Url inválida");
+					}
+
+					if (ajaxInfo.element === undefined || ajaxInfo.element === "") {
+						if (toastr) {
+							toastr.error("Elemento seleccionado para mostrar la información no válido", "Error en el envío")
+						}
+						return;
+						//throw new Error("Elemento inválido");
+					}
+
 					fetch(ajaxInfo.url)
 						.then(function (response) {
 							saveDefaultStyles($fields);

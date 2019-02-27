@@ -63,8 +63,7 @@
 			element: $('textarea')
 		};
 
-		$("form").validar(objPatterns, infoAjax);
-
+		$("form").validar("", objPatterns, infoAjax);
 	}
 	$(init);
 }
