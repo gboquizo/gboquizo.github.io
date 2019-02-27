@@ -9,12 +9,17 @@
  * @author Guillermo Boquizo Sánchez
  */
 {
-	let init = function() {
+	let init = function () {
 		$('#btnShow').click(showHTML);
 	};
 
-	let showHTML = function() {
+	let showHTML = function () {
 		let actions = '';
+		if ($('#url').val() === "") {
+			$('#infoArticle').text("");
+			$('#stateArticle').text("");
+			return;
+		}
 		$.ajax({
 			method: 'GET',
 			url: $('#url').val(),
