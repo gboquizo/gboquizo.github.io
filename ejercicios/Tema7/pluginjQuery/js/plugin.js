@@ -14,7 +14,7 @@
 		//Estilos por defecto
 		let defaultCss = {
 			color: '#ff0000',
-			backgroundcolor: '#ffDEDE',
+			background: '#ffDEDE',
 			border: '2px solid #ffD3D7'
 		}
 
@@ -115,11 +115,7 @@
 				let indexRegex = $input.attr('tipo');
 
 				if (!patterns[indexRegex][0].test($input.val())) {
-					$(this).css({
-						color: extendCss.color,
-						background: extendCss.backgroundcolor,
-						border: extendCss.border
-					});
+					$(this).css(extendCss);
 					if (toastr) {
 						toastr.info(extendPattern[indexRegex][1], 'Formato ' + indexRegex + ' no válido .');
 					}
@@ -132,5 +128,6 @@
 				saveOrSetStyles("set", $(this));
 			});
 		}
+		return this;
 	};
 })(jQuery);
