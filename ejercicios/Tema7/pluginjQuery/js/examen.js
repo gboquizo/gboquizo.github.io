@@ -1,5 +1,5 @@
 (function ($) {
-	$.fn.validar = function (cssStyles, patterns, ajaxInfo) {
+	$.fn.examen = function (cssStyles, patterns, ajaxInfo) {
 
 		/**
 		 * Control de la carga de la librería toast.

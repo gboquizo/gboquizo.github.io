@@ -71,13 +71,13 @@ body {
 .contenedor-main .contenidoCaja .caja {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
-	align-items: flex-end;
-	border-radius: 50px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 3px;
 	color: #fff;
 	min-height: 100px;
 	padding: 2rem;
-	margin: 0.5rem;
+	margin: .5rem;
 }
 
 .contenedor-main .contenidoCaja:hover {
